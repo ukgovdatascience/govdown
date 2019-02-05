@@ -1,0 +1,19 @@
+{
+  "name": "govdown",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "man": "man"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "govuk-frontend": "^2.6.0"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "description": ""
+}

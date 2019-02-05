@@ -1,0 +1,6 @@
+^temp.*$
+^scss$
+^install-govuk-frontend\.sh$
+^package\.json$
+^node_modules$
+^LICENSE\.md$
