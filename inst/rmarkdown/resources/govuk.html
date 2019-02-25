@@ -128,10 +128,20 @@ $endif$
           </span>
         </a>
       </div>
+      $if(service_name)$
+      <div class="govuk-header__content">
+        <a href="#" class="govuk-header__link govuk-header__link--service-name">
+          $service_name$
+        </a>
+      </div>
+      $endif$
     </div>
   </header>
 
   <div class="govuk-width-container">
+    $if(phase_banner)$
+    $phase_banner$
+    $endif$
     <main class="govuk-main-wrapper " id="main-content" role="main">
       <h1 class="govuk-heading-xl">$title$</h1>
       $body$
@@ -164,6 +174,17 @@ $endif$
     window.GOVUKFrontend.initAll()
 
   </script>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
 </body>
 
 </html>

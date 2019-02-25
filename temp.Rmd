@@ -1,11 +1,14 @@
 ---
 title: "GOV.UK-style R Markdown Document"
-author: ""
-date: ""
 output:
   govdown::govuk_document:
+    phase: "alpha"
+    service_name: "govdown"
     keep_md: yes
 ---
+
+With the govdown package you can render RMarkdown documents to look like GOV.UK
+pages.  It only supports rendering to HTML.
 
 # govuk header xl *italic* {caption="govuk caption xl"}
 
@@ -86,3 +89,15 @@ Body text.
 #### govuk header s *italic* {caption="govuk caption s"}
 
 Body text.  There is no small caption.
+
+Here's some inline mathjax $\sum_0^{2e} \alpha_i \mathrm{dt}$.
+Here's some block mathjax
+
+$$
+\begin{align}
+s_i & \sim \mathrm{Binomial}(n_i, p_i) \\
+\mathrm{logit}(p_i) & = \alpha_{\small{TANK}[i]} \\
+\alpha_{\small{TANK}} & \sim \mathrm{Normal}(0, 5)
+\end{align}
+$$
+
