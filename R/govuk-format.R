@@ -4,35 +4,32 @@
 #'
 #' @inheritParams rmarkdown::html_document
 #' @export
-govuk_document <- function(toc = FALSE,
-                           toc_depth = 3,
-                           toc_float = FALSE,
-                           fig_width = 7,
-                           fig_height = 5,
-                           fig_retina = 2,
-                           dev = "png",
+govuk_document <- function(...,
                            phase = c("none", "alpha", "beta"),
                            service_name = NULL,
-                           smart = TRUE,
-                           self_contained = TRUE,
-                           mathjax = "default",
-                           extra_dependencies = NULL,
                            css = NULL,
-                           includes = NULL,
-                           keep_md = FALSE,
-                           lib_dir = NULL,
-                           md_extensions = NULL,
+                           extra_dependencies = NULL,
                            pandoc_args = NULL) {
 
-  # locations of resource files in the package
-  pkg_resource <- function(...) {
-    system.file(..., package = "govdown")
-  }
+  template <- pkg_file("rmarkdown/resources/govuk.html")
+  css <- c(css, pkg_file("rmarkdown/resources/govuk.css"))
+  lua <- pkg_file("rmarkdown/resources/govuk.lua")
+  resources <- paste0(".:", pkg_file("rmarkdown/resources"))
 
-  template <- pkg_resource("rmarkdown/resources/govuk.html")
-  css <- c(css, pkg_resource("rmarkdown/resources/govuk.css"))
-  lua <- pkg_resource("rmarkdown/resources/govuk.lua")
-  resources <- paste0(".:", pkg_resource("rmarkdown/resources"))
+  # Navbar
+  # Unlike rmarkdown::html_document we only support it as defined in _site.yml,
+  # not as a given _navbar.html.
+  config <- rmarkdown::site_config()
+  navbar <- navbar_html(config$navbar)
+
+  # include the navbar html
+  includes <- list(before_body = navbar)
+  pandoc_args <- c(pandoc_args, rmarkdown::includes_to_pandoc_args(includes))
+
+  # TODO: create navbar html inside a pre_processor() function that receives the
+  # name of the input file so that it can highlight the selected page.  I think
+  # to do that I will have to remove the dependency on `html_document()` and go
+  # straight to `output_format()`.
 
   # Use highlights.js from the rmarkdown package
   extra_dependencies <-
@@ -42,41 +39,19 @@ govuk_document <- function(toc = FALSE,
   phase <- match.arg(phase)
   if (phase != "none") {
     banner_file <-
-      pkg_resource(paste0("rmarkdown/resources/govuk-", phase, "-banner.html"))
-    banner_html <- readChar(banner_file, file.info(banner_file)$size)
-    pandoc_args <-
-      c(pandoc_args, pandoc_variable_arg("phase_banner", banner_html))
-  }
-
-  if (!is.null(service_name)) {
-    pandoc_args <-
-      c(pandoc_args, pandoc_variable_arg("service_name", service_name))
+      pkg_file(paste0("rmarkdown/resources/govuk-", phase, "-banner.html"))
+    includes <- list(before_body = banner_file)
+    pandoc_args <- c(pandoc_args, rmarkdown::includes_to_pandoc_args(includes))
   }
 
   # call the base html_document function with the default template so that it
   # sets up mathjax without a warning despite `self_contained = TRUE`.
   base_format <-
-    rmarkdown::html_document(toc = toc,
-                             toc_depth = toc_depth,
-                             toc_float = toc_float,
-                             fig_width = fig_width,
-                             fig_height = fig_height,
-                             fig_retina = fig_retina,
-                             dev = dev,
-                             df_print = "default",
-                             code_folding = "none",
-                             smart = smart,
-                             self_contained = self_contained,
-                             mathjax = mathjax,
-                             keep_md = keep_md,
-                             number_sections = FALSE,
+    rmarkdown::html_document(mathjax = NULL,
                              section_divs = FALSE,
-                             fig_caption = FALSE,
-                             code_download = FALSE,
                              theme = NULL,
                              highlight = NULL,
                              css = css,
-                             lib_dir = lib_dir,
                              pandoc_args = c(pandoc_args,
                                              "--lua-filter", lua,
                                              "--resource-path", resources,
@@ -88,9 +63,119 @@ govuk_document <- function(toc = FALSE,
   no_highlight_arg <- which(base_format$pandoc$args == "--no-highlight")
   base_format$pandoc$args <- base_format$pandoc$args[-no_highlight_arg]
 
-#   # Override the default template
-#   template_arg <- which(base_format$pandoc$args == "--template") + 1L
-#   base_format$pandoc$args[template_arg] <- template
+  # Override the default template
+  template_arg <- which(base_format$pandoc$args == "--template") + 1L
+  base_format$pandoc$args[template_arg] <- template
 
   base_format
+}
+
+# Can't use rmarkdown::navbar_html because its template is hardcoded.
+# This builds up a navbar in stages.
+navbar_html <- function(navbar) {
+
+  # title and type
+  homepage <- navbar$homepage
+  title <- navbar$title
+  service_name <- navbar$service_name
+
+  if (is.null(homepage)) title <- ""
+  if (is.null(title)) title <- ""
+  if (is.null(service_name)) service_name <- ""
+
+  # build the navigation bar and return it as a temp file
+  logo <- ""
+  if (is.null(navbar$logo) || navbar$logo == "true") { # default: TRUE
+    logo <-
+      file_string(pkg_file("rmarkdown/resources/govuk-logo-svg.html"))
+  } else {
+    logo <- file_string(navbar$logo) # read from file
+  }
+
+  service_name <- ""
+  if (!is.null(navbar$service_name)) {
+    service_name  <- file_string(pkg_file("rmarkdown/resources/govuk-service-name.html"))
+    service_name  <- sprintf(service_name, navbar$service_name)
+  }
+
+  # Build up links html one by one
+  links <- ""
+  if (!is.null(navbar$links)) {
+    link <- navbar$links[[1]]
+
+    links <- file_string(pkg_file("rmarkdown/resources/govuk-nav.html"))
+
+    all_links <- ""
+
+    # href is relative to index.Rmd and index.html
+    active_link <- file_string(pkg_file("rmarkdown/resources/govuk-nav-item-active.html"))
+    active_link <- sprintf(active_link, link$href, link$text)
+
+    all_links <- paste0(all_links, active_link)
+
+    if (length(navbar$links) > 1L) {
+      for (link in navbar$links[-1L]) {
+        other_link <- file_string(pkg_file("rmarkdown/resources/govuk-nav-item-other.html"))
+        other_link <- sprintf(other_link, link$href, link$text)
+
+        all_links <- paste0(all_links, other_link)
+      }
+    }
+
+    links <- sprintf(links, all_links)
+  }
+
+  nav <- ""
+  if (!is.null(navbar$service_name) || !is.null(navbar$links)) {
+    nav <- file_string(pkg_file("rmarkdown/resources/govuk-nav.html"))
+    nav <- sprintf(nav, links)
+  }
+
+  content <- ""
+  if (!is.null(navbar$service_name) || !is.null(navbar$links)) {
+    content <- file_string(pkg_file("rmarkdown/resources/govuk-header-content.html"))
+    content <- sprintf(content, service_name, nav)
+  }
+
+  navbar <- file_string(pkg_file("rmarkdown/resources/navbar.html"))
+  navbar <- sprintf(navbar, homepage, logo, title, content)
+
+  as_tmpfile(navbar)
+}
+
+# utils from rmarkdown
+
+read_utf8 <- function(file, encoding = 'UTF-8') {
+  if (inherits(file, 'connection')) con <- file else {
+    con <- base::file(file, encoding = encoding); on.exit(close(con), add = TRUE)
+  }
+  enc2utf8(readLines(con, warn = FALSE))
+}
+
+file_string <- function(path, encoding = 'UTF-8') {
+  one_string(read_utf8(path, encoding))
+}
+
+one_string <- function(x) paste(x, collapse = '\n')
+
+# has to be this, otherwise rmarkdown::render won't be able to find the files to
+# delete them
+tmpfile_pattern <- "rmarkdown-str"
+
+# return a string as a tempfile
+as_tmpfile <- function(str) {
+  if (length(str) == 0) return()
+  f <- tempfile(tmpfile_pattern, fileext = ".html")
+  write_utf8(str, f)
+  f
+}
+
+write_utf8 <- function (text, con, ...) {
+  opts <- options(encoding = "native.enc"); on.exit(options(opts), add = TRUE)
+  writeLines(enc2utf8(text), con, ..., useBytes = TRUE)
+}
+
+# locations of resource files in the package
+pkg_file <- function(...) {
+  system.file(..., package = "govdown", mustWork = TRUE)
 }
