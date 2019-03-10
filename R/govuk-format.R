@@ -93,9 +93,10 @@ navbar_html <- function(navbar, input_file) {
 
   # build the navigation bar and return it as a temp file
   logo <- ""
-  if (is.null(navbar$logo) || navbar$logo == "true") { # default: TRUE
-    logo <-
-      file_string(pkg_file("rmarkdown/resources/govuk-logo-svg.html"))
+  if (is.null(navbar$logo)) { # default to GOV.UK crown
+    logo <- file_string(pkg_file("rmarkdown/resources/govuk-logo-svg.html"))
+  } else if (is.logical(navbar$logo) && !navbar$logo) { # false --> no logo
+    logo <- ""
   } else {
     logo <- file_string(navbar$logo) # read from file
   }

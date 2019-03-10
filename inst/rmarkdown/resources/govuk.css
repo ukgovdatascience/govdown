@@ -1,8 +1,41 @@
 @charset "UTF-8";
 .govuk-link {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
+
+/*! Copyright (c) 2011 by Margaret Calvert & Henrik Kubel. All rights reserved. The font has been customised for exclusive use on gov.uk. This cut is not commercially available. */
+@font-face {
+  font-family: "nta";
+  src: url("assets/fonts/light-2c037cf7e1-v1.eot");
+  src: url("assets/fonts/light-2c037cf7e1-v1.eot?#iefix") format("embedded-opentype"), url("assets/fonts/light-f38ad40456-v1.woff2") format("woff2"), url("assets/fonts/light-458f8ea81c-v1.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback; }
+
+@font-face {
+  font-family: "nta";
+  src: url("assets/fonts/bold-fb2676462a-v1.eot");
+  src: url("assets/fonts/bold-fb2676462a-v1.eot?#iefix") format("embedded-opentype"), url("assets/fonts/bold-a2452cb66f-v1.woff2") format("woff2"), url("assets/fonts/bold-f38c792ac2-v1.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: fallback; }
+
+@font-face {
+  font-family: "ntatabularnumbers";
+  src: url("assets/fonts/light-tabular-498ea8ffe2-v1.eot");
+  src: url("assets/fonts/light-tabular-498ea8ffe2-v1.eot?#iefix") format("embedded-opentype"), url("assets/fonts/light-tabular-851b10ccdd-v1.woff2") format("woff2"), url("assets/fonts/light-tabular-62cc6f0a28-v1.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback; }
+
+@font-face {
+  font-family: "ntatabularnumbers";
+  src: url("assets/fonts/bold-tabular-357fdfbcc3-v1.eot");
+  src: url("assets/fonts/bold-tabular-357fdfbcc3-v1.eot?#iefix") format("embedded-opentype"), url("assets/fonts/bold-tabular-b89238d840-v1.woff2") format("woff2"), url("assets/fonts/bold-tabular-784c21afb8-v1.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: fallback; }
   @media print {
     .govuk-link {
       font-family: sans-serif; } }
@@ -54,7 +87,7 @@
   color: #0b0c0c; }
 
 .govuk-list {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -107,7 +140,14 @@
       margin-bottom: 5px; } }
 
 .govuk-template {
-  background-color: #dee0e2; }
+  background-color: #dee0e2;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%; }
+  @media screen {
+    .govuk-template {
+      overflow-y: scroll; } }
 
 .govuk-template__body {
   margin: 0;
@@ -115,7 +155,7 @@
 
 .govuk-heading-xl {
   color: #0b0c0c;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -146,7 +186,7 @@
 
 .govuk-heading-l {
   color: #0b0c0c;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -177,7 +217,7 @@
 
 .govuk-heading-m {
   color: #0b0c0c;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -208,7 +248,7 @@
 
 .govuk-heading-s {
   color: #0b0c0c;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -238,7 +278,7 @@
       margin-bottom: 20px; } }
 
 .govuk-caption-xl {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -262,7 +302,7 @@
       line-height: 1.15; } }
 
 .govuk-caption-l {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -289,7 +329,7 @@
       margin-bottom: 0; } }
 
 .govuk-caption-m {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -313,7 +353,7 @@
 
 .govuk-body-l, .govuk-body-lead {
   color: #0b0c0c;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -343,7 +383,7 @@
 
 .govuk-body-m, .govuk-body {
   color: #0b0c0c;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -373,7 +413,7 @@
 
 .govuk-body-s {
   color: #0b0c0c;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -403,7 +443,7 @@
 
 .govuk-body-xs {
   color: #0b0c0c;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -647,12 +687,23 @@
 .govuk-width-container {
   max-width: 960px;
   margin: 0 15px; }
+  @supports (margin: max(calc(0px))) {
+    .govuk-width-container {
+      margin-right: max(15px, calc(15px + env(safe-area-inset-right)));
+      margin-left: max(15px, calc(15px + env(safe-area-inset-left))); } }
   @media (min-width: 40.0625em) {
     .govuk-width-container {
-      margin: 0 30px; } }
+      margin: 0 30px; }
+      @supports (margin: max(calc(0px))) {
+        .govuk-width-container {
+          margin-right: max(30px, calc(15px + env(safe-area-inset-right)));
+          margin-left: max(30px, calc(15px + env(safe-area-inset-left))); } } }
   @media (min-width: 1020px) {
     .govuk-width-container {
-      margin: 0 auto; } }
+      margin: 0 auto; }
+      @supports (margin: max(calc(0px))) {
+        .govuk-width-container {
+          margin: 0 auto; } } }
 
 .govuk-accordion {
   margin-bottom: 20px; }
@@ -671,7 +722,7 @@
   margin-bottom: 0; }
 
 .govuk-accordion__section-button {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -723,14 +774,14 @@
   display: block; }
 
 .js-enabled .govuk-accordion__open-all {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 1.14286;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: inline;
@@ -776,7 +827,7 @@
   outline-offset: 0; }
 
 .js-enabled .govuk-accordion__section-button {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
@@ -850,7 +901,7 @@
   font-size: 14px;
   font-size: 0.875rem;
   line-height: 1.14286;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: inline-block;
@@ -903,7 +954,7 @@
   bottom: 1px; }
 
 .govuk-breadcrumbs {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -969,7 +1020,7 @@
       display: none; }
 
 .govuk-breadcrumbs__link {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
   @media print {
@@ -986,7 +1037,7 @@
         color: #000000; } }
 
 .govuk-button {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1109,7 +1160,7 @@
   padding-bottom: 6px; }
 
 .govuk-error-message {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -1143,7 +1194,7 @@
     clear: both; }
 
 .govuk-fieldset__legend {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1175,7 +1226,7 @@
       color: #000000; } }
 
 .govuk-fieldset__legend--xl {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -1197,7 +1248,7 @@
       line-height: 1.15; } }
 
 .govuk-fieldset__legend--l {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -1219,7 +1270,7 @@
       line-height: 1.05; } }
 
 .govuk-fieldset__legend--m {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -1241,7 +1292,7 @@
       line-height: 1.15; } }
 
 .govuk-fieldset__legend--s {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -1267,7 +1318,7 @@
   font-weight: inherit; }
 
 .govuk-hint {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1301,7 +1352,7 @@
   margin-top: -5px; }
 
 .govuk-label {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1328,7 +1379,7 @@
       color: #000000; } }
 
 .govuk-label--xl {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -1350,7 +1401,7 @@
       line-height: 1.15; } }
 
 .govuk-label--l {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -1372,7 +1423,7 @@
       line-height: 1.05; } }
 
 .govuk-label--m {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -1394,7 +1445,7 @@
       line-height: 1.15; } }
 
 .govuk-label--s {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -1418,7 +1469,7 @@
   margin: 0; }
 
 .govuk-checkboxes__item {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1546,7 +1597,7 @@
   visibility: hidden; }
 
 .govuk-summary-list {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1574,7 +1625,8 @@
   @media (min-width: 40.0625em) {
     .govuk-summary-list {
       display: table;
-      width: 100%; } }
+      width: 100%;
+      table-layout: fixed; } }
   @media (min-width: 40.0625em) {
     .govuk-summary-list {
       margin-bottom: 30px; } }
@@ -1611,13 +1663,18 @@
   margin-bottom: 15px; }
   @media (min-width: 40.0625em) {
     .govuk-summary-list__actions {
+      width: 20%;
       padding-right: 0;
       text-align: right; } }
 
+.govuk-summary-list__key,
+.govuk-summary-list__value {
+  word-wrap: break-word;
+  overflow-wrap: break-word; }
+
 .govuk-summary-list__key {
   margin-bottom: 5px;
-  font-weight: 700;
-  word-break: break-word; }
+  font-weight: 700; }
   @media (min-width: 40.0625em) {
     .govuk-summary-list__key {
       width: 30%; } }
@@ -1625,6 +1682,10 @@
 @media (max-width: 40.0525em) {
   .govuk-summary-list__value {
     margin-bottom: 15px; } }
+
+@media (min-width: 40.0625em) {
+  .govuk-summary-list__value {
+    width: 50%; } }
 
 .govuk-summary-list__value > p {
   margin-bottom: 10px; }
@@ -1657,7 +1718,7 @@
   border: 0; }
 
 .govuk-input {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1741,7 +1802,7 @@
   margin-bottom: 0; }
 
 .govuk-details {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1854,7 +1915,7 @@
       border: 5px solid #b10e1e; } }
 
 .govuk-error-summary__title {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -1880,7 +1941,7 @@
       margin-bottom: 20px; } }
 
 .govuk-error-summary__body {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1922,7 +1983,7 @@
     color: #0b0c0c; }
 
 .govuk-file-upload {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -1953,7 +2014,7 @@
   border: 4px solid #b10e1e; }
 
 .govuk-footer {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2154,7 +2215,7 @@
   margin-bottom: 0; }
 
 .govuk-header {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2208,7 +2269,7 @@
   vertical-align: middle; }
 
 .govuk-header__product-name {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2244,7 +2305,7 @@
     color: #0b0c0c; }
 
 .govuk-header__link--homepage {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -2263,7 +2324,7 @@
 .govuk-header__link--service-name {
   display: inline-block;
   margin-bottom: 10px;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -2307,7 +2368,7 @@
     float: left; } }
 
 .govuk-header__menu-button {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2411,7 +2472,7 @@
       padding: 5px 0;
       border: 0; } }
   .govuk-header__navigation-item a {
-    font-family: sans-serif;
+    font-family: "nta", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 700;
@@ -2462,7 +2523,7 @@
   padding-top: 3px; }
 
 .govuk-inset-text {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2496,14 +2557,14 @@
   @media (min-width: 40.0625em) {
     .govuk-inset-text {
       margin-bottom: 30px; } }
-  .govuk-inset-text :first-child {
+  .govuk-inset-text > :first-child {
     margin-top: 0; }
-  .govuk-inset-text :only-child,
-  .govuk-inset-text :last-child {
+  .govuk-inset-text > :only-child,
+  .govuk-inset-text > :last-child {
     margin-bottom: 0; }
 
 .govuk-panel {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2538,7 +2599,7 @@
 .govuk-panel__title {
   margin-top: 0;
   margin-bottom: 30px;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -2562,7 +2623,7 @@
   margin-bottom: 0; }
 
 .govuk-panel__body {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2583,7 +2644,7 @@
       line-height: 1.05; } }
 
 .govuk-tag {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
@@ -2622,7 +2683,7 @@
   border-bottom: 1px solid #bfc1c3; }
 
 .govuk-phase-banner__content {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2656,7 +2717,7 @@
   vertical-align: baseline; }
 
 .govuk-tabs {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2689,7 +2750,7 @@
       margin-bottom: 30px; } }
 
 .govuk-tabs__title {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2729,10 +2790,10 @@
     padding-right: 5px; }
 
 .govuk-tabs__tab {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2835,7 +2896,7 @@
       margin-bottom: 0; } }
 
 .govuk-radios__item {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2943,7 +3004,7 @@
   float: none; }
 
 .govuk-radios__divider {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -2984,7 +3045,7 @@
     margin-bottom: 0; }
 
 .govuk-select {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -3031,7 +3092,7 @@
   -webkit-clip-path: inset(50%) !important;
   clip-path: inset(50%) !important;
   white-space: nowrap !important;
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
@@ -3070,9 +3131,13 @@
     .govuk-skip-link {
       font-size: 14pt;
       line-height: 1.2; } }
+  @supports (padding: max(calc(0px))) {
+    .govuk-skip-link {
+      padding-right: max(15px, calc(15px + env(safe-area-inset-right)));
+      padding-left: max(15px, calc(15px + env(safe-area-inset-left))); } }
 
 .govuk-table {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -3113,7 +3178,7 @@
   text-align: left; }
 
 .govuk-table__cell--numeric {
-  font-family: sans-serif-tabular;
+  font-family: "ntatabularnumbers", "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400; }
@@ -3135,7 +3200,7 @@
   text-align: left; }
 
 .govuk-textarea {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -3175,7 +3240,7 @@
   border: 4px solid #b10e1e; }
 
 .govuk-warning-text {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
@@ -3219,7 +3284,7 @@
   white-space: nowrap !important; }
 
 .govuk-warning-text__icon {
-  font-family: sans-serif;
+  font-family: "nta", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 700;
