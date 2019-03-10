@@ -61,7 +61,8 @@ govuk_document <- function(...,
                         "--template", template,
                         "--lua-filter", lua,
                         "--resource-path", resources,
-                        "--highlight-style=pygments"
+                        "--highlight-style=pygments",
+                        "--mathjax"
                         ),
         extra_dependencies = extra_dependencies
       )
