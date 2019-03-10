@@ -11,21 +11,35 @@ govuk_document <- function(...,
                            extra_dependencies = NULL,
                            pandoc_args = NULL,
                            keep_md = FALSE) {
+  phase <- match.arg(phase)
 
   template <- pkg_file("rmarkdown/resources/govuk.html")
   css <- c(css, pkg_file("rmarkdown/resources/govuk.css"))
   lua <- pkg_file("rmarkdown/resources/govuk.lua")
   resources <- paste0(".:", pkg_file("rmarkdown/resources"))
 
-  # Navbar
-  # Unlike rmarkdown::html_document we only support it as defined in _site.yml,
-  # not as a given _navbar.html.
-  config <- rmarkdown::site_config()
-  navbar <- navbar_html(config$navbar)
+  pre_processor <- function(metadata, input_file, runtime, knit_meta,
+                            files_dir, output_dir) {
 
-  # include the navbar html
-  includes <- list(before_body = navbar)
-  pandoc_args <- c(pandoc_args, rmarkdown::includes_to_pandoc_args(includes))
+    # Navbar
+    # In the pre_processor because it needs to know the input_file to determine
+    # which item to highlight.
+    # Unlike rmarkdown::html_document we only support it as defined in _site.yml,
+    # not as a given _navbar.html.
+    config <- rmarkdown::site_config()
+    navbar_arg <- navbar_html(config$navbar, input_file)
+
+    # Phase (none, alpha, beta)
+    if (phase != "none") {
+      banner_file <-
+        pkg_file(paste0("rmarkdown/resources/govuk-", phase, "-banner.html"))
+      phase_arg <- list(before_body = banner_file)
+    }
+
+    pre_processor_pandoc_args <-
+      rmarkdown::includes_to_pandoc_args(list(before_body = c(navbar_arg,
+                                                              phase_arg)))
+  }
 
   # TODO: create navbar html inside a pre_processor() function that receives the
   # name of the input file so that it can highlight the selected page.
@@ -35,14 +49,6 @@ govuk_document <- function(...,
     append(extra_dependencies,
            list(rmarkdown::html_dependency_highlightjs("default")))
 
-  phase <- match.arg(phase)
-  if (phase != "none") {
-    banner_file <-
-      pkg_file(paste0("rmarkdown/resources/govuk-", phase, "-banner.html"))
-    includes <- list(before_body = banner_file)
-    pandoc_args <- c(pandoc_args, rmarkdown::includes_to_pandoc_args(includes))
-  }
-
   base_format <- rmarkdown::output_format(
     knitr = NULL,
     pandoc = rmarkdown::pandoc_options(
@@ -51,6 +57,7 @@ govuk_document <- function(...,
                             extensions = "+smart")
       ),
     keep_md = keep_md,
+    pre_processor = pre_processor,
     base_format =
       rmarkdown::html_document_base(
         mathjax = NULL,
@@ -73,7 +80,7 @@ govuk_document <- function(...,
 
 # Can't use rmarkdown::navbar_html because its template is hardcoded.
 # This builds up a navbar in stages.
-navbar_html <- function(navbar) {
+navbar_html <- function(navbar, input_file) {
 
   # title and type
   homepage <- navbar$homepage
@@ -100,36 +107,28 @@ navbar_html <- function(navbar) {
   }
 
   # Build up links html one by one
-  links <- ""
   if (!is.null(navbar$links)) {
-    link <- navbar$links[[1]]
-
-    links <- file_string(pkg_file("rmarkdown/resources/govuk-nav.html"))
-
     all_links <- ""
 
-    # href is relative to index.Rmd and index.html
-    active_link <- file_string(pkg_file("rmarkdown/resources/govuk-nav-item-active.html"))
-    active_link <- sprintf(active_link, link$href, link$text)
+    active_html <- file_string(pkg_file("rmarkdown/resources/govuk-nav-item-active.html"))
+    other_html <- file_string(pkg_file("rmarkdown/resources/govuk-nav-item-other.html"))
 
-    all_links <- paste0(all_links, active_link)
-
-    if (length(navbar$links) > 1L) {
-      for (link in navbar$links[-1L]) {
-        other_link <- file_string(pkg_file("rmarkdown/resources/govuk-nav-item-other.html"))
-        other_link <- sprintf(other_link, link$href, link$text)
-
-        all_links <- paste0(all_links, other_link)
-      }
+    for (link in navbar$links) {
+      # input_file has two suffixes e.g. index.utf8.md so strip twice
+      is_active <- filename(link$href) == filename(filename(input_file))
+      link_html <- if (is_active) active_html else other_html
+      link_html <- sprintf(link_html, link$href, link$text)
+      all_links <- paste0(all_links, link_html)
     }
 
-    links <- sprintf(links, all_links)
+    links_html <- file_string(pkg_file("rmarkdown/resources/govuk-nav.html"))
+    links_html <- sprintf(links_html, all_links)
   }
 
   nav <- ""
   if (!is.null(navbar$service_name) || !is.null(navbar$links)) {
     nav <- file_string(pkg_file("rmarkdown/resources/govuk-nav.html"))
-    nav <- sprintf(nav, links)
+    nav <- sprintf(nav, links_html)
   }
 
   content <- ""
@@ -180,3 +179,5 @@ write_utf8 <- function (text, con, ...) {
 pkg_file <- function(...) {
   system.file(..., package = "govdown", mustWork = TRUE)
 }
+
+filename <- function(x) tools::file_path_sans_ext(basename(x))
