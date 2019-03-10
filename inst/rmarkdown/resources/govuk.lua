@@ -39,13 +39,13 @@ function Header(el)
   return header
 end
 
--- -- Apply govuk-body to everything within a para by wrapping it in a span,
--- -- because pandoc doesn't allow attributes of paras.
--- function Para(el)
---   content = el.content
---   attr = pandoc.Attr("", {"govuk-body"})
---   return pandoc.Para(pandoc.Span(content, attr))
--- end
+-- Apply govuk-body to everything within a para by wrapping it in a span,
+-- because pandoc doesn't allow attributes of paras.
+function Para(el)
+  content = el.content
+  attr = pandoc.Attr("", {"govuk-body"})
+  return pandoc.Para(pandoc.Span(content, attr))
+end
 
 -- Hyperlinks
 function Link(el)
@@ -67,7 +67,7 @@ end
 function BulletList(items)
   local res = List:new{pandoc.RawBlock('html', '<ul class="govuk=list govuk-list--bullet">')}
   for _, item in ipairs(items.content) do
-    res[#res + 1] = pandoc.RawBlock('html', '<li>')
+    res[#res + 1] = pandoc.RawBlock('html', '<li class="govuk-body">')
     res:extend(item)
     res[#res + 1] = pandoc.RawBlock('html', '</li>')
   end
@@ -78,7 +78,7 @@ end
 function OrderedList(items)
   local res = List:new{pandoc.RawBlock('html', '<ol class="govuk-list govuk-list--number">')}
   for _, item in ipairs(items.content) do
-    res[#res + 1] = pandoc.RawBlock('html', '<li>')
+    res[#res + 1] = pandoc.RawBlock('html', '<li class="govuk-body">')
     res:extend(item)
     res[#res + 1] = pandoc.RawBlock('html', '</li>')
   end
@@ -105,6 +105,7 @@ function Div(el)
       return el
     end
   }
+  -- Look for 'lead-para'
   v,i = el.classes:find("lead-para")
   if i ~= nil then
     el.classes[i] = "govuk-body-l"
