@@ -9,7 +9,8 @@ govuk_document <- function(...,
                            service_name = NULL,
                            css = NULL,
                            extra_dependencies = NULL,
-                           pandoc_args = NULL) {
+                           pandoc_args = NULL,
+                           keep_md = FALSE) {
 
   template <- pkg_file("rmarkdown/resources/govuk.html")
   css <- c(css, pkg_file("rmarkdown/resources/govuk.css"))
@@ -27,9 +28,7 @@ govuk_document <- function(...,
   pandoc_args <- c(pandoc_args, rmarkdown::includes_to_pandoc_args(includes))
 
   # TODO: create navbar html inside a pre_processor() function that receives the
-  # name of the input file so that it can highlight the selected page.  I think
-  # to do that I will have to remove the dependency on `html_document()` and go
-  # straight to `output_format()`.
+  # name of the input file so that it can highlight the selected page.
 
   # Use highlights.js from the rmarkdown package
   extra_dependencies <-
@@ -44,28 +43,29 @@ govuk_document <- function(...,
     pandoc_args <- c(pandoc_args, rmarkdown::includes_to_pandoc_args(includes))
   }
 
-  # call the base html_document function with the default template so that it
-  # sets up mathjax without a warning despite `self_contained = TRUE`.
-  base_format <-
-    rmarkdown::html_document(mathjax = NULL,
-                             section_divs = FALSE,
-                             theme = NULL,
-                             highlight = NULL,
-                             css = css,
-                             pandoc_args = c(pandoc_args,
-                                             "--lua-filter", lua,
-                                             "--resource-path", resources,
-                                             "--highlight-style=pygments"
-                                             ),
-                             extra_dependencies = extra_dependencies)
-
-  # Drop the --no-highlight pandoc argument
-  no_highlight_arg <- which(base_format$pandoc$args == "--no-highlight")
-  base_format$pandoc$args <- base_format$pandoc$args[-no_highlight_arg]
-
-  # Override the default template
-  template_arg <- which(base_format$pandoc$args == "--template") + 1L
-  base_format$pandoc$args[template_arg] <- template
+  base_format <- rmarkdown::output_format(
+    knitr = NULL,
+    pandoc = rmarkdown::pandoc_options(
+      to = "html",
+      from = rmarkdown::from_rmarkdown(implicit_figures = FALSE,
+                            extensions = "+smart")
+      ),
+    keep_md = keep_md,
+    base_format =
+      rmarkdown::html_document_base(
+        mathjax = NULL,
+        pandoc_args = c(pandoc_args,
+                        "--css", rmarkdown::pandoc_path_arg(css),
+                        "--standalone",
+                        "--self-contained",
+                        "--template", template,
+                        "--lua-filter", lua,
+                        "--resource-path", resources,
+                        "--highlight-style=pygments"
+                        ),
+        extra_dependencies = extra_dependencies
+      )
+  )
 
   base_format
 }
