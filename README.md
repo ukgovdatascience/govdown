@@ -1,6 +1,6 @@
 # govdown
 
-A set of R Markdown templates to style your documents with the GOV.UK Design System.
+Make websites with R Markdown styled with the GOV.UK Design System.
 
 ## Installation
 
