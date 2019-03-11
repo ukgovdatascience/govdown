@@ -64,9 +64,6 @@ govuk_document <- function(...,
                                                               phase_arg)))
   }
 
-  # TODO: create navbar html inside a pre_processor() function that receives the
-  # name of the input file so that it can highlight the selected page.
-
   # Use highlights.js from the rmarkdown package
   extra_dependencies <-
     append(extra_dependencies,
