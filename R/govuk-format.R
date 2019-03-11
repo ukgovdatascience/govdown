@@ -6,6 +6,7 @@
 #' @export
 govuk_document <- function(...,
                            phase = c("none", "alpha", "beta"),
+                           feedback_url = "404.html",
                            font = c("new-transport", "sans-serif"),
                            service_name = NULL,
                            css = NULL,
@@ -41,7 +42,10 @@ govuk_document <- function(...,
     if (phase != "none") {
       banner_file <-
         pkg_file(paste0("rmarkdown/resources/govuk-", phase, "-banner.html"))
-      phase_arg <- list(before_body = banner_file)
+      banner_filestring <- file_string(banner_file)
+      banner_filestring <- sprintf(banner_filestring , feedback_url)
+      tmpfile <- as_tmpfile(banner_filestring)
+      phase_arg <- list(before_body = tmpfile)
     }
 
     pre_processor_pandoc_args <-
