@@ -7,6 +7,7 @@
 govuk_document <- function(...,
                            phase = c("none", "alpha", "beta"),
                            feedback_url = "404.html",
+                           favicon = c("govuk", "custom"),
                            font = c("new-transport", "sans-serif"),
                            service_name = NULL,
                            css = NULL,
@@ -15,6 +16,7 @@ govuk_document <- function(...,
                            keep_md = FALSE) {
   phase <- match.arg(phase)
   font <- match.arg(font)
+  favicon <- match.arg(favicon)
 
   lua <- pkg_file("rmarkdown/resources/govuk.lua")
   resources <- paste0(".:", pkg_file("rmarkdown/resources"))
@@ -26,6 +28,15 @@ govuk_document <- function(...,
     template <- pkg_file("rmarkdown/resources/govukish.html")
     css <- c(css, pkg_file("rmarkdown/resources/govukish.css"))
   }
+
+  if (favicon == "govuk") {
+    favicon_html <- pkg_file("rmarkdown/resources/favicon.html")
+  } else {
+    favicon_html <- pkg_file("rmarkdown/resources/favicon-custom.html")
+  }
+  pandoc_args <-
+    c(pandoc_args,
+      rmarkdown::includes_to_pandoc_args(list(in_header = favicon_html)))
 
   pre_processor <- function(metadata, input_file, runtime, knit_meta,
                             files_dir, output_dir) {
