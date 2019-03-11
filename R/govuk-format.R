@@ -6,17 +6,25 @@
 #' @export
 govuk_document <- function(...,
                            phase = c("none", "alpha", "beta"),
+                           font = c("new-transport", "sans-serif"),
                            service_name = NULL,
                            css = NULL,
                            extra_dependencies = NULL,
                            pandoc_args = NULL,
                            keep_md = FALSE) {
   phase <- match.arg(phase)
+  font <- match.arg(font)
 
-  template <- pkg_file("rmarkdown/resources/govuk.html")
-  css <- c(css, pkg_file("rmarkdown/resources/govuk.css"))
   lua <- pkg_file("rmarkdown/resources/govuk.lua")
   resources <- paste0(".:", pkg_file("rmarkdown/resources"))
+
+  if (font == "new-transport") {
+    template <- pkg_file("rmarkdown/resources/govuk.html")
+    css <- c(css, pkg_file("rmarkdown/resources/govuk.css"))
+  } else {
+    template <- pkg_file("rmarkdown/resources/govukish.html")
+    css <- c(css, pkg_file("rmarkdown/resources/govukish.css"))
+  }
 
   pre_processor <- function(metadata, input_file, runtime, knit_meta,
                             files_dir, output_dir) {
