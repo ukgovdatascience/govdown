@@ -50,6 +50,7 @@ govuk_document <- function(...,
     navbar_arg <- navbar_html(config$navbar, input_file)
 
     # Phase (none, alpha, beta)
+    phase_arg <- NULL
     if (phase != "none") {
       banner_file <-
         pkg_file(paste0("rmarkdown/resources/govuk-", phase, "-banner.html"))
