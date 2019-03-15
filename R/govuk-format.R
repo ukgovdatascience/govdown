@@ -40,13 +40,21 @@ govuk_document <- function(...,
 
   pre_processor <- function(metadata, input_file, runtime, knit_meta,
                             files_dir, output_dir) {
+    # Set/get config depending whether this is a website or a single document
+    config <- rmarkdown::site_config()
+    if (is.null(config)) { # single document
+      yaml <- rmarkdown::yaml_front_matter(input_file)
+      config <- list(navbar = list(service_name = yaml$title,
+                                   title = yaml$organisation,
+                                   logo = yaml$logo))
+      phase <- "none"
+    }
 
     # Navbar
     # In the pre_processor because it needs to know the input_file to determine
     # which item to highlight.
     # Unlike rmarkdown::html_document we only support it as defined in _site.yml,
     # not as a given _navbar.html.
-    config <- rmarkdown::site_config()
     navbar_arg <- navbar_html(config$navbar, input_file)
 
     # Phase (none, alpha, beta)
@@ -108,7 +116,7 @@ navbar_html <- function(navbar, input_file) {
   title <- navbar$title
   service_name <- navbar$service_name
 
-  if (is.null(homepage)) title <- ""
+  if (is.null(homepage)) homepage <- ""
   if (is.null(title)) title <- ""
   if (is.null(service_name)) service_name <- ""
 
@@ -129,6 +137,7 @@ navbar_html <- function(navbar, input_file) {
   }
 
   # Build up links html one by one
+  links_html <- ""
   if (!is.null(navbar$links)) {
     all_links <- ""
 
