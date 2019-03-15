@@ -4,15 +4,11 @@
 #'
 #' @inheritParams rmarkdown::html_document
 #' @export
-govuk_document <- function(...,
-                           phase = c("none", "alpha", "beta"),
+govuk_document <- function(phase = c("none", "alpha", "beta"),
                            feedback_url = "404.html",
                            favicon = c("govuk", "custom"),
                            font = c("new-transport", "sans-serif"),
                            service_name = NULL,
-                           css = NULL,
-                           extra_dependencies = NULL,
-                           pandoc_args = NULL,
                            keep_md = FALSE) {
   phase <- match.arg(phase)
   font <- match.arg(font)
@@ -23,10 +19,10 @@ govuk_document <- function(...,
 
   if (font == "new-transport") {
     template <- pkg_file("rmarkdown/resources/govuk.html")
-    css <- c(css, pkg_file("rmarkdown/resources/govuk.css"))
+    css <- pkg_file("rmarkdown/resources/govuk.css")
   } else {
     template <- pkg_file("rmarkdown/resources/govukish.html")
-    css <- c(css, pkg_file("rmarkdown/resources/govukish.css"))
+    css <- pkg_file("rmarkdown/resources/govukish.css")
   }
 
   if (favicon == "govuk") {
@@ -35,8 +31,7 @@ govuk_document <- function(...,
     favicon_html <- pkg_file("rmarkdown/resources/favicon-custom.html")
   }
   pandoc_args <-
-    c(pandoc_args,
-      rmarkdown::includes_to_pandoc_args(list(in_header = favicon_html)))
+    rmarkdown::includes_to_pandoc_args(list(in_header = favicon_html))
 
   pre_processor <- function(metadata, input_file, runtime, knit_meta,
                             files_dir, output_dir) {
@@ -74,9 +69,7 @@ govuk_document <- function(...,
   }
 
   # Use highlights.js from the rmarkdown package
-  extra_dependencies <-
-    append(extra_dependencies,
-           list(rmarkdown::html_dependency_highlightjs("default")))
+  extra_dependencies <- list(rmarkdown::html_dependency_highlightjs("default"))
 
   base_format <- rmarkdown::output_format(
     knitr = NULL,
