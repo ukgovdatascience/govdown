@@ -4,21 +4,45 @@
 \alias{govuk_document}
 \title{GOV.UK style HTML template}
 \usage{
-govuk_document(..., phase = c("none", "alpha", "beta"),
-  service_name = NULL, css = NULL, extra_dependencies = NULL,
-  pandoc_args = NULL)
+govuk_document(phase = c("none", "alpha", "beta"),
+  feedback_url = "404.html", favicon = c("govuk", "custom"),
+  font = c("new-transport", "sans-serif"), service_name = NULL,
+  keep_md = FALSE)
 }
 \arguments{
-\item{...}{Additional function arguments to pass to the
-base R Markdown HTML output formatter \code{\link{html_document_base}}}
+\item{phase}{one of \code{"none"} (default), \code{"alpha"} or \code{"beta"} to put an alpha
+or beta banner indicating the maturity of the service (if it is a service).}
 
-\item{css}{One or more css files to include}
+\item{feedback_url}{URL for feedback, given in the phase banner when \code{phase}
+is \code{"alpha"} or \code{"beta"}.}
 
-\item{extra_dependencies}{Additional function arguments to pass to the
-base R Markdown HTML output formatter \code{\link{html_document_base}}}
+\item{favicon}{one of \code{"govuk"} (default) or \code{"custom"}.  If \code{"custom"} then
+image files in the directory \code{"favicon/"} will be used. The filenames are:
+\itemize{
+\item \code{apple-touch-icon-152x152.png}
+\item \code{apple-touch-icon-167x167.png}
+\item \code{apple-touch-icon-180x180.png}
+\item \code{apple-touch-icon.png}
+\item \code{favicon.ico}
+\item \code{mask-icon.svg}
+}
 
-\item{pandoc_args}{Additional command line options to pass to pandoc}
+See \code{system.file("rmarkdown/resources/favicon-custom.html", package = "govdown")} for how the icons are used.  See
+\code{system.file("rmarkdown/resources/assets/images", package = "govdown")} for
+the default images.}
+
+\item{font}{one of \code{"new-transport"} (default) or \code{"sans-serif"}.  New
+Transport must be when the document or website is published on the GOV.UK
+domain, otherwise it must not be used.}
+
+\item{service_name}{for websites, the words to appear in the navbar after the
+logo and the name of the organisation.  For single documents, use \code{title:} in
+the yaml header instead.}
+
+\item{keep_md}{logical, whether to keep the intermediate \code{.md} file after
+rendering.}
 }
 \description{
-Loads additional style and template file
+A template for rendering R Markdown documents as HTML using the GOV.UK Design
+System.  Can be used for single documents or for websites.
 }
