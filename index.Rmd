@@ -1,6 +1,4 @@
----
-title: Govdown
----
+# Govdown
 
 ::: {.lead-para}
 Govdown is an R package for creating websites and standalone HTML pages that use
