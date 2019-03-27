@@ -7,7 +7,7 @@ Govdown is an R package for creating websites and standalone HTML pages that use
 the GOV.UK Design System.  This website is an example.
 :::
 
-You use govdown in the same way as [R Markdown](https://rmarkdown.rstudio.com/),
+Use govdown in the same way as [R Markdown](https://rmarkdown.rstudio.com/),
 but specify `output: govdown::govdown_document` instead of `output:
 html_document` in the YAML metadata of the document, or in the `_site.yml` file
 of the website.
