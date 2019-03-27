@@ -1,73 +1,253 @@
+---
+title: Govdown
+---
 
-::: {.breadcrumbs}
-* [home](index.html)
-* [away](index.html)
+::: {.lead-para}
+Govdown is an R package for creating websites and standalone HTML pages that use
+the GOV.UK Design System.  This website is an example.
 :::
 
-With the govdown package you can render RMarkdown documents to look like GOV.UK
-pages.  It only supports rendering to HTML.
+You use govdown in the same way as [R Markdown](https://rmarkdown.rstudio.com/),
+but specify `output: govdown::govdown_document` instead of `output:
+html_document` in the YAML metadata of the document, or in the `_site.yml` file
+of the website.
 
-# govuk header xl *italic* {caption="govuk caption xl"}
+## Installation
 
-```{r}
-library(tidyverse)
+The package is only hosted on GitHub, not on CRAN.  Install it with the devtools
+package.
 
-mtcars %>%
-  ggplot(aes(cyl, mpg)) +
-  geom_point()
+```r
+# install.packages("devtools") # if devtools is not already installed
+devtools::install_github("ukgovdatascience/govdown")
 ```
 
+## Creating standalone HTML pages
+
+Govdown HTML pages are created in the same way as R Markdown HTML pages.  Write
+a markdown document (a plain text file with the suffix `.Rmd` or `.md` instead
+of `.txt`), and put something called 'YAML metadata' at the top.  It should look
+like this:
+
+```md
+---
+title: On Nectar
+author: Buzzy Bee
+date: March 27, 2019
+output:
+  govdown::govdown_document:
+    font: "sans-serif"
+---
+
+Thiz pozt sayz what'z tazty about nectar.
+```
+
+To render that file to HTML, run `rmarkdown::render("filename.Rmd")` in the
+console, or click the 'knit' button in RStudio.
+
+You must use `font: "sans-serif"` unless the page is hosted on the gov.uk
+domain.
+
+## Creating websites
+
+Websites are created in the same way as R Markdown websites.  Write
+a set of markdown documents (plain text files with the suffix `.Rmd` or `.md` instead
+of `.txt`), and a configuration file called `_site.yml` with content like the
+following:
+
+```yaml
+output_dir: docs
+navbar:
+  logo: "images/govdown-logo-white-on-transparent.svg"
+  title: "govdown"
+  homepage: "https://ukgovdatascience.github.io/govdown"
+  service_name: "GOV.UK-style markdown documents"
+  links:
+    - text: "Home"
+      href: index.html
+    - text: "Tech docs"
+      href: tech-docs.html
+output:
+  govdown::govdown_document:
+    font: "sans-serif"
+    phase: alpha
+    feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
+    favicon: "custom"
+```
+
+That example shows all the possible configuration.  You don't have to set a
+`logo` or `favicon` or have any `links` (although you probably should
+eventually), and if you don't set an alpha or beta `phase` banner then you won't
+need a `feedback_url`.  However you must set `font: "sans-serif"` unless the
+website is hosted on the gov.uk domain.  Set `output_dir: docs` if you will
+deploy the site on GitHub pages, otherwise refer to the R Markdown documentation
+on [publishing
+websites](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html#publishing-websites).
+
+To render the website, run `rmarkdown::render_site()` in the
+console, or click the 'knit' button in RStudio.
+
+## Supported markdown syntax
+
+Most of the usual markdown syntax is supported.  There is some new syntax for
+special features of the GOV.UK Design System.
+
+### Headings
+
+Create headings by beginning a new line of text with a `#` symbol.
+
+```md
+# Pithy heading
+
+Rambling content.
+```
+
+Subheadings have more `#`s
+
+```md
+## Helpful subheading
+
+### Can't remember what the main topic was?
+
+#### Four levels of headings are available!
+```
+
+### Headings with captions {caption="This is a caption"}
+
+The GOV.UK Design System supports captions above
+[headers](https://design-system.service.gov.uk/styles/typography/#headings).
+This works for headings of level 1, 2 and 3, but not for the smallest headings
+(level 4).
+
+```md
+# Heading with caption above {caption="This is a caption"}
+```
+
+### Bold and italics
+
+**Bold** and *italics* work as ***normal***.
+
+```md
+**Bold** and *italics* work as ***normal***.
+```
+
+### Lead paragraphs and small text
+
+The GOV.UK Design System supports [larger and smaller text for
+paragraphs](https://design-system.service.gov.uk/styles/typography/#paragraphs).
+Large text is for a single lead paragraph at the top of a page.  See the top of
+this page for an example.
+
+::: {.small-para}
+Small text looks like this.
+:::
+
+```md
 ::: {.lead-para}
 This is a lead paragraph that appears in larger text than the rest of the body
 text of the page.
-
-Using multiple lead paragraphs is discouraged.
 :::
 
 This is a normal paragraph in normal size.
 
 ::: {.small-para}
-If you're bored with writing in big letter and normal letters, then you can
-write small letters too.
+You can write in small letters too.
 :::
+```
 
-Body *italic* **bold** ***bold and italic***
+### Indented text (quotations)
 
+Indented text (often used for block quotations) works as normal
+
+> United wishes and good will cannot overcome brute facts.  Truth is
+> incontrovertible. Panic may resent it. Ignorance may deride it. Malice may
+> distort it. But there it is. -- Winston Churchill
+
+```md
+> United wishes and good will cannot overcome brute facts.  Truth is
+> incontrovertible. Panic may resent it. Ignorance may deride it. Malice may
+> distort it. But there it is. -- Winston Churchill
+```
+
+### Hyperlinks
+
+Hyperlinks work as normal.  The GOV.UK Design System also supports [hyperlinks
+that don't change
+colour](https://design-system.service.gov.uk/styles/typography/#links){.no-visited-state}
+when you have visited the page.
+
+```md
 [normal hyperlink](https://design-system.service.gov.uk).
 
-[hyperlink that doesn't turn purple](https://design-system.service.gov.uk){.govuk-link--no-visited-state}.
+[hyperlink that doesn't turn purple](https://design-system.service.gov.uk){.no-visited-state}.
+```
 
-Next paragraph.
+### Bullets and numbered lists
+
+Bulletted lists work as normal, but nested bullets don't look very good because
+they aren't really supported by the GOV.UK Design System.
 
 * First bullet
   * Nested bullets are available but ...
-  * ... they look terrible because the GOV.UK Design System doesn't really support
-    them.
+  * ... they don't look very good because the GOV.UK Design System doesn't
+    really support them.
 * Second bullet
 * Third bullet
 
-Lists without bullets aren't supported because I don't know how to, so you
-have to write the html yourself
+```md
+* First bullet
+  * Nested bullets are available but ...
+  * ... they don't look very good because the GOV.UK Design System doesn't
+    really support them.
+* Second bullet
+* Third bullet
+```
 
-<ul class="govuk-list">
-  <li>
-    <a>Unbulleted item one</a>
-  </li>
-  <li>
-    <a>Unbulleted item two</a>
-  </li>
-  <li>
-    <a>Unbullted item three</a>
-  </li>
-</ul>
+Numbered lists work as normal, except that nested numbered lists don't work at
+all because they aren't supported by the GOV.UK Design System.
 
 1. Numbered list item
 1. Second numbered list item
 1. Third numbered list item
 
-The default section break `---` is the largest.  For other sizes use the [raw
-HTML](https://design-system.service.gov.uk/styles/typography/#section-break)
-because pandoc doesn't support classes for this element.
+```md
+1. Numbered list item
+1. Second numbered list item
+1. Third numbered list item
+```
+
+The GOV.UK Design System also supports lists with neither bullets nor numbers.
+Standard markdown doesn't have any syntax for this, so create a bulletted list
+and wrap it with a special marker, shown below.
+
+::: {.unbulleted-list}
+* Unbulleted item one
+* Unbulleted item two
+* Unbulleted item three
+:::
+
+```md
+::: {.unbulleted-list}
+* Unbulleted item one
+* Unbulleted item two
+* Unbulleted item three
+:::
+```
+
+### Section breaks
+
+The usual section break is available.
+
+```md
+---
+```
+
+---
+
+The GOV.UK Design System supports several
+sizes of section break; govdown uses the largest.  For the other sizes use the
+[raw
+HTML](https://design-system.service.gov.uk/styles/typography/#section-break).
 
 ```html
 <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
@@ -76,24 +256,61 @@ because pandoc doesn't support classes for this element.
 <hr class="govuk-section-break govuk-section-break--visible">
 ```
 
----
+### Breadcrumbs
 
-> United wishes and good will cannot overcome brute facts.  Truth is
-> incontrovertible. Panic may resent it. Ignorance may deride it. Malice may
-> distort it. But there it is. -- Winston Churchill
+The GOV.UK Design System uses
+[breadcrumbs](https://design-system.service.gov.uk/components/breadcrumbs/) to
+help users know where they are on a website.  They are used at the top of a
+page.
 
+::: {.breadcrumbs}
+* [trail](index.html)
+* [of](index.html)
+* breadcrumbs
+:::
 
-## govuk header l *italic* {caption="govuk caption l"}
+```md
+::: {.breadcrumbs}
+* [trail](index.html)
+* [of](index.html)
+* breadcrumbs
+:::
+```
 
-Body text.
+### Code blocks
 
-### govuk header m *italic* {caption="govuk caption m"}
+Code blocks work the same as they do in markdown and R Markdown.  Code in R
+Markdown files (.Rmd suffix) will be evaluated, and the result interleaved below
+the code.
 
-Body text.
+```r
+print("This code will not be evaluated")
+```
 
-#### govuk header s *italic* {caption="govuk caption s"}
+```{r}
+print("This code will be evaluated")
+```
 
-Body text.  There is no small caption.
+Create code chunks that are not to be evaluated as follows.
+
+```md
+    ```r
+    print("This code will not be evaluated")
+    ```
+```
+
+Create code chunks that are to be evaluated as follows.
+
+```md
+    ```{r}
+    print("This code will be evaluated")
+    ```
+```
+
+### Mathematical equations
+
+Mathjax is supported as normal, by wrapping the equation in `$` symbols (inline
+equations) or in `$$` symbols on their own line (block equations).
 
 Here's some inline mathjax $\sum_0^{2e} \alpha_i \mathrm{dt}$.
 Here's some block mathjax
@@ -106,3 +323,11 @@ s_i & \sim \mathrm{Binomial}(n_i, p_i) \\
 \end{align}
 $$
 
+## Contribute to the development of govdown
+
+Use `install-govuk-frontend.sh` to download, modify and compile the GOV.UK Design System to get the css files for the templates.
+
+### Prerequisites
+
+The `sassc` command-line tool.  If you can't get that to work, try the `sass`
+package by RStudio, which wraps it.
