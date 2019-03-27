@@ -155,7 +155,7 @@ You can write in small letters too.
 
 ### Indented text (quotations)
 
-Indented text (often used for block quotations) works as normal
+Indented text (often used for block quotations) works as normal.
 
 > United wishes and good will cannot overcome brute facts.  Truth is
 > incontrovertible. Panic may resent it. Ignorance may deride it. Malice may
