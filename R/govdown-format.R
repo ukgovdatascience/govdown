@@ -43,7 +43,7 @@
 #' organisation: "govdown"
 #' logo: "./images/govdown-logo-white-on-transparent.svg"
 #' output:
-#'   govdown::govuk_document:
+#'   govdown::govdown_document:
 #'     font: "sans-serif"
 #' ---
 #' ```
@@ -63,7 +63,7 @@
 #'     - text: "Tech docs"
 #'       href: tech-docs.html
 #' output:
-#'   govdown::govuk_document:
+#'   govdown::govdown_document:
 #'     font: "sans-serif"
 #'     phase: alpha
 #'     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
@@ -71,7 +71,7 @@
 #' ```
 #'
 #' @export
-govuk_document <- function(phase = c("none", "alpha", "beta"),
+govdown_document <- function(phase = c("none", "alpha", "beta"),
                            feedback_url = "404.html",
                            favicon = c("govuk", "custom"),
                            font = c("new-transport", "sans-serif"),

@@ -10,7 +10,7 @@ navbar:
     - text: "Tech docs"
       href: tech-docs.html
 output:
-  govdown::govuk_document:
+  govdown::govdown_document:
     font: "sans-serif"
     phase: alpha
     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
