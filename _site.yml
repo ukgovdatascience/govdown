@@ -3,7 +3,7 @@ navbar:
   logo: "images/govdown-logo-white-on-transparent.svg"
   title: "govdown"
   homepage: "https://ukgovdatascience.github.io/govdown"
-  service_name: "Reproducible Analytical Pipelines"
+  service_name: "GOV.UK-style markdown documents"
   links:
     - text: "Home"
       href: index.html
