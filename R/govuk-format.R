@@ -1,6 +1,9 @@
 #' GOV.UK style HTML template
 #'
 #' Loads additional style and template file
+#' @param font one of `"new-transport"` (default) or `"sans-serif"`.  New
+#' Transport must be when the document or website is published on the GOV.UK
+#' domain, otherwise it must not be used.
 #'
 #' @inheritParams rmarkdown::html_document
 #' @export
@@ -14,15 +17,22 @@ govuk_document <- function(phase = c("none", "alpha", "beta"),
   font <- match.arg(font)
   favicon <- match.arg(favicon)
 
+  pandoc_args <- NULL
+
   lua <- pkg_file("rmarkdown/resources/govuk.lua")
   resources <- paste0(".:", pkg_file("rmarkdown/resources"))
+  template <- pkg_file("rmarkdown/resources/govuk.html")
 
   if (font == "new-transport") {
-    template <- pkg_file("rmarkdown/resources/govuk.html")
     css <- pkg_file("rmarkdown/resources/govuk.css")
+    pandoc_args <-
+      c(pandoc_args,
+        rmarkdown::includes_to_pandoc_args(list(css = "govuk.css")))
   } else {
-    template <- pkg_file("rmarkdown/resources/govukish.html")
     css <- pkg_file("rmarkdown/resources/govukish.css")
+    pandoc_args <-
+      c(pandoc_args,
+        rmarkdown::includes_to_pandoc_args(list(css = "govukish.css")))
   }
 
   if (favicon == "govuk") {
@@ -31,7 +41,8 @@ govuk_document <- function(phase = c("none", "alpha", "beta"),
     favicon_html <- pkg_file("rmarkdown/resources/favicon-custom.html")
   }
   pandoc_args <-
-    rmarkdown::includes_to_pandoc_args(list(in_header = favicon_html))
+    c(pandoc_args,
+      rmarkdown::includes_to_pandoc_args(list(in_header = favicon_html)))
 
   pre_processor <- function(metadata, input_file, runtime, knit_meta,
                             files_dir, output_dir) {
