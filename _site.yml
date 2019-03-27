@@ -1,0 +1,17 @@
+output_dir: docs
+navbar:
+  logo: "images/govdown-logo-white-on-transparent.svg"
+  title: "govdown"
+  homepage: "https://ukgovdatascience.github.io/govdown"
+  service_name: "Reproducible Analytical Pipelines"
+  links:
+    - text: "Home"
+      href: index.html
+    - text: "Tech docs"
+      href: tech-docs.html
+output:
+  govdown::govuk_document:
+    font: "sans-serif"
+    phase: alpha
+    feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
+    favicon: "custom"

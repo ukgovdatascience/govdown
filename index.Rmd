@@ -1,0 +1,116 @@
+---
+title: "GOV.UK-style R Markdown Documents"
+organisation: "govdown"
+logo: "./images/govdown-logo-white-on-transparent.svg"
+output:
+  govdown::govuk_document:
+    font: "sans-serif"
+---
+
+::: {.breadcrumbs}
+* [home](index.html)
+* [away](index.html)
+:::
+
+With the govdown package you can render RMarkdown documents to look like GOV.UK
+pages.  It only supports rendering to HTML.
+
+# govuk header xl *italic* {caption="govuk caption xl"}
+
+```{r}
+library(tidyverse)
+
+mtcars %>%
+  ggplot(aes(cyl, mpg)) +
+  geom_point()
+```
+
+::: {.lead-para}
+This is a lead paragraph that appears in larger text than the rest of the body
+text of the page.
+
+Using multiple lead paragraphs is discouraged.
+:::
+
+This is a normal paragraph in normal size.
+
+::: {.small-para}
+If you're bored with writing in big letter and normal letters, then you can
+write small letters too.
+:::
+
+Body *italic* **bold** ***bold and italic***
+
+[normal hyperlink](https://design-system.service.gov.uk).
+
+[hyperlink that doesn't turn purple](https://design-system.service.gov.uk){.govuk-link--no-visited-state}.
+
+Next paragraph.
+
+* First bullet
+  * Nested bullets are available but ...
+  * ... they look terrible because the GOV.UK Design System doesn't really support
+    them.
+* Second bullet
+* Third bullet
+
+Lists without bullets aren't supported because I don't know how to, so you
+have to write the html yourself
+
+<ul class="govuk-list">
+  <li>
+    <a>Unbulleted item one</a>
+  </li>
+  <li>
+    <a>Unbulleted item two</a>
+  </li>
+  <li>
+    <a>Unbullted item three</a>
+  </li>
+</ul>
+
+1. Numbered list item
+1. Second numbered list item
+1. Third numbered list item
+
+The default section break `---` is the largest.  For other sizes use the [raw
+HTML](https://design-system.service.gov.uk/styles/typography/#section-break)
+because pandoc doesn't support classes for this element.
+
+```html
+<hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+<hr class="govuk-section-break govuk-section-break--visible">
+```
+
+---
+
+> United wishes and good will cannot overcome brute facts.  Truth is
+> incontrovertible. Panic may resent it. Ignorance may deride it. Malice may
+> distort it. But there it is. -- Winston Churchill
+
+
+## govuk header l *italic* {caption="govuk caption l"}
+
+Body text.
+
+### govuk header m *italic* {caption="govuk caption m"}
+
+Body text.
+
+#### govuk header s *italic* {caption="govuk caption s"}
+
+Body text.  There is no small caption.
+
+Here's some inline mathjax $\sum_0^{2e} \alpha_i \mathrm{dt}$.
+Here's some block mathjax
+
+$$
+\begin{align}
+s_i & \sim \mathrm{Binomial}(n_i, p_i) \\
+\mathrm{logit}(p_i) & = \alpha_{\small{TANK}[i]} \\
+\alpha_{\small{TANK}} & \sim \mathrm{Normal}(0, 5)
+\end{align}
+$$
+
