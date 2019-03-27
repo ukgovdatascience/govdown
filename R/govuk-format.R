@@ -67,7 +67,7 @@ govuk_document <- function(phase = c("none", "alpha", "beta"),
     phase_arg <- NULL
     if (phase != "none") {
       banner_file <-
-        pkg_file(paste0("rmarkdown/resources/govuk-", phase, "-banner.html"))
+        pkg_file(paste0("rmarkdown/resources/", phase, "-banner.html"))
       banner_filestring <- file_string(banner_file)
       banner_filestring <- sprintf(banner_filestring , feedback_url)
       tmpfile <- as_tmpfile(banner_filestring)
@@ -127,7 +127,7 @@ navbar_html <- function(navbar, input_file) {
   # build the navigation bar and return it as a temp file
   logo <- ""
   if (is.null(navbar$logo)) { # default to GOV.UK crown
-    logo <- file_string(pkg_file("rmarkdown/resources/govuk-logo-svg.html"))
+    logo <- file_string(pkg_file("rmarkdown/resources/logo-svg.html"))
   } else if (is.logical(navbar$logo) && !navbar$logo) { # false --> no logo
     logo <- ""
   } else {
@@ -136,7 +136,7 @@ navbar_html <- function(navbar, input_file) {
 
   service_name <- ""
   if (!is.null(navbar$service_name)) {
-    service_name  <- file_string(pkg_file("rmarkdown/resources/govuk-service-name.html"))
+    service_name  <- file_string(pkg_file("rmarkdown/resources/navbar-service-name.html"))
     service_name  <- sprintf(service_name, navbar$service_name)
   }
 
@@ -145,8 +145,8 @@ navbar_html <- function(navbar, input_file) {
   if (!is.null(navbar$links)) {
     all_links <- ""
 
-    active_html <- file_string(pkg_file("rmarkdown/resources/govuk-nav-item-active.html"))
-    other_html <- file_string(pkg_file("rmarkdown/resources/govuk-nav-item-other.html"))
+    active_html <- file_string(pkg_file("rmarkdown/resources/navbar-item-active.html"))
+    other_html <- file_string(pkg_file("rmarkdown/resources/navbar-item-other.html"))
 
     for (link in navbar$links) {
       # input_file has two suffixes e.g. index.utf8.md so strip twice
@@ -156,19 +156,19 @@ navbar_html <- function(navbar, input_file) {
       all_links <- paste0(all_links, link_html)
     }
 
-    links_html <- file_string(pkg_file("rmarkdown/resources/govuk-nav.html"))
+    links_html <- file_string(pkg_file("rmarkdown/resources/navbar-links.html"))
     links_html <- sprintf(links_html, all_links)
   }
 
   nav <- ""
   if (!is.null(navbar$service_name) || !is.null(navbar$links)) {
-    nav <- file_string(pkg_file("rmarkdown/resources/govuk-nav.html"))
+    nav <- file_string(pkg_file("rmarkdown/resources/navbar-links.html"))
     nav <- sprintf(nav, links_html)
   }
 
   content <- ""
   if (!is.null(navbar$service_name) || !is.null(navbar$links)) {
-    content <- file_string(pkg_file("rmarkdown/resources/govuk-header-content.html"))
+    content <- file_string(pkg_file("rmarkdown/resources/header-content.html"))
     content <- sprintf(content, service_name, nav)
   }
 
