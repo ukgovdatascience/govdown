@@ -1,11 +1,3 @@
----
-title: "GOV.UK-style R Markdown Documents"
-organisation: "govdown"
-logo: "./images/govdown-logo-white-on-transparent.svg"
-output:
-  govdown::govuk_document:
-    font: "sans-serif"
----
 
 ::: {.breadcrumbs}
 * [home](index.html)
