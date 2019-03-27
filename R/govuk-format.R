@@ -38,12 +38,14 @@
 #' file.
 #'
 #' ```
+#' ---
 #' title: "GOV.UK-style R Markdown Document"
 #' organisation: "govdown"
 #' logo: "./images/govdown-logo-white-on-transparent.svg"
 #' output:
 #'   govdown::govuk_document:
 #'     font: "sans-serif"
+#' ---
 #' ```
 #'
 #' To configure a website, use a `_site.yml` file instead.

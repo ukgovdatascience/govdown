@@ -49,12 +49,14 @@ System.  Can be used for single documents or for websites.
 }
 \details{
 To configure a standalone document, use the yaml at the top of the \code{.Rmd}
-file.\preformatted{title: "GOV.UK-style R Markdown Document"
+file.\preformatted{---
+title: "GOV.UK-style R Markdown Document"
 organisation: "govdown"
 logo: "./images/govdown-logo-white-on-transparent.svg"
 output:
   govdown::govuk_document:
     font: "sans-serif"
+---
 }
 
 To configure a website, use a \code{_site.yml} file instead.\preformatted{output_dir: docs # to host on GitHub pages
