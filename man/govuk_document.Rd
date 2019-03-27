@@ -16,8 +16,9 @@ or beta banner indicating the maturity of the service (if it is a service).}
 \item{feedback_url}{URL for feedback, given in the phase banner when \code{phase}
 is \code{"alpha"} or \code{"beta"}.}
 
-\item{favicon}{one of \code{"govuk"} (default) or \code{"custom"}.  If \code{"custom"} then
-image files in the directory \code{"favicon/"} will be used. The filenames are:
+\item{favicon}{one of \code{"govuk"} (default) or \code{"custom"}.  For websites only,
+not standalone documents. If \code{"custom"} then image files in the directory
+\code{"favicon/"} will be used. The filenames are:
 \itemize{
 \item \code{apple-touch-icon-152x152.png}
 \item \code{apple-touch-icon-167x167.png}
@@ -45,4 +46,33 @@ rendering.}
 \description{
 A template for rendering R Markdown documents as HTML using the GOV.UK Design
 System.  Can be used for single documents or for websites.
+}
+\details{
+To configure a standalone document, use the yaml at the top of the \code{.Rmd}
+file.\preformatted{title: "GOV.UK-style R Markdown Document"
+organisation: "govdown"
+logo: "./images/govdown-logo-white-on-transparent.svg"
+output:
+  govdown::govuk_document:
+    font: "sans-serif"
+}
+
+To configure a website, use a \code{_site.yml} file instead.\preformatted{output_dir: docs # to host on GitHub pages
+navbar:
+  logo: "images/govdown-logo-white-on-transparent.svg"
+  title: "govdown"
+  homepage: "https://ukgovdatascience.github.io/govdown"
+  service_name: "Reproducible Analytical Pipelines"
+  links:
+    - text: "Home"
+      href: index.html
+    - text: "Tech docs"
+      href: tech-docs.html
+output:
+  govdown::govuk_document:
+    font: "sans-serif"
+    phase: alpha
+    feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
+    favicon: "custom"
+}
 }

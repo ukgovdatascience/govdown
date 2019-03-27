@@ -1,11 +1,73 @@
 #' GOV.UK style HTML template
 #'
-#' Loads additional style and template file
+#' A template for rendering R Markdown documents as HTML using the GOV.UK Design
+#' System.  Can be used for single documents or for websites.
+#'
+#' @param phase one of `"none"` (default), `"alpha"` or `"beta"` to put an alpha
+#' or beta banner indicating the maturity of the service (if it is a service).
+#' @param feedback_url URL for feedback, given in the phase banner when `phase`
+#' is `"alpha"` or `"beta"`.
+#' @param favicon one of `"govuk"` (default) or `"custom"`.  For websites only,
+#' not standalone documents. If `"custom"` then image files in the directory
+#' `"favicon/"` will be used. The filenames are:
+#'
+#' * `apple-touch-icon-152x152.png`
+#' * `apple-touch-icon-167x167.png`
+#' * `apple-touch-icon-180x180.png`
+#' * `apple-touch-icon.png`
+#' * `favicon.ico`
+#' * `mask-icon.svg`
+#'
+#' See `system.file("rmarkdown/resources/favicon-custom.html", package =
+#' "govdown")` for how the icons are used.  See
+#' `system.file("rmarkdown/resources/assets/images", package = "govdown")` for
+#' the default images.
+#'
 #' @param font one of `"new-transport"` (default) or `"sans-serif"`.  New
 #' Transport must be when the document or website is published on the GOV.UK
 #' domain, otherwise it must not be used.
+#' @param service_name for websites, the words to appear in the navbar after the
+#' logo and the name of the organisation.  For single documents, use `title:` in
+#' the yaml header instead.
+#' @param keep_md logical, whether to keep the intermediate `.md` file after
+#' rendering.
 #'
-#' @inheritParams rmarkdown::html_document
+#' @details
+#'
+#' To configure a standalone document, use the yaml at the top of the `.Rmd`
+#' file.
+#'
+#' ```
+#' title: "GOV.UK-style R Markdown Document"
+#' organisation: "govdown"
+#' logo: "./images/govdown-logo-white-on-transparent.svg"
+#' output:
+#'   govdown::govuk_document:
+#'     font: "sans-serif"
+#' ```
+#'
+#' To configure a website, use a `_site.yml` file instead.
+#'
+#' ```
+#' output_dir: docs # to host on GitHub pages
+#' navbar:
+#'   logo: "images/govdown-logo-white-on-transparent.svg"
+#'   title: "govdown"
+#'   homepage: "https://ukgovdatascience.github.io/govdown"
+#'   service_name: "Reproducible Analytical Pipelines"
+#'   links:
+#'     - text: "Home"
+#'       href: index.html
+#'     - text: "Tech docs"
+#'       href: tech-docs.html
+#' output:
+#'   govdown::govuk_document:
+#'     font: "sans-serif"
+#'     phase: alpha
+#'     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
+#'     favicon: "custom"
+#' ```
+#'
 #' @export
 govuk_document <- function(phase = c("none", "alpha", "beta"),
                            feedback_url = "404.html",
