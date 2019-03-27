@@ -305,6 +305,12 @@ Create code chunks that are to be evaluated as follows.
     ```
 ```
 
+Python code chunks also work, as do any of the languages supported by knitr.
+
+```{python}
+'Monty Python'.split()
+```
+
 ### Mathematical equations
 
 Mathjax is supported as normal, by wrapping the equation in `$` symbols (inline
