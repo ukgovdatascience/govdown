@@ -6,7 +6,7 @@ Make websites with R Markdown styled with the GOV.UK Design System.  See the
 ## Installation
 
 ``` r
-remotes::install_github("govdatascience/govdown")
+remotes::install_github("ukgovdatascience/govdown")
 ```
 
 ## Development
