@@ -77,6 +77,8 @@ govdown_document <- function(phase = c("none", "alpha", "beta"),
                            font = c("new-transport", "sans-serif"),
                            service_name = NULL,
                            keep_md = FALSE) {
+  rmarkdown::pandoc_available("2", error = TRUE)
+
   phase <- match.arg(phase)
   font <- match.arg(font)
   favicon <- match.arg(favicon)
