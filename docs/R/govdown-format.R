@@ -226,16 +226,10 @@ navbar_html <- function(navbar, input_file) {
     links_html <- sprintf(links_html, all_links)
   }
 
-  nav <- ""
-  if (!is.null(navbar$service_name) || !is.null(navbar$links)) {
-    nav <- file_string(pkg_file("rmarkdown/resources/navbar-links.html"))
-    nav <- sprintf(nav, links_html)
-  }
-
   content <- ""
   if (!is.null(navbar$service_name) || !is.null(navbar$links)) {
     content <- file_string(pkg_file("rmarkdown/resources/header-content.html"))
-    content <- sprintf(content, service_name, nav)
+    content <- sprintf(content, service_name, links_html)
   }
 
   navbar <- file_string(pkg_file("rmarkdown/resources/navbar.html"))
