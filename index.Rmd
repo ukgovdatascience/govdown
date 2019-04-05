@@ -311,6 +311,12 @@ Python code chunks also work, as do any of the languages supported by knitr.
 'Monty Python'.split()
 ```
 
+### Images
+
+Images use the normal markdown syntax.
+
+![caption text](./favicon/apple-touch-icon-180x180.png)
+
 ### Mathematical equations
 
 Mathjax is supported as normal, by wrapping the equation in `$` symbols (inline
