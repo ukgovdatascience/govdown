@@ -9,6 +9,8 @@ navbar:
       href: index.html
     - text: "Tech docs"
       href: tech-docs.html
+    - text: "News"
+      href: NEWS.html
 output:
   govdown::govdown_document:
     font: "sans-serif"
