@@ -6,6 +6,32 @@ return {
     -- Deal with fenced divs
     Div = function(el)
 
+      -- Look for 'tabset'
+      v,i = el.classes:find("tabset")
+      if i ~= nil then
+        el.classes[i] = nil
+            el.classes:extend({"govuk-tabs"})
+            el.attributes:extend({{"data-module", "tabs"}})
+        return pandoc.walk_block(el, {
+
+          -- Headers
+          Header = function(el)
+            local level = el.level
+            local identifier = el.attr.identifier
+            local content = el.content
+
+            if level == 1 then
+              el.classes:extend({govuk-tabs__title})
+            else
+            end
+
+            return header
+          end
+
+        })
+      end
+
+
       -- Look for 'breadcrumbs'
       v,i = el.classes:find("breadcrumbs")
       if i ~= nil then

@@ -275,6 +275,45 @@ page.
 :::
 ```
 
+### Tabsets
+
+Tabs can be a helpful way of letting users quickly switch between related
+information.  See the guidance on the [GOV.UK Design
+System](https://design-system.service.gov.uk/components/tabs/).
+
+The syntax is different from normal R Markdown tabsets.
+
+```md
+::: {.tabset}
+# Header appears on narrow screens
+
+## Tab header 1
+
+Tab content A
+
+## Tab header 2
+
+Tab content B
+
+Second paragraph of content.
+:::
+```
+
+::: {.tabset}
+# Header appears on narrow screens
+
+## Tab header 1
+
+Tab content A
+
+## Tab header 2
+
+Tab content B
+
+Second paragraph of content.
+:::
+
+
 ### Code blocks
 
 Code blocks work the same as they do in markdown and R Markdown.  Code in R
