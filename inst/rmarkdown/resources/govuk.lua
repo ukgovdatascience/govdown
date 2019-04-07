@@ -138,11 +138,11 @@ return {
                 pandoc.RawBlock('html', '<ol class="govuk-breadcrumbs__list">')
               }
               for _, item in ipairs(items.content) do
-                res[#res + 1] = pandoc.RawBlock('html', '<li class="govuk-breadcrumbs__list-item">')
+                table.insert(res, pandoc.RawBlock('html', '<li class="govuk-breadcrumbs__list-item">'))
                 res:extend(item)
-                res[#res + 1] = pandoc.RawBlock('html', '</li>')
+                table.insert(res, pandoc.RawBlock('html', '</li>'))
               end
-              res[#res + 1] = pandoc.RawBlock('html', '</ol>')
+              table.insert(res, pandoc.RawBlock('html', '</ol>'))
               return res
             end
         })
@@ -167,11 +167,11 @@ return {
           BulletList = function (items)
             local res = List:new{pandoc.RawBlock('html', '<ul class="govuk-list">')}
             for _, item in ipairs(items.content) do
-              res[#res + 1] = pandoc.RawBlock('html', '<li>')
+              table.insert(res, pandoc.RawBlock('html', '<li>'))
               res:extend(item)
-              res[#res + 1] = pandoc.RawBlock('html', '</li>')
+              table.insert(res, pandoc.RawBlock('html', '</li>'))
             end
-            res[#res + 1] = pandoc.RawBlock('html', '</ul>')
+            table.insert(res, pandoc.RawBlock('html', '</ul>'))
             return res
           end
         })
@@ -300,11 +300,11 @@ return {
     BulletList = function(items)
       local res = List:new{pandoc.RawBlock('html', '<ul class="govuk=list govuk-list--bullet">')}
       for _, item in ipairs(items.content) do
-        res[#res + 1] = pandoc.RawBlock('html', '<li class="govuk-body">')
+        table.insert(res, pandoc.RawBlock('html', '<li class="govuk-body">'))
         res:extend(item)
-        res[#res + 1] = pandoc.RawBlock('html', '</li>')
+        table.insert(res, pandoc.RawBlock('html', '</li>'))
       end
-      res[#res + 1] = pandoc.RawBlock('html', '</ul>')
+      table.insert(res, pandoc.RawBlock('html', '</ul>'))
       return res
     end
   },
@@ -314,11 +314,11 @@ return {
     OrderedList = function(items)
       local res = List:new{pandoc.RawBlock('html', '<ol class="govuk-list govuk-list--number">')}
       for _, item in ipairs(items.content) do
-        res[#res + 1] = pandoc.RawBlock('html', '<li class="govuk-body">')
+        table.insert(res, pandoc.RawBlock('html', '<li class="govuk-body">'))
         res:extend(item)
-        res[#res + 1] = pandoc.RawBlock('html', '</li>')
+        table.insert(res, pandoc.RawBlock('html', '</li>'))
       end
-      res[#res + 1] = pandoc.RawBlock('html', '</ol>')
+      table.insert(res, pandoc.RawBlock('html', '</ol>'))
       return res
     end
   },
