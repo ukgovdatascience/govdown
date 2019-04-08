@@ -86,7 +86,8 @@ govdown_document <- function(phase = c("none", "alpha", "beta"),
   pandoc_args <- NULL
 
   lua <- pkg_file("rmarkdown/resources/govuk.lua")
-  resources <- paste0(".:", pkg_file("rmarkdown/resources"))
+  path_sep <- ifelse(.Platform$OS.type == "windows", ";", ":")
+  resources <- paste0(".", path_sep, pkg_file("rmarkdown/resources"))
   template <- pkg_file("rmarkdown/resources/govuk.html")
 
   if (font == "new-transport") {

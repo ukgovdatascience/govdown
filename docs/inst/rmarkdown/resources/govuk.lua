@@ -1,5 +1,27 @@
 local List = require 'pandoc.List'
 
+-- -- https://gist.github.com/liukun/f9ce7d6d14fa45fe9b924a3eed5c3d99
+-- -- see also https://gist.github.com/liukun/f9ce7d6d14fa45fe9b924a3eed5c3d99
+
+-- function encodeURI(str)
+--   if (str) then
+--     str = string.gsub (str, "\n", "\r\n")
+--     str = string.gsub (str, "([^%w ])",
+--       function (c) return string.format ("%%%02X", string.byte(c)) end)
+--     str = string.gsub (str, " ", "+")
+--   end
+--   return str
+-- end
+
+-- function decodeURI(s)
+--   if(s) then
+--     s = string.gsub(s, "+", " ")
+--     s = string.gsub(s, '%%(%x%x)',
+--       function (hex) return string.char(tonumber(hex,16)) end )
+--   end
+--   return s
+-- end
+
 return {
 
   {
@@ -10,27 +32,99 @@ return {
       v,i = el.classes:find("tabset")
       if i ~= nil then
         el.classes[i] = nil
-            el.classes:extend({"govuk-tabs"})
-            el.attributes:extend({{"data-module", "tabs"}})
-        return pandoc.walk_block(el, {
+        el.classes:extend({"govuk-tabs"})
+        el.attributes = {{"data-module", "tabs"}}
 
-          -- Headers
-          Header = function(el)
-            local level = el.level
-            local identifier = el.attr.identifier
-            local content = el.content
+        -- begin items
+        -- iterate over blocks
+        -- if header
+        --   if level 1
+        --     set as title at level 2
+        --   elseif level 2
+        --     add to items
+        --     if not first level 2 header
+        --       close previous section
+        --     begin new section
+        --   else
+        --     add to section
+        -- else
+        --   add to section
+        -- end
+        -- close items and sections
+        -- combine title, items and sections
 
-            if level == 1 then
-              el.classes:extend({govuk-tabs__title})
-            else
+        local title
+        local items = List:new{}
+        local sections = List:new{}
+        local html
+        local first_section = true
+
+        -- items[#items] = pandoc.RawBlock('html', '<ul class="govuk-tabs__list">')
+        table.insert(items, pandoc.RawBlock('html', '<ul class="govuk-tabs__list">'))
+
+        for _, block in pairs(el.content) do
+          if block.t == "Header" then
+            if block.level == 1 then
+              -- set title
+              block.level = 2
+              block.classes:extend({"govuk-tabs__title"})
+              title = block
+            elseif block.level == 2 then
+              -- add new item
+              html =
+                '<li class="govuk-tabs__list-item">' ..
+                '<a class="govuk-tabs__tab govuk-tabs__tab--selected" href="#' ..
+                block.identifier ..
+                '">' ..
+                pandoc.utils.stringify(block.content) ..
+                '</a>'
+              table.insert(items, pandoc.RawBlock('html', html))
+              if first_section then
+                first_section = false
+              else
+                -- Close previous section
+                table.insert(sections, pandoc.RawBlock('html', "</section>"))
+              end
+              -- Open  new section
+              html =
+                '<section class="govuk-tabs__panel" id="' ..
+                block.identifier ..
+                '">'
+              table.insert(sections, pandoc.RawBlock('html', html))
+              -- Put header in section, but disguise it as not-a-header so that
+              -- pandoc doesn't give it an id attribute, otherwise browsers will
+              -- scroll to it, pushing the tab titles above the screen edge.
+              html =
+                '<h2 class="govuk-heading-l">' ..
+                pandoc.utils.stringify(block.content) ..
+                '</h2>'
+              table.insert(sections, pandoc.RawBlock('html', html))
             end
-
-            return header
+          else
+            table.insert(sections, block)
           end
+        end
 
-        })
+        -- close items and sections
+        table.insert(items, pandoc.RawBlock('html', '</ul>'))
+        table.insert(sections, pandoc.RawBlock('html', "</section>"))
+
+        -- combine title, items and sections
+        el.content = List:new{}
+
+        table.insert(el.content, title)
+
+        for _, v in pairs(items) do
+          table.insert(el.content, v)
+        end
+
+        for _, v in pairs(sections) do
+          table.insert(el.content, v)
+        end
+
+        return el
+
       end
-
 
       -- Look for 'breadcrumbs'
       v,i = el.classes:find("breadcrumbs")
@@ -44,11 +138,11 @@ return {
                 pandoc.RawBlock('html', '<ol class="govuk-breadcrumbs__list">')
               }
               for _, item in ipairs(items.content) do
-                res[#res + 1] = pandoc.RawBlock('html', '<li class="govuk-breadcrumbs__list-item">')
+                table.insert(res, pandoc.RawBlock('html', '<li class="govuk-breadcrumbs__list-item">'))
                 res:extend(item)
-                res[#res + 1] = pandoc.RawBlock('html', '</li>')
+                table.insert(res, pandoc.RawBlock('html', '</li>'))
               end
-              res[#res + 1] = pandoc.RawBlock('html', '</ol>')
+              table.insert(res, pandoc.RawBlock('html', '</ol>'))
               return res
             end
         })
@@ -73,11 +167,11 @@ return {
           BulletList = function (items)
             local res = List:new{pandoc.RawBlock('html', '<ul class="govuk-list">')}
             for _, item in ipairs(items.content) do
-              res[#res + 1] = pandoc.RawBlock('html', '<li>')
+              table.insert(res, pandoc.RawBlock('html', '<li>'))
               res:extend(item)
-              res[#res + 1] = pandoc.RawBlock('html', '</li>')
+              table.insert(res, pandoc.RawBlock('html', '</li>'))
             end
-            res[#res + 1] = pandoc.RawBlock('html', '</ul>')
+            table.insert(res, pandoc.RawBlock('html', '</ul>'))
             return res
           end
         })
@@ -120,7 +214,6 @@ return {
   {
     Header = function(el)
       local level = el.level
-      local identifier = el.attr.identifier
       local caption_text = el.attributes["caption"]
       local content = el.content
       local header_text
@@ -147,14 +240,14 @@ return {
         header_text = content
       end
 
-      local header =
-      pandoc.Header(
-      level,
-      header_text,
-      pandoc.Attr("", {"govuk-heading-" .. size})
-      )
+      el.content = header_text
+      if el.classes ~= nil then
+        el.classes:extend({"govuk-heading-" .. size})
+      else
+        el.classes = {"govuk-heading-" .. size}
+      end
+      return el
 
-      return header
     end
   },
 
@@ -207,11 +300,11 @@ return {
     BulletList = function(items)
       local res = List:new{pandoc.RawBlock('html', '<ul class="govuk=list govuk-list--bullet">')}
       for _, item in ipairs(items.content) do
-        res[#res + 1] = pandoc.RawBlock('html', '<li class="govuk-body">')
+        table.insert(res, pandoc.RawBlock('html', '<li class="govuk-body">'))
         res:extend(item)
-        res[#res + 1] = pandoc.RawBlock('html', '</li>')
+        table.insert(res, pandoc.RawBlock('html', '</li>'))
       end
-      res[#res + 1] = pandoc.RawBlock('html', '</ul>')
+      table.insert(res, pandoc.RawBlock('html', '</ul>'))
       return res
     end
   },
@@ -221,11 +314,11 @@ return {
     OrderedList = function(items)
       local res = List:new{pandoc.RawBlock('html', '<ol class="govuk-list govuk-list--number">')}
       for _, item in ipairs(items.content) do
-        res[#res + 1] = pandoc.RawBlock('html', '<li class="govuk-body">')
+        table.insert(res, pandoc.RawBlock('html', '<li class="govuk-body">'))
         res:extend(item)
-        res[#res + 1] = pandoc.RawBlock('html', '</li>')
+        table.insert(res, pandoc.RawBlock('html', '</li>'))
       end
-      res[#res + 1] = pandoc.RawBlock('html', '</ol>')
+      table.insert(res, pandoc.RawBlock('html', '</ol>'))
       return res
     end
   },

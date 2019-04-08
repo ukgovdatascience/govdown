@@ -3890,12 +3890,21 @@ color: #d14;
             <ul id="navigation" class="govuk-header__navigation " aria-label="Top Level Navigation">
               <!-- items, beginning with nav-item-active then nav-item-other -->
                           <li class="govuk-header__navigation-item">
-                <a class="govuk-header__link" href="index.html">Home</a>
+                <a class="govuk-header__link" href="index.html">
+                  <!-- link name -->
+                  Home
+                </a>
               </li>            <li class="govuk-header__navigation-item govuk-header__navigation-item--active">
-                <a class="govuk-header__link" href="tech-docs.html">Tech docs</a>
+                <a class="govuk-header__link" href="tech-docs.html">
+                  <!-- link name -->
+                  Tech docs
+                </a>
               </li>
               <li class="govuk-header__navigation-item">
-                <a class="govuk-header__link" href="NEWS.html">News</a>
+                <a class="govuk-header__link" href="NEWS.html">
+                  <!-- link name -->
+                  News
+                </a>
               </li>
             </ul>
           </nav>
@@ -3929,16 +3938,16 @@ color: #d14;
 
   <div class="govuk-width-container">
     <main class="govuk-main-wrapper " id="main-content" role="main">
-            <h1 class="govuk-heading-xl">Technical Documentation</h1>
+            <h1 id="technical-documentation" class="govuk-heading-xl">Technical Documentation</h1>
 <p><span class="govuk-body">This page explains the design and implementation of Govdown.</span></p>
-<h2 class="govuk-heading-l">Design</h2>
+<h2 id="design" class="govuk-heading-l">Design</h2>
 <p><span class="govuk-body">Govdown was created so that the <a href="https://ukgovdatascience.github.io/rap-website/" class="govuk-link">Reproducible Analytical Pipelines</a> community could publish its materials on the web, collaboratively, using familiar technology, using accessible components from the GOV.UK Design System.</span></p>
 <p><span class="govuk-body">Govdown is based on R Markdown, a tool widely used in the R community to create HTML documents from code, interleaving content, code and output. R Markdown supports both R and Python code, which are the two languages most familiar to the RAP community. It creates static sites (a set of html files) that can be served by GitHub pages.</span></p>
 <p><span class="govuk-body">Other technical communities use the <a href="https://github.com/alphagov/tech-docs-template" class="govuk-link">Tech Docs Template</a>. The advantages of using it for RAP would have been that it already exists and is maintained. It has some nice features, such as the sidebar, search, and content review date tracking. The main disadvantage is that it is based on Ruby and Middleman, which most people in the RAP community don’t use.</span></p>
-<h2 class="govuk-heading-l">Implementation</h2>
+<h2 id="implementation" class="govuk-heading-l">Implementation</h2>
 <p><span class="govuk-body">Govdown is a wrapper around R Markdown. It customises R Markdown to apply components of the GOV.UK Design System.</span></p>
 <p><span class="govuk-body">R Markdown supports some customisation via YAML headers and configuration files, but those are only useful when customising a particular site. To enable other users to create pre-customised sites, a function <code>govdown::govdown_document()</code> had to be written, and the GOV.UK Design System elements (a collection of CSS, javascript and image files) made available locally to the user. This was done by creating an R package for the user to install, containing the function and the components.</span></p>
-<h3 class="govuk-heading-m">Rendering function</h3>
+<h3 id="rendering-function" class="govuk-heading-m">Rendering function</h3>
 <p><span class="govuk-body">The govdown package exposes a single function, <code>govdown::govdown_document()</code>. The user specifies this in place of <code>rmarkdown::html_document()</code> either in the YAML section of a standalone document, or in the <code>_site.yml</code> configuration file of their website. It accepts some parameters to control whether the New Transport font is used, the logo, the navigation bar, and a phase banner.</span></p>
 <p><span class="govuk-body">The document or website is rendered by calling <code>rmarkdown::render()</code> or <code>rmarkdown::render_site()</code> at the console. This triggers a (simplified) series of actions:</span></p>
 <ol class="govuk-list govuk-list--number">
@@ -3959,7 +3968,7 @@ R Markdown organises the HTML files and any dependencies such as CSS and images 
 </li>
 </ol>
 <p><span class="govuk-body">The result is a directory of files that can be published as a static website. The procedure is familiar to users of R Markdown.</span></p>
-<h3 class="govuk-heading-m">Lua and the GOV.UK Design System</h3>
+<h3 id="lua-and-the-gov.uk-design-system" class="govuk-heading-m">Lua and the GOV.UK Design System</h3>
 <p><span class="govuk-body">The GOV.UK Design System is mainly a set of Sass files, which are rendered to CSS files, which apply styles to HTML elements that have a given class. For example, an HTML <code>&lt;p&gt;</code> element with the class <code>&quot;govuk-body&quot;</code> is styled to look like ordinary text on GOV.UK.</span></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode html app-tabs__container js-tabs__container"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;govuk-body&quot;</span><span class="kw">&gt;</span></a>
 <a class="sourceLine" id="cb1-2" title="2">  ordinary text</a>
@@ -3969,7 +3978,7 @@ R Markdown organises the HTML files and any dependencies such as CSS and images 
 <a class="sourceLine" id="cb2-2" title="2">  ordinary text</a>
 <a class="sourceLine" id="cb2-3" title="3"><span class="kw">&lt;/p&gt;</span></a></code></pre></div>
 <p><span class="govuk-body">Govdown uses <a href="https://pandoc.org/lua-filters.html" class="govuk-link">Lua filters</a> to alter the way that pandoc writes HTML elements. Lua filters are supported by Pandoc. All the filters are defined in one file, <code>inst/rmarkdown/resources/govuk.lua</code>.</span></p>
-<h4 class="govuk-heading-s">Lua paragraphs</h4>
+<h4 id="lua-paragraphs" class="govuk-heading-s">Lua paragraphs</h4>
 <p><span class="govuk-body">Here is some Lua code to modify <code>&lt;p&gt;</code> elements.</span></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode lua app-tabs__container js-tabs__container"><code class="sourceCode lua"><a class="sourceLine" id="cb3-1" title="1"><span class="co">-- Code blocks</span></a>
 <a class="sourceLine" id="cb3-2" title="2">Para <span class="op">=</span> <span class="kw">function</span> <span class="op">(</span>el<span class="op">)</span></a>
@@ -3997,7 +4006,7 @@ R Markdown organises the HTML files and any dependencies such as CSS and images 
 <a class="sourceLine" id="cb6-2" title="2">  ordinary text</a>
 <a class="sourceLine" id="cb6-3" title="3"><span class="kw">&lt;/p&gt;</span></a></code></pre></div>
 <p><span class="govuk-body">That last line is complicated. Why does it create another <code>Para</code> outside the <code>Span</code>? Because, for some reason, one <code>Span</code> after another isn’t rendered the same way as one <code>Para</code> after another in browsers, so it looks funny. Wrapping the whole thing in another <code>Para</code> seems to fix this.</span></p>
-<h4 class="govuk-heading-s">Lua custom components</h4>
+<h4 id="lua-custom-components" class="govuk-heading-s">Lua custom components</h4>
 <p><span class="govuk-body">Some components of the GOV.UK Design System don’t have a counterpart in markdown. Lead paragraphs have larger text than ordinary paragraphs, but markdown doesn’t have a way to express that.</span></p>
 <p><span class="govuk-body">Govdown uses a feature of markdown that applies classes to <a href="https://pandoc.org/MANUAL.html#divs-and-spans" class="govuk-link">fenced divs</a>. This allows arbitrary classes to be applied to anything in the markdown document.</span></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb7-1" title="1">::: {.extra-special-para}</a>
