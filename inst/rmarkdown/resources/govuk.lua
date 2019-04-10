@@ -321,11 +321,5 @@ return {
       table.insert(res, pandoc.RawBlock('html', '</ol>'))
       return res
     end
-  },
-
-  -- Preserve raw html
-  html = function(text)
-    return pandoc.RawInline("html", text)
-  end
-
+  }
 }
