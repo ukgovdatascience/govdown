@@ -3995,7 +3995,7 @@ color: #d14;
 <a class="sourceLine" id="cb5-3" title="3"><span class="fu">### Can&#39;t remember what the main topic was?</span></a>
 <a class="sourceLine" id="cb5-4" title="4"></a>
 <a class="sourceLine" id="cb5-5" title="5"><span class="fu">#### Four levels of headings are available!</span></a></code></pre></div>
-<h3 id="headings-with-captions" class="govuk-heading-m" caption="This is a caption"><span class="govuk-caption-m">This is a caption</span>Headings with captions</h3>
+<h3 id="headings-with-captions" class="govuk-heading-m"><span class="govuk-caption-m">This is a caption</span>Headings with captions</h3>
 <p><span class="govuk-body">The GOV.UK Design System supports captions above <a href="https://design-system.service.gov.uk/styles/typography/#headings" class="govuk-link">headers</a>. This works for headings of level 1, 2 and 3, but not for the smallest headings (level 4).</span></p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb6-1" title="1"><span class="fu"># Heading with caption above {caption=&quot;This is a caption&quot;}</span></a></code></pre></div>
 <h3 id="bold-and-italics" class="govuk-heading-m">Bold and italics</h3>
@@ -4151,26 +4151,42 @@ breadcrumbs
 <p><span class="govuk-body">Second paragraph of content.</span></p>
 </section>
 </div>
+<h3 id="details" class="govuk-heading-m">Details</h3>
+<p><span class="govuk-body">Details make a page easier to scan by letting users reveal more detailed information only if they need it. As with Tabs, guidance can be found on the <a href="https://design-system.service.gov.uk/components/details/" class="govuk-link">GOV.UK Design System</a>.</span></p>
+<p><span class="govuk-body">The syntax uses the summary attribute is to provide the top level information with the content provided by the text within.</span></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb18-1" title="1">::: {.details summary=&quot;Details&quot;}</a>
+<a class="sourceLine" id="cb18-2" title="2"></a>
+<a class="sourceLine" id="cb18-3" title="3">Here are some details on the</a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="ot">[Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service)</span>.</a>
+<a class="sourceLine" id="cb18-5" title="5"></a>
+<a class="sourceLine" id="cb18-6" title="6">Multiple paragraphs can be contained in details.</a>
+<a class="sourceLine" id="cb18-7" title="7"></a>
+<a class="sourceLine" id="cb18-8" title="8">:::</a></code></pre></div>
+<details class="govuk-details"><summary class="govuk-details__summary"><span class="govuk-details__summary-text">Details</span></summary><div class="govuk-details__text">
+<p><span class="govuk-body">Here are some details on the <a href="https://www.gov.uk/government/organisations/government-digital-service" class="govuk-link">Government Digital Service</a>.</span></p>
+<p><span class="govuk-body">Multiple paragraphs can be contained in details.</span></p>
+</div>
+</details>
 <h3 id="code-blocks" class="govuk-heading-m">Code blocks</h3>
 <p><span class="govuk-body">Code blocks work the same as they do in markdown and R Markdown. Code in R Markdown files (.Rmd suffix) will be evaluated, and the result interleaved below the code.</span></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">print</span>(<span class="st">&quot;This code will not be evaluated&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">print</span>(<span class="st">&quot;This code will be evaluated&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">print</span>(<span class="st">&quot;This code will not be evaluated&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">print</span>(<span class="st">&quot;This code will be evaluated&quot;</span>)</a></code></pre></div>
 <pre class="app-tabs__container js-tabs__container"><code>## [1] &quot;This code will be evaluated&quot;</code></pre>
 <p><span class="govuk-body">Create code chunks that are not to be evaluated as follows.</span></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb21-1" title="1"><span class="bn">    ```r</span></a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="bn">    print(&quot;This code will not be evaluated&quot;)</span></a>
-<a class="sourceLine" id="cb21-3" title="3"><span class="bn">    ```</span></a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb22-1" title="1"><span class="bn">    ```r</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="bn">    print(&quot;This code will not be evaluated&quot;)</span></a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="bn">    ```</span></a></code></pre></div>
 <p><span class="govuk-body">Create code chunks that are to be evaluated as follows.</span></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb22-1" title="1"><span class="bn">    </span></a>
-<a class="sourceLine" id="cb22-2" title="2"><span class="bn">    ```r</span></a>
-<a class="sourceLine" id="cb22-3" title="3"><span class="bn">    print(&quot;This code will be evaluated&quot;)</span></a>
-<a class="sourceLine" id="cb22-4" title="4"><span class="bn">    ```</span></a>
-<a class="sourceLine" id="cb22-5" title="5"><span class="bn">    </span></a>
-<a class="sourceLine" id="cb22-6" title="6"><span class="bn">    ```</span></a>
-<a class="sourceLine" id="cb22-7" title="7"><span class="bn">    ## [1] &quot;This code will be evaluated&quot;</span></a>
-<a class="sourceLine" id="cb22-8" title="8"><span class="bn">    ```</span></a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb23-1" title="1"><span class="bn">    </span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="bn">    ```r</span></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="bn">    print(&quot;This code will be evaluated&quot;)</span></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="bn">    ```</span></a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="bn">    </span></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="bn">    ```</span></a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="bn">    ## [1] &quot;This code will be evaluated&quot;</span></a>
+<a class="sourceLine" id="cb23-8" title="8"><span class="bn">    ```</span></a></code></pre></div>
 <p><span class="govuk-body">Python code chunks also work, as do any of the languages supported by knitr.</span></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python app-tabs__container js-tabs__container"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" title="1"><span class="co">&#39;Monty Python&#39;</span>.split()</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python app-tabs__container js-tabs__container"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" title="1"><span class="co">&#39;Monty Python&#39;</span>.split()</a></code></pre></div>
 <pre class="app-tabs__container js-tabs__container"><code>## [&#39;Monty&#39;, &#39;Python&#39;]</code></pre>
 <h3 id="images" class="govuk-heading-m">Images</h3>
 <p><span class="govuk-body">Images use the normal markdown syntax.</span></p>
