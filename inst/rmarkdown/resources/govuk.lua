@@ -257,6 +257,7 @@ return {
       end
 
       if caption_text ~= nil and level <= 3 then
+        el.attributes["caption"] = nil
         header_text = {pandoc.Span(caption_text, pandoc.Attr("", {"govuk-caption-" .. size}))}
 
         -- concatenate the content after the caption to have one list of caption
