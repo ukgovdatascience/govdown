@@ -313,6 +313,34 @@ Tab content B
 Second paragraph of content.
 :::
 
+### Details
+
+Details make a page easier to scan by letting users reveal more detailed
+information only if they need it. As with Tabs, guidance can be found on the
+[GOV.UK Design System](https://design-system.service.gov.uk/components/details/).
+
+The syntax uses the summary attribute is to provide the top level information 
+with the content provided by the text within.
+
+```md
+::: {.details summary="Details"}
+
+Here are some details on the
+[Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service).
+
+Multiple paragraphs can be contained in details.
+
+:::
+```
+
+::: {.details summary="Details"}
+
+Here are some details on the
+[Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service).
+
+Multiple paragraphs can be contained in details.
+
+:::
 
 ### Code blocks
 
