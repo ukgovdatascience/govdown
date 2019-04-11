@@ -27,6 +27,34 @@ return {
   {
     -- Deal with fenced divs
     Div = function(el)
+      
+       -- look for details
+      v,i = el.classes:find("details")
+      if i ~= nil then
+        el.classes[i] = nil
+        
+        local html
+        local res = List:new{}
+        
+        html = 
+          '<details class="govuk-details">' ..
+          '<summary class="govuk-details__summary">' ..
+          '<span class="govuk-details__summary-text">'..
+          pandoc.utils.stringify(el.attributes["summary"]) ..
+          '</span>'..
+          '</summary>' ..
+          '<div class="govuk-details__text">'
+        
+        table.insert(res, pandoc.RawBlock('html', html))
+        
+        for _, block in pairs(el.content) do
+          table.insert(res, block)
+        end
+        table.insert(res, pandoc.RawBlock('html', '</div>'))
+        table.insert(res, pandoc.RawBlock('html', '</details>'))
+      
+        return res
+      end
 
       -- Look for 'tabset'
       v,i = el.classes:find("tabset")
