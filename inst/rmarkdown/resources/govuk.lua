@@ -209,13 +209,15 @@ return {
       v,i = el.classes:find("lead-para")
       if i ~= nil then
         el.classes[i] = nil
-        -- Apply govuk-body to everything within a para by wrapping it in a span,
-        -- because pandoc doesn't allow attributes of paras.
+        -- Construct a fake para because pandoc doesn't allow attributes of
+        -- paras.
         return pandoc.walk_block(el, {
           Para = function(el)
-            content = el.content
-            attr = pandoc.Attr("", {"govuk-body-l"})
-            return pandoc.Para(pandoc.Span(content, attr))
+            res = List:new{}
+            res:extend({pandoc.RawBlock('html', '<p class="govuk-body-l">')})
+            res:extend({pandoc.Plain(el.content)})
+            res:extend({pandoc.RawBlock('html', '</p>')})
+            return res
           end
         })
       end
@@ -224,13 +226,15 @@ return {
       v,i = el.classes:find("small-para")
       if i ~= nil then
         el.classes[i] = nil
-        -- Apply govuk-body to everything within a para by wrapping it in a span,
-        -- because pandoc doesn't allow attributes of paras.
+        -- Construct a fake para because pandoc doesn't allow attributes of
+        -- paras.
         return pandoc.walk_block(el, {
           Para = function(el)
-            content = el.content
-            attr = pandoc.Attr("", {"govuk-body-s"})
-            return pandoc.Para(pandoc.Span(content, attr))
+            res = List:new{}
+            res:extend({pandoc.RawBlock('html', '<p class="govuk-body-s">')})
+            res:extend({pandoc.Plain(el.content)})
+            res:extend({pandoc.RawBlock('html', '</p>')})
+            return res
           end
         })
       end
@@ -281,12 +285,13 @@ return {
   },
 
   {
-    -- Apply govuk-body to everything within a para by wrapping it in a span,
-    -- because pandoc doesn't allow attributes of paras.
+    -- Construct a fake para because pandoc doesn't allow attributes of paras.
     Para = function(el)
-      content = el.content
-      attr = pandoc.Attr("", {"govuk-body"})
-      return pandoc.Para(pandoc.Span(content, attr))
+      res = List:new{}
+      res:extend({pandoc.RawBlock('html', '<p class="govuk-body">')})
+      res:extend({pandoc.Plain(el.content)})
+      res:extend({pandoc.RawBlock('html', '</p>')})
+      return res
     end
   },
 
