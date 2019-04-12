@@ -119,7 +119,7 @@ govdown_document <- function(phase = c("none", "alpha", "beta"),
     template_html <- sprintf(template_html, "")
   } else {
     analytics_html <- file_string(pkg_file("rmarkdown/resources/google-analytics.html"))
-    analytics_html <- sprintf(analytics_html, google_analytics)
+    analytics_html <- sprintf(analytics_html, google_analytics, google_analytics)
     template_html <- sprintf(template_html, analytics_html)
   }
 
