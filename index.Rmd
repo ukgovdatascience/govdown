@@ -319,8 +319,8 @@ Details make a page easier to scan by letting users reveal more detailed
 information only if they need it. As with Tabs, guidance can be found on the
 [GOV.UK Design System](https://design-system.service.gov.uk/components/details/).
 
-The syntax uses the summary attribute is to provide the top level information 
-with the content provided by the text within.
+The syntax uses the summary attribute to provide the top level information with
+the content provided by the text within.
 
 ```md
 ::: {.details summary="Details"}
