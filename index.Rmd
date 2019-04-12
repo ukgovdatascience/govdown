@@ -351,10 +351,12 @@ the code.
 ```r
 print("This code will not be evaluated")
 ```
+<p/>
 
 ```{r}
 print("This code will be evaluated")
 ```
+<p/>
 
 Create code chunks that are not to be evaluated as follows.
 
@@ -363,6 +365,7 @@ Create code chunks that are not to be evaluated as follows.
     print("This code will not be evaluated")
     ```
 ```
+<p/>
 
 Create code chunks that are to be evaluated as follows.
 
@@ -371,12 +374,14 @@ Create code chunks that are to be evaluated as follows.
     print("This code will be evaluated")
     ```
 ```
+<p/>
 
 Python code chunks also work, as do any of the languages supported by knitr.
 
 ```{python}
 'Monty Python'.split()
 ```
+<p/>
 
 ### Images
 
