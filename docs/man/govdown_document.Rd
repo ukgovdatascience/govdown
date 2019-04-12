@@ -7,7 +7,7 @@
 govdown_document(phase = c("none", "alpha", "beta"),
   feedback_url = "404.html", favicon = c("govuk", "custom"),
   font = c("new-transport", "sans-serif"), service_name = NULL,
-  keep_md = FALSE)
+  keep_md = FALSE, google_analytics = NULL)
 }
 \arguments{
 \item{phase}{one of \code{"none"} (default), \code{"alpha"} or \code{"beta"} to put an alpha
@@ -42,6 +42,9 @@ the yaml header instead.}
 
 \item{keep_md}{logical, whether to keep the intermediate \code{.md} file after
 rendering.}
+
+\item{google_analytics}{Google Analytics ID for monitoring traffic to the
+website.}
 }
 \description{
 A template for rendering R Markdown documents as HTML using the GOV.UK Design

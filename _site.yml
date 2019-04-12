@@ -17,3 +17,4 @@ output:
     phase: alpha
     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
     favicon: "custom"
+    google_analytics: "UA-45097885-11"

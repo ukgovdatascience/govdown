@@ -31,6 +31,8 @@
 #' the yaml header instead.
 #' @param keep_md logical, whether to keep the intermediate `.md` file after
 #' rendering.
+#' @param google_analytics Google Analytics ID for monitoring traffic to the
+#' website.
 #'
 #' @details
 #'
@@ -76,7 +78,8 @@ govdown_document <- function(phase = c("none", "alpha", "beta"),
                            favicon = c("govuk", "custom"),
                            font = c("new-transport", "sans-serif"),
                            service_name = NULL,
-                           keep_md = FALSE) {
+                           keep_md = FALSE,
+                           google_analytics = NULL) {
   rmarkdown::pandoc_available("2", error = TRUE)
 
   phase <- match.arg(phase)
@@ -88,7 +91,7 @@ govdown_document <- function(phase = c("none", "alpha", "beta"),
   lua <- pkg_file("rmarkdown/resources/govuk.lua")
   path_sep <- ifelse(.Platform$OS.type == "windows", ";", ":")
   resources <- paste0(".", path_sep, pkg_file("rmarkdown/resources"))
-  template <- pkg_file("rmarkdown/resources/govuk.html")
+  template_html <- file_string(pkg_file("rmarkdown/resources/govuk.html"))
 
   if (font == "new-transport") {
     css <- pkg_file("rmarkdown/resources/govuk.css")
@@ -110,6 +113,17 @@ govdown_document <- function(phase = c("none", "alpha", "beta"),
   pandoc_args <-
     c(pandoc_args,
       rmarkdown::includes_to_pandoc_args(list(in_header = favicon_html)))
+
+  analytics <- ""
+  if (is.null(google_analytics)) {
+    template_html <- sprintf(template_html, "")
+  } else {
+    analytics_html <- file_string(pkg_file("rmarkdown/resources/google-analytics.html"))
+    analytics_html <- sprintf(analytics_html, google_analytics)
+    template_html <- sprintf(template_html, analytics_html)
+  }
+
+  template <- as_tmpfile(template_html)
 
   pre_processor <- function(metadata, input_file, runtime, knit_meta,
                             files_dir, output_dir) {
