@@ -1,6 +1,8 @@
 # Technical Documentation
 
+::: {.lead-para}
 This page explains the design and implementation of Govdown.
+:::
 
 ## Design
 
