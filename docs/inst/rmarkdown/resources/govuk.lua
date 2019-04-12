@@ -331,6 +331,65 @@ return {
   },
 
   {
+    -- Table
+    Table = function(el)
+      local res = List:new{} -- list of blocks
+      table.insert(res, pandoc.RawBlock('html', '<table class="govuk-table">'))
+
+      local caption = List:new{} -- list of inlines
+      caption:extend({pandoc.RawInline('html', '<caption class="govuk-table__caption">')})
+      for _, item in ipairs(el.caption) do
+        table.insert(caption, item)
+      end
+      caption:extend({pandoc.RawInline('html', '</caption>')})
+      table.insert(res, pandoc.Plain(caption))
+
+
+      if el.headers ~= nil then
+        table.insert(res, pandoc.RawBlock('html', '<thead class="govuk-table__head">'))
+        table.insert(res, pandoc.RawBlock('html', '<tr class="govuk-table__row">'))
+        local i = 0
+        local alignment = ""
+        for _, item in ipairs(el.headers) do
+          i = i + 1
+          if el.aligns[i] == "AlignRight" then
+            table.insert(res, pandoc.RawBlock('html', '<th class="govuk-table__header govuk-table__header--numeric" scope="col">'))
+          else
+            table.insert(res, pandoc.RawBlock('html', '<th class="govuk-table__header" scope="col">'))
+          end
+          res:extend(item)
+          table.insert(res, pandoc.RawBlock('html', '</th>'))
+        end
+        table.insert(res, pandoc.RawBlock('html', '</tr>'))
+        table.insert(res, pandoc.RawBlock('html', '</thead>'))
+      end
+
+      if el.rows ~= nil then
+        table.insert(res, pandoc.RawBlock('html', '<tbody class="govuk-table__body">'))
+        for _, row in ipairs(el.rows) do
+          table.insert(res, pandoc.RawBlock('html', '<tr class="govuk-table__row">'))
+          local i = 0
+          for _, cell in ipairs(row) do
+            i = i + 1
+            if el.aligns[i] == "AlignRight" then
+              table.insert(res, pandoc.RawBlock('html', '<td class="govuk-table__cell govuk-table__cell--numeric">'))
+            else
+              table.insert(res, pandoc.RawBlock('html', '<td class="govuk-table__cell">'))
+            end
+            res:extend(cell)
+            table.insert(res, pandoc.RawBlock('html', '</td>'))
+          end
+          table.insert(res, pandoc.RawBlock('html', '</tr>'))
+        end
+        table.insert(res, pandoc.RawBlock('html', '</tbody>'))
+      end
+
+      table.insert(res, pandoc.RawBlock('html', '</table>'))
+      return res
+    end
+  },
+
+  {
     -- Normal BulletList
     BulletList = function(items)
       local res = List:new{pandoc.RawBlock('html', '<ul class="govuk=list govuk-list--bullet">')}
