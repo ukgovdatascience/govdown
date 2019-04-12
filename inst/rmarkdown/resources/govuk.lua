@@ -47,7 +47,7 @@ return {
 
         table.insert(res, pandoc.RawBlock('html', html))
 
-        for _, block in pairs(el.content) do
+        for _, block in ipairs(el.content) do
           table.insert(res, block)
         end
         table.insert(res, pandoc.RawBlock('html', '</div>'))
@@ -90,7 +90,7 @@ return {
         -- items[#items] = pandoc.RawBlock('html', '<ul class="govuk-tabs__list">')
         table.insert(items, pandoc.RawBlock('html', '<ul class="govuk-tabs__list">'))
 
-        for _, block in pairs(el.content) do
+        for _, block in ipairs(el.content) do
           if block.t == "Header" then
             if block.level == 1 then
               -- set title
@@ -142,11 +142,11 @@ return {
 
         table.insert(el.content, title)
 
-        for _, v in pairs(items) do
+        for _, v in ipairs(items) do
           table.insert(el.content, v)
         end
 
-        for _, v in pairs(sections) do
+        for _, v in ipairs(sections) do
           table.insert(el.content, v)
         end
 
@@ -266,7 +266,7 @@ return {
 
         -- concatenate the content after the caption to have one list of caption
         -- and then content.
-        for _, v in pairs(content) do
+        for _, v in ipairs(content) do
           table.insert(header_text, v)
         end
       else
