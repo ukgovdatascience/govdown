@@ -1,5 +1,6 @@
 local List = require 'pandoc.List'
 
+
 -- -- https://gist.github.com/liukun/f9ce7d6d14fa45fe9b924a3eed5c3d99
 -- -- see also https://gist.github.com/liukun/f9ce7d6d14fa45fe9b924a3eed5c3d99
 
@@ -27,16 +28,16 @@ return {
   {
     -- Deal with fenced divs
     Div = function(el)
-      
+
        -- look for details
       v,i = el.classes:find("details")
       if i ~= nil then
         el.classes[i] = nil
-        
+
         local html
         local res = List:new{}
-        
-        html = 
+
+        html =
           '<details class="govuk-details">' ..
           '<summary class="govuk-details__summary">' ..
           '<span class="govuk-details__summary-text">'..
@@ -44,15 +45,15 @@ return {
           '</span>'..
           '</summary>' ..
           '<div class="govuk-details__text">'
-        
+
         table.insert(res, pandoc.RawBlock('html', html))
-        
-        for _, block in pairs(el.content) do
+
+        for _, block in ipairs(el.content) do
           table.insert(res, block)
         end
         table.insert(res, pandoc.RawBlock('html', '</div>'))
         table.insert(res, pandoc.RawBlock('html', '</details>'))
-      
+
         return res
       end
 
@@ -90,7 +91,7 @@ return {
         -- items[#items] = pandoc.RawBlock('html', '<ul class="govuk-tabs__list">')
         table.insert(items, pandoc.RawBlock('html', '<ul class="govuk-tabs__list">'))
 
-        for _, block in pairs(el.content) do
+        for _, block in ipairs(el.content) do
           if block.t == "Header" then
             if block.level == 1 then
               -- set title
@@ -142,11 +143,11 @@ return {
 
         table.insert(el.content, title)
 
-        for _, v in pairs(items) do
+        for _, v in ipairs(items) do
           table.insert(el.content, v)
         end
 
-        for _, v in pairs(sections) do
+        for _, v in ipairs(sections) do
           table.insert(el.content, v)
         end
 
@@ -209,13 +210,15 @@ return {
       v,i = el.classes:find("lead-para")
       if i ~= nil then
         el.classes[i] = nil
-        -- Apply govuk-body to everything within a para by wrapping it in a span,
-        -- because pandoc doesn't allow attributes of paras.
+        -- Construct a fake para because pandoc doesn't allow attributes of
+        -- paras.
         return pandoc.walk_block(el, {
           Para = function(el)
-            content = el.content
-            attr = pandoc.Attr("", {"govuk-body-l"})
-            return pandoc.Para(pandoc.Span(content, attr))
+            res = List:new{}
+            res:extend({pandoc.RawBlock('html', '<p class="govuk-body-l">')})
+            res:extend({pandoc.Plain(el.content)})
+            res:extend({pandoc.RawBlock('html', '</p>')})
+            return res
           end
         })
       end
@@ -224,13 +227,15 @@ return {
       v,i = el.classes:find("small-para")
       if i ~= nil then
         el.classes[i] = nil
-        -- Apply govuk-body to everything within a para by wrapping it in a span,
-        -- because pandoc doesn't allow attributes of paras.
+        -- Construct a fake para because pandoc doesn't allow attributes of
+        -- paras.
         return pandoc.walk_block(el, {
           Para = function(el)
-            content = el.content
-            attr = pandoc.Attr("", {"govuk-body-s"})
-            return pandoc.Para(pandoc.Span(content, attr))
+            res = List:new{}
+            res:extend({pandoc.RawBlock('html', '<p class="govuk-body-s">')})
+            res:extend({pandoc.Plain(el.content)})
+            res:extend({pandoc.RawBlock('html', '</p>')})
+            return res
           end
         })
       end
@@ -262,7 +267,7 @@ return {
 
         -- concatenate the content after the caption to have one list of caption
         -- and then content.
-        for _, v in pairs(content) do
+        for _, v in ipairs(content) do
           table.insert(header_text, v)
         end
       else
@@ -281,12 +286,13 @@ return {
   },
 
   {
-    -- Apply govuk-body to everything within a para by wrapping it in a span,
-    -- because pandoc doesn't allow attributes of paras.
+    -- Construct a fake para because pandoc doesn't allow attributes of paras.
     Para = function(el)
-      content = el.content
-      attr = pandoc.Attr("", {"govuk-body"})
-      return pandoc.Para(pandoc.Span(content, attr))
+      res = List:new{}
+      res:extend({pandoc.RawBlock('html', '<p class="govuk-body">')})
+      res:extend({pandoc.Plain(el.content)})
+      res:extend({pandoc.RawBlock('html', '</p>')})
+      return res
     end
   },
 
