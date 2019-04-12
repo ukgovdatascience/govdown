@@ -384,6 +384,60 @@ Images use the normal markdown syntax.
 
 ![caption text](./favicon/apple-touch-icon-180x180.png)
 
+### Tables
+
+All four kinds of [pandoc tables](https://pandoc.org/MANUAL.html#tables) are
+work.  Below is a common kind.  Note that only left-aligned and
+right-aligned columns are supported in the GOV.UK Design System, and captions
+always appear above the table.
+
+    Table: This is a table caption.
+
+    | Right | Left | Default | Center |
+    |------:|:-----|---------|:------:|
+    |   12  |  12  |    12   |    12  |
+    |  123  |  123 |   123   |   123  |
+    |    1  |    1 |     1   |     1  |
+
+<p/>
+
+Table: This is a table caption.
+
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|   12  |  12  |    12   |    12  |
+|  123  |  123 |   123   |   123  |
+|    1  |    1 |     1   |     1  |
+
+<p/>
+
+    Another table without a caption.
+
+    | Right | Left | Default | Center |
+    |------:|:-----|---------|:------:|
+    |   12  |  12  |    12   |    12  |
+    |  123  |  123 |   123   |   123  |
+    |    1  |    1 |     1   |     1  |
+
+<p/>
+
+Another table without a caption.
+
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|   12  |  12  |    12   |    12  |
+|  123  |  123 |   123   |   123  |
+|    1  |    1 |     1   |     1  |
+
+<p/>
+
+Tables can also be created from code chunks.  This example in R uses
+`knitr::kable()`.
+
+```{r}
+knitr::kable(head(mtcars[, 1:4]))
+```
+
 ### Mathematical equations
 
 Mathjax is supported as normal, by wrapping the equation in `$` symbols (inline
