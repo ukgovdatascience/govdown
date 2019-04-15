@@ -4,6 +4,7 @@
 * Added implementation of the `Table` component from the GOV.UK Design System.
 * Defaults to sans-serif font and no logo, because most documents won't be
     hosted on GOV.UK.
+* Added Google Analytics.
 
 # govdown 0.1.0
 
