@@ -1,3 +1,5 @@
+# govdown 0.2.0
+
 # govdown 0.1.0.9000
 
 * Added implementation of the `Details` component from the GOV.UK Design System.
