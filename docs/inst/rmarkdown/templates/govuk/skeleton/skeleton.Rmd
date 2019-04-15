@@ -1,16 +1,25 @@
 ---
-title: "GOV.UK-style R Markdown Document"
-author: ""
+title: "GOV.UK-style standalone R Markdown document"
 date: ""
 output:
   govdown::govdown_document
 ---
 
-## Header level 1 (not a title)
+This file will be rendered to look like GOV.UK.  If it will be hosted on GOV.UK
+then set the crown logo and New Transport font.
 
-Body *italic* **bold** ***bold and italic*** [hyperlink](https://design-system.service.gov.uk).
+    ---
+    title: "GOV.UK-style standalone R Markdown document"
+    date: ""
+    output:
+      govdown::govdown_document
+    logo: "crown"
+    font: "new-transport"
+    ---
 
-Next paragraph.
+Most standard markdown works.  See the [govdown
+website](https://ukgovdatascience.github.io/govdown/index.html) for a complete
+guide.
 
 * Bullet 1
 * Bullet 2
@@ -20,9 +29,9 @@ Next paragraph.
 
 > Inspirational quotation
 
-### Header level 2
+## Header level 2
 
-#### Header level 3
+### Header level 3
 
 More body text.
 

@@ -6,8 +6,8 @@
 \usage{
 govdown_document(phase = c("none", "alpha", "beta"),
   feedback_url = "404.html", favicon = c("govuk", "custom"),
-  font = c("new-transport", "sans-serif"), service_name = NULL,
-  keep_md = FALSE, google_analytics = NULL)
+  logo = FALSE, font = c("sans-serif", "new-transport"),
+  service_name = NULL, keep_md = FALSE, google_analytics = NULL)
 }
 \arguments{
 \item{phase}{one of \code{"none"} (default), \code{"alpha"} or \code{"beta"} to put an alpha
@@ -32,7 +32,7 @@ See \code{system.file("rmarkdown/resources/favicon-custom.html", package = "govd
 \code{system.file("rmarkdown/resources/assets/images", package = "govdown")} for
 the default images.}
 
-\item{font}{one of \code{"new-transport"} (default) or \code{"sans-serif"}.  New
+\item{font}{one of \code{"sans-serif"} (default) or \code{"new-transport"}.  New
 Transport must be when the document or website is published on the GOV.UK
 domain, otherwise it must not be used.}
 

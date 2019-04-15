@@ -23,7 +23,7 @@
 #' `system.file("rmarkdown/resources/assets/images", package = "govdown")` for
 #' the default images.
 #'
-#' @param font one of `"new-transport"` (default) or `"sans-serif"`.  New
+#' @param font one of `"sans-serif"` (default) or `"new-transport"`.  New
 #' Transport must be when the document or website is published on the GOV.UK
 #' domain, otherwise it must not be used.
 #' @param service_name for websites, the words to appear in the navbar after the
@@ -76,7 +76,8 @@
 govdown_document <- function(phase = c("none", "alpha", "beta"),
                            feedback_url = "404.html",
                            favicon = c("govuk", "custom"),
-                           font = c("new-transport", "sans-serif"),
+                           logo = FALSE,
+                           font = c("sans-serif", "new-transport"),
                            service_name = NULL,
                            keep_md = FALSE,
                            google_analytics = NULL) {
@@ -207,10 +208,12 @@ navbar_html <- function(navbar, input_file) {
 
   # build the navigation bar and return it as a temp file
   logo <- ""
-  if (is.null(navbar$logo)) { # default to GOV.UK crown
-    logo <- file_string(pkg_file("rmarkdown/resources/logo-svg.html"))
+  if (is.null(navbar$logo)) { # default to no logo
+    logo <- ""
   } else if (is.logical(navbar$logo) && !navbar$logo) { # false --> no logo
     logo <- ""
+  } else if (navbar$logo == "crown") { # GOV.UK crown
+    logo <- file_string(pkg_file("rmarkdown/resources/logo-svg.html"))
   } else {
     logo <- file_string(navbar$logo) # read from file
   }
