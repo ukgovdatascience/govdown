@@ -38,8 +38,6 @@ like this:
 
     This is a study of official statistics in the UK.
 
-<p/>
-
 To render that file to HTML, run `rmarkdown::render("filename.Rmd")` in the
 console, or click the 'knit' button in RStudio.
 
@@ -351,13 +349,9 @@ the code.
 ```r
 print("This code will not be evaluated")
 ```
-<p/>
-
 ```{r}
 print("This code will be evaluated")
 ```
-<p/>
-
 Create code chunks that are not to be evaluated as follows.
 
 ```md
@@ -365,8 +359,6 @@ Create code chunks that are not to be evaluated as follows.
     print("This code will not be evaluated")
     ```
 ```
-<p/>
-
 Create code chunks that are to be evaluated as follows.
 
 ```md
@@ -374,15 +366,11 @@ Create code chunks that are to be evaluated as follows.
     print("This code will be evaluated")
     ```
 ```
-<p/>
-
 Python code chunks also work, as do any of the languages supported by knitr.
 
 ```{python}
 'Monty Python'.split()
 ```
-<p/>
-
 ### Images
 
 Images use the normal markdown syntax.
@@ -404,8 +392,6 @@ always appear above the table.
     |  123  |  123 |   123   |   123  |
     |    1  |    1 |     1   |     1  |
 
-<p/>
-
 Table: This is a table caption.
 
 | Right | Left | Default | Center |
@@ -413,8 +399,6 @@ Table: This is a table caption.
 |   12  |  12  |    12   |    12  |
 |  123  |  123 |   123   |   123  |
 |    1  |    1 |     1   |     1  |
-
-<p/>
 
     Another table without a caption.
 
@@ -424,8 +408,6 @@ Table: This is a table caption.
     |  123  |  123 |   123   |   123  |
     |    1  |    1 |     1   |     1  |
 
-<p/>
-
 Another table without a caption.
 
 | Right | Left | Default | Center |
@@ -433,8 +415,6 @@ Another table without a caption.
 |   12  |  12  |    12   |    12  |
 |  123  |  123 |   123   |   123  |
 |    1  |    1 |     1   |     1  |
-
-<p/>
 
 Tables can also be created from code chunks.  This example in R uses
 `knitr::kable()`.

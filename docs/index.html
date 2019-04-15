@@ -3928,11 +3928,43 @@ width: 100% !important; }
 width: 25% !important; } }
 pre {
 position: relative;
-margin: 0;
+margin-top: 0;
+margin-bottom: 15px;
 padding: 15px;
 overflow: auto;
 border: 1px solid #bfc1c3;
 background-color: #f8f8f8; }
+.sourceCode + .govuk-heading-l, .sourceCode + .govuk-heading-l {
+padding-top: 5px; }
+@media (min-width: 40.0625em) {
+.sourceCode + .govuk-heading-l, .sourceCode + .govuk-heading-l {
+padding-top: 10px; } }
+.sourceCode + .govuk-heading-l, .sourceCode + .govuk-heading-l,
+.sourceCode + .govuk-heading-l,
+.sourceCode + .govuk-heading-l {
+padding-top: 15px; }
+@media (min-width: 40.0625em) {
+.sourceCode + .govuk-heading-l, .sourceCode + .govuk-heading-l,
+.sourceCode + .govuk-heading-l,
+.sourceCode + .govuk-heading-l {
+padding-top: 20px; } }
+.sourceCode + .govuk-heading-m, .sourceCode + .govuk-heading-m,
+.sourceCode + .govuk-heading-m,
+.sourceCode + .govuk-heading-m,
+.sourceCode + .govuk-heading-s,
+.sourceCode + .govuk-heading-s,
+.sourceCode + .govuk-heading-s,
+.sourceCode + .govuk-heading-s {
+padding-top: 5px; }
+@media (min-width: 40.0625em) {
+.sourceCode + .govuk-heading-m, .sourceCode + .govuk-heading-m,
+.sourceCode + .govuk-heading-m,
+.sourceCode + .govuk-heading-m,
+.sourceCode + .govuk-heading-s,
+.sourceCode + .govuk-heading-s,
+.sourceCode + .govuk-heading-s,
+.sourceCode + .govuk-heading-s {
+padding-top: 10px; } }
 </style>
   <!--<![endif]-->
 
@@ -4106,7 +4138,6 @@ output:
 ---
 
 This is a study of official statistics in the UK.</code></pre>
-<p></p>
 <p class="govuk-body">
 To render that file to HTML, run <code>rmarkdown::render(&quot;filename.Rmd&quot;)</code> in the console, or click the ‘knit’ button in RStudio.
 </p>
@@ -4380,17 +4411,14 @@ Multiple paragraphs can be contained in details.
 Code blocks work the same as they do in markdown and R Markdown. Code in R Markdown files (.Rmd suffix) will be evaluated, and the result interleaved below the code.
 </p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">print</span>(<span class="st">&quot;This code will not be evaluated&quot;</span>)</a></code></pre></div>
-<p></p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">print</span>(<span class="st">&quot;This code will be evaluated&quot;</span>)</a></code></pre></div>
 <pre class="app-tabs__container js-tabs__container"><code>## [1] &quot;This code will be evaluated&quot;</code></pre>
-<p></p>
 <p class="govuk-body">
 Create code chunks that are not to be evaluated as follows.
 </p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb22-1" title="1"><span class="bn">    ```r</span></a>
 <a class="sourceLine" id="cb22-2" title="2"><span class="bn">    print(&quot;This code will not be evaluated&quot;)</span></a>
 <a class="sourceLine" id="cb22-3" title="3"><span class="bn">    ```</span></a></code></pre></div>
-<p></p>
 <p class="govuk-body">
 Create code chunks that are to be evaluated as follows.
 </p>
@@ -4402,13 +4430,11 @@ Create code chunks that are to be evaluated as follows.
 <a class="sourceLine" id="cb23-6" title="6"><span class="bn">    ```</span></a>
 <a class="sourceLine" id="cb23-7" title="7"><span class="bn">    ## [1] &quot;This code will be evaluated&quot;</span></a>
 <a class="sourceLine" id="cb23-8" title="8"><span class="bn">    ```</span></a></code></pre></div>
-<p></p>
 <p class="govuk-body">
 Python code chunks also work, as do any of the languages supported by knitr.
 </p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode python app-tabs__container js-tabs__container"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" title="1"><span class="co">&#39;Monty Python&#39;</span>.split()</a></code></pre></div>
 <pre class="app-tabs__container js-tabs__container"><code>## [&#39;Monty&#39;, &#39;Python&#39;]</code></pre>
-<p></p>
 <h3 id="images" class="govuk-heading-m">Images</h3>
 <p class="govuk-body">
 Images use the normal markdown syntax.
@@ -4427,7 +4453,6 @@ All four kinds of <a href="https://pandoc.org/MANUAL.html#tables" class="govuk-l
 |   12  |  12  |    12   |    12  |
 |  123  |  123 |   123   |   123  |
 |    1  |    1 |     1   |     1  |</code></pre>
-<p></p>
 <table class="govuk-table">
 <caption class="govuk-table__caption">This is a table caption.</caption>
 <thead class="govuk-table__head">
@@ -4491,7 +4516,6 @@ Center
 </tr>
 </tbody>
 </table>
-<p></p>
 <pre class="app-tabs__container js-tabs__container"><code>Another table without a caption.
 
 | Right | Left | Default | Center |
@@ -4499,7 +4523,6 @@ Center
 |   12  |  12  |    12   |    12  |
 |  123  |  123 |   123   |   123  |
 |    1  |    1 |     1   |     1  |</code></pre>
-<p></p>
 <p class="govuk-body">
 Another table without a caption.
 </p>
@@ -4566,7 +4589,6 @@ Center
 </tr>
 </tbody>
 </table>
-<p></p>
 <p class="govuk-body">
 Tables can also be created from code chunks. This example in R uses <code>knitr::kable()</code>.
 </p>
