@@ -3976,16 +3976,17 @@ The package is only hosted on GitHub, not on CRAN. Install it with the devtools 
 <p class="govuk-body">
 Govdown HTML pages are created in the same way as R Markdown HTML pages. Write a markdown document (a plain text file with the suffix <code>.Rmd</code> or <code>.md</code> instead of <code>.txt</code>), and put something called ‘YAML metadata’ at the top. It should look like this:
 </p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb2-1" title="1">---</a>
-<a class="sourceLine" id="cb2-2" title="2">title: On Nectar</a>
-<a class="sourceLine" id="cb2-3" title="3">author: Buzzy Bee</a>
-<a class="sourceLine" id="cb2-4" title="4">date: March 27, 2019</a>
-<a class="sourceLine" id="cb2-5" title="5">output:</a>
-<a class="sourceLine" id="cb2-6" title="6">  govdown::govdown_document:</a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="bn">    font: &quot;sans-serif&quot;</span></a>
-<a class="sourceLine" id="cb2-8" title="8">---</a>
-<a class="sourceLine" id="cb2-9" title="9"></a>
-<a class="sourceLine" id="cb2-10" title="10">Thiz pozt sayz what&#39;z tazty about nectar.</a></code></pre></div>
+<pre class="app-tabs__container js-tabs__container"><code>---
+title: Statistics about statistics
+author: Joe Bloggs
+date: March 27, 2019
+output:
+  govdown::govdown_document:
+    font: &quot;sans-serif&quot;
+---
+
+This is a study of official statistics in the UK.</code></pre>
+<p></p>
 <p class="govuk-body">
 To render that file to HTML, run <code>rmarkdown::render(&quot;filename.Rmd&quot;)</code> in the console, or click the ‘knit’ button in RStudio.
 </p>
