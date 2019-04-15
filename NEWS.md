@@ -5,6 +5,8 @@
 * Defaults to sans-serif font and no logo, because most documents won't be
     hosted on GOV.UK.
 * Added Google Analytics.
+* Updated the embedded GOV.UK Design System.
+* Minor tweaks and bugfixes.
 
 # govdown 0.1.0
 
