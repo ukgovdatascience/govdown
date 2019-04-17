@@ -1,8 +1,11 @@
 ---
-title: "GOV.UK-style standalone R Markdown document"
-date: ""
+title: "GOV.UK-style R Markdown Document"
+organisation: "govdown"
+# logo: "crown"
 output:
-  govdown::govdown_document
+  govdown::govdown_document:
+    font: "sans-serif"
+    # font: "new-transport"
 ---
 
 This file will be rendered to look like GOV.UK.  If it will be hosted on GOV.UK
