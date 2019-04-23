@@ -1,7 +1,5 @@
 # govdown 0.3.0
 
-# govdown 0.2.0.9000
-
 * Implemented bold according to the GOV.UK Design System.
 * Disabled italics and strike-through, which are not supported by the GOV.UK
     Design System.
