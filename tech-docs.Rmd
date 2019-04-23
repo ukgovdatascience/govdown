@@ -87,7 +87,9 @@ markdown paragraph to HTML, the `<p>` element doesn't have the class
 
 Govdown uses [Lua filters](https://pandoc.org/lua-filters.html) to alter the way
 that pandoc writes HTML elements.  Lua filters are supported by Pandoc.  All the
-filters are defined in one file, `inst/rmarkdown/resources/govuk.lua`.
+filters are defined in one file, `inst/rmarkdown/resources/govuk.lua`.  There is
+an excellent blog post about using [lua filters with R
+Markdown](https://ulyngs.github.io/blog/posts/2019-02-19-how-to-use-pandoc-filters-for-advanced-customisation-of-your-r-markdown-document/).
 
 #### Lua paragraphs
 
