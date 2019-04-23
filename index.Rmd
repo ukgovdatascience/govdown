@@ -119,9 +119,10 @@ This works for headings of level 1, 2 and 3, but not for the smallest headings
 # Heading with caption above {caption="This is a caption"}
 ```
 
-### Bold and italics
+### Bold, italics and strike-through
 
-**Bold** and *italics* work as ***normal***.
+**Bold** works as normal, but *italics* and ~~strike-through~~ are disabled
+because they are not supported by the GOV.UK Design System.
 
 ```md
 **Bold** and *italics* work as ***normal***.

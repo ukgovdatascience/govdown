@@ -297,6 +297,35 @@ return {
   },
 
   {
+    -- Bold
+    Strong = function(el)
+      return pandoc.Span(el.content, pandoc.Attr("", {"govuk-!-font-weight-bold"}))
+    end
+  },
+
+  {
+    -- Disable italics
+    Emph = function(el)
+      return el.content
+    end
+  },
+
+  {
+    -- Disable strike-through
+    Strikeout = function(el)
+      return el.content
+    end
+  },
+
+  {
+    -- Disable italics
+    Emph = function(el)
+      return el.content
+    end
+  },
+
+
+  {
     -- Hyperlinks
     Link = function(el)
       el.classes:extend({"govuk-link"})

@@ -1,5 +1,9 @@
 # govdown 0.2.0.9000
 
+* Implemented bold according to the GOV.UK Design System.
+* Disabled italics and strike-through, which are not supported by the GOV.UK
+    Design System.
+
 # govdown 0.2.0
 
 * Added implementation of the `Details` component from the GOV.UK Design System.
