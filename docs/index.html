@@ -4124,6 +4124,9 @@ The package is only hosted on GitHub, not on CRAN. Install it with the devtools 
 </p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages(&quot;devtools&quot;) # if devtools is not already installed</span></a>
 <a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ukgovdatascience/govdown&quot;</span>)</a></code></pre></div>
+<p class="govuk-body">
+You need Pandoc version 2.0 or greater on your system to use Govdown. You can check which version you have at the R console by typing <code>rmarkdown::pandoc_version()</code>. Look at this <a href="https://github.com/ukgovdatascience/govdown/issues/2" class="govuk-link">GitHub issue</a> for advice on how to obtain a more recent version of pandoc.
+</p>
 <h2 id="creating-standalone-html-pages" class="govuk-heading-l">Creating standalone HTML pages</h2>
 <p class="govuk-body">
 Govdown HTML pages are created in the same way as R Markdown HTML pages. Write a markdown document (a plain text file with the suffix <code>.Rmd</code> or <code>.md</code> instead of <code>.txt</code>), and put something called ‘YAML metadata’ at the top. It should look like this:
@@ -4718,6 +4721,9 @@ Valiant
 </tr>
 </tbody>
 </table>
+<p class="govuk-body">
+If kable doesn’t produce a table that looks like the one above, then try using the <code>format</code> argument, for example <code>kable(mtcars, format = &quot;markdown&quot;)</code> or <code>kable(mtcars, format = &quot;pandoc&quot;)</code>. You will need to do that if the <code>kableExtra</code> package is loaded, because <code>kableExtra</code> sets a global option. Check the value of <code>getOption(&quot;knitr.table.format&quot;)</code> to see if that option has been set. If <code>kableExtra</code> isn’t loaded, then the option might be set in your <code>.Rprofile</code>, which you can open with <code>usethis::edit_r_profile()</code>.
+</p>
 <h3 id="mathematical-equations" class="govuk-heading-m">Mathematical equations</h3>
 <p class="govuk-body">
 Mathjax is supported as normal, by wrapping the equation in <code>$</code> symbols (inline equations) or in <code>$$</code> symbols on their own line (block equations).
