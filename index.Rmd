@@ -430,6 +430,14 @@ Tables can also be created from code chunks.  This example in R uses
 knitr::kable(head(mtcars[, 1:4]))
 ```
 
+If kable doesn't produce a table that looks like the one above, then try using
+the `format` argument, for example `kable(mtcars, format = "markdown")` or
+`kable(mtcars, format = "pandoc")`.  You will need to do that if the
+`kableExtra` package is loaded, because `kableExtra` sets a global option.
+Check the value of `getOption("knitr.table.format")` to see if that option has
+been set.  If `kableExtra` isn't loaded, then the option might be set in your
+`.Rprofile`, which you can open with `usethis::edit_r_profile()`.
+
 ### Mathematical equations
 
 Mathjax is supported as normal, by wrapping the equation in `$` symbols (inline
