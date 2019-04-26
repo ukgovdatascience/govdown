@@ -20,6 +20,12 @@ package.
 devtools::install_github("ukgovdatascience/govdown")
 ```
 
+You need Pandoc version 2.0 or greater on your system to use Govdown.  You can
+check which version you have at the R console by typing
+`rmarkdown::pandoc_version()`.  Look at this [GitHub
+issue](https://github.com/ukgovdatascience/govdown/issues/2) for advice on how
+to obtain a more recent version of pandoc.
+
 ## Creating standalone HTML pages
 
 Govdown HTML pages are created in the same way as R Markdown HTML pages.  Write
