@@ -23,6 +23,7 @@ sassc scss/govuk.scss inst/rmarkdown/resources/govuk.css
 # Make a variant that doesn't use the New Transport font
 sed -i "s/\$govuk-font-family-nta/sans-serif/" node_modules/govuk-frontend/settings/_typography-font.scss
 sed -i "s/\$govuk-font-family-nta-tabular/sans-serif/" node_modules/govuk-frontend/settings/_typography-font.scss
+sed -i "/@include _govuk-font-face-nta;/d" node_modules/govuk-frontend/helpers/_typography.scss
 
 # Recompile the scss to css
 sassc scss/govuk.scss inst/rmarkdown/resources/govukish.css
