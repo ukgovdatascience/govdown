@@ -1,3 +1,12 @@
+# govdown 0.4.0
+
+* Overhauled yaml configuration to make websites and standalone pages more
+    consistent.
+* `favicon = "none"` by default to avoid inadvertently using the GOV.UK crown
+    logo.
+* Phase banner wording no longer mentions "services".
+* The New Transport font isn't embedded unless it is used.
+
 # govdown 0.3.0
 
 * Implemented bold according to the GOV.UK Design System.
