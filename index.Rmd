@@ -142,7 +142,7 @@ This works for headings of level 1, 2 and 3, but not for the smallest headings
 because they are not supported by the GOV.UK Design System.
 
 ```md
-**Bold** and *italics* work as ***normal***.
+**Bold** works as normal, but *italics* and ~~strike-through~~ are disabled.
 ```
 
 ### Lead paragraphs and small text
