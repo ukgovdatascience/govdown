@@ -6,6 +6,8 @@
     logo.
 * Phase banner wording no longer mentions "services".
 * The New Transport font isn't embedded unless it is used.
+* The "skip to main content" link appears above the banner (press Tab to find
+    it).
 
 # govdown 0.3.0
 

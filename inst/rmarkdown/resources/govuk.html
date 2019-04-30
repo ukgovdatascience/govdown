@@ -86,9 +86,6 @@ $endif$
 </head>
 
 <body class="govuk-template__body ">
-  $for(include-before)$
-  $include-before$
-  $endfor$
 
   <script>
     document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
@@ -96,6 +93,10 @@ $endif$
   </script>
 
   <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+
+  $for(include-before)$
+  $include-before$
+  $endfor$
 
   <!-- header woz ere -->
 
