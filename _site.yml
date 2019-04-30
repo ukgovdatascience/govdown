@@ -1,21 +1,21 @@
 output_dir: docs
 navbar:
-  logo: "images/govdown-logo-white-on-transparent.svg"
-  title: "govdown"
-  homepage: "https://ukgovdatascience.github.io/govdown"
-  service_name: "GOV.UK-style markdown documents"
-  links:
-    - text: "Home"
-      href: index.html
-    - text: "Tech docs"
-      href: tech-docs.html
-    - text: "News"
-      href: NEWS.html
+  - text: "Home"
+    href: index.html
+  - text: "Tech docs"
+    href: tech-docs.html
+  - text: "News"
+    href: NEWS.html
 output:
   govdown::govdown_document:
     font: "sans-serif"
+    favicon: "custom"
+    logo: "images/govdown-logo-white-on-transparent.svg"
+    logo_url: "https://ukgovdatascience.github.io/govdown"
+    logo_text: "govdown"
+    page_title: "Govdown - publish accessible static websites with R using the GOV.UK Design System"
+    title: "GOV.UK-style markdown documents"
     phase: alpha
     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
-    favicon: "custom"
     google_analytics: "UA-45097885-11"
 exclude: ["node_modules", "DESCRIPTION", "inst", "install-govuk-frontend.sh", "LICENSE", "LICENSE.md", "LICENSE.html", "man", "NAMESPACE", "package.json", "R", ".Rbuildignore", "README.md", "README.html", "scss", "tags"]

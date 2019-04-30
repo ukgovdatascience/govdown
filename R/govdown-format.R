@@ -2,11 +2,19 @@
 #'
 #' A template for rendering R Markdown documents as HTML using the GOV.UK Design
 #' System.  Can be used for single documents or for websites.
+#'     font: "sans-serif"
+#'     favicon: "custom"
+#'     logo: "images/govdown-logo-white-on-transparent.svg"
+#'     logo_url: "https://ukgovdatascience.github.io/govdown"
+#'     logo_text: "govdown"
+#'     page_title: "page_title"
+#'     title: "title"
+#'     phase: alpha
+#'     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
 #'
-#' @param phase one of `"none"` (default), `"alpha"` or `"beta"` to put an alpha
-#' or beta banner indicating the maturity of the service (if it is a service).
-#' @param feedback_url URL for feedback, given in the phase banner when `phase`
-#' is `"alpha"` or `"beta"`.
+#' @param font one of `"sans-serif"` (default) or `"new-transport"`.  New
+#' Transport must be when the document or website is published on the GOV.UK
+#' domain, otherwise it must not be used.
 #' @param favicon one of `"govuk"` (default) or `"custom"`.  For websites only,
 #' not standalone documents. If `"custom"` then image files in the directory
 #' `"favicon/"` will be used. The filenames are:
@@ -21,18 +29,22 @@
 #' See `system.file("rmarkdown/resources/favicon-custom.html", package =
 #' "govdown")` for how the icons are used.  See
 #' `system.file("rmarkdown/resources/assets/images", package = "govdown")` for
-#' the default images.
-#'
-#' @param font one of `"sans-serif"` (default) or `"new-transport"`.  New
-#' Transport must be when the document or website is published on the GOV.UK
-#' domain, otherwise it must not be used.
-#' @param service_name for websites, the words to appear in the navbar after the
-#' logo and the name of the organisation.  For single documents, use `title:` in
-#' the yaml header instead.
-#' @param keep_md logical, whether to keep the intermediate `.md` file after
-#' rendering.
+#' the default images.  All the files are required.
+#' @param logo `FALSE` (default) or a path to an image file.
+#' @param logo_url URL to follow when the logo is clicked.
+#' @param logo_text Text to place beside the logo.
+#' @param page_title Text to go inside the `<title>` tags, used in browser
+#' toolbars, when making bookmarks and in search engine results.
+#' @param title Text to appear in the main part of the bar at the top of every
+#' page.
+#' @param phase one of `"none"` (default), `"alpha"` or `"beta"` to put an alpha
+#' or beta banner indicating the maturity of the service (if it is a service).
+#' @param feedback_url URL for feedback, given in the phase banner when `phase`
+#' is `"alpha"` or `"beta"`.
 #' @param google_analytics Google Analytics ID for monitoring traffic to the
 #' website.
+#' @param keep_md logical, whether to keep the intermediate `.md` file after
+#' rendering.
 #'
 #' @details
 #'
@@ -41,12 +53,18 @@
 #'
 #' ```
 #' ---
-#' title: "GOV.UK-style R Markdown Document"
-#' organisation: "govdown"
-#' logo: "./images/govdown-logo-white-on-transparent.svg"
 #' output:
 #'   govdown::govdown_document:
 #'     font: "sans-serif"
+#'     favicon: "custom"
+#'     logo: "images/logo.svg"
+#'     logo_url: "https://ukgovdatascience.github.io/govdown"
+#'     logo_text: "logo_text"
+#'     page_title: "page_title"
+#'     title: "title"
+#'     phase: alpha
+#'     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
+#'     google_analytics: "UA-12345678-90"
 #' ---
 #' ```
 #'
@@ -55,32 +73,39 @@
 #' ```
 #' output_dir: docs # to host on GitHub pages
 #' navbar:
-#'   logo: "images/govdown-logo-white-on-transparent.svg"
-#'   title: "govdown"
-#'   homepage: "https://ukgovdatascience.github.io/govdown"
-#'   service_name: "Reproducible Analytical Pipelines"
-#'   links:
-#'     - text: "Home"
-#'       href: index.html
-#'     - text: "Tech docs"
-#'       href: tech-docs.html
+#'   - text: "Home"
+#'     href: index.html
+#'   - text: "Tech docs"
+#'     href: tech-docs.html
+#'   - text: "News"
+#'     href: NEWS.html
 #' output:
 #'   govdown::govdown_document:
 #'     font: "sans-serif"
+#'     favicon: "custom"
+#'     logo: "images/govdown-logo-white-on-transparent.svg"
+#'     logo_url: "https://ukgovdatascience.github.io/govdown"
+#'     logo_text: "govdown"
+#'     page_title: "page_title"
+#'     title: "title"
 #'     phase: alpha
 #'     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
-#'     favicon: "custom"
+#'     google_analytics: "UA-45097885-11"
 #' ```
 #'
 #' @export
-govdown_document <- function(phase = c("none", "alpha", "beta"),
-                           feedback_url = "404.html",
-                           favicon = c("govuk", "custom"),
-                           logo = FALSE,
-                           font = c("sans-serif", "new-transport"),
-                           service_name = NULL,
-                           keep_md = FALSE,
-                           google_analytics = NULL) {
+govdown_document <- function(keep_md = FALSE,
+                             font = c("sans-serif", "new-transport"),
+                             favicon = c("none", "custom", "govuk"),
+                             logo = FALSE,
+                             logo_url = "",
+                             logo_text = "Logo text",
+                             page_title = "Page title",
+                             title = "Title",
+                             phase = c("none", "alpha", "beta"),
+                             feedback_url = "404.html",
+                             google_analytics = NULL) {
+
   rmarkdown::pandoc_available("2", error = TRUE)
 
   phase <- match.arg(phase)
@@ -106,14 +131,16 @@ govdown_document <- function(phase = c("none", "alpha", "beta"),
         rmarkdown::includes_to_pandoc_args(list(css = "govukish.css")))
   }
 
-  if (favicon == "govuk") {
-    favicon_html <- pkg_file("rmarkdown/resources/favicon.html")
-  } else {
-    favicon_html <- pkg_file("rmarkdown/resources/favicon-custom.html")
+  if (favicon != "none") {
+    if (favicon == "govuk") {
+      favicon_html <- pkg_file("rmarkdown/resources/favicon.html")
+    } else if (favicon == "custom") {
+      favicon_html <- pkg_file("rmarkdown/resources/favicon-custom.html")
+    }
+    pandoc_args <-
+      c(pandoc_args,
+        rmarkdown::includes_to_pandoc_args(list(in_header = favicon_html)))
   }
-  pandoc_args <-
-    c(pandoc_args,
-      rmarkdown::includes_to_pandoc_args(list(in_header = favicon_html)))
 
   analytics <- ""
   if (is.null(google_analytics)) {
@@ -121,21 +148,19 @@ govdown_document <- function(phase = c("none", "alpha", "beta"),
   } else {
     analytics_html <- file_string(pkg_file("rmarkdown/resources/google-analytics.html"))
     analytics_html <- sprintf(analytics_html, google_analytics, google_analytics)
-    template_html <- sprintf(template_html, analytics_html)
+    template_html <- sprintf(template_html, analytics_html, page_title)
   }
 
   template <- as_tmpfile(template_html)
 
   pre_processor <- function(metadata, input_file, runtime, knit_meta,
                             files_dir, output_dir) {
-    # Set/get config depending whether this is a website or a single document
-    config <- rmarkdown::site_config()
-    if (is.null(config)) { # single document
-      yaml <- rmarkdown::yaml_front_matter(input_file)
-      config <- list(navbar = list(service_name = yaml$title,
-                                   title = yaml$organisation,
-                                   logo = yaml$logo))
-      phase <- "none"
+    config <- list(title = title,
+                   logo_text = logo_text,
+                   logo = logo)
+    site_config <- rmarkdown::site_config()
+    if (!is.null(site_config)) { # website
+      config$links <- site_config$navbar
     }
 
     # Navbar
@@ -143,7 +168,7 @@ govdown_document <- function(phase = c("none", "alpha", "beta"),
     # which item to highlight.
     # Unlike rmarkdown::html_document we only support it as defined in _site.yml,
     # not as a given _navbar.html.
-    navbar_arg <- navbar_html(config$navbar, input_file)
+    navbar_arg <- navbar_html(config, input_file)
 
     # Phase (none, alpha, beta)
     phase_arg <- NULL
@@ -195,44 +220,42 @@ govdown_document <- function(phase = c("none", "alpha", "beta"),
 
 # Can't use rmarkdown::navbar_html because its template is hardcoded.
 # This builds up a navbar in stages.
-navbar_html <- function(navbar, input_file) {
+navbar_html <- function(config, input_file) {
 
   # title and type
-  homepage <- navbar$homepage
-  title <- navbar$title
-  service_name <- navbar$service_name
+  logo_url <- config$logo_url
+  logo_text <- config$logo_text
 
-  if (is.null(homepage)) homepage <- ""
-  if (is.null(title)) title <- ""
-  if (is.null(service_name)) service_name <- ""
+  if (is.null(config$logo_url)) logo_url <- ""
+  if (is.null(logo_text)) logo_text <- ""
 
   # build the navigation bar and return it as a temp file
   logo <- ""
-  if (is.null(navbar$logo)) { # default to no logo
+  if (is.null(config$logo)) { # default to no logo
     logo <- ""
-  } else if (is.logical(navbar$logo) && !navbar$logo) { # false --> no logo
+  } else if (is.logical(config$logo) && !config$logo) { # false --> no logo
     logo <- ""
-  } else if (navbar$logo == "crown") { # GOV.UK crown
+  } else if (config$logo == "crown") { # GOV.UK crown
     logo <- file_string(pkg_file("rmarkdown/resources/logo-svg.html"))
   } else {
-    logo <- file_string(navbar$logo) # read from file
+    logo <- file_string(config$logo) # read from file
   }
 
-  service_name <- ""
-  if (!is.null(navbar$service_name)) {
-    service_name  <- file_string(pkg_file("rmarkdown/resources/navbar-service-name.html"))
-    service_name  <- sprintf(service_name, navbar$service_name)
+  title <- ""
+  if (!is.null(config$title)) {
+    title  <- file_string(pkg_file("rmarkdown/resources/navbar-service-name.html"))
+    title  <- sprintf(title, config$title)
   }
 
   # Build up links html one by one
   links_html <- ""
-  if (!is.null(navbar$links)) {
+  if (!is.null(config$links)) {
     all_links <- ""
 
     active_html <- file_string(pkg_file("rmarkdown/resources/navbar-item-active.html"))
     other_html <- file_string(pkg_file("rmarkdown/resources/navbar-item-other.html"))
 
-    for (link in navbar$links) {
+    for (link in config$links) {
       # input_file has two suffixes e.g. index.utf8.md so strip twice
       is_active <- filename(link$href) == filename(filename(input_file))
       link_html <- if (is_active) active_html else other_html
@@ -245,13 +268,13 @@ navbar_html <- function(navbar, input_file) {
   }
 
   content <- ""
-  if (!is.null(navbar$service_name) || !is.null(navbar$links)) {
+  if (!is.null(config$title) || !is.null(config$links)) {
     content <- file_string(pkg_file("rmarkdown/resources/header-content.html"))
-    content <- sprintf(content, service_name, links_html)
+    content <- sprintf(content, title, links_html)
   }
 
   navbar <- file_string(pkg_file("rmarkdown/resources/navbar.html"))
-  navbar <- sprintf(navbar, homepage, logo, title, content)
+  navbar <- sprintf(navbar, logo_url, logo, logo_text, content)
 
   as_tmpfile(navbar)
 }

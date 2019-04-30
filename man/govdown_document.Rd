@@ -4,17 +4,19 @@
 \alias{govdown_document}
 \title{GOV.UK style HTML template}
 \usage{
-govdown_document(phase = c("none", "alpha", "beta"),
-  feedback_url = "404.html", favicon = c("govuk", "custom"),
-  logo = FALSE, font = c("sans-serif", "new-transport"),
-  service_name = NULL, keep_md = FALSE, google_analytics = NULL)
+govdown_document(keep_md = FALSE, font = c("sans-serif",
+  "new-transport"), favicon = c("none", "custom", "govuk"),
+  logo = FALSE, logo_url = "", logo_text = "Logo text",
+  page_title = "Page title", title = "Title", phase = c("none",
+  "alpha", "beta"), feedback_url = "404.html", google_analytics = NULL)
 }
 \arguments{
-\item{phase}{one of \code{"none"} (default), \code{"alpha"} or \code{"beta"} to put an alpha
-or beta banner indicating the maturity of the service (if it is a service).}
+\item{keep_md}{logical, whether to keep the intermediate \code{.md} file after
+rendering.}
 
-\item{feedback_url}{URL for feedback, given in the phase banner when \code{phase}
-is \code{"alpha"} or \code{"beta"}.}
+\item{font}{one of \code{"sans-serif"} (default) or \code{"new-transport"}.  New
+Transport must be when the document or website is published on the GOV.UK
+domain, otherwise it must not be used.}
 
 \item{favicon}{one of \code{"govuk"} (default) or \code{"custom"}.  For websites only,
 not standalone documents. If \code{"custom"} then image files in the directory
@@ -30,18 +32,25 @@ not standalone documents. If \code{"custom"} then image files in the directory
 
 See \code{system.file("rmarkdown/resources/favicon-custom.html", package = "govdown")} for how the icons are used.  See
 \code{system.file("rmarkdown/resources/assets/images", package = "govdown")} for
-the default images.}
+the default images.  All the files are required.}
 
-\item{font}{one of \code{"sans-serif"} (default) or \code{"new-transport"}.  New
-Transport must be when the document or website is published on the GOV.UK
-domain, otherwise it must not be used.}
+\item{logo}{\code{FALSE} (default) or a path to an image file.}
 
-\item{service_name}{for websites, the words to appear in the navbar after the
-logo and the name of the organisation.  For single documents, use \code{title:} in
-the yaml header instead.}
+\item{logo_url}{URL to follow when the logo is clicked.}
 
-\item{keep_md}{logical, whether to keep the intermediate \code{.md} file after
-rendering.}
+\item{logo_text}{Text to place beside the logo.}
+
+\item{page_title}{Text to go inside the \code{<title>} tags, used in browser
+toolbars, when making bookmarks and in search engine results.}
+
+\item{title}{Text to appear in the main part of the bar at the top of every
+page.}
+
+\item{phase}{one of \code{"none"} (default), \code{"alpha"} or \code{"beta"} to put an alpha
+or beta banner indicating the maturity of the service (if it is a service).}
+
+\item{feedback_url}{URL for feedback, given in the phase banner when \code{phase}
+is \code{"alpha"} or \code{"beta"}.}
 
 \item{google_analytics}{Google Analytics ID for monitoring traffic to the
 website.}
@@ -49,35 +58,53 @@ website.}
 \description{
 A template for rendering R Markdown documents as HTML using the GOV.UK Design
 System.  Can be used for single documents or for websites.
+font: "sans-serif"
+favicon: "custom"
+logo: "images/govdown-logo-white-on-transparent.svg"
+logo_url: "https://ukgovdatascience.github.io/govdown"
+logo_text: "govdown"
+page_title: "page_title"
+title: "title"
+phase: alpha
+feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
 }
 \details{
 To configure a standalone document, use the yaml at the top of the \code{.Rmd}
 file.\preformatted{---
-title: "GOV.UK-style R Markdown Document"
-organisation: "govdown"
-logo: "./images/govdown-logo-white-on-transparent.svg"
 output:
   govdown::govdown_document:
     font: "sans-serif"
+    favicon: "custom"
+    logo: "images/logo.svg"
+    logo_url: "https://ukgovdatascience.github.io/govdown"
+    logo_text: "logo_text"
+    page_title: "page_title"
+    title: "title"
+    phase: alpha
+    feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
+    google_analytics: "UA-12345678-90"
 ---
 }
 
 To configure a website, use a \code{_site.yml} file instead.\preformatted{output_dir: docs # to host on GitHub pages
 navbar:
-  logo: "images/govdown-logo-white-on-transparent.svg"
-  title: "govdown"
-  homepage: "https://ukgovdatascience.github.io/govdown"
-  service_name: "Reproducible Analytical Pipelines"
-  links:
-    - text: "Home"
-      href: index.html
-    - text: "Tech docs"
-      href: tech-docs.html
+  - text: "Home"
+    href: index.html
+  - text: "Tech docs"
+    href: tech-docs.html
+  - text: "News"
+    href: NEWS.html
 output:
   govdown::govdown_document:
     font: "sans-serif"
+    favicon: "custom"
+    logo: "images/govdown-logo-white-on-transparent.svg"
+    logo_url: "https://ukgovdatascience.github.io/govdown"
+    logo_text: "govdown"
+    page_title: "page_title"
+    title: "title"
     phase: alpha
     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
-    favicon: "custom"
+    google_analytics: "UA-45097885-11"
 }
 }

@@ -33,14 +33,22 @@ a markdown document (a plain text file with the suffix `.Rmd` or `.md` instead
 of `.txt`), and put something called 'YAML metadata' at the top.  It should look
 like this:
 
-    ---
-    title: Statistics about statistics
-    author: Joe Bloggs
-    date: March 27, 2019
-    output:
-      govdown::govdown_document:
-        font: "sans-serif"
-    ---
+```yaml
+---
+output:
+  govdown::govdown_document:
+    font: "sans-serif" # (default) or "new-transport"
+    favicon: "custom" # or "none" (default) or "govuk" see ?govdown_document
+    logo: "images/logo.svg" # or false (default)
+    logo_url: "https://ukgovdatascience.github.io/govdown"
+    logo_text: "logo_text"
+    page_title: "page_title"
+    title: "title"
+    phase: alpha
+    feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
+    google_analytics: "UA-12345678-90"
+---
+```
 
     This is a study of official statistics in the UK.
 
@@ -58,23 +66,26 @@ of `.txt`), and a configuration file called `_site.yml` with content like the
 following:
 
 ```yaml
-output_dir: docs
-navbar:
-  logo: "images/govdown-logo-white-on-transparent.svg"
-  title: "govdown"
-  homepage: "https://ukgovdatascience.github.io/govdown"
-  service_name: "GOV.UK-style markdown documents"
-  links:
-    - text: "Home"
-      href: index.html
-    - text: "Tech docs"
-      href: tech-docs.html
+output_dir: docs # to host on GitHub pages
+navbar: # links to include in the bar at the top of every page
+  - text: "Home"
+    href: index.html
+  - text: "Tech docs"
+    href: tech-docs.html
+  - text: "News"
+    href: NEWS.html
 output:
   govdown::govdown_document:
-    font: "sans-serif"
+    font: "sans-serif" # (default) or "new-transport"
+    favicon: "custom" # or "none" (default) or "govuk" see ?govdown_document
+    logo: "images/logo.svg" # or false (default)
+    logo_url: "https://ukgovdatascience.github.io/govdown"
+    logo_text: "logo_text"
+    page_title: "page_title"
+    title: "title"
     phase: alpha
     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
-    favicon: "custom"
+    google_analytics: "UA-12345678-90"
 ```
 
 That example shows all the possible configuration.  You don't have to set a
