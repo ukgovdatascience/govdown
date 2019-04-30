@@ -144,7 +144,7 @@ govdown_document <- function(keep_md = FALSE,
 
   analytics <- ""
   if (is.null(google_analytics)) {
-    template_html <- sprintf(template_html, "")
+    template_html <- sprintf(template_html, "", page_title)
   } else {
     analytics_html <- file_string(pkg_file("rmarkdown/resources/google-analytics.html"))
     analytics_html <- sprintf(analytics_html, google_analytics, google_analytics)
