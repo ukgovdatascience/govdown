@@ -98,7 +98,7 @@ on [publishing
 websites](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html#publishing-websites).
 
 To render the website, run `rmarkdown::render_site()` in the
-console, or click the 'knit' button in RStudio.
+console, or click the 'Build Website' button in RStudio Build panel.
 
 ## Supported markdown syntax
 
