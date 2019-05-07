@@ -2,7 +2,8 @@
 
 ::: {.lead-para}
 Govdown is an R package for creating websites and standalone HTML pages that use
-the GOV.UK Design System.  This website is an example.
+the [GOV.UK Design System](https://design-system.service.gov.uk/).  This website
+is an example.
 :::
 
 Use govdown in the same way as [R Markdown](https://rmarkdown.rstudio.com/),
