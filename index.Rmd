@@ -13,8 +13,8 @@ of the website.
 
 ## Installation
 
-The package is only hosted on GitHub, not on CRAN.  Install it with the devtools
-package.
+The package is only hosted on [GitHub](https://github.com/ukgovdatascience), not
+on CRAN.  Install it with the devtools package.
 
 ```r
 # install.packages("devtools") # if devtools is not already installed
