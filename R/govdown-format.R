@@ -45,6 +45,11 @@
 #' website.
 #' @param keep_md logical, whether to keep the intermediate `.md` file after
 #' rendering.
+#' @param encrypt logical, whether to encrypt the HTML file with a password,
+#' which will be written to a file `something.html.key` where `something` is the
+#' same as the page that is encrypted.  Experimental.  Uses the encryptedRmd
+#' package by Dirk Schumacher.  Not recommended for websites because each page
+#' is encrypted separately.
 #'
 #' @details
 #'
@@ -65,6 +70,7 @@
 #'     phase: alpha
 #'     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
 #'     google_analytics: "UA-12345678-90"
+#'     encrypt: false
 #' ---
 #' ```
 #'
@@ -91,6 +97,7 @@
 #'     phase: alpha
 #'     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
 #'     google_analytics: "UA-45097885-11"
+#'     encrypt: false
 #' ```
 #'
 #' @export
@@ -104,7 +111,8 @@ govdown_document <- function(keep_md = FALSE,
                              title = "Title",
                              phase = c("none", "alpha", "beta"),
                              feedback_url = "404.html",
-                             google_analytics = NULL) {
+                             google_analytics = NULL,
+                             encrypt = FALSE) {
 
   rmarkdown::pandoc_available("2", error = TRUE)
 
@@ -214,6 +222,18 @@ govdown_document <- function(keep_md = FALSE,
         extra_dependencies = extra_dependencies
       )
   )
+
+  if (encrypt) {
+    initial_post_process <- base_format$post_processor
+    base_format$post_processor <-
+      function(metadata, input_file, output_file, clean, verbose) {
+        on.exit(encryptedRmd::encrypt_html_file(path = output_file,
+                                                output_path = output_file,
+                                                message_key = FALSE,
+                                                write_key_file = TRUE))
+        initial_post_process(metadata, input_file, output_file, clean, verbose)
+      }
+  }
 
   base_format
 }

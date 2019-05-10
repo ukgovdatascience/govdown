@@ -14,4 +14,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Imports: 
-    rmarkdown
+    rmarkdown,
+    encryptedRmd (>= 0.0.0.9000)
+Remotes:  
+    dirkschumacher/encryptedRmd

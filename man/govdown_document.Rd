@@ -8,7 +8,8 @@ govdown_document(keep_md = FALSE, font = c("sans-serif",
   "new-transport"), favicon = c("none", "custom", "govuk"),
   logo = FALSE, logo_url = "", logo_text = "Logo text",
   page_title = "Page title", title = "Title", phase = c("none",
-  "alpha", "beta"), feedback_url = "404.html", google_analytics = NULL)
+  "alpha", "beta"), feedback_url = "404.html", google_analytics = NULL,
+  encrypt = FALSE)
 }
 \arguments{
 \item{keep_md}{logical, whether to keep the intermediate \code{.md} file after
@@ -54,6 +55,12 @@ is \code{"alpha"} or \code{"beta"}.}
 
 \item{google_analytics}{Google Analytics ID for monitoring traffic to the
 website.}
+
+\item{encrypt}{logical, whether to encrypt the HTML file with a password,
+which will be written to a file \code{something.html.key} where \code{something} is the
+same as the page that is encrypted.  Experimental.  Uses the encryptedRmd
+package by Dirk Schumacher.  Not recommended for websites because each page
+is encrypted separately.}
 }
 \description{
 A template for rendering R Markdown documents as HTML using the GOV.UK Design
@@ -83,6 +90,7 @@ output:
     phase: alpha
     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
     google_analytics: "UA-12345678-90"
+    encrypt: false
 ---
 }
 
@@ -106,5 +114,6 @@ output:
     phase: alpha
     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
     google_analytics: "UA-45097885-11"
+    encrypt: false
 }
 }
