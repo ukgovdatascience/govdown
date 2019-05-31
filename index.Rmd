@@ -11,6 +11,15 @@ but specify `output: govdown::govdown_document` instead of `output:
 html_document` in the YAML metadata of the document, or in the `_site.yml` file
 of the website.
 
+## Examples
+
+These websites and documents use govdown.
+
+* https://ukgovdatascience.github.io/rap-website/
+* https://co-analysis.github.io/csmapping/cs_lad.html
+* https://mattkerlogue.github.io/coding-guide/
+* https://matt-dray.github.io/drake-egg-rap/
+
 ## Installation
 
 The package is only hosted on [GitHub](https://github.com/ukgovdatascience), not
