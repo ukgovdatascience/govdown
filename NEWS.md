@@ -1,3 +1,7 @@
+# govdown 0.4.1
+
+* Upgrade to GOV.UK Frontend release v2.12.0. No user-facing changes.
+
 # govdown 0.4.0
 
 * Overhauled yaml configuration to make websites and standalone pages more
