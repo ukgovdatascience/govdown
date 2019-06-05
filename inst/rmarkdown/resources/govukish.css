@@ -3302,7 +3302,7 @@
   text-align: left; }
 
 .govuk-table__cell--numeric {
-  font-family: sans-serif-tabular;
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400; }

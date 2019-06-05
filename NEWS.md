@@ -1,6 +1,7 @@
 # govdown (development version)
 
 * Support warning text (#30, #29)
+* Don't accidentally use New Transport font in tables (#31)
 
 # govdown 0.4.1
 
