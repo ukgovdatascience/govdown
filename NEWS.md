@@ -1,5 +1,7 @@
 # govdown (development version)
 
+* Support warning text (#30, #29)
+
 # govdown 0.4.1
 
 * Upgrade to GOV.UK Frontend release v2.12.0. No user-facing changes.

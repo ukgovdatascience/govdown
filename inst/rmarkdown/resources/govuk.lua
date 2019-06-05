@@ -240,6 +240,32 @@ return {
         })
       end
 
+      -- Look for 'warning'
+      v,i = el.classes:find("warning")
+      if i ~= nil then
+        el.classes[i] = nil
+
+        local html
+        local res = List:new{}
+
+        html =
+          '<div class="govuk-warning-text">' ..
+          '<span class="govuk-warning-text__icon" aria-hidden="true">!</span>' ..
+          '<strong class="govuk-warning-text__text">'..
+          '<span class="govuk-warning-text__assistive">Warning</span>'
+
+        table.insert(res, pandoc.RawBlock('html', html))
+
+        for _, block in ipairs(el.content) do
+          table.insert(res, pandoc.Plain(block.content))
+        end
+
+        table.insert(res, pandoc.RawBlock('html', '</strong>'))
+        table.insert(res, pandoc.RawBlock('html', '</div>'))
+
+        return res
+      end
+
       return el
     end
   },

@@ -193,6 +193,23 @@ Indented text (often used for block quotations) works as normal.
 > distort it. But there it is. -- Winston Churchill
 ```
 
+### Warnings
+
+Use the [Warning
+text](https://design-system.service.gov.uk/components/warning-text/) when you
+need to warn users about something important, such as legal consequences of an
+action, or lack of action, that they might take.
+
+::: {.warning}
+Fee fi fo fum
+:::
+
+```md
+::: {.warning}
+Fee fi fo fum
+:::
+```
+
 ### Hyperlinks
 
 Hyperlinks work as normal.  The GOV.UK Design System also supports [hyperlinks
