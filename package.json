@@ -11,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "govuk-frontend": "^2.10.0"
+    "govuk-frontend": "^2.13.0"
   },
   "devDependencies": {},
   "keywords": [],

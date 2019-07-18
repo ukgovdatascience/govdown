@@ -1,5 +1,17 @@
 # govdown (development version)
 
+## GOV.UK Design System upgrade
+
+Upgrade to GOV.UK Frontend release v2.13.0. One user-facing change.  The crown
+logo image in the header now:
+
+* has height and width attributes set
+* aligns better with 'GOV.UK' in IE8
+
+(Pull request #1419)
+
+## Govdown changes:
+
 * Support warning text (#30, #29)
 * Don't accidentally use New Transport font in tables (#31)
 * Support shiny server by passing through args (#33) (#33) @RobinL
