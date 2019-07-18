@@ -1,6 +1,6 @@
 Package: govdown
 Title: GOV.UK Style Templates for R Markdown
-Version: 0.4.1.9001
+Version: 0.5.0
 Authors@R:
     person(given = "Duncan",
            family = "Garmonsway",
