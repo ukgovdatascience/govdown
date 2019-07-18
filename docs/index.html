@@ -31,26 +31,27 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -59,9 +60,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -4150,8 +4151,8 @@ These websites and documents use govdown.
 <p class="govuk-body">
 The package is only hosted on <a href="https://github.com/ukgovdatascience" class="govuk-link">GitHub</a>, not on CRAN. Install it with the devtools package.
 </p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages(&quot;devtools&quot;) # if devtools is not already installed</span></a>
-<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ukgovdatascience/govdown&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages(&quot;devtools&quot;) # if devtools is not already installed</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ukgovdatascience/govdown&quot;</span>)</span></code></pre></div>
 <p class="govuk-body">
 You need Pandoc version 2.0 or greater on your system to use Govdown. You can check which version you have at the R console by typing <code>rmarkdown::pandoc_version()</code>. Look at this <a href="https://github.com/ukgovdatascience/govdown/issues/2" class="govuk-link">GitHub issue</a> for advice on how to obtain a more recent version of pandoc.
 </p>
@@ -4159,20 +4160,20 @@ You need Pandoc version 2.0 or greater on your system to use Govdown. You can ch
 <p class="govuk-body">
 Govdown HTML pages are created in the same way as R Markdown HTML pages. Write a markdown document (a plain text file with the suffix <code>.Rmd</code> or <code>.md</code> instead of <code>.txt</code>), and put something called ‘YAML metadata’ at the top. It should look like this:
 </p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode yaml app-tabs__container js-tabs__container"><code class="sourceCode yaml"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">---</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="fu">output:</span></a>
-<a class="sourceLine" id="cb2-3" title="3">  govdown:<span class="fu">:govdown_document:</span></a>
-<a class="sourceLine" id="cb2-4" title="4">    <span class="fu">font:</span><span class="at"> </span><span class="st">&quot;sans-serif&quot;</span> <span class="co"># (default) or &quot;new-transport&quot;</span></a>
-<a class="sourceLine" id="cb2-5" title="5">    <span class="fu">favicon:</span><span class="at"> </span><span class="st">&quot;custom&quot;</span> <span class="co"># or &quot;none&quot; (default) or &quot;govuk&quot; see ?govdown_document</span></a>
-<a class="sourceLine" id="cb2-6" title="6">    <span class="fu">logo:</span><span class="at"> </span><span class="st">&quot;images/logo.svg&quot;</span> <span class="co"># or false (default)</span></a>
-<a class="sourceLine" id="cb2-7" title="7">    <span class="fu">logo_url:</span><span class="at"> </span><span class="st">&quot;https://ukgovdatascience.github.io/govdown&quot;</span></a>
-<a class="sourceLine" id="cb2-8" title="8">    <span class="fu">logo_text:</span><span class="at"> </span><span class="st">&quot;logo_text&quot;</span></a>
-<a class="sourceLine" id="cb2-9" title="9">    <span class="fu">page_title:</span><span class="at"> </span><span class="st">&quot;page_title&quot;</span></a>
-<a class="sourceLine" id="cb2-10" title="10">    <span class="fu">title:</span><span class="at"> </span><span class="st">&quot;title&quot;</span></a>
-<a class="sourceLine" id="cb2-11" title="11">    <span class="fu">phase:</span><span class="at"> alpha</span></a>
-<a class="sourceLine" id="cb2-12" title="12">    <span class="fu">feedback_url:</span><span class="at"> </span><span class="st">&quot;https://github.com/ukgovdatascience/govdown/issues&quot;</span></a>
-<a class="sourceLine" id="cb2-13" title="13">    <span class="fu">google_analytics:</span><span class="at"> </span><span class="st">&quot;UA-12345678-90&quot;</span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="ot">---</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml app-tabs__container js-tabs__container"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="at">  govdown:</span><span class="fu">:govdown_document</span><span class="kw">:</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="at">    </span><span class="fu">font</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;sans-serif&quot;</span><span class="co"> # (default) or &quot;new-transport&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="at">    </span><span class="fu">favicon</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;custom&quot;</span><span class="co"> # or &quot;none&quot; (default) or &quot;govuk&quot; see ?govdown_document</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="at">    </span><span class="fu">logo</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;images/logo.svg&quot;</span><span class="co"> # or false (default)</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="at">    </span><span class="fu">logo_url</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://ukgovdatascience.github.io/govdown&quot;</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="at">    </span><span class="fu">logo_text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;logo_text&quot;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="at">    </span><span class="fu">page_title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;page_title&quot;</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="at">    </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;title&quot;</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="at">    </span><span class="fu">phase</span><span class="kw">:</span><span class="at"> alpha</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="at">    </span><span class="fu">feedback_url</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://github.com/ukgovdatascience/govdown/issues&quot;</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="at">    </span><span class="fu">google_analytics</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;UA-12345678-90&quot;</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="pp">---</span></span></code></pre></div>
 <pre class="app-tabs__container js-tabs__container"><code>This is a study of official statistics in the UK.</code></pre>
 <p class="govuk-body">
 To render that file to HTML, run <code>rmarkdown::render(&quot;filename.Rmd&quot;)</code> in the console, or click the ‘knit’ button in RStudio.
@@ -4184,26 +4185,26 @@ You must use <code>font: &quot;sans-serif&quot;</code> unless the page is hosted
 <p class="govuk-body">
 Websites are created in the same way as R Markdown websites. Write a set of markdown documents (plain text files with the suffix <code>.Rmd</code> or <code>.md</code> instead of <code>.txt</code>), and a configuration file called <code>_site.yml</code> with content like the following:
 </p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml app-tabs__container js-tabs__container"><code class="sourceCode yaml"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">output_dir:</span><span class="at"> docs </span><span class="co"># to host on GitHub pages</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="fu">navbar:</span><span class="at"> </span><span class="co"># links to include in the bar at the top of every page</span></a>
-<a class="sourceLine" id="cb4-3" title="3">  <span class="kw">-</span> <span class="fu">text:</span><span class="at"> </span><span class="st">&quot;Home&quot;</span></a>
-<a class="sourceLine" id="cb4-4" title="4">    <span class="fu">href:</span><span class="at"> index.html</span></a>
-<a class="sourceLine" id="cb4-5" title="5">  <span class="kw">-</span> <span class="fu">text:</span><span class="at"> </span><span class="st">&quot;Tech docs&quot;</span></a>
-<a class="sourceLine" id="cb4-6" title="6">    <span class="fu">href:</span><span class="at"> tech-docs.html</span></a>
-<a class="sourceLine" id="cb4-7" title="7">  <span class="kw">-</span> <span class="fu">text:</span><span class="at"> </span><span class="st">&quot;News&quot;</span></a>
-<a class="sourceLine" id="cb4-8" title="8">    <span class="fu">href:</span><span class="at"> NEWS.html</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="fu">output:</span></a>
-<a class="sourceLine" id="cb4-10" title="10">  govdown:<span class="fu">:govdown_document:</span></a>
-<a class="sourceLine" id="cb4-11" title="11">    <span class="fu">font:</span><span class="at"> </span><span class="st">&quot;sans-serif&quot;</span> <span class="co"># (default) or &quot;new-transport&quot;</span></a>
-<a class="sourceLine" id="cb4-12" title="12">    <span class="fu">favicon:</span><span class="at"> </span><span class="st">&quot;custom&quot;</span> <span class="co"># or &quot;none&quot; (default) or &quot;govuk&quot; see ?govdown_document</span></a>
-<a class="sourceLine" id="cb4-13" title="13">    <span class="fu">logo:</span><span class="at"> </span><span class="st">&quot;images/logo.svg&quot;</span> <span class="co"># or false (default)</span></a>
-<a class="sourceLine" id="cb4-14" title="14">    <span class="fu">logo_url:</span><span class="at"> </span><span class="st">&quot;https://ukgovdatascience.github.io/govdown&quot;</span></a>
-<a class="sourceLine" id="cb4-15" title="15">    <span class="fu">logo_text:</span><span class="at"> </span><span class="st">&quot;logo_text&quot;</span></a>
-<a class="sourceLine" id="cb4-16" title="16">    <span class="fu">page_title:</span><span class="at"> </span><span class="st">&quot;page_title&quot;</span></a>
-<a class="sourceLine" id="cb4-17" title="17">    <span class="fu">title:</span><span class="at"> </span><span class="st">&quot;title&quot;</span></a>
-<a class="sourceLine" id="cb4-18" title="18">    <span class="fu">phase:</span><span class="at"> alpha</span></a>
-<a class="sourceLine" id="cb4-19" title="19">    <span class="fu">feedback_url:</span><span class="at"> </span><span class="st">&quot;https://github.com/ukgovdatascience/govdown/issues&quot;</span></a>
-<a class="sourceLine" id="cb4-20" title="20">    <span class="fu">google_analytics:</span><span class="at"> </span><span class="st">&quot;UA-12345678-90&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml app-tabs__container js-tabs__container"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">output_dir</span><span class="kw">:</span><span class="at"> docs</span><span class="co"> # to host on GitHub pages</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">navbar</span><span class="kw">:</span><span class="co"> # links to include in the bar at the top of every page</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Home&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> index.html</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Tech docs&quot;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> tech-docs.html</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;News&quot;</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> NEWS.html</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="at">  govdown:</span><span class="fu">:govdown_document</span><span class="kw">:</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="at">    </span><span class="fu">font</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;sans-serif&quot;</span><span class="co"> # (default) or &quot;new-transport&quot;</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="at">    </span><span class="fu">favicon</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;custom&quot;</span><span class="co"> # or &quot;none&quot; (default) or &quot;govuk&quot; see ?govdown_document</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="at">    </span><span class="fu">logo</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;images/logo.svg&quot;</span><span class="co"> # or false (default)</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="at">    </span><span class="fu">logo_url</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://ukgovdatascience.github.io/govdown&quot;</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="at">    </span><span class="fu">logo_text</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;logo_text&quot;</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="at">    </span><span class="fu">page_title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;page_title&quot;</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="at">    </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;title&quot;</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="at">    </span><span class="fu">phase</span><span class="kw">:</span><span class="at"> alpha</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="at">    </span><span class="fu">feedback_url</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;https://github.com/ukgovdatascience/govdown/issues&quot;</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="at">    </span><span class="fu">google_analytics</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;UA-12345678-90&quot;</span></span></code></pre></div>
 <p class="govuk-body">
 That example shows all the possible configuration. You don’t have to set a <code>logo</code> or <code>favicon</code> or have any <code>links</code> (although you probably should eventually), and if you don’t set an alpha or beta <code>phase</code> banner then you won’t need a <code>feedback_url</code>. However you must set <code>font: &quot;sans-serif&quot;</code> unless the website is hosted on the gov.uk domain. Set <code>output_dir: docs</code> if you will deploy the site on GitHub pages, otherwise refer to the R Markdown documentation on <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html#publishing-websites" class="govuk-link">publishing websites</a>.
 </p>
@@ -4218,27 +4219,27 @@ Most of the usual markdown syntax is supported. There is some new syntax for spe
 <p class="govuk-body">
 Create headings by beginning a new line of text with a <code>#</code> symbol.
 </p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb5-1" title="1"><span class="fu"># Pithy heading</span></a>
-<a class="sourceLine" id="cb5-2" title="2"></a>
-<a class="sourceLine" id="cb5-3" title="3">Rambling content.</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu"># Pithy heading</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a>Rambling content.</span></code></pre></div>
 <p class="govuk-body">
 Subheadings have more <code>#</code>s
 </p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">## Helpful subheading</span></a>
-<a class="sourceLine" id="cb6-2" title="2"></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="fu">### Can&#39;t remember what the main topic was?</span></a>
-<a class="sourceLine" id="cb6-4" title="4"></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="fu">#### Four levels of headings are available!</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">## Helpful subheading</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">### Can&#39;t remember what the main topic was?</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="fu">#### Four levels of headings are available!</span></span></code></pre></div>
 <h3 id="headings-with-captions" class="govuk-heading-m"><span class="govuk-caption-m">This is a caption</span>Headings with captions</h3>
 <p class="govuk-body">
 The GOV.UK Design System supports captions above <a href="https://design-system.service.gov.uk/styles/typography/#headings" class="govuk-link">headers</a>. This works for headings of level 1, 2 and 3, but not for the smallest headings (level 4).
 </p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb7-1" title="1"><span class="fu"># Heading with caption above {caption=&quot;This is a caption&quot;}</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu"># Heading with caption above {caption=&quot;This is a caption&quot;}</span></span></code></pre></div>
 <h3 id="bold-italics-and-strike-through" class="govuk-heading-m">Bold, italics and strike-through</h3>
 <p class="govuk-body">
 <span class="govuk-!-font-weight-bold">Bold</span> works as normal, but italics and strike-through are disabled because they are not supported by the GOV.UK Design System.
 </p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb8-1" title="1">**Bold** works as normal, but *italics* and ~~strike-through~~ are disabled.</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1"></a>**Bold** works as normal, but *italics* and ~~strike-through~~ are disabled.</span></code></pre></div>
 <h3 id="lead-paragraphs-and-small-text" class="govuk-heading-m">Lead paragraphs and small text</h3>
 <p class="govuk-body">
 The GOV.UK Design System supports <a href="https://design-system.service.gov.uk/styles/typography/#paragraphs" class="govuk-link">larger and smaller text for paragraphs</a>. Large text is for a single lead paragraph at the top of a page. See the top of this page for an example.
@@ -4248,16 +4249,16 @@ The GOV.UK Design System supports <a href="https://design-system.service.gov.uk/
 Small text looks like this.
 </p>
 </div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb9-1" title="1">::: {.lead-para}</a>
-<a class="sourceLine" id="cb9-2" title="2">This is a lead paragraph that appears in larger text than the rest of the body</a>
-<a class="sourceLine" id="cb9-3" title="3">text of the page.</a>
-<a class="sourceLine" id="cb9-4" title="4">:::</a>
-<a class="sourceLine" id="cb9-5" title="5"></a>
-<a class="sourceLine" id="cb9-6" title="6">This is a normal paragraph in normal size.</a>
-<a class="sourceLine" id="cb9-7" title="7"></a>
-<a class="sourceLine" id="cb9-8" title="8">::: {.small-para}</a>
-<a class="sourceLine" id="cb9-9" title="9">You can write in small letters too.</a>
-<a class="sourceLine" id="cb9-10" title="10">:::</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a>::: {.lead-para}</span>
+<span id="cb9-2"><a href="#cb9-2"></a>This is a lead paragraph that appears in larger text than the rest of the body</span>
+<span id="cb9-3"><a href="#cb9-3"></a>text of the page.</span>
+<span id="cb9-4"><a href="#cb9-4"></a>:::</span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a>This is a normal paragraph in normal size.</span>
+<span id="cb9-7"><a href="#cb9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8"></a>::: {.small-para}</span>
+<span id="cb9-9"><a href="#cb9-9"></a>You can write in small letters too.</span>
+<span id="cb9-10"><a href="#cb9-10"></a>:::</span></code></pre></div>
 <h3 id="indented-text-quotations" class="govuk-heading-m">Indented text (quotations)</h3>
 <p class="govuk-body">
 Indented text (often used for block quotations) works as normal.
@@ -4267,9 +4268,9 @@ Indented text (often used for block quotations) works as normal.
 United wishes and good will cannot overcome brute facts. Truth is incontrovertible. Panic may resent it. Ignorance may deride it. Malice may distort it. But there it is. – Winston Churchill
 </p>
 </div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb10-1" title="1">&gt;<span class="dt"> United wishes and good will cannot overcome brute facts.  Truth is</span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="dt">&gt; incontrovertible. Panic may resent it. Ignorance may deride it. Malice may</span></a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="dt">&gt; distort it. But there it is. -- Winston Churchill</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1"></a>&gt;<span class="dt"> United wishes and good will cannot overcome brute facts.  Truth is</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="dt">&gt; incontrovertible. Panic may resent it. Ignorance may deride it. Malice may</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="dt">&gt; distort it. But there it is. -- Winston Churchill</span></span></code></pre></div>
 <h3 id="warnings" class="govuk-heading-m">Warnings</h3>
 <p class="govuk-body">
 Use the <a href="https://design-system.service.gov.uk/components/warning-text/" class="govuk-link">Warning text</a> when you need to warn users about something important, such as legal consequences of an action, or lack of action, that they might take.
@@ -4278,16 +4279,16 @@ Use the <a href="https://design-system.service.gov.uk/components/warning-text/" 
 Fee fi fo fum
 </strong>
 </div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb11-1" title="1">::: {.warning}</a>
-<a class="sourceLine" id="cb11-2" title="2">Fee fi fo fum</a>
-<a class="sourceLine" id="cb11-3" title="3">:::</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1"></a>::: {.warning}</span>
+<span id="cb11-2"><a href="#cb11-2"></a>Fee fi fo fum</span>
+<span id="cb11-3"><a href="#cb11-3"></a>:::</span></code></pre></div>
 <h3 id="hyperlinks" class="govuk-heading-m">Hyperlinks</h3>
 <p class="govuk-body">
 Hyperlinks work as normal. The GOV.UK Design System also supports <a href="https://design-system.service.gov.uk/styles/typography/#links" class="govuk-link--no-visited-state govuk-link">hyperlinks that don’t change colour</a> when you have visited the page.
 </p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb12-1" title="1"><span class="ot">[normal hyperlink](https://design-system.service.gov.uk)</span>.</a>
-<a class="sourceLine" id="cb12-2" title="2"></a>
-<a class="sourceLine" id="cb12-3" title="3"><span class="ot">[hyperlink that doesn&#39;t turn purple](https://design-system.service.gov.uk)</span>{.no-visited-state}.</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="ot">[normal hyperlink](https://design-system.service.gov.uk)</span>.</span>
+<span id="cb12-2"><a href="#cb12-2"></a></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="ot">[hyperlink that doesn&#39;t turn purple](https://design-system.service.gov.uk)</span>{.no-visited-state}.</span></code></pre></div>
 <h3 id="bullets-and-numbered-lists" class="govuk-heading-m">Bullets and numbered lists</h3>
 <p class="govuk-body">
 Bulletted lists work as normal, but nested bullets don’t look very good because they aren’t really supported by the GOV.UK Design System.
@@ -4311,12 +4312,12 @@ Second bullet
 Third bullet
 </li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb13-1" title="1">* <span class="fl">First bullet</span></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="fl">  * Nested bullets are available but ...</span></a>
-<a class="sourceLine" id="cb13-3" title="3"><span class="fl">  * ... they don&#39;t look very good because the GOV.UK Design System doesn&#39;t</span></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="fl">    really support them.</span></a>
-<a class="sourceLine" id="cb13-5" title="5"><span class="fl">* Second bullet</span></a>
-<a class="sourceLine" id="cb13-6" title="6"><span class="fl">* Third bullet</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1"></a>* <span class="st">First bullet</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="st">  * Nested bullets are available but ...</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="st">  * ... they don&#39;t look very good because the GOV.UK Design System doesn&#39;t</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="st">    really support them.</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="st">* Second bullet</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="st">* Third bullet</span></span></code></pre></div>
 <p class="govuk-body">
 Numbered lists work as normal, except that nested numbered lists don’t work at all because they aren’t supported by the GOV.UK Design System.
 </p>
@@ -4331,9 +4332,9 @@ Second numbered list item
 Third numbered list item
 </li>
 </ol>
-<div class="sourceCode" id="cb14"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb14-1" title="1">1. <span class="fl">Numbered list item</span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="fl">1. Second numbered list item</span></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="fl">1. Third numbered list item</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1"></a>1. <span class="st">Numbered list item</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="st">1. Second numbered list item</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="st">1. Third numbered list item</span></span></code></pre></div>
 <p class="govuk-body">
 The GOV.UK Design System also supports lists with neither bullets nor numbers. Standard markdown doesn’t have any syntax for this, so create a bulletted list and wrap it with a special marker, shown below.
 </p>
@@ -4350,24 +4351,24 @@ Unbulleted item three
 </li>
 </ul>
 </div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb15-1" title="1">::: {.unbulleted-list}</a>
-<a class="sourceLine" id="cb15-2" title="2">* <span class="fl">Unbulleted item one</span></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="fl">* Unbulleted item two</span></a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="fl">* Unbulleted item three</span></a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="fl">:::</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1"></a>::: {.unbulleted-list}</span>
+<span id="cb15-2"><a href="#cb15-2"></a>* <span class="st">Unbulleted item one</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="st">* Unbulleted item two</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="st">* Unbulleted item three</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="st">:::</span></span></code></pre></div>
 <h3 id="section-breaks" class="govuk-heading-m">Section breaks</h3>
 <p class="govuk-body">
 The usual section break is available.
 </p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb16-1" title="1">---</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1"></a>---</span></code></pre></div>
 <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
 <p class="govuk-body">
 The GOV.UK Design System supports several sizes of section break; govdown uses the largest. For the other sizes use the <a href="https://design-system.service.gov.uk/styles/typography/#section-break" class="govuk-link">raw HTML</a>.
 </p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode html app-tabs__container js-tabs__container"><code class="sourceCode html"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">&lt;hr</span><span class="ot"> class=</span><span class="st">&quot;govuk-section-break govuk-section-break--xl govuk-section-break--visible&quot;</span><span class="kw">&gt;</span></a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="kw">&lt;hr</span><span class="ot"> class=</span><span class="st">&quot;govuk-section-break govuk-section-break--l govuk-section-break--visible&quot;</span><span class="kw">&gt;</span></a>
-<a class="sourceLine" id="cb17-3" title="3"><span class="kw">&lt;hr</span><span class="ot"> class=</span><span class="st">&quot;govuk-section-break govuk-section-break--m govuk-section-break--visible&quot;</span><span class="kw">&gt;</span></a>
-<a class="sourceLine" id="cb17-4" title="4"><span class="kw">&lt;hr</span><span class="ot"> class=</span><span class="st">&quot;govuk-section-break govuk-section-break--visible&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode html app-tabs__container js-tabs__container"><code class="sourceCode html"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">&lt;hr</span><span class="ot"> class=</span><span class="st">&quot;govuk-section-break govuk-section-break--xl govuk-section-break--visible&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">&lt;hr</span><span class="ot"> class=</span><span class="st">&quot;govuk-section-break govuk-section-break--l govuk-section-break--visible&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="kw">&lt;hr</span><span class="ot"> class=</span><span class="st">&quot;govuk-section-break govuk-section-break--m govuk-section-break--visible&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="kw">&lt;hr</span><span class="ot"> class=</span><span class="st">&quot;govuk-section-break govuk-section-break--visible&quot;</span><span class="kw">&gt;</span></span></code></pre></div>
 <h3 id="breadcrumbs" class="govuk-heading-m">Breadcrumbs</h3>
 <p class="govuk-body">
 The GOV.UK Design System uses <a href="https://design-system.service.gov.uk/components/breadcrumbs/" class="govuk-link">breadcrumbs</a> to help users know where they are on a website. They are used at the top of a page.
@@ -4385,11 +4386,11 @@ breadcrumbs
 </li>
 </ol>
 </div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb18-1" title="1">::: {.breadcrumbs}</a>
-<a class="sourceLine" id="cb18-2" title="2">* <span class="ot">[trail](index.html)</span></a>
-<a class="sourceLine" id="cb18-3" title="3"><span class="fl">* </span><span class="ot">[of](index.html)</span></a>
-<a class="sourceLine" id="cb18-4" title="4"><span class="fl">* breadcrumbs</span></a>
-<a class="sourceLine" id="cb18-5" title="5"><span class="fl">:::</span></a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1"></a>::: {.breadcrumbs}</span>
+<span id="cb18-2"><a href="#cb18-2"></a>* <span class="ot">[trail](index.html)</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="st">* </span><span class="ot">[of](index.html)</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="st">* breadcrumbs</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="st">:::</span></span></code></pre></div>
 <h3 id="tabsets" class="govuk-heading-m">Tabsets</h3>
 <p class="govuk-body">
 Tabs can be a helpful way of letting users quickly switch between related information. See the guidance on the <a href="https://design-system.service.gov.uk/components/tabs/" class="govuk-link">GOV.UK Design System</a>.
@@ -4397,19 +4398,19 @@ Tabs can be a helpful way of letting users quickly switch between related inform
 <p class="govuk-body">
 The syntax is different from normal R Markdown tabsets.
 </p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb19-1" title="1">::: {.tabset}</a>
-<a class="sourceLine" id="cb19-2" title="2"><span class="fu"># Header appears on narrow screens</span></a>
-<a class="sourceLine" id="cb19-3" title="3"></a>
-<a class="sourceLine" id="cb19-4" title="4"><span class="fu">## Tab header 1</span></a>
-<a class="sourceLine" id="cb19-5" title="5"></a>
-<a class="sourceLine" id="cb19-6" title="6">Tab content A</a>
-<a class="sourceLine" id="cb19-7" title="7"></a>
-<a class="sourceLine" id="cb19-8" title="8"><span class="fu">## Tab header 2</span></a>
-<a class="sourceLine" id="cb19-9" title="9"></a>
-<a class="sourceLine" id="cb19-10" title="10">Tab content B</a>
-<a class="sourceLine" id="cb19-11" title="11"></a>
-<a class="sourceLine" id="cb19-12" title="12">Second paragraph of content.</a>
-<a class="sourceLine" id="cb19-13" title="13">:::</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1"></a>::: {.tabset}</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu"># Header appears on narrow screens</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="fu">## Tab header 1</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a></span>
+<span id="cb19-6"><a href="#cb19-6"></a>Tab content A</span>
+<span id="cb19-7"><a href="#cb19-7"></a></span>
+<span id="cb19-8"><a href="#cb19-8"></a><span class="fu">## Tab header 2</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a></span>
+<span id="cb19-10"><a href="#cb19-10"></a>Tab content B</span>
+<span id="cb19-11"><a href="#cb19-11"></a></span>
+<span id="cb19-12"><a href="#cb19-12"></a>Second paragraph of content.</span>
+<span id="cb19-13"><a href="#cb19-13"></a>:::</span></code></pre></div>
 <div class="govuk-tabs" data-module="tabs">
 <h2 id="header-appears-on-narrow-screens" class="govuk-tabs__title govuk-heading-l">Header appears on narrow screens</h2>
 <ul class="govuk-tabs__list">
@@ -4439,14 +4440,14 @@ Details make a page easier to scan by letting users reveal more detailed informa
 <p class="govuk-body">
 The syntax uses the summary attribute to provide the top level information with the content provided by the text within.
 </p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb20-1" title="1">::: {.details summary=&quot;Details&quot;}</a>
-<a class="sourceLine" id="cb20-2" title="2"></a>
-<a class="sourceLine" id="cb20-3" title="3">Here are some details on the</a>
-<a class="sourceLine" id="cb20-4" title="4"><span class="ot">[Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service)</span>.</a>
-<a class="sourceLine" id="cb20-5" title="5"></a>
-<a class="sourceLine" id="cb20-6" title="6">Multiple paragraphs can be contained in details.</a>
-<a class="sourceLine" id="cb20-7" title="7"></a>
-<a class="sourceLine" id="cb20-8" title="8">:::</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1"></a>::: {.details summary=&quot;Details&quot;}</span>
+<span id="cb20-2"><a href="#cb20-2"></a></span>
+<span id="cb20-3"><a href="#cb20-3"></a>Here are some details on the</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="ot">[Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service)</span>.</span>
+<span id="cb20-5"><a href="#cb20-5"></a></span>
+<span id="cb20-6"><a href="#cb20-6"></a>Multiple paragraphs can be contained in details.</span>
+<span id="cb20-7"><a href="#cb20-7"></a></span>
+<span id="cb20-8"><a href="#cb20-8"></a>:::</span></code></pre></div>
 <details class="govuk-details"><summary class="govuk-details__summary"><span class="govuk-details__summary-text">Details</span></summary><div class="govuk-details__text">
 <p class="govuk-body">
 Here are some details on the <a href="https://www.gov.uk/government/organisations/government-digital-service" class="govuk-link">Government Digital Service</a>.
@@ -4460,30 +4461,30 @@ Multiple paragraphs can be contained in details.
 <p class="govuk-body">
 Code blocks work the same as they do in markdown and R Markdown. Code in R Markdown files (.Rmd suffix) will be evaluated, and the result interleaved below the code.
 </p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">print</span>(<span class="st">&quot;This code will not be evaluated&quot;</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">print</span>(<span class="st">&quot;This code will be evaluated&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">print</span>(<span class="st">&quot;This code will not be evaluated&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">print</span>(<span class="st">&quot;This code will be evaluated&quot;</span>)</span></code></pre></div>
 <pre class="app-tabs__container js-tabs__container"><code>## [1] &quot;This code will be evaluated&quot;</code></pre>
 <p class="govuk-body">
 Create code chunks that are not to be evaluated as follows.
 </p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb24-1" title="1"><span class="bn">    ```r</span></a>
-<a class="sourceLine" id="cb24-2" title="2"><span class="bn">    print(&quot;This code will not be evaluated&quot;)</span></a>
-<a class="sourceLine" id="cb24-3" title="3"><span class="bn">    ```</span></a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1"></a><span class="bn">    ```r</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="bn">    print(&quot;This code will not be evaluated&quot;)</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="bn">    ```</span></span></code></pre></div>
 <p class="govuk-body">
 Create code chunks that are to be evaluated as follows.
 </p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb25-1" title="1"><span class="bn">    </span></a>
-<a class="sourceLine" id="cb25-2" title="2"><span class="bn">    ```r</span></a>
-<a class="sourceLine" id="cb25-3" title="3"><span class="bn">    print(&quot;This code will be evaluated&quot;)</span></a>
-<a class="sourceLine" id="cb25-4" title="4"><span class="bn">    ```</span></a>
-<a class="sourceLine" id="cb25-5" title="5"><span class="bn">    </span></a>
-<a class="sourceLine" id="cb25-6" title="6"><span class="bn">    ```</span></a>
-<a class="sourceLine" id="cb25-7" title="7"><span class="bn">    ## [1] &quot;This code will be evaluated&quot;</span></a>
-<a class="sourceLine" id="cb25-8" title="8"><span class="bn">    ```</span></a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb25-1"><a href="#cb25-1"></a><span class="bn">    </span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="bn">    ```r</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="bn">    print(&quot;This code will be evaluated&quot;)</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="bn">    ```</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="bn">    </span></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="bn">    ```</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a><span class="bn">    ## [1] &quot;This code will be evaluated&quot;</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a><span class="bn">    ```</span></span></code></pre></div>
 <p class="govuk-body">
 Python code chunks also work, as do any of the languages supported by knitr.
 </p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode python app-tabs__container js-tabs__container"><code class="sourceCode python"><a class="sourceLine" id="cb26-1" title="1"><span class="co">&#39;Monty Python&#39;</span>.split()</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python app-tabs__container js-tabs__container"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="co">&#39;Monty Python&#39;</span>.split()</span></code></pre></div>
 <pre class="app-tabs__container js-tabs__container"><code>## [&#39;Monty&#39;, &#39;Python&#39;]</code></pre>
 <h3 id="images" class="govuk-heading-m">Images</h3>
 <p class="govuk-body">
@@ -4642,7 +4643,7 @@ Center
 <p class="govuk-body">
 Tables can also be created from code chunks. This example in R uses <code>knitr::kable()</code>.
 </p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]))</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r app-tabs__container js-tabs__container"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(mtcars[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>]))</span></code></pre></div>
 <table class="govuk-table">
 <caption class="govuk-table__caption"></caption>
 <thead class="govuk-table__head">
@@ -7195,4 +7196,3 @@ exports.Tabs = Tabs;
 </body>
 
 </html>
-

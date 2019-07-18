@@ -31,26 +31,27 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -59,9 +60,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -4173,15 +4174,15 @@ The result is a directory of files that can be published as a static website. Th
 <p class="govuk-body">
 The GOV.UK Design System is mainly a set of Sass files, which are rendered to CSS files, which apply styles to HTML elements that have a given class. For example, an HTML <code>&lt;p&gt;</code> element with the class <code>&quot;govuk-body&quot;</code> is styled to look like ordinary text on GOV.UK.
 </p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode html app-tabs__container js-tabs__container"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;govuk-body&quot;</span><span class="kw">&gt;</span></a>
-<a class="sourceLine" id="cb1-2" title="2">  ordinary text</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">&lt;/p&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html app-tabs__container js-tabs__container"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;govuk-body&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  ordinary text</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
 <p class="govuk-body">
 But Pandoc doesn’t add classes to HTML elements, so when Pandoc converts a markdown paragraph to HTML, the <code>&lt;p&gt;</code> element doesn’t have the class <code>&quot;govuk-body&quot;</code>, so isn’t styled by the CSS.
 </p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode html app-tabs__container js-tabs__container"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;p&gt;</span></a>
-<a class="sourceLine" id="cb2-2" title="2">  ordinary text</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="kw">&lt;/p&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html app-tabs__container js-tabs__container"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">&lt;p&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  ordinary text</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
 <p class="govuk-body">
 Govdown uses <a href="https://pandoc.org/lua-filters.html" class="govuk-link">Lua filters</a> to alter the way that pandoc writes HTML elements. Lua filters are supported by Pandoc. All the filters are defined in one file, <code>inst/rmarkdown/resources/govuk.lua</code>. There is an excellent blog post about using <a href="https://ulyngs.github.io/blog/posts/2019-02-19-how-to-use-pandoc-filters-for-advanced-customisation-of-your-r-markdown-document/" class="govuk-link">lua filters with R Markdown</a>.
 </p>
@@ -4189,11 +4190,11 @@ Govdown uses <a href="https://pandoc.org/lua-filters.html" class="govuk-link">Lu
 <p class="govuk-body">
 Here is some Lua code to modify <code>&lt;p&gt;</code> elements.
 </p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode lua app-tabs__container js-tabs__container"><code class="sourceCode lua"><a class="sourceLine" id="cb3-1" title="1"><span class="co">-- Code blocks</span></a>
-<a class="sourceLine" id="cb3-2" title="2">Para <span class="op">=</span> <span class="kw">function</span> <span class="op">(</span>el<span class="op">)</span></a>
-<a class="sourceLine" id="cb3-3" title="3">  el<span class="op">.</span>classes<span class="op">:</span>extend<span class="op">({</span><span class="st">&quot;govuk-body&quot;</span><span class="op">})</span></a>
-<a class="sourceLine" id="cb3-4" title="4">  <span class="cf">return</span> el</a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="cf">end</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode lua app-tabs__container js-tabs__container"><code class="sourceCode lua"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">-- Code blocks</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>Para <span class="op">=</span> <span class="kw">function</span> <span class="op">(</span>el<span class="op">)</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  el<span class="op">.</span>classes<span class="op">:</span>extend<span class="op">({</span><span class="st">&quot;govuk-body&quot;</span><span class="op">})</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="cf">return</span> el</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="cf">end</span></span></code></pre></div>
 <p class="govuk-body">
 The line <code>Para = function(el)</code> tells Pandoc, every time it encounters a <code>Para</code> in a markdown document, to perform the rest of this chunk of code. The <code>el</code> is a representation of the paragraph as Pandoc sees it.
 </p>
@@ -4203,21 +4204,21 @@ The line <code>el.classes:extend({&quot;govuk-body&quot;})</code> adds a class a
 <p class="govuk-body">
 The line <code>return el</code> returns the modified element to be written out as HTML.
 </p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode html app-tabs__container js-tabs__container"><code class="sourceCode html"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;govuk-body&quot;</span><span class="kw">&gt;</span></a>
-<a class="sourceLine" id="cb4-2" title="2">  ordinary text</a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="kw">&lt;/p&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html app-tabs__container js-tabs__container"><code class="sourceCode html"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;govuk-body&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  ordinary text</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
 <p class="govuk-body">
 Unfortunately, that Lua code doesn’t work. It does work for some elements, such as hyperlinks <code>&lt;href&gt;</code>, but it doesn’t work for paragraphs because Pandoc doesn’t allow paragraphs to have attributes. There’s simply no way to tell Pandoc to apply an attribute to a paragraph.
 </p>
 <p class="govuk-body">
 Instead, the Lua code used in govdown wraps the paragraph in a <code>Span</code>, a kind of neutral HTML element that doesn’t necessarily do anything except contain other elements. Govdown applies the <code>class=&quot;govuk-body&quot;</code> attribute to the <code>Span</code>, and the paragraph within the <code>Span</code> inherit that class automatically.
 </p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode lua app-tabs__container js-tabs__container"><code class="sourceCode lua"><a class="sourceLine" id="cb5-1" title="1"><span class="co">-- Apply govuk-body to everything within a para by wrapping it in a span,</span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co">-- because pandoc doesn&#39;t allow attributes of paras.</span></a>
-<a class="sourceLine" id="cb5-3" title="3">Para <span class="op">=</span> <span class="kw">function</span><span class="op">(</span>el<span class="op">)</span></a>
-<a class="sourceLine" id="cb5-4" title="4">  attr <span class="op">=</span> pandoc<span class="op">.</span>Attr<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">,</span> <span class="op">{</span><span class="st">&quot;govuk-body&quot;</span><span class="op">})</span></a>
-<a class="sourceLine" id="cb5-5" title="5">  <span class="cf">return</span> pandoc<span class="op">.</span>Para<span class="op">(</span>pandoc<span class="op">.</span>Span<span class="op">(</span>el<span class="op">.</span>content<span class="op">,</span> attr<span class="op">))</span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="cf">end</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode lua app-tabs__container js-tabs__container"><code class="sourceCode lua"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">-- Apply govuk-body to everything within a para by wrapping it in a span,</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">-- because pandoc doesn&#39;t allow attributes of paras.</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>Para <span class="op">=</span> <span class="kw">function</span><span class="op">(</span>el<span class="op">)</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  attr <span class="op">=</span> pandoc<span class="op">.</span>Attr<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">,</span> <span class="op">{</span><span class="st">&quot;govuk-body&quot;</span><span class="op">})</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="cf">return</span> pandoc<span class="op">.</span>Para<span class="op">(</span>pandoc<span class="op">.</span>Span<span class="op">(</span>el<span class="op">.</span>content<span class="op">,</span> attr<span class="op">))</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="cf">end</span></span></code></pre></div>
 <p class="govuk-body">
 As before line <code>Para = function(el)</code> tells Pandoc, every time it encounters a <code>Para</code> in a markdown document, to perform the rest of this chunk of code. The <code>el</code> is a representation of the paragraph as Pandoc sees it.
 </p>
@@ -4227,9 +4228,9 @@ The line <code>attr = pandoc.Attr(&quot;&quot;, {&quot;govuk-body&quot;})</code>
 <p class="govuk-body">
 The line <code>return pandoc.Para(pandoc.Span(content, attr))</code> creates a new <code>Para</code> object that contains a new <code>Span</code> object. The <code>Span</code> object is given the attribute that contains the <code>&quot;govuk-body&quot;</code> class. It is also given the ‘content’ or text of the original markdown paragraph <code>el.content</code>. Finally the whole object is ‘returned’, which effectively means written out as HTML.
 </p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode html app-tabs__container js-tabs__container"><code class="sourceCode html"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;govuk-body&quot;</span><span class="kw">&gt;</span></a>
-<a class="sourceLine" id="cb6-2" title="2">  ordinary text</a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="kw">&lt;/p&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html app-tabs__container js-tabs__container"><code class="sourceCode html"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;govuk-body&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  ordinary text</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="kw">&lt;/p&gt;</span></span></code></pre></div>
 <p class="govuk-body">
 That last line is complicated. Why does it create another <code>Para</code> outside the <code>Span</code>? Because, for some reason, one <code>Span</code> after another isn’t rendered the same way as one <code>Para</code> after another in browsers, so it looks funny. Wrapping the whole thing in another <code>Para</code> seems to fix this.
 </p>
@@ -4240,60 +4241,60 @@ Some components of the GOV.UK Design System don’t have a counterpart in markdo
 <p class="govuk-body">
 Govdown uses a feature of markdown that applies classes to <a href="https://pandoc.org/MANUAL.html#divs-and-spans" class="govuk-link">fenced divs</a>. This allows arbitrary classes to be applied to anything in the markdown document.
 </p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb7-1" title="1">::: {.extra-special-para}</a>
-<a class="sourceLine" id="cb7-2" title="2">This text will be rendered extra-speciallly.</a>
-<a class="sourceLine" id="cb7-3" title="3">:::</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a>::: {.extra-special-para}</span>
+<span id="cb7-2"><a href="#cb7-2"></a>This text will be rendered extra-speciallly.</span>
+<span id="cb7-3"><a href="#cb7-3"></a>:::</span></code></pre></div>
 <p class="govuk-body">
 When Pandoc parses a fenced div into memory, it constructs a <code>Div</code> object that has the attributes and classes given in the curly braces. Govdown then uses Lua to detect particular classes, and control how the content of the div is rendered to HTML.
 </p>
 <p class="govuk-body">
 One of the classes govdown recognises is <code>lead-para</code>.
 </p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><a class="sourceLine" id="cb8-1" title="1">::: {.lead-para}</a>
-<a class="sourceLine" id="cb8-2" title="2">This paragraph will be rendered larger.</a>
-<a class="sourceLine" id="cb8-3" title="3">:::</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode md app-tabs__container js-tabs__container"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1"></a>::: {.lead-para}</span>
+<span id="cb8-2"><a href="#cb8-2"></a>This paragraph will be rendered larger.</span>
+<span id="cb8-3"><a href="#cb8-3"></a>:::</span></code></pre></div>
 <p class="govuk-body">
 Here is the Lua code to intervene with lead paragraphs. Like a previous example, it’s complicated because Pandoc doesn’t allow paragraphs to have classes (they have to be wrapped in spans that have classes, and then the spans themselves have to be wrapped in paragraphs to avoid looking funny).
 </p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode lua app-tabs__container js-tabs__container"><code class="sourceCode lua"><a class="sourceLine" id="cb9-1" title="1">Div <span class="op">=</span> <span class="kw">function</span><span class="op">(</span>el<span class="op">)</span></a>
-<a class="sourceLine" id="cb9-2" title="2">  <span class="co">-- Look for &#39;lead-para&#39;</span></a>
-<a class="sourceLine" id="cb9-3" title="3">  v<span class="op">,</span>i <span class="op">=</span> el<span class="op">.</span>classes<span class="op">:</span><span class="fu">find</span><span class="op">(</span><span class="st">&quot;lead-para&quot;</span><span class="op">)</span></a>
-<a class="sourceLine" id="cb9-4" title="4">  <span class="cf">if</span> i <span class="op">~=</span> <span class="kw">nil</span> <span class="cf">then</span></a>
-<a class="sourceLine" id="cb9-5" title="5">    el<span class="op">.</span>classes<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="kw">nil</span></a>
-<a class="sourceLine" id="cb9-6" title="6">    <span class="co">-- Apply govuk-body to everything within a para by wrapping it in a span,</span></a>
-<a class="sourceLine" id="cb9-7" title="7">    <span class="co">-- because pandoc doesn&#39;t allow attributes of paras.</span></a>
-<a class="sourceLine" id="cb9-8" title="8">    <span class="cf">return</span> pandoc<span class="op">.</span>walk_block<span class="op">(</span>el<span class="op">,</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-9" title="9">      Para <span class="op">=</span> <span class="kw">function</span><span class="op">(</span>el<span class="op">)</span></a>
-<a class="sourceLine" id="cb9-10" title="10">        content <span class="op">=</span> el<span class="op">.</span>content</a>
-<a class="sourceLine" id="cb9-11" title="11">        attr <span class="op">=</span> pandoc<span class="op">.</span>Attr<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">,</span> <span class="op">{</span><span class="st">&quot;govuk-body-l&quot;</span><span class="op">})</span></a>
-<a class="sourceLine" id="cb9-12" title="12">        <span class="cf">return</span> pandoc<span class="op">.</span>Para<span class="op">(</span>pandoc<span class="op">.</span>Span<span class="op">(</span>content<span class="op">,</span> attr<span class="op">))</span></a>
-<a class="sourceLine" id="cb9-13" title="13">      <span class="cf">end</span></a>
-<a class="sourceLine" id="cb9-14" title="14">    <span class="op">})</span></a>
-<a class="sourceLine" id="cb9-15" title="15">  <span class="cf">end</span></a>
-<a class="sourceLine" id="cb9-16" title="16"><span class="cf">end</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode lua app-tabs__container js-tabs__container"><code class="sourceCode lua"><span id="cb9-1"><a href="#cb9-1"></a>Div <span class="op">=</span> <span class="kw">function</span><span class="op">(</span>el<span class="op">)</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="co">-- Look for &#39;lead-para&#39;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  v<span class="op">,</span>i <span class="op">=</span> el<span class="op">.</span>classes<span class="op">:</span><span class="fu">find</span><span class="op">(</span><span class="st">&quot;lead-para&quot;</span><span class="op">)</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="cf">if</span> i <span class="op">~=</span> <span class="kw">nil</span> <span class="cf">then</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>    el<span class="op">.</span>classes<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="kw">nil</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="co">-- Apply govuk-body to everything within a para by wrapping it in a span,</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="co">-- because pandoc doesn&#39;t allow attributes of paras.</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>    <span class="cf">return</span> pandoc<span class="op">.</span>walk_block<span class="op">(</span>el<span class="op">,</span> <span class="op">{</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>      Para <span class="op">=</span> <span class="kw">function</span><span class="op">(</span>el<span class="op">)</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>        content <span class="op">=</span> el<span class="op">.</span>content</span>
+<span id="cb9-11"><a href="#cb9-11"></a>        attr <span class="op">=</span> pandoc<span class="op">.</span>Attr<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">,</span> <span class="op">{</span><span class="st">&quot;govuk-body-l&quot;</span><span class="op">})</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>        <span class="cf">return</span> pandoc<span class="op">.</span>Para<span class="op">(</span>pandoc<span class="op">.</span>Span<span class="op">(</span>content<span class="op">,</span> attr<span class="op">))</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>      <span class="cf">end</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a>    <span class="op">})</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>  <span class="cf">end</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="cf">end</span></span></code></pre></div>
 <p class="govuk-body">
 The first line <code>Div = function(el)</code> matches all <code>Div</code> elements parsed from the markdown document.
 </p>
 <p class="govuk-body">
 The next two lines check whether the div has a class <code>&quot;lead-para&quot;</code>.
 </p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode lua app-tabs__container js-tabs__container"><code class="sourceCode lua"><a class="sourceLine" id="cb10-1" title="1">v<span class="op">,</span>i <span class="op">=</span> el<span class="op">.</span>classes<span class="op">:</span><span class="fu">find</span><span class="op">(</span><span class="st">&quot;lead-para&quot;</span><span class="op">)</span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="cf">if</span> i <span class="op">~=</span> <span class="kw">nil</span> <span class="cf">then</span></a>
-<a class="sourceLine" id="cb10-3" title="3">  <span class="co">-- do something</span></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="cf">end</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode lua app-tabs__container js-tabs__container"><code class="sourceCode lua"><span id="cb10-1"><a href="#cb10-1"></a>v<span class="op">,</span>i <span class="op">=</span> el<span class="op">.</span>classes<span class="op">:</span><span class="fu">find</span><span class="op">(</span><span class="st">&quot;lead-para&quot;</span><span class="op">)</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="cf">if</span> i <span class="op">~=</span> <span class="kw">nil</span> <span class="cf">then</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="co">-- do something</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="cf">end</span></span></code></pre></div>
 <p class="govuk-body">
 The line <code>el.classes[i] = nil</code> erases the class <code>&quot;lead-para&quot;</code> because it isn’t needed any longer – it is only used to alert Lua to a lead paragraph, and it shouldn’t be passed on any further.
 </p>
 <p class="govuk-body">
 The remaining lines construct a new <code>Para</code> with the <code>&quot;ggovuk-body-l&quot;</code> class that causes it to be rendered larger. The <code>pandoc.walk_block()</code> construction is awkward, but seems to be the only way to get Lua to do things with the contents of a <code>Div</code> – in this case, one or more <code>Para</code> elements.
 </p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode lua app-tabs__container js-tabs__container"><code class="sourceCode lua"><a class="sourceLine" id="cb11-1" title="1"><span class="cf">return</span> pandoc<span class="op">.</span>walk_block<span class="op">(</span>el<span class="op">,</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb11-2" title="2">  Para <span class="op">=</span> <span class="kw">function</span><span class="op">(</span>el<span class="op">)</span></a>
-<a class="sourceLine" id="cb11-3" title="3">    content <span class="op">=</span> el<span class="op">.</span>content</a>
-<a class="sourceLine" id="cb11-4" title="4">    attr <span class="op">=</span> pandoc<span class="op">.</span>Attr<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">,</span> <span class="op">{</span><span class="st">&quot;govuk-body-l&quot;</span><span class="op">})</span></a>
-<a class="sourceLine" id="cb11-5" title="5">    <span class="cf">return</span> pandoc<span class="op">.</span>Para<span class="op">(</span>pandoc<span class="op">.</span>Span<span class="op">(</span>content<span class="op">,</span> attr<span class="op">))</span></a>
-<a class="sourceLine" id="cb11-6" title="6">  <span class="cf">end</span></a>
-<a class="sourceLine" id="cb11-7" title="7"><span class="op">})</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode lua app-tabs__container js-tabs__container"><code class="sourceCode lua"><span id="cb11-1"><a href="#cb11-1"></a><span class="cf">return</span> pandoc<span class="op">.</span>walk_block<span class="op">(</span>el<span class="op">,</span> <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  Para <span class="op">=</span> <span class="kw">function</span><span class="op">(</span>el<span class="op">)</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>    content <span class="op">=</span> el<span class="op">.</span>content</span>
+<span id="cb11-4"><a href="#cb11-4"></a>    attr <span class="op">=</span> pandoc<span class="op">.</span>Attr<span class="op">(</span><span class="st">&quot;&quot;</span><span class="op">,</span> <span class="op">{</span><span class="st">&quot;govuk-body-l&quot;</span><span class="op">})</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="cf">return</span> pandoc<span class="op">.</span>Para<span class="op">(</span>pandoc<span class="op">.</span>Span<span class="op">(</span>content<span class="op">,</span> attr<span class="op">))</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>  <span class="cf">end</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="op">})</span></span></code></pre></div>
 <p class="govuk-body">
 Custom <code>Div</code> elements like this are handled at the top of the <code>govuk.lua</code> file. This is because some of them conflict with other customisations. For example, the custom <code>Div</code> for breadcrumbs contains a bulleted list. If the bulleted list were handled first, then by the time its parent <code>Div</code> was noticed, it would be too late to override the styles that had already been applied.
 </p>
@@ -6697,4 +6698,3 @@ exports.Tabs = Tabs;
 </body>
 
 </html>
-
