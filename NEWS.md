@@ -2,6 +2,7 @@
 
 * Support warning text (#30, #29)
 * Don't accidentally use New Transport font in tables (#31)
+* Support shiny server by passing through args (#33) (#33) @RobinL
 
 # govdown 0.4.1
 
