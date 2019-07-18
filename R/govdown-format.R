@@ -45,6 +45,8 @@
 #' website.
 #' @param keep_md logical, whether to keep the intermediate `.md` file after
 #' rendering.
+#' @param ... passed on to [rmarkdown::html_document_base()], used by Shiny and
+#' [rmarkdown::run()].
 #'
 #' @details
 #'
