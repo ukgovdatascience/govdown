@@ -45,6 +45,8 @@
 #' website.
 #' @param keep_md logical, whether to keep the intermediate `.md` file after
 #' rendering.
+#' @param ... passed on to [rmarkdown::html_document_base()], used by Shiny and
+#' [rmarkdown::run()].
 #'
 #' @details
 #'
@@ -104,7 +106,8 @@ govdown_document <- function(keep_md = FALSE,
                              title = "Title",
                              phase = c("none", "alpha", "beta"),
                              feedback_url = "404.html",
-                             google_analytics = NULL) {
+                             google_analytics = NULL,
+                             ...) {
 
   rmarkdown::pandoc_available("2", error = TRUE)
 
@@ -211,7 +214,8 @@ govdown_document <- function(keep_md = FALSE,
                         "--highlight-style=pygments",
                         "--mathjax"
                         ),
-        extra_dependencies = extra_dependencies
+        extra_dependencies = extra_dependencies,
+        ...
       )
   )
 

@@ -8,7 +8,8 @@ govdown_document(keep_md = FALSE, font = c("sans-serif",
   "new-transport"), favicon = c("none", "custom", "govuk"),
   logo = FALSE, logo_url = "", logo_text = "Logo text",
   page_title = "Page title", title = "Title", phase = c("none",
-  "alpha", "beta"), feedback_url = "404.html", google_analytics = NULL)
+  "alpha", "beta"), feedback_url = "404.html", google_analytics = NULL,
+  ...)
 }
 \arguments{
 \item{keep_md}{logical, whether to keep the intermediate \code{.md} file after
@@ -54,6 +55,9 @@ is \code{"alpha"} or \code{"beta"}.}
 
 \item{google_analytics}{Google Analytics ID for monitoring traffic to the
 website.}
+
+\item{...}{passed on to \code{\link[rmarkdown:html_document_base]{rmarkdown::html_document_base()}}, used by Shiny and
+\code{\link[rmarkdown:run]{rmarkdown::run()}}.}
 }
 \description{
 A template for rendering R Markdown documents as HTML using the GOV.UK Design
