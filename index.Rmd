@@ -356,6 +356,54 @@ Tab content B
 Second paragraph of content.
 :::
 
+### Accordions
+
+The accordion component lets users show and hide sections of related content on
+a page.  See the guidance on the [GOV.UK Design
+System](https://design-system.service.gov.uk/components/accordion/).
+
+The syntax is similar to govdown tabsets.
+
+```md
+::: {.accordion}
+## Writing well for the web
+
+This is the content for Writing well for the web.
+
+## Writing well for specialists
+
+This is the content for Writing well for specialists.
+
+## Know your audience
+
+This is the content for Know your audience.
+
+## How people read
+
+This is the content for How people read.
+:::
+```
+
+::: {.accordion}
+## Writing well for the web
+
+This is the content for Writing well for the web.
+
+## Writing well for specialists
+
+This is the content for Writing well for specialists.
+
+## Know your audience
+
+This is the content for Know your audience.
+
+## How people read
+
+This is the content for How people read.
+:::
+
+</br>
+
 ### Details
 
 Details make a page easier to scan by letting users reveal more detailed

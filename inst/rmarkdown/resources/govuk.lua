@@ -1,4 +1,5 @@
 local List = require 'pandoc.List'
+local accordion_id = 0
 
 
 -- -- https://gist.github.com/liukun/f9ce7d6d14fa45fe9b924a3eed5c3d99
@@ -146,6 +147,83 @@ return {
         for _, v in ipairs(items) do
           table.insert(el.content, v)
         end
+
+        for _, v in ipairs(sections) do
+          table.insert(el.content, v)
+        end
+
+        return el
+
+      end
+
+      -- Look for 'accordion'
+      v,i = el.classes:find("accordion")
+      if i ~= nil then
+        accordion_id = accordion_id + 1
+        el.classes[i] = nil
+        el.classes:extend({"govuk-accordion"})
+        el.attributes = {{"data-module", "govuk-accordion"}, {"id", "accordion-1"}}
+
+        -- begin items
+        -- iterate over blocks
+        -- if header
+        --   if level 1
+        --     set as title at level 2
+        --   elseif level 2
+        --     add to items
+        --     if not first level 2 header
+        --       close previous section
+        --     begin new section
+        --   else
+        --     add to section
+        -- else
+        --   add to section
+        -- end
+        -- close sections
+
+        local sections = List:new{}
+        local html
+        local first_section = true
+        local section_id = 0
+
+        for _, block in ipairs(el.content) do
+          if block.t == "Header" then
+            if block.level == 2 then
+              section_id = section_id + 1
+              -- add new item
+              html =
+                '<div class="govuk-accordion__section">\n' ..
+                '<div class="govuk-accordion__section-header">\n' ..
+                '<h2 class="govuk-accordion__section-heading">\n' ..
+                '<span class="govuk-accordion__section-button" id="accordion-' ..
+                accordion_id ..
+                '-heading-' ..
+                section_id ..
+                '">\n' ..
+                pandoc.utils.stringify(block.content) ..
+                '\n</span>\n' ..
+                '</h2>\n' ..
+                '</div>\n' ..
+                '<div id="accordion-' .. accordion_id .. '-content-' .. section_id .. '" class="govuk-accordion__section-content" aria-labelledby="accordion-' .. accordion_id .. '-heading-' .. section_id .. '">'
+              if first_section then
+                first_section = false
+              else
+                -- Close previous section
+                table.insert(sections, pandoc.RawBlock('html', "</div>"))
+              end
+              -- Open new section
+              table.insert(sections, pandoc.RawBlock('html', html))
+            end
+          else
+            table.insert(sections, block)
+          end
+        end
+
+        -- close everything
+        table.insert(sections, pandoc.RawBlock('html', "</div></div>"))
+
+        -- replace element content
+        el.content = List:new{}
 
         for _, v in ipairs(sections) do
           table.insert(el.content, v)
