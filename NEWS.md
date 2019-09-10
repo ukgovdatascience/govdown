@@ -1,5 +1,9 @@
 # govdown (development version)
 
+* Upgrade to GOV.UK Frontend release v3.1.0. Many user-facing changes. See the
+  [GOV.UK Frontend release
+  notes](https://github.com/alphagov/govuk-frontend/releases/tag/v3.1.0).  None
+  of the changes are breaking for users of govdown.
 # govdown 0.5.0
 
 ## GOV.UK Design System upgrade

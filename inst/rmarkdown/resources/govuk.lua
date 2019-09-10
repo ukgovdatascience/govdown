@@ -38,7 +38,7 @@ return {
         local res = List:new{}
 
         html =
-          '<details class="govuk-details">' ..
+          '<details class="govuk-details" data-module="govuk-details">' ..
           '<summary class="govuk-details__summary">' ..
           '<span class="govuk-details__summary-text">'..
           pandoc.utils.stringify(el.attributes["summary"]) ..
@@ -62,7 +62,7 @@ return {
       if i ~= nil then
         el.classes[i] = nil
         el.classes:extend({"govuk-tabs"})
-        el.attributes = {{"data-module", "tabs"}}
+        el.attributes = {{"data-module", "govuk-tabs"}}
 
         -- begin items
         -- iterate over blocks
