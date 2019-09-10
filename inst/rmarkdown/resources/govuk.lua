@@ -209,7 +209,7 @@ return {
                 first_section = false
               else
                 -- Close previous section
-                table.insert(sections, pandoc.RawBlock('html', "</div>"))
+                table.insert(sections, pandoc.RawBlock('html', "</div></div>"))
               end
               -- Open new section
               table.insert(sections, pandoc.RawBlock('html', html))
