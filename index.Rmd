@@ -297,6 +297,13 @@ HTML](https://design-system.service.gov.uk/styles/typography/#section-break).
 <hr class="govuk-section-break govuk-section-break--visible">
 ```
 
+<hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+<hr class="govuk-section-break govuk-section-break--visible">
+
+</br>
+
 ### Breadcrumbs
 
 The GOV.UK Design System uses
