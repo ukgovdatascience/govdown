@@ -192,17 +192,10 @@ govdown_document <- function(keep_md = FALSE,
   # Use highlights.js from the rmarkdown package
   extra_dependencies <- list(rmarkdown::html_dependency_highlightjs("default"))
 
-  base_format <- rmarkdown::output_format(
-    knitr = NULL,
-    pandoc = rmarkdown::pandoc_options(
-      to = "html",
-      from = rmarkdown::from_rmarkdown(implicit_figures = FALSE,
-                            extensions = "+smart")
-      ),
-    keep_md = keep_md,
-    pre_processor = pre_processor,
-    base_format =
-      rmarkdown::html_document_base(
+  dots <- list(...)
+  html_document_base_args <-
+    c(
+      list(
         mathjax = NULL,
         pandoc_args = c(pandoc_args,
                         "--css", rmarkdown::pandoc_path_arg(css),
@@ -214,9 +207,24 @@ govdown_document <- function(keep_md = FALSE,
                         "--highlight-style=pygments",
                         "--mathjax"
                         ),
-        extra_dependencies = extra_dependencies,
-        ...
-      )
+        extra_dependencies = extra_dependencies
+      ),
+      dots)
+
+  # override arguments provided by rmarkdown::render_site()
+  html_document_base_args$self_contained <- NULL
+
+  base_format <- rmarkdown::output_format(
+    knitr = NULL,
+    pandoc = rmarkdown::pandoc_options(
+      to = "html",
+      from = rmarkdown::from_rmarkdown(implicit_figures = FALSE,
+                            extensions = "+smart")
+      ),
+    keep_md = keep_md,
+    pre_processor = pre_processor,
+    base_format = do.call(rmarkdown::html_document_base,
+                          html_document_base_args)
   )
 
   base_format
