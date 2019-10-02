@@ -4314,6 +4314,11 @@ pre {
   border: 1px solid #b1b4b6;
   background-color: #f8f8f8; }
 
+pre,
+code {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
 .sourceCode + .govuk-heading-l, .sourceCode + .govuk-heading-l {
   padding-top: 5px; }
 
