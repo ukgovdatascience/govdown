@@ -204,7 +204,7 @@ govdown_document <- function(keep_md = FALSE,
                         "--template", template,
                         "--lua-filter", lua,
                         "--resource-path", resources,
-                        "--highlight-style=pygments",
+                        "--no-highlight",
                         "--mathjax"
                         ),
         extra_dependencies = extra_dependencies
