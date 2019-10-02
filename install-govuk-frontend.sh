@@ -1,3 +1,4 @@
+#!/bin/bash
 # Remove previous installation
 ASSETS=/inst/rmarkdown/resources/assets
 if [ -d "$ASSETS" ]; then rm -Rf $ASSETS; fi
@@ -20,11 +21,13 @@ sed -i "s/\/assets\//assets\//" node_modules/govuk-frontend/govuk/settings/_asse
 # Compile the scss to css
 sassc scss/govuk.scss inst/rmarkdown/resources/govuk.css
 
-# Make a variant that doesn't use the New Transport font
-sed -i "s/\$govuk-font-family-nta/sans-serif/" node_modules/govuk-frontend/govuk/settings/_typography-font.scss
-sed -i "s/\$govuk-font-family-nta-tabular/sans-serif/" node_modules/govuk-frontend/govuk/settings/_typography-font.scss
-sed -i "s/sans-serif-tabular/sans-serif/" node_modules/govuk-frontend/govuk/settings/_typography-font.scss
-sed -i "/@include _govuk-font-face-nta;/d" node_modules/govuk-frontend/govuk/helpers/_typography.scss
+# Make a variant that doesn't use the New Transport font.
+# By declaring the variables govuk-font-family and govuk-font-family-tabular at
+# the top of the file, they won't be reassigned by the later definitions.
+TYPFILE=./node_modules/govuk-frontend/govuk/settings/_typography-font.scss
+TEMPFILE=/tmp/out
+echo '$govuk-font-family: sans-serif !default;' | cat - $TYPFILE > $TEMPFILE && mv $TEMPFILE $TYPFILE
+echo '$govuk-font-family-tabular: false !default;' | cat - $TYPFILE > $TEMPFILE && mv $TEMPFILE $TYPFILE
 
 # Recompile the scss to css
 sassc scss/govuk.scss inst/rmarkdown/resources/govukish.css
