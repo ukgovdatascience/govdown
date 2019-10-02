@@ -6,6 +6,8 @@ navbar:
     href: tech-docs.html
   - text: "News"
     href: NEWS.html
+  - text: "Accessibility"
+    href: accessibility.html
 output:
   govdown::govdown_document:
     font: "sans-serif"
