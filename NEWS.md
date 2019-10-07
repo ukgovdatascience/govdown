@@ -1,9 +1,14 @@
 # govdown 0.7.0
 
-* Add an accessibility statement.
 * Upgrade to GOV.UK Frontent release v3.2.0. No user-facing changes.
-* Fix a tabbing problem with code blocks.
-* Stop code block text being shrunk.
+* Add an accessibility statement
+  * Fix a tabbing problem with code blocks (#45)
+  * Stop code block text being shrunk (325e71b937f08034ef6ab9b83f0f7c8dc7fd07a9)
+  * Fix logo URL config (#44)
+  * Add at least two links to each page
+* Stop rendering New Transport font by mistake (#38)
+* Fix accordion expansion (#36)
+* Fix rendering hang with large images (04473a4530e540dfdf96be0f768c0568714ff3d3)
 
 # govdown 0.6.0
 
