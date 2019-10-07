@@ -16,7 +16,7 @@ then
 
   # clone the repository to the book-output directory
   git clone -b gh-pages \
-    git@github.com:ukgovdatascience/rap-website.git \
+    git@github.com:ukgovdatascience/govdown.git \
     book-output
   cd book-output
   git rm -rf *
