@@ -1,4 +1,4 @@
-# govdown (development version)
+# govdown 0.7.0
 
 * Add an accessibility statement.
 * Upgrade to GOV.UK Frontent release v3.2.0. No user-facing changes.
