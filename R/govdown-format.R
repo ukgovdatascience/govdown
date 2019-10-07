@@ -5,7 +5,7 @@
 #'     font: "sans-serif"
 #'     favicon: "custom"
 #'     logo: "images/govdown-logo-white-on-transparent.svg"
-#'     logo_url: "https://ukgovdatascience.github.io/govdown"
+#'     logo_url: "index.html"
 #'     logo_text: "govdown"
 #'     page_title: "page_title"
 #'     title: "title"
@@ -86,7 +86,7 @@
 #'     font: "sans-serif"
 #'     favicon: "custom"
 #'     logo: "images/govdown-logo-white-on-transparent.svg"
-#'     logo_url: "https://ukgovdatascience.github.io/govdown"
+#'     logo_url: "index.html"
 #'     logo_text: "govdown"
 #'     page_title: "page_title"
 #'     title: "title"
@@ -160,6 +160,7 @@ govdown_document <- function(keep_md = FALSE,
                             files_dir, output_dir) {
     config <- list(title = title,
                    logo_text = logo_text,
+                   logo_url = logo_url,
                    logo = logo)
     site_config <- rmarkdown::site_config()
     if (!is.null(site_config)) { # website
@@ -238,7 +239,10 @@ navbar_html <- function(config, input_file) {
   logo_url <- config$logo_url
   logo_text <- config$logo_text
 
-  if (is.null(config$logo_url)) logo_url <- ""
+  if (is.null(config$logo_url)) {
+    browser()
+    logo_url <- ""
+  }
   if (is.null(logo_text)) logo_text <- ""
 
   # build the navigation bar and return it as a temp file

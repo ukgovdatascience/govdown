@@ -13,7 +13,7 @@ output:
     font: "sans-serif"
     favicon: "custom"
     logo: "images/govdown-logo-white-on-transparent.svg"
-    logo_url: "https://ukgovdatascience.github.io/govdown"
+    logo_url: "index.html"
     logo_text: "govdown"
     page_title: "Govdown - publish accessible static websites with R using the GOV.UK Design System"
     title: "GOV.UK-style markdown documents"
