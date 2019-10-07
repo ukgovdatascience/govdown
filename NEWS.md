@@ -1,5 +1,10 @@
 # govdown (development version)
 
+* Add an accessibility statement.
+* Upgrade to GOV.UK Frontent release v3.2.0. No user-facing changes.
+* Fix a tabbing problem with code blocks.
+* Stop code block text being shrunk.
+
 # govdown 0.6.0
 
 * Upgrade to GOV.UK Frontend release v3.1.0. Many user-facing changes. See the
