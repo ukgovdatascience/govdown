@@ -1,2 +1,2 @@
 # Build the book!
-Rscript -e "rmarkdown::render_site(input='site')"
+Rscript -e "rmarkdown::render_site()"
