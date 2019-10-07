@@ -10,61 +10,20 @@
 
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-$if(highlightjs)$
 <style type="text/css">code{white-space: pre;}</style>
-$if(theme)$
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
   }
 </style>
-$endif$
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
-$endif$
 
-$if(highlighting-css)$
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css" data-origin="pandoc">
-$highlighting-css$
-
-</style>
-<script>
-// apply pandoc div.sourceCode style to pre.sourceCode instead
-(function() {
-  var sheets = document.styleSheets;
-  for (var i = 0; i < sheets.length; i++) {
-    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
-    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
-      var rule = rules[j];
-      // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
-      var style = rule.style.cssText;
-      // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
-      // replace div.sourceCode by a pre.sourceCode rule
-      sheets[i].deleteRule(j);
-      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
-    }
-  }
-})();
-</script>
-$if(theme)$
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
-$endif$
-$endif$
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+<script
+ charset="UTF-8"
+ src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/languages/r.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
   <!--[if !IE 8]><!-->
   <link href="$css$" rel="stylesheet" />
@@ -89,7 +48,6 @@ $endif$
 
   <script>
     document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
-
   </script>
 
   <a href="#main-content" class="govuk-skip-link">Skip to main content</a>

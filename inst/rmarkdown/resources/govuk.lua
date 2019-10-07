@@ -442,14 +442,6 @@ return {
   },
 
   {
-    -- Code blocks
-    CodeBlock = function (el)
-      el.classes:extend({"app-tabs__container js-tabs__container"})
-      return el
-    end
-  },
-
-  {
     -- Inset text
     BlockQuote = function(el)
       return pandoc.Div(el.content, pandoc.Attr("", {"govuk-inset-text"}))
