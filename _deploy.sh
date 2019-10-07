@@ -3,7 +3,7 @@
 if [[ $TRAVIS_BRANCH == 'master' ]]
 then
   # Decrypt the deploy key
-  openssl aes-256-cbc -K $encrypted_516b420c1ae6_key -iv $encrypted_516b420c1ae6_iv -in deploy_key.enc -out deploy_key -d
+  openssl aes-256-cbc -K $encrypted_e5387e4e26d8_key -iv $encrypted_e5387e4e26d8_iv -in deploy_key.enc -out deploy_key -d
 
   # Start ssh agent and add key
   eval "$(ssh-agent -s)" # Start the ssh agent
