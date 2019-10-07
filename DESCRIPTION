@@ -2,10 +2,11 @@ Package: govdown
 Title: GOV.UK Style Templates for R Markdown
 Version: 0.7.0
 Authors@R:
+    person("Crown Copyright 2018", role = "cph")
     person(given = "Duncan",
            family = "Garmonsway",
            role = c("aut", "cre"),
-           email = "nacnudus@gmail.com")
+           email = "duncan.garmonsway@digital.cabinet-office.gov.uk")
 Description: A suite of custom R Markdown formats and templates for
   authoring web pages styled with the GOV.UK Design System.
 License: MIT + file LICENSE
