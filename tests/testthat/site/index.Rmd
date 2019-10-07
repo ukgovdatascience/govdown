@@ -1,0 +1,557 @@
+# Govdown
+
+::: {.lead-para}
+Govdown is an R package for creating websites and standalone HTML pages that use
+the [GOV.UK Design System](https://design-system.service.gov.uk/).  This website
+is an example.
+:::
+
+Use govdown in the same way as [R Markdown](https://rmarkdown.rstudio.com/),
+but specify `output: govdown::govdown_document` instead of `output:
+html_document` in the YAML metadata of the document, or in the `_site.yml` file
+of the website.
+
+## Examples
+
+These websites and documents use govdown.
+
+* https://ukgovdatascience.github.io/rap-website/
+* https://co-analysis.github.io/csmapping/cs_lad.html
+* https://mattkerlogue.github.io/coding-guide/
+* https://matt-dray.github.io/drake-egg-rap/
+
+## Installation
+
+The package is only hosted on [GitHub](https://github.com/ukgovdatascience), not
+on CRAN.  Install it with the devtools package.
+
+```r
+# install.packages("devtools") # if devtools is not already installed
+devtools::install_github("ukgovdatascience/govdown")
+```
+
+You need Pandoc version 2.0 or greater on your system to use Govdown.  You can
+check which version you have at the R console by typing
+`rmarkdown::pandoc_version()`.  Look at this [GitHub
+issue](https://github.com/ukgovdatascience/govdown/issues/2) for advice on how
+to obtain a more recent version of pandoc.
+
+## Creating standalone HTML pages
+
+Govdown HTML pages are created in the same way as R Markdown HTML pages.  Write
+a markdown document (a plain text file with the suffix `.Rmd` or `.md` instead
+of `.txt`), and put something called 'YAML metadata' at the top.  It should look
+like this:
+
+```yaml
+---
+output:
+  govdown::govdown_document:
+    font: "sans-serif" # (default) or "new-transport"
+    favicon: "custom" # or "none" (default) or "govuk" see ?govdown_document
+    logo: "images/logo.svg" # or false (default)
+    logo_url: "https://ukgovdatascience.github.io/govdown"
+    logo_text: "logo_text"
+    page_title: "page_title"
+    title: "title"
+    phase: alpha
+    feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
+    google_analytics: "UA-12345678-90"
+---
+```
+
+    This is a study of official statistics in the UK.
+
+To render that file to HTML, run `rmarkdown::render("filename.Rmd")` in the
+console, or click the 'knit' button in RStudio.
+
+You must use `font: "sans-serif"` unless the page is hosted on the gov.uk
+domain.
+
+## Creating websites
+
+Websites are created in the same way as R Markdown websites.  Write
+a set of markdown documents (plain text files with the suffix `.Rmd` or `.md` instead
+of `.txt`), and a configuration file called `_site.yml` with content like the
+following:
+
+```yaml
+output_dir: docs # to host on GitHub pages
+navbar: # links to include in the bar at the top of every page
+  - text: "Home"
+    href: index.html
+  - text: "Tech docs"
+    href: tech-docs.html
+  - text: "News"
+    href: NEWS.html
+output:
+  govdown::govdown_document:
+    font: "sans-serif" # (default) or "new-transport"
+    favicon: "custom" # or "none" (default) or "govuk" see ?govdown_document
+    logo: "images/logo.svg" # or false (default)
+    logo_url: "https://ukgovdatascience.github.io/govdown"
+    logo_text: "logo_text"
+    page_title: "page_title"
+    title: "title"
+    phase: alpha
+    feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
+    google_analytics: "UA-12345678-90"
+```
+
+That example shows all the possible configuration.  You don't have to set a
+`logo` or `favicon` or have any `links` (although you probably should
+eventually), and if you don't set an alpha or beta `phase` banner then you won't
+need a `feedback_url`.  However you must set `font: "sans-serif"` unless the
+website is hosted on the gov.uk domain.  Set `output_dir: docs` if you will
+deploy the site on GitHub pages, otherwise refer to the R Markdown documentation
+on [publishing
+websites](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html#publishing-websites).
+
+To render the website, run `rmarkdown::render_site()` in the
+console, or click the 'Build Website' button in RStudio Build panel.
+
+## Supported markdown syntax
+
+Most of the usual markdown syntax is supported.  There is some new syntax for
+special features of the GOV.UK Design System.
+
+### Headings
+
+Create headings by beginning a new line of text with a `#` symbol.
+
+```md
+# Pithy heading
+
+Rambling content.
+```
+
+Subheadings have more `#`s
+
+```md
+## Helpful subheading
+
+### Can't remember what the main topic was?
+
+#### Four levels of headings are available!
+```
+
+### Headings with captions {caption="This is a caption"}
+
+The GOV.UK Design System supports captions above
+[headers](https://design-system.service.gov.uk/styles/typography/#headings).
+This works for headings of level 1, 2 and 3, but not for the smallest headings
+(level 4).
+
+```md
+# Heading with caption above {caption="This is a caption"}
+```
+
+### Bold, italics and strike-through
+
+**Bold** works as normal, but *italics* and ~~strike-through~~ are disabled
+because they are not supported by the GOV.UK Design System.
+
+```md
+**Bold** works as normal, but *italics* and ~~strike-through~~ are disabled.
+```
+
+### Lead paragraphs and small text
+
+The GOV.UK Design System supports [larger and smaller text for
+paragraphs](https://design-system.service.gov.uk/styles/typography/#paragraphs).
+Large text is for a single lead paragraph at the top of a page.  See the top of
+this page for an example.
+
+::: {.small-para}
+Small text looks like this.
+:::
+
+```md
+::: {.lead-para}
+This is a lead paragraph that appears in larger text than the rest of the body
+text of the page.
+:::
+
+This is a normal paragraph in normal size.
+
+::: {.small-para}
+You can write in small letters too.
+:::
+```
+
+### Indented text (quotations)
+
+Indented text (often used for block quotations) works as normal.
+
+> United wishes and good will cannot overcome brute facts.  Truth is
+> incontrovertible. Panic may resent it. Ignorance may deride it. Malice may
+> distort it. But there it is. -- Winston Churchill
+
+```md
+> United wishes and good will cannot overcome brute facts.  Truth is
+> incontrovertible. Panic may resent it. Ignorance may deride it. Malice may
+> distort it. But there it is. -- Winston Churchill
+```
+
+### Warnings
+
+Use the [Warning
+text](https://design-system.service.gov.uk/components/warning-text/) when you
+need to warn users about something important, such as legal consequences of an
+action, or lack of action, that they might take.
+
+::: {.warning}
+Fee fi fo fum
+:::
+
+```md
+::: {.warning}
+Fee fi fo fum
+:::
+```
+
+### Hyperlinks
+
+Hyperlinks work as normal.  The GOV.UK Design System also supports [hyperlinks
+that don't change
+colour](https://design-system.service.gov.uk/styles/typography/#links){.no-visited-state}
+when you have visited the page.
+
+```md
+[normal hyperlink](https://design-system.service.gov.uk).
+
+[hyperlink that doesn't turn purple](https://design-system.service.gov.uk){.no-visited-state}.
+```
+
+### Bullets and numbered lists
+
+Bulletted lists work as normal, but nested bullets don't look very good because
+they aren't really supported by the GOV.UK Design System.
+
+* First bullet
+  * Nested bullets are available but ...
+  * ... they don't look very good because the GOV.UK Design System doesn't
+    really support them.
+* Second bullet
+* Third bullet
+
+```md
+* First bullet
+  * Nested bullets are available but ...
+  * ... they don't look very good because the GOV.UK Design System doesn't
+    really support them.
+* Second bullet
+* Third bullet
+```
+
+Numbered lists work as normal, except that nested numbered lists don't work at
+all because they aren't supported by the GOV.UK Design System.
+
+1. Numbered list item
+1. Second numbered list item
+1. Third numbered list item
+
+```md
+1. Numbered list item
+1. Second numbered list item
+1. Third numbered list item
+```
+
+The GOV.UK Design System also supports lists with neither bullets nor numbers.
+Standard markdown doesn't have any syntax for this, so create a bulletted list
+and wrap it with a special marker, shown below.
+
+::: {.unbulleted-list}
+* Unbulleted item one
+* Unbulleted item two
+* Unbulleted item three
+:::
+
+```md
+::: {.unbulleted-list}
+* Unbulleted item one
+* Unbulleted item two
+* Unbulleted item three
+:::
+```
+
+### Section breaks
+
+The usual section break is available.
+
+```md
+---
+```
+
+---
+
+The GOV.UK Design System supports several
+sizes of section break; govdown uses the largest.  For the other sizes use the
+[raw
+HTML](https://design-system.service.gov.uk/styles/typography/#section-break).
+
+```html
+<hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+<hr class="govuk-section-break govuk-section-break--visible">
+```
+
+<hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+<hr class="govuk-section-break govuk-section-break--visible">
+
+</br>
+
+### Breadcrumbs
+
+The GOV.UK Design System uses
+[breadcrumbs](https://design-system.service.gov.uk/components/breadcrumbs/) to
+help users know where they are on a website.  They are used at the top of a
+page.
+
+::: {.breadcrumbs}
+* [trail](index.html)
+* [of](index.html)
+* breadcrumbs
+:::
+
+```md
+::: {.breadcrumbs}
+* [trail](index.html)
+* [of](index.html)
+* breadcrumbs
+:::
+```
+
+### Tabsets
+
+Tabs can be a helpful way of letting users quickly switch between related
+information.  See the guidance on the [GOV.UK Design
+System](https://design-system.service.gov.uk/components/tabs/).
+
+The syntax is different from normal R Markdown tabsets.
+
+```md
+::: {.tabset}
+# Header appears on narrow screens
+
+## Tab header 1
+
+Tab content A
+
+## Tab header 2
+
+Tab content B
+
+Second paragraph of content.
+:::
+```
+
+::: {.tabset}
+# Header appears on narrow screens
+
+## Tab header 1
+
+Tab content A
+
+## Tab header 2
+
+Tab content B
+
+Second paragraph of content.
+:::
+
+### Accordions
+
+The accordion component lets users show and hide sections of related content on
+a page.  See the guidance on the [GOV.UK Design
+System](https://design-system.service.gov.uk/components/accordion/).
+
+The syntax is similar to govdown tabsets.
+
+```md
+::: {.accordion}
+## Writing well for the web
+
+This is the content for Writing well for the web.
+
+## Writing well for specialists
+
+This is the content for Writing well for specialists.
+
+## Know your audience
+
+This is the content for Know your audience.
+
+## How people read
+
+This is the content for How people read.
+:::
+```
+
+::: {.accordion}
+## Writing well for the web
+
+This is the content for Writing well for the web.
+
+## Writing well for specialists
+
+This is the content for Writing well for specialists.
+
+## Know your audience
+
+This is the content for Know your audience.
+
+## How people read
+
+This is the content for How people read.
+:::
+
+</br>
+
+### Details
+
+Details make a page easier to scan by letting users reveal more detailed
+information only if they need it. As with Tabs, guidance can be found on the
+[GOV.UK Design System](https://design-system.service.gov.uk/components/details/).
+
+The syntax uses the summary attribute to provide the top level information with
+the content provided by the text within.
+
+```md
+::: {.details summary="Details"}
+
+Here are some details on the
+[Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service).
+
+Multiple paragraphs can be contained in details.
+
+:::
+```
+
+::: {.details summary="Details"}
+
+Here are some details on the
+[Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service).
+
+Multiple paragraphs can be contained in details.
+
+:::
+
+### Code blocks
+
+Code blocks work the same as they do in markdown and R Markdown.  Code in R
+Markdown files (.Rmd suffix) will be evaluated, and the result interleaved below
+the code.
+
+```r
+print("This code will not be evaluated")
+```
+```{r}
+print("This code will be evaluated")
+```
+Create code chunks that are not to be evaluated as follows.
+
+```md
+    ```r
+    print("This code will not be evaluated")
+    ```
+```
+Create code chunks that are to be evaluated as follows.
+
+```md
+    ```{r}
+    print("This code will be evaluated")
+    ```
+```
+Python code chunks also work, as do any of the languages supported by knitr.
+
+```{python}
+'Monty Python'.split()
+```
+### Images
+
+Images use the normal markdown syntax.
+
+![caption text](./favicon/apple-touch-icon-180x180.png)
+
+### Tables
+
+All four kinds of [pandoc tables](https://pandoc.org/MANUAL.html#tables) are
+work.  Below is a common kind.  Note that only left-aligned and
+right-aligned columns are supported in the GOV.UK Design System, and captions
+always appear above the table.
+
+    Table: This is a table caption.
+
+    | Right | Left | Default | Center |
+    |------:|:-----|---------|:------:|
+    |   12  |  12  |    12   |    12  |
+    |  123  |  123 |   123   |   123  |
+    |    1  |    1 |     1   |     1  |
+
+Table: This is a table caption.
+
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|   12  |  12  |    12   |    12  |
+|  123  |  123 |   123   |   123  |
+|    1  |    1 |     1   |     1  |
+
+    Another table without a caption.
+
+    | Right | Left | Default | Center |
+    |------:|:-----|---------|:------:|
+    |   12  |  12  |    12   |    12  |
+    |  123  |  123 |   123   |   123  |
+    |    1  |    1 |     1   |     1  |
+
+Another table without a caption.
+
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|   12  |  12  |    12   |    12  |
+|  123  |  123 |   123   |   123  |
+|    1  |    1 |     1   |     1  |
+
+Tables can also be created from code chunks.  This example in R uses
+`knitr::kable()`.
+
+```{r}
+knitr::kable(head(mtcars[, 1:4]))
+```
+
+If kable doesn't produce a table that looks like the one above, then try using
+the `format` argument, for example `kable(mtcars, format = "markdown")` or
+`kable(mtcars, format = "pandoc")`.  You will need to do that if the
+`kableExtra` package is loaded, because `kableExtra` sets a global option.
+Check the value of `getOption("knitr.table.format")` to see if that option has
+been set.  If `kableExtra` isn't loaded, then the option might be set in your
+`.Rprofile`, which you can open with `usethis::edit_r_profile()`.
+
+### Mathematical equations
+
+Mathjax is supported as normal, by wrapping the equation in `$` symbols (inline
+equations) or in `$$` symbols on their own line (block equations).
+
+Here's some inline mathjax $\sum_0^{2e} \alpha_i \mathrm{dt}$.
+Here's some block mathjax
+
+$$
+\begin{align}
+s_i & \sim \mathrm{Binomial}(n_i, p_i) \\
+\mathrm{logit}(p_i) & = \alpha_{\small{TANK}[i]} \\
+\alpha_{\small{TANK}} & \sim \mathrm{Normal}(0, 5)
+\end{align}
+$$
+
+## Contribute to the development of govdown
+
+Use `install-govuk-frontend.sh` to download, modify and compile the GOV.UK Design System to get the css files for the templates.
+
+### Prerequisites
+
+The `sassc` command-line tool.  If you can't get that to work, try the `sass`
+package by RStudio, which wraps it.
