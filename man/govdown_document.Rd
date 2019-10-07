@@ -112,3 +112,13 @@ output:
     google_analytics: "UA-45097885-11"
 }
 }
+\examples{
+\dontrun{
+library(rmarkdown)
+library(govdown)
+
+render("input.Rmd", govdown_document())
+
+render("input.Rmd", govdown_document(phase = "alpha"))
+}
+}

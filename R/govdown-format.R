@@ -95,6 +95,15 @@
 #'     google_analytics: "UA-45097885-11"
 #' ```
 #'
+#' @examples
+#' \dontrun{
+#' library(rmarkdown)
+#' library(govdown)
+#'
+#' render("input.Rmd", govdown_document())
+#'
+#' render("input.Rmd", govdown_document(phase = "alpha"))
+#' }
 #' @export
 govdown_document <- function(keep_md = FALSE,
                              font = c("sans-serif", "new-transport"),
