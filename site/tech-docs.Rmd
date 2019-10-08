@@ -1,0 +1,253 @@
+# Technical Documentation
+
+::: {.lead-para}
+This page explains the design and implementation of [Govdown](./index.html).
+:::
+
+## Design
+
+Govdown was created so that the [Reproducible Analytical
+Pipelines](https://ukgovdatascience.github.io/rap-website/) community could
+publish its materials on the web, collaboratively, using familiar technology,
+using accessible components from the GOV.UK Design System.
+
+Govdown is based on R Markdown, a tool widely used in the R community to create
+HTML documents from code, interleaving content, code and output.  R Markdown
+supports both R and Python code, which are the two languages most familiar to
+the RAP community.  It creates static sites (a set of html files) that can be
+served by GitHub pages.
+
+Other technical communities use the [Tech Docs
+Template](https://github.com/alphagov/tech-docs-template).  The advantages of
+using it for RAP would have been that it already exists and is maintained.  It
+has some nice features, such as the sidebar, search, and content review date
+tracking.  The main disadvantage is that it is based on Ruby and Middleman,
+which most people in the RAP community don't use.
+
+## Implementation
+
+Govdown is a wrapper around R Markdown.  It customises R Markdown to apply
+components of the GOV.UK Design System.
+
+R Markdown supports some customisation via YAML headers and configuration files,
+but those are only useful when customising a particular site.  To enable other
+users to create pre-customised sites, a function `govdown::govdown_document()`
+had to be written, and the GOV.UK Design System elements (a collection of CSS,
+javascript and image files) made available locally to the user.  This was done
+by creating an R package for the user to install, containing the function and
+the components.
+
+### Rendering function
+
+The govdown package exposes a single function, `govdown::govdown_document()`.
+The user specifies this in place of `rmarkdown::html_document()` either in the
+YAML section of a standalone document, or in the `_site.yml` configuration file
+of their website.  It accepts some parameters to control whether the New
+Transport font is used, the logo, the navigation bar, and a phase banner.
+
+The document or website is rendered by calling `rmarkdown::render()` or
+`rmarkdown::render_site()` at the console.  This triggers a (simplified) series
+of actions:
+
+1. R Markdown calls knitr to render the R Markdown files to plain markdown files.
+1. R Markdown calls `govdown::govdown_document()`
+1. `govdown::govdown_document()` constructs a call to Pandoc (installed with R
+   Markdown) that references certain dependent files such as the GOV.UK Design
+   System components.
+1. Pandoc renders the plain markdown files as HTML files, and returns control to
+   R Markdown.
+1. R Markdown organises the HTML files and any dependencies such as CSS and
+   images into a single directory.
+
+The result is a directory of files that can be published as a static website.
+The procedure is familiar to users of R Markdown.
+
+### Lua and the GOV.UK Design System
+
+The GOV.UK Design System is mainly a set of Sass files, which are rendered to
+CSS files, which apply styles to HTML elements that have a given class.  For
+example, an HTML `<p>` element with the class `"govuk-body"` is styled to look
+like ordinary text on GOV.UK.
+
+```html
+<p class="govuk-body">
+  ordinary text
+</p>
+```
+
+But Pandoc doesn't add classes to HTML elements, so when Pandoc converts a
+markdown paragraph to HTML, the `<p>` element doesn't have the class
+`"govuk-body"`, so isn't styled by the CSS.
+
+```html
+<p>
+  ordinary text
+</p>
+```
+
+Govdown uses [Lua filters](https://pandoc.org/lua-filters.html) to alter the way
+that pandoc writes HTML elements.  Lua filters are supported by Pandoc.  All the
+filters are defined in one file, `inst/rmarkdown/resources/govuk.lua`.  There is
+an excellent blog post about using [lua filters with R
+Markdown](https://ulyngs.github.io/blog/posts/2019-02-19-how-to-use-pandoc-filters-for-advanced-customisation-of-your-r-markdown-document/).
+
+#### Lua paragraphs
+
+Here is some Lua code to modify `<p>` elements.
+
+```lua
+-- Code blocks
+Para = function (el)
+  el.classes:extend({"govuk-body"})
+  return el
+end
+```
+
+The line `Para = function(el)` tells Pandoc, every time it encounters a `Para`
+in a markdown document, to perform the rest of this chunk of code.  The `el` is
+a representation of the paragraph as Pandoc sees it.
+
+The line `el.classes:extend({"govuk-body"})` adds a class attribute to the `<p>`
+element, making it `<p class="govuk-body">`.
+
+The line `return el` returns the modified element to be written out as HTML.
+
+```html
+<p class="govuk-body">
+  ordinary text
+</p>
+```
+
+Unfortunately, that Lua code doesn't work.  It does work for some elements, such
+as hyperlinks `<href>`, but it doesn't work for paragraphs because Pandoc
+doesn't allow paragraphs to have attributes.  There's simply no way to tell
+Pandoc to apply an attribute to a paragraph.
+
+Instead, the Lua code used in govdown wraps the paragraph in a `Span`, a kind of
+neutral HTML element that doesn't necessarily do anything except contain other
+elements.  Govdown applies the `class="govuk-body"` attribute to the `Span`, and
+the paragraph within the `Span` inherit that class automatically.
+
+```lua
+-- Apply govuk-body to everything within a para by wrapping it in a span,
+-- because pandoc doesn't allow attributes of paras.
+Para = function(el)
+  attr = pandoc.Attr("", {"govuk-body"})
+  return pandoc.Para(pandoc.Span(el.content, attr))
+end
+```
+
+As before line `Para = function(el)` tells Pandoc, every time it encounters a
+`Para` in a markdown document, to perform the rest of this chunk of code.  The
+`el` is a representation of the paragraph as Pandoc sees it.
+
+The line `attr = pandoc.Attr("", {"govuk-body"})` constructs a new 'attribute'
+object.  The 'class' part of the attribute is given the value `"govuk-body"`.
+This becomes `class="govuk-body"` in the HTML.
+
+The line `return pandoc.Para(pandoc.Span(content, attr))` creates a new `Para`
+object that contains a new `Span` object.  The `Span` object is given the
+attribute that contains the `"govuk-body"` class.  It is also given the
+'content' or text of the original markdown paragraph `el.content`.  Finally the
+whole object is 'returned', which effectively means written out as HTML.
+
+```html
+<p class="govuk-body">
+  ordinary text
+</p>
+```
+
+That last line is complicated.  Why does it create another `Para` outside the
+`Span`?  Because, for some reason, one `Span` after another isn't rendered the
+same way as one `Para` after another in browsers, so it looks funny.  Wrapping
+the whole thing in another `Para` seems to fix this.
+
+#### Lua custom components
+
+Some components of the GOV.UK Design System don't have a counterpart in
+markdown.  Lead paragraphs have larger text than ordinary paragraphs, but
+markdown doesn't have a way to express that.
+
+Govdown uses a feature of markdown that applies classes to [fenced
+divs](https://pandoc.org/MANUAL.html#divs-and-spans).  This allows arbitrary
+classes to be applied to anything in the markdown document.
+
+```md
+::: {.extra-special-para}
+This text will be rendered extra-speciallly.
+:::
+```
+
+When Pandoc parses a fenced div into memory, it constructs a `Div` object that
+has the attributes and classes given in the curly braces.  Govdown then uses Lua
+to detect particular classes, and control how the content of the div is rendered
+to HTML.
+
+One of the classes govdown recognises is `lead-para`.
+
+```md
+::: {.lead-para}
+This paragraph will be rendered larger.
+:::
+```
+
+Here is the Lua code to intervene with lead paragraphs.  Like a previous
+example, it's complicated because Pandoc doesn't allow paragraphs to have
+classes (they have to be wrapped in spans that have classes, and then the
+spans themselves have to be wrapped in paragraphs to avoid looking funny).
+
+```lua
+Div = function(el)
+  -- Look for 'lead-para'
+  v,i = el.classes:find("lead-para")
+  if i ~= nil then
+    el.classes[i] = nil
+    -- Apply govuk-body to everything within a para by wrapping it in a span,
+    -- because pandoc doesn't allow attributes of paras.
+    return pandoc.walk_block(el, {
+      Para = function(el)
+        content = el.content
+        attr = pandoc.Attr("", {"govuk-body-l"})
+        return pandoc.Para(pandoc.Span(content, attr))
+      end
+    })
+  end
+end
+```
+
+The first line `Div = function(el)` matches all `Div` elements parsed from the
+markdown document.
+
+The next two lines check whether the div has a class `"lead-para"`.
+
+```lua
+v,i = el.classes:find("lead-para")
+if i ~= nil then
+  -- do something
+end
+```
+
+The line `el.classes[i] = nil` erases the class `"lead-para"` because it isn't
+needed any longer -- it is only used to alert Lua to a lead paragraph, and it
+shouldn't be passed on any further.
+
+The remaining lines construct a new `Para` with the `"ggovuk-body-l"` class that
+causes it to be rendered larger.  The `pandoc.walk_block()` construction is
+awkward, but seems to be the only way to get Lua to do things with the contents
+of a `Div` -- in this case, one or more `Para` elements.
+
+```lua
+return pandoc.walk_block(el, {
+  Para = function(el)
+    content = el.content
+    attr = pandoc.Attr("", {"govuk-body-l"})
+    return pandoc.Para(pandoc.Span(content, attr))
+  end
+})
+```
+
+Custom `Div` elements like this are handled at the top of the `govuk.lua` file.
+This is because some of them conflict with other customisations.  For example,
+the custom `Div` for breadcrumbs contains a bulleted list.  If the bulleted list
+were handled first, then by the time its parent `Div` was noticed, it would be
+too late to override the styles that had already been applied.
