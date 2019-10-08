@@ -15,3 +15,4 @@
 ^deploy_key.pub$
 ^tags$
 ^site$
+^cran-comments\.md$
