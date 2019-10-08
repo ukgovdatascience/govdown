@@ -9,4 +9,5 @@
 ^\.nojekyll$
 ^\.travis\.yml$
 ^_build\.sh$
-^_deploy\.sh$
+^_deploy*$
+^tags$
