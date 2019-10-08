@@ -9,5 +9,8 @@
 ^\.nojekyll$
 ^\.travis\.yml$
 ^_build\.sh$
-^_deploy*$
+^_deploy.sh$
+^deploy_key$
+^deploy_key.enc$
+^deploy_key.pub$
 ^tags$
