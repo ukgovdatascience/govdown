@@ -16,7 +16,7 @@ of the website.
 These websites and documents use govdown.
 
 * https://ukgovdatascience.github.io/rap-website/
-* https://co-analysis.github.io/csmapping/cs_lad.html
+* https://co-analysis.github.io/csmapping/cs_lad_2019.html ([2018 version](https://co-analysis.github.io/csmapping/cs_lad_2018.html))
 * https://mattkerlogue.github.io/coding-guide/
 * https://matt-dray.github.io/drake-egg-rap/egg-report.html
 
