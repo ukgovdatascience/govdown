@@ -8,6 +8,5 @@
 ^\.Rproj\.user$
 ^\.nojekyll$
 ^\.travis\.yml$
-^site$
 ^_build\.sh$
 ^_deploy\.sh$
