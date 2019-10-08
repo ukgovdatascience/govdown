@@ -14,3 +14,4 @@
 ^deploy_key.enc$
 ^deploy_key.pub$
 ^tags$
+^site$
