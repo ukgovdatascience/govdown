@@ -59,6 +59,9 @@ website.}
 \item{...}{passed on to \code{\link[rmarkdown:html_document_base]{rmarkdown::html_document_base()}}, used by Shiny and
 \code{\link[rmarkdown:run]{rmarkdown::run()}}.}
 }
+\value{
+R Markdown output format to pass to \code{\link[rmarkdown:render]{rmarkdown::render()}}
+}
 \description{
 A template for rendering R Markdown documents as HTML using the GOV.UK Design
 System.  Can be used for single documents or for websites.
