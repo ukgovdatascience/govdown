@@ -1,3 +1,11 @@
+## Resubmission
+
+* Added \value to .Rd files.
+
+* Rewrote examples to use a small file in inst/extdata.  But did not remove
+    \dontrun{} as requested because the examples require Pandoc version 2, which
+    is not available on CRAN (checked with winbuilder with R devel).
+
 ## Test environments
 
 ### Local
