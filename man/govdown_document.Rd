@@ -116,9 +116,12 @@ output:
 }
 }
 \examples{
-input_rmd <- system.file("extdata/input.Rmd", package = "govdown")
-x <- rmarkdown::render(input_rmd, govdown_document())
-y <- rmarkdown::render(input_rmd, govdown_document(phase = "alpha"))
-utils::browseURL(x)
-utils::browseURL(y)
+\dontrun{
+  # Requires pandoc version 2+
+  input_rmd <- system.file("extdata/input.Rmd", package = "govdown")
+  x <- rmarkdown::render(input_rmd, govdown_document())
+  y <- rmarkdown::render(input_rmd, govdown_document(phase = "alpha"))
+  utils::browseURL(x)
+  utils::browseURL(y)
+\dontrun}
 }
