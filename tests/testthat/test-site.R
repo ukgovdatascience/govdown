@@ -1,6 +1,6 @@
 context("site")
 
-test_that("render_site", {
+test_that("rmarkdown::render_site", {
 
   skip_on_cran()
 
@@ -13,7 +13,7 @@ test_that("render_site", {
   file.copy(file.path("site", files), site_dir, recursive = TRUE)
 
   # render it
-  capture.output(render_site(site_dir))
+  capture.output(rmarkdown::render_site(site_dir))
 
   # did the html files get rendered and the css get copied?
   html_files <- c("index.html", "tech-docs.html", "404.html",
