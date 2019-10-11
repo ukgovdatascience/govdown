@@ -17,8 +17,7 @@ test_that("rmarkdown::render_site", {
 
   # did the html files get rendered and the css get copied?
   html_files <- c("index.html", "tech-docs.html", "404.html",
-                  "accessibility.html", "LICENSE.html", "NEWS.html",
-                  "README.html")
+                  "accessibility.html", "LICENSE.html", "NEWS.html")
   html_files <- file.path(site_dir, "docs", html_files)
   expect_true(all(file.exists(html_files)))
 
