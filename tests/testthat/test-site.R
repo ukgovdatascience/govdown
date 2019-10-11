@@ -2,7 +2,7 @@ context("site")
 
 test_that("rmarkdown::render_site", {
 
-  skip_on_cran()
+  skip_on_cran() # due to Pandoc v2 dependency
 
   # copy our demo site to a tempdir
   site_dir <- tempfile()
