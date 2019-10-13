@@ -1,7 +1,7 @@
 Package: govdown
 Title: GOV.UK Style Templates for R Markdown
 Version: 0.7.0
-Authors@R: 
+Authors@R:
     c(person(given = "Crown Copyright 2018",
              role = "cph"),
       person(given = "Duncan",
@@ -22,3 +22,4 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+SystemRequirements: pandoc (>= 2.0) - http://pandoc.org
