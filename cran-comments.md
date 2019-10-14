@@ -1,6 +1,6 @@
 ## Resubmission
 
-* Added pandoc version >= 2.0 to the system requirements in DESCRIPTION.
+* Removed extraneous "dontrun"
 
 ## Test environments
 

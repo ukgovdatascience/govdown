@@ -123,5 +123,5 @@ output:
   y <- rmarkdown::render(input_rmd, govdown_document(phase = "alpha"))
   utils::browseURL(x)
   utils::browseURL(y)
-\dontrun}
+}
 }

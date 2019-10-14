@@ -105,7 +105,7 @@
 #'   y <- rmarkdown::render(input_rmd, govdown_document(phase = "alpha"))
 #'   utils::browseURL(x)
 #'   utils::browseURL(y)
-#' \dontrun}
+#' }
 #' @export
 govdown_document <- function(keep_md = FALSE,
                              font = c("sans-serif", "new-transport"),
