@@ -22,8 +22,14 @@ These websites and documents use govdown.
 
 ## Installation
 
-The package is only hosted on [GitHub](https://github.com/ukgovdatascience), not
-on CRAN.  Install it with the devtools package.
+You can install the released version of govdown from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("govdown")
+```
+
+And the development version from [GitHub](https://github.com/) with:
 
 ```r
 # install.packages("devtools") # if devtools is not already installed
