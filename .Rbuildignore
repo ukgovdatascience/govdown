@@ -16,3 +16,4 @@
 ^tags$
 ^site$
 ^cran-comments\.md$
+^CRAN-RELEASE$
