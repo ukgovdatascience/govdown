@@ -11,6 +11,10 @@ but specify `output: govdown::govdown_document` instead of `output:
 html_document` in the YAML metadata of the document, or in the `_site.yml` file
 of the website.
 
+> You can't publish govdown documents on the GOV.UK website itself. Please
+> follow the normal guidance for [how to publish on
+> GOV.UK](https://www.gov.uk/guidance/how-to-publish-on-gov-uk).
+
 ## Examples
 
 These websites and documents use govdown.
