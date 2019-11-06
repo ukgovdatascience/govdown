@@ -4217,7 +4217,7 @@ Unfortunately, that Lua code doesn’t work. It does work for some elements, suc
 Instead, the Lua code used in govdown wraps the paragraph in a <code>Span</code>, a kind of neutral HTML element that doesn’t necessarily do anything except contain other elements. Govdown applies the <code>class=&quot;govuk-body&quot;</code> attribute to the <code>Span</code>, and the paragraph within the <code>Span</code> inherit that class automatically.
 </p>
 <pre class="lua"><code>-- Apply govuk-body to everything within a para by wrapping it in a span,
--- because pandoc doesn't allow attributes of paras.
+-- because pandoc doesn&#39;t allow attributes of paras.
 Para = function(el)
   attr = pandoc.Attr(&quot;&quot;, {&quot;govuk-body&quot;})
   return pandoc.Para(pandoc.Span(el.content, attr))
@@ -4260,12 +4260,12 @@ This paragraph will be rendered larger.
 Here is the Lua code to intervene with lead paragraphs. Like a previous example, it’s complicated because Pandoc doesn’t allow paragraphs to have classes (they have to be wrapped in spans that have classes, and then the spans themselves have to be wrapped in paragraphs to avoid looking funny).
 </p>
 <pre class="lua"><code>Div = function(el)
-  -- Look for 'lead-para'
+  -- Look for &#39;lead-para&#39;
   v,i = el.classes:find(&quot;lead-para&quot;)
   if i ~= nil then
     el.classes[i] = nil
     -- Apply govuk-body to everything within a para by wrapping it in a span,
-    -- because pandoc doesn't allow attributes of paras.
+    -- because pandoc doesn&#39;t allow attributes of paras.
     return pandoc.walk_block(el, {
       Para = function(el)
         content = el.content
