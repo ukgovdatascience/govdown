@@ -12,5 +12,5 @@ script:
   not deploying"; fi
 before_install:
 - openssl aes-256-cbc -K $encrypted_e5387e4e26d8_key -iv $encrypted_e5387e4e26d8_iv -in deploy_key.enc -out deploy_key -d
-- wget https://github.com/jgm/pandoc/releases/download/2.6/pandoc-2.6-1-amd64.deb
-- sudo dpkg -i pandoc-2.6-1-amd64.deb
+- wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb
+- sudo dpkg -i pandoc-2.5-1-amd64.deb
