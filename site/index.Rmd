@@ -430,6 +430,10 @@ information only if they need it. As with Tabs, guidance can be found on the
 The syntax uses the summary attribute to provide the top level information with
 the content provided by the text within.
 
+:::{.warning}
+The details component requires Pandoc version 2.5 or more recent.
+:::
+
 ```md
 ::: {.details summary="Details"}
 
