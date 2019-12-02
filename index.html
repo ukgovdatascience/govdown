@@ -4141,7 +4141,7 @@ You can’t publish govdown documents on the GOV.UK website itself. Please follo
 <p class="govuk-body">
 These websites and documents use govdown.
 </p>
-<ul class="govuk=list govuk-list--bullet">
+<ul class=".govuk-list govuk-list--bullet">
 <li class="govuk-body">
 <a href="https://ukgovdatascience.github.io/rap-website/" class="uri govuk-link">https://ukgovdatascience.github.io/rap-website/</a>
 </li>
@@ -4227,6 +4227,9 @@ To render the website, run <code>rmarkdown::render_site()</code> in the console,
 <p class="govuk-body">
 Most of the usual markdown syntax is supported. There is some new syntax for special features of the GOV.UK Design System.
 </p>
+<p class="govuk-body">
+Where syntax isn’t supported, that might be because research by contributors to the GOV.UK Design System found the features to be detrimental. Govdown defers to the GOV.UK Design System in these cases.
+</p>
 <h3 id="headings" class="govuk-heading-m">Headings</h3>
 <p class="govuk-body">
 Create headings by beginning a new line of text with a <code>#</code> symbol.
@@ -4303,12 +4306,12 @@ Hyperlinks work as normal. The GOV.UK Design System also supports <a href="https
 [hyperlink that doesn&#39;t turn purple](https://design-system.service.gov.uk){.no-visited-state}.</code></pre>
 <h3 id="bullets-and-numbered-lists" class="govuk-heading-m">Bullets and numbered lists</h3>
 <p class="govuk-body">
-Bulletted lists work as normal, but nested bullets don’t look very good because they aren’t really supported by the GOV.UK Design System.
+Bulletted and nested lists work as normal, except that nested lists don’t look very good because they aren’t supported by the GOV.UK Design System. Govdown defers to the designers who made this decision, but if you have evidence of a need for nested lists, please submit it to the GOV.UK Design System by opening a new GitHub issue on the <a href="https://github.com/alphagov/govuk-frontend/issues" class="govuk-link">GOV.UK frontend repository</a>.
 </p>
-<ul class="govuk=list govuk-list--bullet">
+<ul class=".govuk-list govuk-list--bullet">
 <li class="govuk-body">
 First bullet
-<ul class="govuk=list govuk-list--bullet">
+<ul class=".govuk-list govuk-list--bullet">
 <li class="govuk-body">
 Nested bullets are available but …
 </li>
@@ -4330,9 +4333,6 @@ Third bullet
     really support them.
 * Second bullet
 * Third bullet</code></pre>
-<p class="govuk-body">
-Numbered lists work as normal, except that nested numbered lists don’t work at all because they aren’t supported by the GOV.UK Design System.
-</p>
 <ol class="govuk-list govuk-list--number">
 <li class="govuk-body">
 Numbered list item
