@@ -8,9 +8,8 @@ before_script:
 - chmod +x ./_deploy.sh
 script:
 - "./_build.sh"
-- if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./_deploy.sh; else echo "PR so
-  not deploying"; fi
+- if [ "$TRAVIS_BRANCH" = "master" ]; then bash ./_deploy.sh; else echo "Not master so not deploying"; fi
 before_install:
-- if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash openssl aes-256-cbc -K $encrypted_e5387e4e26d8_key -iv $encrypted_e5387e4e26d8_iv -in deploy_key.enc -out deploy_key -d; else echo "PR so not decrypting key"; fi
+- if [ "$TRAVIS_BRANCH" = "master" ]; then bash openssl aes-256-cbc -K $encrypted_e5387e4e26d8_key -iv $encrypted_e5387e4e26d8_iv -in deploy_key.enc -out deploy_key -d; else echo "Not master so not decrypting key"; fi
 - wget https://github.com/jgm/pandoc/releases/download/2.5/pandoc-2.5-1-amd64.deb
 - sudo dpkg -i pandoc-2.5-1-amd64.deb
