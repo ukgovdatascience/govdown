@@ -517,7 +517,7 @@ return {
   {
     -- Normal BulletList
     BulletList = function(items)
-      local res = List:new{pandoc.RawBlock('html', '<ul class="govuk=list govuk-list--bullet">')}
+      local res = List:new{pandoc.RawBlock('html', '<ul class=".govuk-list govuk-list--bullet">')}
       for _, item in ipairs(items.content) do
         table.insert(res, pandoc.RawBlock('html', '<li class="govuk-body">'))
         res:extend(item)
