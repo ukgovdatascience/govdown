@@ -26,7 +26,7 @@ sassc scss/govuk.scss inst/rmarkdown/resources/govuk.css
 # the top of the file, they won't be reassigned by the later definitions.
 TYPFILE=./node_modules/govuk-frontend/govuk/settings/_typography-font.scss
 TEMPFILE=/tmp/out
-echo '$govuk-font-family: sans-serif !default;' | cat - $TYPFILE > $TEMPFILE && mv $TEMPFILE $TYPFILE
+echo '$govuk-font-family: "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif !default;' | cat - $TYPFILE > $TEMPFILE && mv $TEMPFILE $TYPFILE
 echo '$govuk-font-family-tabular: false !default;' | cat - $TYPFILE > $TEMPFILE && mv $TEMPFILE $TYPFILE
 
 # Recompile the scss to css
