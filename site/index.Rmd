@@ -125,6 +125,10 @@ console, or click the 'Build Website' button in RStudio Build panel.
 Most of the usual markdown syntax is supported.  There is some new syntax for
 special features of the GOV.UK Design System.
 
+Where syntax isn't supported, that might be because research by contributors to
+the GOV.UK Design System found the features to be detrimental. Govdown defers to
+the GOV.UK Design System in these cases.
+
 ### Headings
 
 Create headings by beginning a new line of text with a `#` symbol.
@@ -235,8 +239,12 @@ when you have visited the page.
 
 ### Bullets and numbered lists
 
-Bulletted lists work as normal, but nested bullets don't look very good because
-they aren't really supported by the GOV.UK Design System.
+Bulletted and nested lists work as normal, except that nested lists don't look
+very good because they aren't supported by the GOV.UK Design System.  Govdown
+defers to the designers who made this decision, but if you have evidence of a
+need for nested lists, please submit it to the GOV.UK Design System by opening a
+new GitHub issue on the [GOV.UK frontend
+repository](https://github.com/alphagov/govuk-frontend/issues).
 
 * First bullet
   * Nested bullets are available but ...
@@ -253,9 +261,6 @@ they aren't really supported by the GOV.UK Design System.
 * Second bullet
 * Third bullet
 ```
-
-Numbered lists work as normal, except that nested numbered lists don't work at
-all because they aren't supported by the GOV.UK Design System.
 
 1. Numbered list item
 1. Second numbered list item
