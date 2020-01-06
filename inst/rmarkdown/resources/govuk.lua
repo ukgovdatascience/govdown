@@ -540,5 +540,14 @@ return {
       table.insert(res, pandoc.RawBlock('html', '</ol>'))
       return res
     end
+  },
+
+  {
+    CodeBlock = function(el)
+      if el.classes[1] == nil then
+          el.classes[1] = "plaintext"
+      end
+      return el
+    end
   }
 }
