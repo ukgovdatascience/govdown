@@ -4186,7 +4186,7 @@ output:
     feedback_url: &quot;https://github.com/ukgovdatascience/govdown/issues&quot;
     google_analytics: &quot;UA-12345678-90&quot;
 ---</code></pre>
-<pre><code>This is a study of official statistics in the UK.</code></pre>
+<pre class="plaintext"><code>This is a study of official statistics in the UK.</code></pre>
 <p class="govuk-body">
 To render that file to HTML, run <code>rmarkdown::render(&quot;filename.Rmd&quot;)</code> in the console, or click the ‘knit’ button in RStudio.
 </p>
@@ -4567,7 +4567,7 @@ Code blocks work the same as they do in markdown and R Markdown. Code in R Markd
 </p>
 <pre class="r"><code>print(&quot;This code will not be evaluated&quot;)</code></pre>
 <pre class="r"><code>print(&quot;This code will be evaluated&quot;)</code></pre>
-<pre><code>## [1] &quot;This code will be evaluated&quot;</code></pre>
+<pre class="plaintext"><code>## [1] &quot;This code will be evaluated&quot;</code></pre>
 <p class="govuk-body">
 Create code chunks that are not to be evaluated as follows.
 </p>
@@ -4589,7 +4589,7 @@ Create code chunks that are to be evaluated as follows.
 Python code chunks also work, as do any of the languages supported by knitr.
 </p>
 <pre class="python"><code>&#39;Monty Python&#39;.split()</code></pre>
-<pre><code>## [&#39;Monty&#39;, &#39;Python&#39;]</code></pre>
+<pre class="plaintext"><code>## [&#39;Monty&#39;, &#39;Python&#39;]</code></pre>
 <h3 id="images" class="govuk-heading-m">Images</h3>
 <p class="govuk-body">
 Images use the normal markdown syntax.
@@ -4601,7 +4601,7 @@ Images use the normal markdown syntax.
 <p class="govuk-body">
 All four kinds of <a href="https://pandoc.org/MANUAL.html#tables" class="govuk-link">pandoc tables</a> are work. Below is a common kind. Note that only left-aligned and right-aligned columns are supported in the GOV.UK Design System, and captions always appear above the table.
 </p>
-<pre><code>Table: This is a table caption.
+<pre class="plaintext"><code>Table: This is a table caption.
 
 | Right | Left | Default | Center |
 |------:|:-----|---------|:------:|
@@ -4671,7 +4671,7 @@ Center
 </tr>
 </tbody>
 </table>
-<pre><code>Another table without a caption.
+<pre class="plaintext"><code>Another table without a caption.
 
 | Right | Left | Default | Center |
 |------:|:-----|---------|:------:|
