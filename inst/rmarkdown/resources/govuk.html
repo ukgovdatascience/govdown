@@ -23,7 +23,16 @@
 <script
  charset="UTF-8"
  src="r.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+
+<!-- highlight code according to the language specified in <pre> not <code> -->
+<script>
+window.onload = function() {
+    var aCodes = document.getElementsByTagName('pre');
+    for (var i=0; i < aCodes.length; i++) {
+        hljs.highlightBlock(aCodes[i]);
+    }
+};
+</script>
 
   <!--[if !IE 8]><!-->
   <link href="$css$" rel="stylesheet" />
