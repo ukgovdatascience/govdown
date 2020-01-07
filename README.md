@@ -2,6 +2,7 @@
 
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/ukgovdatascience/govdown.svg?branch=master)](https://travis-ci.org/ukgovdatascience/govdown)
+[![CRAN status](https://www.r-pkg.org/badges/version/govdown)](https://CRAN.R-project.org/package=govdown)
 <!-- badges: end -->
 
 Make websites with R Markdown styled with the GOV.UK Design System.  See the
