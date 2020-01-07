@@ -4186,13 +4186,13 @@ The result is a directory of files that can be published as a static website. Th
 <p class="govuk-body">
 The GOV.UK Design System is mainly a set of Sass files, which are rendered to CSS files, which apply styles to HTML elements that have a given class. For example, an HTML <code>&lt;p&gt;</code> element with the class <code>&quot;govuk-body&quot;</code> is styled to look like ordinary text on GOV.UK.
 </p>
-<pre class="html"><code>&lt;p class=&quot;govuk-body&quot;&gt;
+<pre><code class="language-html">&lt;p class=&quot;govuk-body&quot;&gt;
   ordinary text
 &lt;/p&gt;</code></pre>
 <p class="govuk-body">
 But Pandoc doesn’t add classes to HTML elements, so when Pandoc converts a markdown paragraph to HTML, the <code>&lt;p&gt;</code> element doesn’t have the class <code>&quot;govuk-body&quot;</code>, so isn’t styled by the CSS.
 </p>
-<pre class="html"><code>&lt;p&gt;
+<pre><code class="language-html">&lt;p&gt;
   ordinary text
 &lt;/p&gt;</code></pre>
 <p class="govuk-body">
@@ -4202,7 +4202,7 @@ Govdown uses <a href="https://pandoc.org/lua-filters.html" class="govuk-link">Lu
 <p class="govuk-body">
 Here is some Lua code to modify <code>&lt;p&gt;</code> elements.
 </p>
-<pre class="lua"><code>-- Code blocks
+<pre><code class="language-lua">-- Code blocks
 Para = function (el)
   el.classes:extend({&quot;govuk-body&quot;})
   return el
@@ -4216,7 +4216,7 @@ The line <code>el.classes:extend({&quot;govuk-body&quot;})</code> adds a class a
 <p class="govuk-body">
 The line <code>return el</code> returns the modified element to be written out as HTML.
 </p>
-<pre class="html"><code>&lt;p class=&quot;govuk-body&quot;&gt;
+<pre><code class="language-html">&lt;p class=&quot;govuk-body&quot;&gt;
   ordinary text
 &lt;/p&gt;</code></pre>
 <p class="govuk-body">
@@ -4225,7 +4225,7 @@ Unfortunately, that Lua code doesn’t work. It does work for some elements, suc
 <p class="govuk-body">
 Instead, the Lua code used in govdown wraps the paragraph in a <code>Span</code>, a kind of neutral HTML element that doesn’t necessarily do anything except contain other elements. Govdown applies the <code>class=&quot;govuk-body&quot;</code> attribute to the <code>Span</code>, and the paragraph within the <code>Span</code> inherit that class automatically.
 </p>
-<pre class="lua"><code>-- Apply govuk-body to everything within a para by wrapping it in a span,
+<pre><code class="language-lua">-- Apply govuk-body to everything within a para by wrapping it in a span,
 -- because pandoc doesn&#39;t allow attributes of paras.
 Para = function(el)
   attr = pandoc.Attr(&quot;&quot;, {&quot;govuk-body&quot;})
@@ -4240,7 +4240,7 @@ The line <code>attr = pandoc.Attr(&quot;&quot;, {&quot;govuk-body&quot;})</code>
 <p class="govuk-body">
 The line <code>return pandoc.Para(pandoc.Span(content, attr))</code> creates a new <code>Para</code> object that contains a new <code>Span</code> object. The <code>Span</code> object is given the attribute that contains the <code>&quot;govuk-body&quot;</code> class. It is also given the ‘content’ or text of the original markdown paragraph <code>el.content</code>. Finally the whole object is ‘returned’, which effectively means written out as HTML.
 </p>
-<pre class="html"><code>&lt;p class=&quot;govuk-body&quot;&gt;
+<pre><code class="language-html">&lt;p class=&quot;govuk-body&quot;&gt;
   ordinary text
 &lt;/p&gt;</code></pre>
 <p class="govuk-body">
@@ -4253,7 +4253,7 @@ Some components of the GOV.UK Design System don’t have a counterpart in markdo
 <p class="govuk-body">
 Govdown uses a feature of markdown that applies classes to <a href="https://pandoc.org/MANUAL.html#divs-and-spans" class="govuk-link">fenced divs</a>. This allows arbitrary classes to be applied to anything in the markdown document.
 </p>
-<pre class="md"><code>::: {.extra-special-para}
+<pre><code class="language-md">::: {.extra-special-para}
 This text will be rendered extra-speciallly.
 :::</code></pre>
 <p class="govuk-body">
@@ -4262,13 +4262,13 @@ When Pandoc parses a fenced div into memory, it constructs a <code>Div</code> ob
 <p class="govuk-body">
 One of the classes govdown recognises is <code>lead-para</code>.
 </p>
-<pre class="md"><code>::: {.lead-para}
+<pre><code class="language-md">::: {.lead-para}
 This paragraph will be rendered larger.
 :::</code></pre>
 <p class="govuk-body">
 Here is the Lua code to intervene with lead paragraphs. Like a previous example, it’s complicated because Pandoc doesn’t allow paragraphs to have classes (they have to be wrapped in spans that have classes, and then the spans themselves have to be wrapped in paragraphs to avoid looking funny).
 </p>
-<pre class="lua"><code>Div = function(el)
+<pre><code class="language-lua">Div = function(el)
   -- Look for &#39;lead-para&#39;
   v,i = el.classes:find(&quot;lead-para&quot;)
   if i ~= nil then
@@ -4290,7 +4290,7 @@ The first line <code>Div = function(el)</code> matches all <code>Div</code> elem
 <p class="govuk-body">
 The next two lines check whether the div has a class <code>&quot;lead-para&quot;</code>.
 </p>
-<pre class="lua"><code>v,i = el.classes:find(&quot;lead-para&quot;)
+<pre><code class="language-lua">v,i = el.classes:find(&quot;lead-para&quot;)
 if i ~= nil then
   -- do something
 end</code></pre>
@@ -4300,7 +4300,7 @@ The line <code>el.classes[i] = nil</code> erases the class <code>&quot;lead-para
 <p class="govuk-body">
 The remaining lines construct a new <code>Para</code> with the <code>&quot;ggovuk-body-l&quot;</code> class that causes it to be rendered larger. The <code>pandoc.walk_block()</code> construction is awkward, but seems to be the only way to get Lua to do things with the contents of a <code>Div</code> – in this case, one or more <code>Para</code> elements.
 </p>
-<pre class="lua"><code>return pandoc.walk_block(el, {
+<pre><code class="language-lua">return pandoc.walk_block(el, {
   Para = function(el)
     content = el.content
     attr = pandoc.Attr(&quot;&quot;, {&quot;govuk-body-l&quot;})

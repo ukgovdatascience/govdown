@@ -4168,11 +4168,11 @@ These websites and documents use govdown.
 <p class="govuk-body">
 You can install the released version of govdown from <a href="https://CRAN.R-project.org" class="govuk-link">CRAN</a> with:
 </p>
-<pre class="r"><code>install.packages(&quot;govdown&quot;)</code></pre>
+<pre><code class="language-r">install.packages(&quot;govdown&quot;)</code></pre>
 <p class="govuk-body">
 And the development version from <a href="https://github.com/" class="govuk-link">GitHub</a> with:
 </p>
-<pre class="r"><code># install.packages(&quot;devtools&quot;) # if devtools is not already installed
+<pre><code class="language-r"># install.packages(&quot;devtools&quot;) # if devtools is not already installed
 devtools::install_github(&quot;ukgovdatascience/govdown&quot;)</code></pre>
 <p class="govuk-body">
 You need Pandoc version 2.0 or greater on your system to use Govdown. You can check which version you have at the R console by typing <code>rmarkdown::pandoc_version()</code>. Look at this <a href="https://github.com/ukgovdatascience/govdown/issues/2" class="govuk-link">GitHub issue</a> for advice on how to obtain a more recent version of pandoc.
@@ -4181,7 +4181,7 @@ You need Pandoc version 2.0 or greater on your system to use Govdown. You can ch
 <p class="govuk-body">
 Govdown HTML pages are created in the same way as R Markdown HTML pages. Write a markdown document (a plain text file with the suffix <code>.Rmd</code> or <code>.md</code> instead of <code>.txt</code>), and put something called ‘YAML metadata’ at the top. It should look like this:
 </p>
-<pre class="yaml"><code>---
+<pre><code class="language-yaml">---
 output:
   govdown::govdown_document:
     font: &quot;sans-serif&quot; # (default) or &quot;new-transport&quot;
@@ -4195,7 +4195,7 @@ output:
     feedback_url: &quot;https://github.com/ukgovdatascience/govdown/issues&quot;
     google_analytics: &quot;UA-12345678-90&quot;
 ---</code></pre>
-<pre class="plaintext"><code>This is a study of official statistics in the UK.</code></pre>
+<pre><code class="language-plaintext">This is a study of official statistics in the UK.</code></pre>
 <p class="govuk-body">
 To render that file to HTML, run <code>rmarkdown::render(&quot;filename.Rmd&quot;)</code> in the console, or click the ‘knit’ button in RStudio.
 </p>
@@ -4206,7 +4206,7 @@ You must use <code>font: &quot;sans-serif&quot;</code> unless the page is hosted
 <p class="govuk-body">
 Websites are created in the same way as R Markdown websites. Write a set of markdown documents (plain text files with the suffix <code>.Rmd</code> or <code>.md</code> instead of <code>.txt</code>), and a configuration file called <code>_site.yml</code> with content like the following:
 </p>
-<pre class="yaml"><code>output_dir: docs # to host on GitHub pages
+<pre><code class="language-yaml">output_dir: docs # to host on GitHub pages
 navbar: # links to include in the bar at the top of every page
   - text: &quot;Home&quot;
     href: index.html
@@ -4243,13 +4243,13 @@ Where syntax isn’t supported, that might be because research by contributors t
 <p class="govuk-body">
 Create headings by beginning a new line of text with a <code>#</code> symbol.
 </p>
-<pre class="md"><code># Pithy heading
+<pre><code class="language-md"># Pithy heading
 
 Rambling content.</code></pre>
 <p class="govuk-body">
 Subheadings have more <code>#</code>s
 </p>
-<pre class="md"><code>## Helpful subheading
+<pre><code class="language-md">## Helpful subheading
 
 ### Can&#39;t remember what the main topic was?
 
@@ -4258,12 +4258,12 @@ Subheadings have more <code>#</code>s
 <p class="govuk-body">
 The GOV.UK Design System supports captions above <a href="https://design-system.service.gov.uk/styles/typography/#headings" class="govuk-link">headers</a>. This works for headings of level 1, 2 and 3, but not for the smallest headings (level 4).
 </p>
-<pre class="md"><code># Heading with caption above {caption=&quot;This is a caption&quot;}</code></pre>
+<pre><code class="language-md"># Heading with caption above {caption=&quot;This is a caption&quot;}</code></pre>
 <h3 id="bold-italics-and-strike-through" class="govuk-heading-m">Bold, italics and strike-through</h3>
 <p class="govuk-body">
 <span class="govuk-!-font-weight-bold">Bold</span> works as normal, but italics and strike-through are disabled because they are not supported by the GOV.UK Design System.
 </p>
-<pre class="md"><code>**Bold** works as normal, but *italics* and ~~strike-through~~ are disabled.</code></pre>
+<pre><code class="language-md">**Bold** works as normal, but *italics* and ~~strike-through~~ are disabled.</code></pre>
 <h3 id="lead-paragraphs-and-small-text" class="govuk-heading-m">Lead paragraphs and small text</h3>
 <p class="govuk-body">
 The GOV.UK Design System supports <a href="https://design-system.service.gov.uk/styles/typography/#paragraphs" class="govuk-link">larger and smaller text for paragraphs</a>. Large text is for a single lead paragraph at the top of a page. See the top of this page for an example.
@@ -4273,7 +4273,7 @@ The GOV.UK Design System supports <a href="https://design-system.service.gov.uk/
 Small text looks like this.
 </p>
 </div>
-<pre class="md"><code>::: {.lead-para}
+<pre><code class="language-md">::: {.lead-para}
 This is a lead paragraph that appears in larger text than the rest of the body
 text of the page.
 :::
@@ -4292,7 +4292,7 @@ Indented text (often used for block quotations) works as normal.
 United wishes and good will cannot overcome brute facts. Truth is incontrovertible. Panic may resent it. Ignorance may deride it. Malice may distort it. But there it is. – Winston Churchill
 </p>
 </div>
-<pre class="md"><code>&gt; United wishes and good will cannot overcome brute facts.  Truth is
+<pre><code class="language-md">&gt; United wishes and good will cannot overcome brute facts.  Truth is
 &gt; incontrovertible. Panic may resent it. Ignorance may deride it. Malice may
 &gt; distort it. But there it is. -- Winston Churchill</code></pre>
 <h3 id="warnings" class="govuk-heading-m">Warnings</h3>
@@ -4303,14 +4303,14 @@ Use the <a href="https://design-system.service.gov.uk/components/warning-text/" 
 Fee fi fo fum
 </strong>
 </div>
-<pre class="md"><code>::: {.warning}
+<pre><code class="language-md">::: {.warning}
 Fee fi fo fum
 :::</code></pre>
 <h3 id="hyperlinks" class="govuk-heading-m">Hyperlinks</h3>
 <p class="govuk-body">
 Hyperlinks work as normal. The GOV.UK Design System also supports <a href="https://design-system.service.gov.uk/styles/typography/#links" class="govuk-link--no-visited-state govuk-link">hyperlinks that don’t change colour</a> when you have visited the page.
 </p>
-<pre class="md"><code>[normal hyperlink](https://design-system.service.gov.uk).
+<pre><code class="language-md">[normal hyperlink](https://design-system.service.gov.uk).
 
 [hyperlink that doesn&#39;t turn purple](https://design-system.service.gov.uk){.no-visited-state}.</code></pre>
 <h3 id="bullets-and-numbered-lists" class="govuk-heading-m">Bullets and numbered lists</h3>
@@ -4336,7 +4336,7 @@ Second bullet
 Third bullet
 </li>
 </ul>
-<pre class="md"><code>* First bullet
+<pre><code class="language-md">* First bullet
   * Nested bullets are available but ...
   * ... they don&#39;t look very good because the GOV.UK Design System doesn&#39;t
     really support them.
@@ -4353,7 +4353,7 @@ Second numbered list item
 Third numbered list item
 </li>
 </ol>
-<pre class="md"><code>1. Numbered list item
+<pre><code class="language-md">1. Numbered list item
 1. Second numbered list item
 1. Third numbered list item</code></pre>
 <p class="govuk-body">
@@ -4372,7 +4372,7 @@ Unbulleted item three
 </li>
 </ul>
 </div>
-<pre class="md"><code>::: {.unbulleted-list}
+<pre><code class="language-md">::: {.unbulleted-list}
 * Unbulleted item one
 * Unbulleted item two
 * Unbulleted item three
@@ -4381,12 +4381,12 @@ Unbulleted item three
 <p class="govuk-body">
 The usual section break is available.
 </p>
-<pre class="md"><code>---</code></pre>
+<pre><code class="language-md">---</code></pre>
 <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
 <p class="govuk-body">
 The GOV.UK Design System supports several sizes of section break; govdown uses the largest. For the other sizes use the <a href="https://design-system.service.gov.uk/styles/typography/#section-break" class="govuk-link">raw HTML</a>.
 </p>
-<pre class="html"><code>&lt;hr class=&quot;govuk-section-break govuk-section-break--xl govuk-section-break--visible&quot;&gt;
+<pre><code class="language-html">&lt;hr class=&quot;govuk-section-break govuk-section-break--xl govuk-section-break--visible&quot;&gt;
 &lt;hr class=&quot;govuk-section-break govuk-section-break--l govuk-section-break--visible&quot;&gt;
 &lt;hr class=&quot;govuk-section-break govuk-section-break--m govuk-section-break--visible&quot;&gt;
 &lt;hr class=&quot;govuk-section-break govuk-section-break--visible&quot;&gt;</code></pre>
@@ -4414,7 +4414,7 @@ breadcrumbs
 </li>
 </ol>
 </div>
-<pre class="md"><code>::: {.breadcrumbs}
+<pre><code class="language-md">::: {.breadcrumbs}
 * [trail](index.html)
 * [of](index.html)
 * breadcrumbs
@@ -4426,7 +4426,7 @@ Tabs can be a helpful way of letting users quickly switch between related inform
 <p class="govuk-body">
 The syntax is different from normal R Markdown tabsets.
 </p>
-<pre class="md"><code>::: {.tabset}
+<pre><code class="language-md">::: {.tabset}
 # Header appears on narrow screens
 
 ## Tab header 1
@@ -4468,7 +4468,7 @@ The accordion component lets users show and hide sections of related content on 
 <p class="govuk-body">
 The syntax is similar to govdown tabsets.
 </p>
-<pre class="md"><code>::: {.accordion}
+<pre><code class="language-md">::: {.accordion}
 ## Writing well for the web
 
 This is the content for Writing well for the web.
@@ -4553,7 +4553,7 @@ The syntax uses the summary attribute to provide the top level information with 
 The details component requires Pandoc version 2.5 or more recent.
 </strong>
 </div>
-<pre class="md"><code>::: {.details summary=&quot;Details&quot;}
+<pre><code class="language-md">::: {.details summary=&quot;Details&quot;}
 
 Here are some details on the
 [Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service).
@@ -4574,19 +4574,19 @@ Multiple paragraphs can be contained in details.
 <p class="govuk-body">
 Code blocks work the same as they do in markdown and R Markdown. Code in R Markdown files (.Rmd suffix) will be evaluated, and the result interleaved below the code.
 </p>
-<pre class="r"><code>print(&quot;This code will not be evaluated&quot;)</code></pre>
-<pre class="r"><code>print(&quot;This code will be evaluated&quot;)</code></pre>
-<pre class="plaintext"><code>## [1] &quot;This code will be evaluated&quot;</code></pre>
+<pre><code class="language-r">print(&quot;This code will not be evaluated&quot;)</code></pre>
+<pre><code class="language-r">print(&quot;This code will be evaluated&quot;)</code></pre>
+<pre><code class="language-plaintext">## [1] &quot;This code will be evaluated&quot;</code></pre>
 <p class="govuk-body">
 Create code chunks that are not to be evaluated as follows.
 </p>
-<pre class="md"><code>    ```r
+<pre><code class="language-md">    ```r
     print(&quot;This code will not be evaluated&quot;)
     ```</code></pre>
 <p class="govuk-body">
 Create code chunks that are to be evaluated as follows.
 </p>
-<pre class="md"><code>    
+<pre><code class="language-md">    
     ```r
     print(&quot;This code will be evaluated&quot;)
     ```
@@ -4597,8 +4597,8 @@ Create code chunks that are to be evaluated as follows.
 <p class="govuk-body">
 Python code chunks also work, as do any of the languages supported by knitr.
 </p>
-<pre class="python"><code>&#39;Monty Python&#39;.split()</code></pre>
-<pre class="plaintext"><code>## [&#39;Monty&#39;, &#39;Python&#39;]</code></pre>
+<pre><code class="language-python">&#39;Monty Python&#39;.split()</code></pre>
+<pre><code class="language-plaintext">## [&#39;Monty&#39;, &#39;Python&#39;]</code></pre>
 <h3 id="images" class="govuk-heading-m">Images</h3>
 <p class="govuk-body">
 Images use the normal markdown syntax.
@@ -4610,7 +4610,7 @@ Images use the normal markdown syntax.
 <p class="govuk-body">
 All four kinds of <a href="https://pandoc.org/MANUAL.html#tables" class="govuk-link">pandoc tables</a> are work. Below is a common kind. Note that only left-aligned and right-aligned columns are supported in the GOV.UK Design System, and captions always appear above the table.
 </p>
-<pre class="plaintext"><code>Table: This is a table caption.
+<pre><code class="language-plaintext">Table: This is a table caption.
 
 | Right | Left | Default | Center |
 |------:|:-----|---------|:------:|
@@ -4680,7 +4680,7 @@ Center
 </tr>
 </tbody>
 </table>
-<pre class="plaintext"><code>Another table without a caption.
+<pre><code class="language-plaintext">Another table without a caption.
 
 | Right | Left | Default | Center |
 |------:|:-----|---------|:------:|
@@ -4756,7 +4756,7 @@ Center
 <p class="govuk-body">
 Tables can also be created from code chunks. This example in R uses <code>knitr::kable()</code>.
 </p>
-<pre class="r"><code>knitr::kable(head(mtcars[, 1:4]))</code></pre>
+<pre><code class="language-r">knitr::kable(head(mtcars[, 1:4]))</code></pre>
 <table class="govuk-table">
 <caption class="govuk-table__caption"></caption>
 <thead class="govuk-table__head">
