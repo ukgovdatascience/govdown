@@ -67,7 +67,7 @@ return {
       classReg = makeClasses(p.classes)
 
       local pre_code = string.format(
-        '<pre%s%s><code%s>%s</code></pre>', id, classReg, classLang, escape(p.text)
+        '<pre%s%s%s><code%s>%s</code></pre>', id, classLang, classReg, classLang, escape(p.text)
       )
       return pandoc.RawBlock('html', pre_code ,'RawBlock')
     end,
