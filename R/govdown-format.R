@@ -128,7 +128,8 @@ govdown_document <- function(keep_md = FALSE,
 
   pandoc_args <- NULL
 
-  lua <- pkg_file("rmarkdown/resources/govuk.lua")
+  govuk_lua <- pkg_file("rmarkdown/resources/govuk.lua")
+  highlight_lua <- pkg_file("rmarkdown/resources/highlight.lua")
   path_sep <- ifelse(.Platform$OS.type == "windows", ";", ":")
   resources <- paste0(".", path_sep, pkg_file("rmarkdown/resources"))
   template_html <- file_string(pkg_file("rmarkdown/resources/govuk.html"))
@@ -214,7 +215,8 @@ govdown_document <- function(keep_md = FALSE,
                         "--standalone",
                         "--self-contained",
                         "--template", template,
-                        "--lua-filter", lua,
+                        "--lua-filter", govuk_lua,
+                        "--lua-filter", highlight_lua,
                         "--resource-path", resources,
                         "--no-highlight",
                         "--mathjax"
