@@ -7,6 +7,7 @@
     * Only add underline to back link when href exists
     * Fixed text resize issue with warning text icon
     * Fixed height and alignment issue within header in Chrome 76+
+* Prevent highlightjs from highlighting the syntax of plain text.
 
 # govdown 0.7.0
 
