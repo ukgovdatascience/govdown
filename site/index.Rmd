@@ -46,6 +46,11 @@ check which version you have at the R console by typing
 issue](https://github.com/ukgovdatascience/govdown/issues/2) for advice on how
 to obtain a more recent version of pandoc.
 
+## Shiny
+
+If you are developing a Shiny application, then look at
+https://github.com/moj-analytical-services/shinyGovstyle.
+
 ## Creating standalone HTML pages
 
 Govdown HTML pages are created in the same way as R Markdown HTML pages.  Write

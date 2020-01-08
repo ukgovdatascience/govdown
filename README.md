@@ -14,6 +14,11 @@ Make websites with R Markdown styled with the GOV.UK Design System.  See the
 remotes::install_github("ukgovdatascience/govdown")
 ```
 
+## Shiny
+
+If you are developing a Shiny application, then look at
+https://github.com/moj-analytical-services/shinyGovstyle.
+
 ## Development
 
 Use `install-govuk-frontend.sh` to download, modify and compile the GOV.UK Design System to get the css files for the templates.
