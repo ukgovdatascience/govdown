@@ -1,8 +1,16 @@
-# govdown 0.7.1
+# govdown 0.8.0
+
+* Upgrade to GOV.UK Frontend release v3.4.0.  Some user-facing changes, see the
+  [GOV.UK Frontend release
+  notes](https://github.com/alphagov/govuk-frontend/releases/tag/v3.4.0)
+    * Improved contrast of secondary text
+    * Only add underline to back link when href exists
+    * Fixed text resize issue with warning text icon
+    * Fixed height and alignment issue within header in Chrome 76+
 
 # govdown 0.7.0
 
-* Upgrade to GOV.UK Frontent release v3.2.0. No user-facing changes.
+* Upgrade to GOV.UK Frontend release v3.2.0. No user-facing changes.
 * Add an accessibility statement
   * Fix a tabbing problem with code blocks (#45)
   * Stop code block text being shrunk (325e71b937f08034ef6ab9b83f0f7c8dc7fd07a9)
