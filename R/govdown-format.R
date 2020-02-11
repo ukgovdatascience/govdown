@@ -218,6 +218,7 @@ govdown_document <- function(keep_md = FALSE,
                         "--lua-filter", govuk_lua,
                         "--lua-filter", highlight_lua,
                         "--resource-path", resources,
+                        paste0("--metadata=title:", title),
                         "--no-highlight",
                         "--mathjax"
                         ),
