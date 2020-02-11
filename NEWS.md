@@ -1,5 +1,7 @@
 # govdown 0.9.0
 
+* Fix a pandoc warning about missing title elements.
+
 # govdown 0.8.0
 
 * Upgrade to GOV.UK Frontend release v3.4.0.  Some user-facing changes, see the
