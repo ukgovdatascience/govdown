@@ -1,6 +1,6 @@
 Package: govdown
 Title: GOV.UK Style Templates for R Markdown
-Version: 0.8.0
+Version: 0.9.0
 Authors@R:
     c(person(given = "Crown Copyright 2019",
              role = "cph"),
