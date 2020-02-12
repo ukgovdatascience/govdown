@@ -51,6 +51,12 @@ to obtain a more recent version of pandoc.
 If you are developing a Shiny application, then look at
 https://github.com/moj-analytical-services/shinyGovstyle.
 
+## Crosstalk
+
+If you use the [crosstalk](https://rstudio.github.io/crosstalk/) package for
+interactive commponents, then use the `govdown::unstrap()` function to prevent
+them from interfering with how the page is rendered.
+
 ## Creating standalone HTML pages
 
 Govdown HTML pages are created in the same way as R Markdown HTML pages.  Write

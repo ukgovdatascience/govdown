@@ -1,6 +1,8 @@
 # govdown 0.9.0
 
 * Fix a pandoc warning about missing title elements.
+* Provide `unstrap()` to remove unwanted Boostrap CSS from any crosstalk
+    components (#57)
 
 # govdown 0.8.0
 
