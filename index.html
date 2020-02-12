@@ -4189,6 +4189,10 @@ You need Pandoc version 2.0 or greater on your system to use Govdown. You can ch
 <p class="govuk-body">
 If you are developing a Shiny application, then look at <a href="https://github.com/moj-analytical-services/shinyGovstyle" class="uri govuk-link">https://github.com/moj-analytical-services/shinyGovstyle</a>.
 </p>
+<h2 id="crosstalk" class="govuk-heading-l">Crosstalk</h2>
+<p class="govuk-body">
+If you use the <a href="https://rstudio.github.io/crosstalk/" class="govuk-link">crosstalk</a> package for interactive commponents, then use the <code>govdown::unstrap()</code> function to prevent them from interfering with how the page is rendered.
+</p>
 <h2 id="creating-standalone-html-pages" class="govuk-heading-l">Creating standalone HTML pages</h2>
 <p class="govuk-body">
 Govdown HTML pages are created in the same way as R Markdown HTML pages. Write a markdown document (a plain text file with the suffix <code>.Rmd</code> or <code>.md</code> instead of <code>.txt</code>), and put something called ‘YAML metadata’ at the top. It should look like this:
