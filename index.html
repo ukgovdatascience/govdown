@@ -4139,792 +4139,791 @@ color: #d14;
 
   <div class="govuk-width-container">
     <main class="govuk-main-wrapper " id="main-content" role="main">
-            <h1 class="govuk-heading-xl">GOV.UK-style markdown documents</h1>
-            <h1 id="govdown" class="govuk-heading-xl">Govdown</h1>
-<div>
-<p class="govuk-body-l">
-Govdown is an R package for creating websites and standalone HTML pages that use the <a href="https://design-system.service.gov.uk/" class="govuk-link">GOV.UK Design System</a>. This website is an example.
-</p>
-</div>
-<p class="govuk-body">
-Use govdown in the same way as <a href="https://rmarkdown.rstudio.com/" class="govuk-link">R Markdown</a>, but specify <code>output: govdown::govdown_document</code> instead of <code>output: html_document</code> in the YAML metadata of the document, or in the <code>_site.yml</code> file of the website.
-</p>
-<div class="govuk-inset-text">
-<p class="govuk-body">
-You can’t publish govdown documents on the GOV.UK website itself. Please follow the normal guidance for <a href="https://www.gov.uk/guidance/how-to-publish-on-gov-uk" class="govuk-link">how to publish on GOV.UK</a>.
-</p>
-</div>
-<h2 id="examples" class="govuk-heading-l">Examples</h2>
-<p class="govuk-body">
-These websites and documents use govdown.
-</p>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-<a href="https://ukgovdatascience.github.io/rap-website/" class="uri govuk-link">https://ukgovdatascience.github.io/rap-website/</a>
-</li>
-<li class="govuk-body">
-<a href="https://co-analysis.github.io/csmapping/cs_lad_2019.html" class="uri govuk-link">https://co-analysis.github.io/csmapping/cs_lad_2019.html</a> (<a href="https://co-analysis.github.io/csmapping/cs_lad_2018.html" class="govuk-link">2018 version</a>)
-</li>
-<li class="govuk-body">
-<a href="https://mattkerlogue.github.io/coding-guide/" class="uri govuk-link">https://mattkerlogue.github.io/coding-guide/</a>
-</li>
-<li class="govuk-body">
-<a href="https://matt-dray.github.io/drake-egg-rap/egg-report.html" class="uri govuk-link">https://matt-dray.github.io/drake-egg-rap/egg-report.html</a>
-</li>
-</ul>
-<h2 id="installation" class="govuk-heading-l">Installation</h2>
-<p class="govuk-body">
-You can install the released version of govdown from <a href="https://CRAN.R-project.org" class="govuk-link">CRAN</a> with:
-</p>
-<pre class="language-r"><code class="language-r">install.packages(&quot;govdown&quot;)</code></pre>
-<p class="govuk-body">
-And the development version from <a href="https://github.com/" class="govuk-link">GitHub</a> with:
-</p>
-<pre class="language-r"><code class="language-r"># install.packages(&quot;devtools&quot;) # if devtools is not already installed
-devtools::install_github(&quot;ukgovdatascience/govdown&quot;)</code></pre>
-<p class="govuk-body">
-You need Pandoc version 2.0 or greater on your system to use Govdown. You can check which version you have at the R console by typing <code>rmarkdown::pandoc_version()</code>. Look at this <a href="https://github.com/ukgovdatascience/govdown/issues/2" class="govuk-link">GitHub issue</a> for advice on how to obtain a more recent version of pandoc.
-</p>
-<h2 id="shiny" class="govuk-heading-l">Shiny</h2>
-<p class="govuk-body">
-If you are developing a Shiny application, then look at <a href="https://github.com/moj-analytical-services/shinyGovstyle" class="uri govuk-link">https://github.com/moj-analytical-services/shinyGovstyle</a>.
-</p>
-<h2 id="crosstalk" class="govuk-heading-l">Crosstalk</h2>
-<p class="govuk-body">
-If you use the <a href="https://rstudio.github.io/crosstalk/" class="govuk-link">crosstalk</a> package for interactive commponents, then use the <code>govdown::unstrap()</code> function to prevent them from interfering with how the page is rendered.
-</p>
-<h2 id="creating-standalone-html-pages" class="govuk-heading-l">Creating standalone HTML pages</h2>
-<p class="govuk-body">
-Govdown HTML pages are created in the same way as R Markdown HTML pages. Write a markdown document (a plain text file with the suffix <code>.Rmd</code> or <code>.md</code> instead of <code>.txt</code>), and put something called ‘YAML metadata’ at the top. It should look like this:
-</p>
-<pre class="language-yaml"><code class="language-yaml">---
-output:
-  govdown::govdown_document:
-    font: &quot;sans-serif&quot; # (default) or &quot;new-transport&quot;
-    favicon: &quot;custom&quot; # or &quot;none&quot; (default) or &quot;govuk&quot; see ?govdown_document
-    logo: &quot;images/logo.svg&quot; # or false (default)
-    logo_url: &quot;https://ukgovdatascience.github.io/govdown&quot;
-    logo_text: &quot;logo_text&quot;
-    page_title: &quot;page_title&quot;
-    title: &quot;title&quot;
-    phase: alpha
-    feedback_url: &quot;https://github.com/ukgovdatascience/govdown/issues&quot;
-    google_analytics: &quot;UA-12345678-90&quot;
----</code></pre>
-<pre class="language-plaintext"><code class="language-plaintext">This is a study of official statistics in the UK.</code></pre>
-<p class="govuk-body">
-To render that file to HTML, run <code>rmarkdown::render(&quot;filename.Rmd&quot;)</code> in the console, or click the ‘knit’ button in RStudio.
-</p>
-<p class="govuk-body">
-You must use <code>font: &quot;sans-serif&quot;</code> unless the page is hosted on the gov.uk domain.
-</p>
-<h2 id="creating-websites" class="govuk-heading-l">Creating websites</h2>
-<p class="govuk-body">
-Websites are created in the same way as R Markdown websites. Write a set of markdown documents (plain text files with the suffix <code>.Rmd</code> or <code>.md</code> instead of <code>.txt</code>), and a configuration file called <code>_site.yml</code> with content like the following:
-</p>
-<pre class="language-yaml"><code class="language-yaml">output_dir: docs # to host on GitHub pages
-navbar: # links to include in the bar at the top of every page
-  - text: &quot;Home&quot;
-    href: index.html
-  - text: &quot;Tech docs&quot;
-    href: tech-docs.html
-  - text: &quot;News&quot;
-    href: NEWS.html
-output:
-  govdown::govdown_document:
-    font: &quot;sans-serif&quot; # (default) or &quot;new-transport&quot;
-    favicon: &quot;custom&quot; # or &quot;none&quot; (default) or &quot;govuk&quot; see ?govdown_document
-    logo: &quot;images/logo.svg&quot; # or false (default)
-    logo_url: &quot;https://ukgovdatascience.github.io/govdown&quot;
-    logo_text: &quot;logo_text&quot;
-    page_title: &quot;page_title&quot;
-    title: &quot;title&quot;
-    phase: alpha
-    feedback_url: &quot;https://github.com/ukgovdatascience/govdown/issues&quot;
-    google_analytics: &quot;UA-12345678-90&quot;</code></pre>
-<p class="govuk-body">
-That example shows all the possible configuration. You don’t have to set a <code>logo</code> or <code>favicon</code> or have any <code>links</code> (although you probably should eventually), and if you don’t set an alpha or beta <code>phase</code> banner then you won’t need a <code>feedback_url</code>. However you must set <code>font: &quot;sans-serif&quot;</code> unless the website is hosted on the gov.uk domain. Set <code>output_dir: docs</code> if you will deploy the site on GitHub pages, otherwise refer to the R Markdown documentation on <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html#publishing-websites" class="govuk-link">publishing websites</a>.
-</p>
-<p class="govuk-body">
-To render the website, run <code>rmarkdown::render_site()</code> in the console, or click the ‘Build Website’ button in RStudio Build panel.
-</p>
-<h2 id="supported-markdown-syntax" class="govuk-heading-l">Supported markdown syntax</h2>
-<p class="govuk-body">
-Most of the usual markdown syntax is supported. There is some new syntax for special features of the GOV.UK Design System.
-</p>
-<p class="govuk-body">
-Where syntax isn’t supported, that might be because research by contributors to the GOV.UK Design System found the features to be detrimental. Govdown defers to the GOV.UK Design System in these cases.
-</p>
-<h3 id="headings" class="govuk-heading-m">Headings</h3>
-<p class="govuk-body">
-Create headings by beginning a new line of text with a <code>#</code> symbol.
-</p>
-<pre class="language-md"><code class="language-md"># Pithy heading
-
-Rambling content.</code></pre>
-<p class="govuk-body">
-Subheadings have more <code>#</code>s
-</p>
-<pre class="language-md"><code class="language-md">## Helpful subheading
-
-### Can&#39;t remember what the main topic was?
-
-#### Four levels of headings are available!</code></pre>
-<h3 id="headings-with-captions" class="govuk-heading-m"><span class="govuk-caption-m">This is a caption</span>Headings with captions</h3>
-<p class="govuk-body">
-The GOV.UK Design System supports captions above <a href="https://design-system.service.gov.uk/styles/typography/#headings" class="govuk-link">headers</a>. This works for headings of level 1, 2 and 3, but not for the smallest headings (level 4).
-</p>
-<pre class="language-md"><code class="language-md"># Heading with caption above {caption=&quot;This is a caption&quot;}</code></pre>
-<h3 id="bold-italics-and-strike-through" class="govuk-heading-m">Bold, italics and strike-through</h3>
-<p class="govuk-body">
-<span class="govuk-!-font-weight-bold">Bold</span> works as normal, but italics and strike-through are disabled because they are not supported by the GOV.UK Design System.
-</p>
-<pre class="language-md"><code class="language-md">**Bold** works as normal, but *italics* and ~~strike-through~~ are disabled.</code></pre>
-<h3 id="lead-paragraphs-and-small-text" class="govuk-heading-m">Lead paragraphs and small text</h3>
-<p class="govuk-body">
-The GOV.UK Design System supports <a href="https://design-system.service.gov.uk/styles/typography/#paragraphs" class="govuk-link">larger and smaller text for paragraphs</a>. Large text is for a single lead paragraph at the top of a page. See the top of this page for an example.
-</p>
-<div>
-<p class="govuk-body-s">
-Small text looks like this.
-</p>
-</div>
-<pre class="language-md"><code class="language-md">::: {.lead-para}
-This is a lead paragraph that appears in larger text than the rest of the body
-text of the page.
-:::
-
-This is a normal paragraph in normal size.
-
-::: {.small-para}
-You can write in small letters too.
-:::</code></pre>
-<h3 id="indented-text-quotations" class="govuk-heading-m">Indented text (quotations)</h3>
-<p class="govuk-body">
-Indented text (often used for block quotations) works as normal.
-</p>
-<div class="govuk-inset-text">
-<p class="govuk-body">
-United wishes and good will cannot overcome brute facts. Truth is incontrovertible. Panic may resent it. Ignorance may deride it. Malice may distort it. But there it is. – Winston Churchill
-</p>
-</div>
-<pre class="language-md"><code class="language-md">&gt; United wishes and good will cannot overcome brute facts.  Truth is
-&gt; incontrovertible. Panic may resent it. Ignorance may deride it. Malice may
-&gt; distort it. But there it is. -- Winston Churchill</code></pre>
-<h3 id="warnings" class="govuk-heading-m">Warnings</h3>
-<p class="govuk-body">
-Use the <a href="https://design-system.service.gov.uk/components/warning-text/" class="govuk-link">Warning text</a> when you need to warn users about something important, such as legal consequences of an action, or lack of action, that they might take.
-</p>
-<div class="govuk-warning-text"><span class="govuk-warning-text__icon" aria-hidden="true">!</span><strong class="govuk-warning-text__text"><span class="govuk-warning-text__assistive">Warning</span>
-Fee fi fo fum
-</strong>
-</div>
-<pre class="language-md"><code class="language-md">::: {.warning}
-Fee fi fo fum
-:::</code></pre>
-<h3 id="hyperlinks" class="govuk-heading-m">Hyperlinks</h3>
-<p class="govuk-body">
-Hyperlinks work as normal. The GOV.UK Design System also supports <a href="https://design-system.service.gov.uk/styles/typography/#links" class="govuk-link--no-visited-state govuk-link">hyperlinks that don’t change colour</a> when you have visited the page.
-</p>
-<pre class="language-md"><code class="language-md">[normal hyperlink](https://design-system.service.gov.uk).
-
-[hyperlink that doesn&#39;t turn purple](https://design-system.service.gov.uk){.no-visited-state}.</code></pre>
-<h3 id="bullets-and-numbered-lists" class="govuk-heading-m">Bullets and numbered lists</h3>
-<p class="govuk-body">
-Bulletted and nested lists work as normal, except that nested lists don’t look very good because they aren’t supported by the GOV.UK Design System. Govdown defers to the designers who made this decision, but if you have evidence of a need for nested lists, please submit it to the GOV.UK Design System by opening a new GitHub issue on the <a href="https://github.com/alphagov/govuk-frontend/issues" class="govuk-link">GOV.UK frontend repository</a>.
-</p>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-First bullet
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-Nested bullets are available but …
-</li>
-<li class="govuk-body">
-… they don’t look very good because the GOV.UK Design System doesn’t really support them.
-</li>
-</ul>
-</li>
-<li class="govuk-body">
-Second bullet
-</li>
-<li class="govuk-body">
-Third bullet
-</li>
-</ul>
-<pre class="language-md"><code class="language-md">* First bullet
-  * Nested bullets are available but ...
-  * ... they don&#39;t look very good because the GOV.UK Design System doesn&#39;t
-    really support them.
-* Second bullet
-* Third bullet</code></pre>
-<ol class="govuk-list govuk-list--number">
-<li class="govuk-body">
-Numbered list item
-</li>
-<li class="govuk-body">
-Second numbered list item
-</li>
-<li class="govuk-body">
-Third numbered list item
-</li>
-</ol>
-<pre class="language-md"><code class="language-md">1. Numbered list item
-1. Second numbered list item
-1. Third numbered list item</code></pre>
-<p class="govuk-body">
-The GOV.UK Design System also supports lists with neither bullets nor numbers. Standard markdown doesn’t have any syntax for this, so create a bulletted list and wrap it with a special marker, shown below.
-</p>
-<div>
-<ul class="govuk-list">
-<li>
-Unbulleted item one
-</li>
-<li>
-Unbulleted item two
-</li>
-<li>
-Unbulleted item three
-</li>
-</ul>
-</div>
-<pre class="language-md"><code class="language-md">::: {.unbulleted-list}
-* Unbulleted item one
-* Unbulleted item two
-* Unbulleted item three
-:::</code></pre>
-<h3 id="section-breaks" class="govuk-heading-m">Section breaks</h3>
-<p class="govuk-body">
-The usual section break is available.
-</p>
-<pre class="language-md"><code class="language-md">---</code></pre>
-<hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
-<p class="govuk-body">
-The GOV.UK Design System supports several sizes of section break; govdown uses the largest. For the other sizes use the <a href="https://design-system.service.gov.uk/styles/typography/#section-break" class="govuk-link">raw HTML</a>.
-</p>
-<pre class="language-html"><code class="language-html">&lt;hr class=&quot;govuk-section-break govuk-section-break--xl govuk-section-break--visible&quot;&gt;
-&lt;hr class=&quot;govuk-section-break govuk-section-break--l govuk-section-break--visible&quot;&gt;
-&lt;hr class=&quot;govuk-section-break govuk-section-break--m govuk-section-break--visible&quot;&gt;
-&lt;hr class=&quot;govuk-section-break govuk-section-break--visible&quot;&gt;</code></pre>
-<hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
-<hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
-<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
-<hr class="govuk-section-break govuk-section-break--visible">
-<p class="govuk-body">
-</br>
-</p>
-<h3 id="breadcrumbs" class="govuk-heading-m">Breadcrumbs</h3>
-<p class="govuk-body">
-The GOV.UK Design System uses <a href="https://design-system.service.gov.uk/components/breadcrumbs/" class="govuk-link">breadcrumbs</a> to help users know where they are on a website. They are used at the top of a page.
-</p>
-<div class="govuk-breadcrumbs">
-<ol class="govuk-breadcrumbs__list">
-<li class="govuk-breadcrumbs__list-item">
-<a href="index.html" class="govuk-breadcrumbs__link govuk-link">trail</a>
-</li>
-<li class="govuk-breadcrumbs__list-item">
-<a href="index.html" class="govuk-breadcrumbs__link govuk-link">of</a>
-</li>
-<li class="govuk-breadcrumbs__list-item">
-breadcrumbs
-</li>
-</ol>
-</div>
-<pre class="language-md"><code class="language-md">::: {.breadcrumbs}
-* [trail](index.html)
-* [of](index.html)
-* breadcrumbs
-:::</code></pre>
-<h3 id="tabsets" class="govuk-heading-m">Tabsets</h3>
-<p class="govuk-body">
-Tabs can be a helpful way of letting users quickly switch between related information. See the guidance on the <a href="https://design-system.service.gov.uk/components/tabs/" class="govuk-link">GOV.UK Design System</a>.
-</p>
-<p class="govuk-body">
-The syntax is different from normal R Markdown tabsets.
-</p>
-<pre class="language-md"><code class="language-md">::: {.tabset}
-# Header appears on narrow screens
-
-## Tab header 1
-
-Tab content A
-
-## Tab header 2
-
-Tab content B
-
-Second paragraph of content.
-:::</code></pre>
-<div class="govuk-tabs" data-module="govuk-tabs">
-<h2 id="header-appears-on-narrow-screens" class="govuk-tabs__title govuk-heading-l">Header appears on narrow screens</h2>
-<ul class="govuk-tabs__list">
-<li class="govuk-tabs__list-item"><a class="govuk-tabs__tab govuk-tabs__tab--selected" href="#tab-header-1">Tab header 1</a>
-<li class="govuk-tabs__list-item"><a class="govuk-tabs__tab govuk-tabs__tab--selected" href="#tab-header-2">Tab header 2</a>
-</ul>
-<section class="govuk-tabs__panel" id="tab-header-1">
-<h2 class="govuk-heading-l">Tab header 1</h2>
-<p class="govuk-body">
-Tab content A
-</p>
-</section>
-<section class="govuk-tabs__panel" id="tab-header-2">
-<h2 class="govuk-heading-l">Tab header 2</h2>
-<p class="govuk-body">
-Tab content B
-</p>
-<p class="govuk-body">
-Second paragraph of content.
-</p>
-</section>
-</div>
-<h3 id="accordions" class="govuk-heading-m">Accordions</h3>
-<p class="govuk-body">
-The accordion component lets users show and hide sections of related content on a page. See the guidance on the <a href="https://design-system.service.gov.uk/components/accordion/" class="govuk-link">GOV.UK Design System</a>.
-</p>
-<p class="govuk-body">
-The syntax is similar to govdown tabsets.
-</p>
-<pre class="language-md"><code class="language-md">::: {.accordion}
-## Writing well for the web
-
-This is the content for Writing well for the web.
-
-## Writing well for specialists
-
-This is the content for Writing well for specialists.
-
-## Know your audience
-
-This is the content for Know your audience.
-
-## How people read
-
-This is the content for How people read.
-:::</code></pre>
-<div class="govuk-accordion" data-module="govuk-accordion" id="accordion-1">
-<div class="govuk-accordion__section">
-<div class="govuk-accordion__section-header">
-<h2 class="govuk-accordion__section-heading">
-<span class="govuk-accordion__section-button" id="accordion-1-heading-1">
-Writing well for the web
-</span>
-</h2>
-</div>
-<div id="accordion-1-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-1-heading-1">
-<p class="govuk-body">
-This is the content for Writing well for the web.
-</p>
-</div></div>
-<div class="govuk-accordion__section">
-<div class="govuk-accordion__section-header">
-<h2 class="govuk-accordion__section-heading">
-<span class="govuk-accordion__section-button" id="accordion-1-heading-2">
-Writing well for specialists
-</span>
-</h2>
-</div>
-<div id="accordion-1-content-2" class="govuk-accordion__section-content" aria-labelledby="accordion-1-heading-2">
-<p class="govuk-body">
-This is the content for Writing well for specialists.
-</p>
-</div></div>
-<div class="govuk-accordion__section">
-<div class="govuk-accordion__section-header">
-<h2 class="govuk-accordion__section-heading">
-<span class="govuk-accordion__section-button" id="accordion-1-heading-3">
-Know your audience
-</span>
-</h2>
-</div>
-<div id="accordion-1-content-3" class="govuk-accordion__section-content" aria-labelledby="accordion-1-heading-3">
-<p class="govuk-body">
-This is the content for Know your audience.
-</p>
-</div></div>
-<div class="govuk-accordion__section">
-<div class="govuk-accordion__section-header">
-<h2 class="govuk-accordion__section-heading">
-<span class="govuk-accordion__section-button" id="accordion-1-heading-4">
-How people read
-</span>
-</h2>
-</div>
-<div id="accordion-1-content-4" class="govuk-accordion__section-content" aria-labelledby="accordion-1-heading-4">
-<p class="govuk-body">
-This is the content for How people read.
-</p>
-</div></div>
-</div>
-<p class="govuk-body">
-</br>
-</p>
-<h3 id="details" class="govuk-heading-m">Details</h3>
-<p class="govuk-body">
-Details make a page easier to scan by letting users reveal more detailed information only if they need it. As with Tabs, guidance can be found on the <a href="https://design-system.service.gov.uk/components/details/" class="govuk-link">GOV.UK Design System</a>.
-</p>
-<p class="govuk-body">
-The syntax uses the summary attribute to provide the top level information with the content provided by the text within.
-</p>
-<div class="govuk-warning-text"><span class="govuk-warning-text__icon" aria-hidden="true">!</span><strong class="govuk-warning-text__text"><span class="govuk-warning-text__assistive">Warning</span>
-The details component requires Pandoc version 2.5 or more recent.
-</strong>
-</div>
-<pre class="language-md"><code class="language-md">::: {.details summary=&quot;Details&quot;}
-
-Here are some details on the
-[Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service).
-
-Multiple paragraphs can be contained in details.
-
-:::</code></pre>
-<details class="govuk-details" data-module="govuk-details"><summary class="govuk-details__summary"><span class="govuk-details__summary-text">Details</span></summary><div class="govuk-details__text">
-<p class="govuk-body">
-Here are some details on the <a href="https://www.gov.uk/government/organisations/government-digital-service" class="govuk-link">Government Digital Service</a>.
-</p>
-<p class="govuk-body">
-Multiple paragraphs can be contained in details.
-</p>
-</div>
-</details>
-<h3 id="code-blocks" class="govuk-heading-m">Code blocks</h3>
-<p class="govuk-body">
-Code blocks work the same as they do in markdown and R Markdown. Code in R Markdown files (.Rmd suffix) will be evaluated, and the result interleaved below the code.
-</p>
-<pre class="language-r"><code class="language-r">print(&quot;This code will not be evaluated&quot;)</code></pre>
-<pre class="language-r"><code class="language-r">print(&quot;This code will be evaluated&quot;)</code></pre>
-<pre class="language-plaintext"><code class="language-plaintext">## [1] &quot;This code will be evaluated&quot;</code></pre>
-<p class="govuk-body">
-Create code chunks that are not to be evaluated as follows.
-</p>
-<pre class="language-md"><code class="language-md">    ```r
-    print(&quot;This code will not be evaluated&quot;)
-    ```</code></pre>
-<p class="govuk-body">
-Create code chunks that are to be evaluated as follows.
-</p>
-<pre class="language-md"><code class="language-md">    
-    ```r
-    print(&quot;This code will be evaluated&quot;)
-    ```
-    
-    ```
-    ## [1] &quot;This code will be evaluated&quot;
-    ```</code></pre>
-<p class="govuk-body">
-Python code chunks also work, as do any of the languages supported by knitr.
-</p>
-<pre class="language-python"><code class="language-python">&#39;Monty Python&#39;.split()</code></pre>
-<pre class="language-plaintext"><code class="language-plaintext">## [&#39;Monty&#39;, &#39;Python&#39;]</code></pre>
-<h3 id="images" class="govuk-heading-m">Images</h3>
-<p class="govuk-body">
-Images use the normal markdown syntax.
-</p>
-<p class="govuk-body">
-<img src="data:image/png;base64,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" alt="caption text" />
-</p>
-<h3 id="tables" class="govuk-heading-m">Tables</h3>
-<p class="govuk-body">
-All four kinds of <a href="https://pandoc.org/MANUAL.html#tables" class="govuk-link">pandoc tables</a> are work. Below is a common kind. Note that only left-aligned and right-aligned columns are supported in the GOV.UK Design System, and captions always appear above the table.
-</p>
-<pre class="language-plaintext"><code class="language-plaintext">Table: This is a table caption.
-
-| Right | Left | Default | Center |
-|------:|:-----|---------|:------:|
-|   12  |  12  |    12   |    12  |
-|  123  |  123 |   123   |   123  |
-|    1  |    1 |     1   |     1  |</code></pre>
-<table class="govuk-table">
-<caption class="govuk-table__caption">This is a table caption.</caption>
-<thead class="govuk-table__head">
-<tr class="govuk-table__row">
-<th class="govuk-table__header govuk-table__header--numeric" scope="col">
-Right
-</th>
-<th class="govuk-table__header" scope="col">
-Left
-</th>
-<th class="govuk-table__header" scope="col">
-Default
-</th>
-<th class="govuk-table__header" scope="col">
-Center
-</th>
-</tr>
-</thead>
-<tbody class="govuk-table__body">
-<tr class="govuk-table__row">
-<td class="govuk-table__cell govuk-table__cell--numeric">
-12
-</td>
-<td class="govuk-table__cell">
-12
-</td>
-<td class="govuk-table__cell">
-12
-</td>
-<td class="govuk-table__cell">
-12
-</td>
-</tr>
-<tr class="govuk-table__row">
-<td class="govuk-table__cell govuk-table__cell--numeric">
-123
-</td>
-<td class="govuk-table__cell">
-123
-</td>
-<td class="govuk-table__cell">
-123
-</td>
-<td class="govuk-table__cell">
-123
-</td>
-</tr>
-<tr class="govuk-table__row">
-<td class="govuk-table__cell govuk-table__cell--numeric">
-1
-</td>
-<td class="govuk-table__cell">
-1
-</td>
-<td class="govuk-table__cell">
-1
-</td>
-<td class="govuk-table__cell">
-1
-</td>
-</tr>
-</tbody>
-</table>
-<pre class="language-plaintext"><code class="language-plaintext">Another table without a caption.
-
-| Right | Left | Default | Center |
-|------:|:-----|---------|:------:|
-|   12  |  12  |    12   |    12  |
-|  123  |  123 |   123   |   123  |
-|    1  |    1 |     1   |     1  |</code></pre>
-<p class="govuk-body">
-Another table without a caption.
-</p>
-<table class="govuk-table">
-<caption class="govuk-table__caption"></caption>
-<thead class="govuk-table__head">
-<tr class="govuk-table__row">
-<th class="govuk-table__header govuk-table__header--numeric" scope="col">
-Right
-</th>
-<th class="govuk-table__header" scope="col">
-Left
-</th>
-<th class="govuk-table__header" scope="col">
-Default
-</th>
-<th class="govuk-table__header" scope="col">
-Center
-</th>
-</tr>
-</thead>
-<tbody class="govuk-table__body">
-<tr class="govuk-table__row">
-<td class="govuk-table__cell govuk-table__cell--numeric">
-12
-</td>
-<td class="govuk-table__cell">
-12
-</td>
-<td class="govuk-table__cell">
-12
-</td>
-<td class="govuk-table__cell">
-12
-</td>
-</tr>
-<tr class="govuk-table__row">
-<td class="govuk-table__cell govuk-table__cell--numeric">
-123
-</td>
-<td class="govuk-table__cell">
-123
-</td>
-<td class="govuk-table__cell">
-123
-</td>
-<td class="govuk-table__cell">
-123
-</td>
-</tr>
-<tr class="govuk-table__row">
-<td class="govuk-table__cell govuk-table__cell--numeric">
-1
-</td>
-<td class="govuk-table__cell">
-1
-</td>
-<td class="govuk-table__cell">
-1
-</td>
-<td class="govuk-table__cell">
-1
-</td>
-</tr>
-</tbody>
-</table>
-<p class="govuk-body">
-Tables can also be created from code chunks. This example in R uses <code>knitr::kable()</code>.
-</p>
-<pre class="language-r"><code class="language-r">knitr::kable(head(mtcars[, 1:4]))</code></pre>
-<table class="govuk-table">
-<caption class="govuk-table__caption"></caption>
-<thead class="govuk-table__head">
-<tr class="govuk-table__row">
-<th class="govuk-table__header" scope="col">
-</th>
-<th class="govuk-table__header govuk-table__header--numeric" scope="col">
-mpg
-</th>
-<th class="govuk-table__header govuk-table__header--numeric" scope="col">
-cyl
-</th>
-<th class="govuk-table__header govuk-table__header--numeric" scope="col">
-disp
-</th>
-<th class="govuk-table__header govuk-table__header--numeric" scope="col">
-hp
-</th>
-</tr>
-</thead>
-<tbody class="govuk-table__body">
-<tr class="govuk-table__row">
-<td class="govuk-table__cell">
-Mazda RX4
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-21.0
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-6
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-160
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-110
-</td>
-</tr>
-<tr class="govuk-table__row">
-<td class="govuk-table__cell">
-Mazda RX4 Wag
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-21.0
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-6
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-160
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-110
-</td>
-</tr>
-<tr class="govuk-table__row">
-<td class="govuk-table__cell">
-Datsun 710
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-22.8
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-4
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-108
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-93
-</td>
-</tr>
-<tr class="govuk-table__row">
-<td class="govuk-table__cell">
-Hornet 4 Drive
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-21.4
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-6
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-258
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-110
-</td>
-</tr>
-<tr class="govuk-table__row">
-<td class="govuk-table__cell">
-Hornet Sportabout
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-18.7
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-8
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-360
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-175
-</td>
-</tr>
-<tr class="govuk-table__row">
-<td class="govuk-table__cell">
-Valiant
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-18.1
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-6
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-225
-</td>
-<td class="govuk-table__cell govuk-table__cell--numeric">
-105
-</td>
-</tr>
-</tbody>
-</table>
-<p class="govuk-body">
-If kable doesn’t produce a table that looks like the one above, then try using the <code>format</code> argument, for example <code>kable(mtcars, format = &quot;markdown&quot;)</code> or <code>kable(mtcars, format = &quot;pandoc&quot;)</code>. You will need to do that if the <code>kableExtra</code> package is loaded, because <code>kableExtra</code> sets a global option. Check the value of <code>getOption(&quot;knitr.table.format&quot;)</code> to see if that option has been set. If <code>kableExtra</code> isn’t loaded, then the option might be set in your <code>.Rprofile</code>, which you can open with <code>usethis::edit_r_profile()</code>.
-</p>
-<h3 id="mathematical-equations" class="govuk-heading-m">Mathematical equations</h3>
-<p class="govuk-body">
-Mathjax is supported as normal, by wrapping the equation in <code>$</code> symbols (inline equations) or in <code>$$</code> symbols on their own line (block equations).
-</p>
-<p class="govuk-body">
-Here’s some inline mathjax <span class="math inline">\(\sum_0^{2e} \alpha_i \mathrm{dt}\)</span>. Here’s some block mathjax
-</p>
-<p class="govuk-body">
-<span class="math display">\[
-\begin{align}
-s_i &amp; \sim \mathrm{Binomial}(n_i, p_i) \\
-\mathrm{logit}(p_i) &amp; = \alpha_{\small{TANK}[i]} \\
-\alpha_{\small{TANK}} &amp; \sim \mathrm{Normal}(0, 5)
-\end{align}
-\]</span>
-</p>
-<h2 id="contribute-to-the-development-of-govdown" class="govuk-heading-l">Contribute to the development of govdown</h2>
-<p class="govuk-body">
-Use <code>install-govuk-frontend.sh</code> to download, modify and compile the GOV.UK Design System to get the css files for the templates.
-</p>
-<h3 id="prerequisites" class="govuk-heading-m">Prerequisites</h3>
-<p class="govuk-body">
-The <code>sassc</code> command-line tool. If you can’t get that to work, try the <code>sass</code> package by RStudio, which wraps it.
-</p>
+      <h1 id="govdown" class="govuk-heading-xl">Govdown</h1>
+      <div>
+      <p class="govuk-body-l">
+      Govdown is an R package for creating websites and standalone HTML pages that use the <a href="https://design-system.service.gov.uk/" class="govuk-link">GOV.UK Design System</a>. This website is an example.
+      </p>
+      </div>
+      <p class="govuk-body">
+      Use govdown in the same way as <a href="https://rmarkdown.rstudio.com/" class="govuk-link">R Markdown</a>, but specify <code>output: govdown::govdown_document</code> instead of <code>output: html_document</code> in the YAML metadata of the document, or in the <code>_site.yml</code> file of the website.
+      </p>
+      <div class="govuk-inset-text">
+      <p class="govuk-body">
+      You can’t publish govdown documents on the GOV.UK website itself. Please follow the normal guidance for <a href="https://www.gov.uk/guidance/how-to-publish-on-gov-uk" class="govuk-link">how to publish on GOV.UK</a>.
+      </p>
+      </div>
+      <h2 id="examples" class="govuk-heading-l">Examples</h2>
+      <p class="govuk-body">
+      These websites and documents use govdown.
+      </p>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      <a href="https://ukgovdatascience.github.io/rap-website/" class="uri govuk-link">https://ukgovdatascience.github.io/rap-website/</a>
+      </li>
+      <li class="govuk-body">
+      <a href="https://co-analysis.github.io/csmapping/cs_lad_2019.html" class="uri govuk-link">https://co-analysis.github.io/csmapping/cs_lad_2019.html</a> (<a href="https://co-analysis.github.io/csmapping/cs_lad_2018.html" class="govuk-link">2018 version</a>)
+      </li>
+      <li class="govuk-body">
+      <a href="https://mattkerlogue.github.io/coding-guide/" class="uri govuk-link">https://mattkerlogue.github.io/coding-guide/</a>
+      </li>
+      <li class="govuk-body">
+      <a href="https://matt-dray.github.io/drake-egg-rap/egg-report.html" class="uri govuk-link">https://matt-dray.github.io/drake-egg-rap/egg-report.html</a>
+      </li>
+      </ul>
+      <h2 id="installation" class="govuk-heading-l">Installation</h2>
+      <p class="govuk-body">
+      You can install the released version of govdown from <a href="https://CRAN.R-project.org" class="govuk-link">CRAN</a> with:
+      </p>
+      <pre class="language-r"><code class="language-r">install.packages(&quot;govdown&quot;)</code></pre>
+      <p class="govuk-body">
+      And the development version from <a href="https://github.com/" class="govuk-link">GitHub</a> with:
+      </p>
+      <pre class="language-r"><code class="language-r"># install.packages(&quot;devtools&quot;) # if devtools is not already installed
+      devtools::install_github(&quot;ukgovdatascience/govdown&quot;)</code></pre>
+      <p class="govuk-body">
+      You need Pandoc version 2.0 or greater on your system to use Govdown. You can check which version you have at the R console by typing <code>rmarkdown::pandoc_version()</code>. Look at this <a href="https://github.com/ukgovdatascience/govdown/issues/2" class="govuk-link">GitHub issue</a> for advice on how to obtain a more recent version of pandoc.
+      </p>
+      <h2 id="shiny" class="govuk-heading-l">Shiny</h2>
+      <p class="govuk-body">
+      If you are developing a Shiny application, then look at <a href="https://github.com/moj-analytical-services/shinyGovstyle" class="uri govuk-link">https://github.com/moj-analytical-services/shinyGovstyle</a>.
+      </p>
+      <h2 id="crosstalk" class="govuk-heading-l">Crosstalk</h2>
+      <p class="govuk-body">
+      If you use the <a href="https://rstudio.github.io/crosstalk/" class="govuk-link">crosstalk</a> package for interactive commponents, then use the <code>govdown::unstrap()</code> function to prevent them from interfering with how the page is rendered.
+      </p>
+      <h2 id="creating-standalone-html-pages" class="govuk-heading-l">Creating standalone HTML pages</h2>
+      <p class="govuk-body">
+      Govdown HTML pages are created in the same way as R Markdown HTML pages. Write a markdown document (a plain text file with the suffix <code>.Rmd</code> or <code>.md</code> instead of <code>.txt</code>), and put something called ‘YAML metadata’ at the top. It should look like this:
+      </p>
+      <pre class="language-yaml"><code class="language-yaml">---
+      output:
+        govdown::govdown_document:
+          font: &quot;sans-serif&quot; # (default) or &quot;new-transport&quot;
+          favicon: &quot;custom&quot; # or &quot;none&quot; (default) or &quot;govuk&quot; see ?govdown_document
+          logo: &quot;images/logo.svg&quot; # or false (default)
+          logo_url: &quot;https://ukgovdatascience.github.io/govdown&quot;
+          logo_text: &quot;logo_text&quot;
+          page_title: &quot;page_title&quot;
+          title: &quot;title&quot;
+          phase: alpha
+          feedback_url: &quot;https://github.com/ukgovdatascience/govdown/issues&quot;
+          google_analytics: &quot;UA-12345678-90&quot;
+      ---</code></pre>
+      <pre class="language-plaintext"><code class="language-plaintext">This is a study of official statistics in the UK.</code></pre>
+      <p class="govuk-body">
+      To render that file to HTML, run <code>rmarkdown::render(&quot;filename.Rmd&quot;)</code> in the console, or click the ‘knit’ button in RStudio.
+      </p>
+      <p class="govuk-body">
+      You must use <code>font: &quot;sans-serif&quot;</code> unless the page is hosted on the gov.uk domain.
+      </p>
+      <h2 id="creating-websites" class="govuk-heading-l">Creating websites</h2>
+      <p class="govuk-body">
+      Websites are created in the same way as R Markdown websites. Write a set of markdown documents (plain text files with the suffix <code>.Rmd</code> or <code>.md</code> instead of <code>.txt</code>), and a configuration file called <code>_site.yml</code> with content like the following:
+      </p>
+      <pre class="language-yaml"><code class="language-yaml">output_dir: docs # to host on GitHub pages
+      navbar: # links to include in the bar at the top of every page
+        - text: &quot;Home&quot;
+          href: index.html
+        - text: &quot;Tech docs&quot;
+          href: tech-docs.html
+        - text: &quot;News&quot;
+          href: NEWS.html
+      output:
+        govdown::govdown_document:
+          font: &quot;sans-serif&quot; # (default) or &quot;new-transport&quot;
+          favicon: &quot;custom&quot; # or &quot;none&quot; (default) or &quot;govuk&quot; see ?govdown_document
+          logo: &quot;images/logo.svg&quot; # or false (default)
+          logo_url: &quot;https://ukgovdatascience.github.io/govdown&quot;
+          logo_text: &quot;logo_text&quot;
+          page_title: &quot;page_title&quot;
+          title: &quot;title&quot;
+          phase: alpha
+          feedback_url: &quot;https://github.com/ukgovdatascience/govdown/issues&quot;
+          google_analytics: &quot;UA-12345678-90&quot;</code></pre>
+      <p class="govuk-body">
+      That example shows all the possible configuration. You don’t have to set a <code>logo</code> or <code>favicon</code> or have any <code>links</code> (although you probably should eventually), and if you don’t set an alpha or beta <code>phase</code> banner then you won’t need a <code>feedback_url</code>. However you must set <code>font: &quot;sans-serif&quot;</code> unless the website is hosted on the gov.uk domain. Set <code>output_dir: docs</code> if you will deploy the site on GitHub pages, otherwise refer to the R Markdown documentation on <a href="https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html#publishing-websites" class="govuk-link">publishing websites</a>.
+      </p>
+      <p class="govuk-body">
+      To render the website, run <code>rmarkdown::render_site()</code> in the console, or click the ‘Build Website’ button in RStudio Build panel.
+      </p>
+      <h2 id="supported-markdown-syntax" class="govuk-heading-l">Supported markdown syntax</h2>
+      <p class="govuk-body">
+      Most of the usual markdown syntax is supported. There is some new syntax for special features of the GOV.UK Design System.
+      </p>
+      <p class="govuk-body">
+      Where syntax isn’t supported, that might be because research by contributors to the GOV.UK Design System found the features to be detrimental. Govdown defers to the GOV.UK Design System in these cases.
+      </p>
+      <h3 id="headings" class="govuk-heading-m">Headings</h3>
+      <p class="govuk-body">
+      Create headings by beginning a new line of text with a <code>#</code> symbol.
+      </p>
+      <pre class="language-md"><code class="language-md"># Pithy heading
+      
+      Rambling content.</code></pre>
+      <p class="govuk-body">
+      Subheadings have more <code>#</code>s
+      </p>
+      <pre class="language-md"><code class="language-md">## Helpful subheading
+      
+      ### Can&#39;t remember what the main topic was?
+      
+      #### Four levels of headings are available!</code></pre>
+      <h3 id="headings-with-captions" class="govuk-heading-m"><span class="govuk-caption-m">This is a caption</span>Headings with captions</h3>
+      <p class="govuk-body">
+      The GOV.UK Design System supports captions above <a href="https://design-system.service.gov.uk/styles/typography/#headings" class="govuk-link">headers</a>. This works for headings of level 1, 2 and 3, but not for the smallest headings (level 4).
+      </p>
+      <pre class="language-md"><code class="language-md"># Heading with caption above {caption=&quot;This is a caption&quot;}</code></pre>
+      <h3 id="bold-italics-and-strike-through" class="govuk-heading-m">Bold, italics and strike-through</h3>
+      <p class="govuk-body">
+      <span class="govuk-!-font-weight-bold">Bold</span> works as normal, but italics and strike-through are disabled because they are not supported by the GOV.UK Design System.
+      </p>
+      <pre class="language-md"><code class="language-md">**Bold** works as normal, but *italics* and ~~strike-through~~ are disabled.</code></pre>
+      <h3 id="lead-paragraphs-and-small-text" class="govuk-heading-m">Lead paragraphs and small text</h3>
+      <p class="govuk-body">
+      The GOV.UK Design System supports <a href="https://design-system.service.gov.uk/styles/typography/#paragraphs" class="govuk-link">larger and smaller text for paragraphs</a>. Large text is for a single lead paragraph at the top of a page. See the top of this page for an example.
+      </p>
+      <div>
+      <p class="govuk-body-s">
+      Small text looks like this.
+      </p>
+      </div>
+      <pre class="language-md"><code class="language-md">::: {.lead-para}
+      This is a lead paragraph that appears in larger text than the rest of the body
+      text of the page.
+      :::
+      
+      This is a normal paragraph in normal size.
+      
+      ::: {.small-para}
+      You can write in small letters too.
+      :::</code></pre>
+      <h3 id="indented-text-quotations" class="govuk-heading-m">Indented text (quotations)</h3>
+      <p class="govuk-body">
+      Indented text (often used for block quotations) works as normal.
+      </p>
+      <div class="govuk-inset-text">
+      <p class="govuk-body">
+      United wishes and good will cannot overcome brute facts. Truth is incontrovertible. Panic may resent it. Ignorance may deride it. Malice may distort it. But there it is. – Winston Churchill
+      </p>
+      </div>
+      <pre class="language-md"><code class="language-md">&gt; United wishes and good will cannot overcome brute facts.  Truth is
+      &gt; incontrovertible. Panic may resent it. Ignorance may deride it. Malice may
+      &gt; distort it. But there it is. -- Winston Churchill</code></pre>
+      <h3 id="warnings" class="govuk-heading-m">Warnings</h3>
+      <p class="govuk-body">
+      Use the <a href="https://design-system.service.gov.uk/components/warning-text/" class="govuk-link">Warning text</a> when you need to warn users about something important, such as legal consequences of an action, or lack of action, that they might take.
+      </p>
+      <div class="govuk-warning-text"><span class="govuk-warning-text__icon" aria-hidden="true">!</span><strong class="govuk-warning-text__text"><span class="govuk-warning-text__assistive">Warning</span>
+      Fee fi fo fum
+      </strong>
+      </div>
+      <pre class="language-md"><code class="language-md">::: {.warning}
+      Fee fi fo fum
+      :::</code></pre>
+      <h3 id="hyperlinks" class="govuk-heading-m">Hyperlinks</h3>
+      <p class="govuk-body">
+      Hyperlinks work as normal. The GOV.UK Design System also supports <a href="https://design-system.service.gov.uk/styles/typography/#links" class="govuk-link--no-visited-state govuk-link">hyperlinks that don’t change colour</a> when you have visited the page.
+      </p>
+      <pre class="language-md"><code class="language-md">[normal hyperlink](https://design-system.service.gov.uk).
+      
+      [hyperlink that doesn&#39;t turn purple](https://design-system.service.gov.uk){.no-visited-state}.</code></pre>
+      <h3 id="bullets-and-numbered-lists" class="govuk-heading-m">Bullets and numbered lists</h3>
+      <p class="govuk-body">
+      Bulletted and nested lists work as normal, except that nested lists don’t look very good because they aren’t supported by the GOV.UK Design System. Govdown defers to the designers who made this decision, but if you have evidence of a need for nested lists, please submit it to the GOV.UK Design System by opening a new GitHub issue on the <a href="https://github.com/alphagov/govuk-frontend/issues" class="govuk-link">GOV.UK frontend repository</a>.
+      </p>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      First bullet
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      Nested bullets are available but …
+      </li>
+      <li class="govuk-body">
+      … they don’t look very good because the GOV.UK Design System doesn’t really support them.
+      </li>
+      </ul>
+      </li>
+      <li class="govuk-body">
+      Second bullet
+      </li>
+      <li class="govuk-body">
+      Third bullet
+      </li>
+      </ul>
+      <pre class="language-md"><code class="language-md">* First bullet
+        * Nested bullets are available but ...
+        * ... they don&#39;t look very good because the GOV.UK Design System doesn&#39;t
+          really support them.
+      * Second bullet
+      * Third bullet</code></pre>
+      <ol class="govuk-list govuk-list--number">
+      <li class="govuk-body">
+      Numbered list item
+      </li>
+      <li class="govuk-body">
+      Second numbered list item
+      </li>
+      <li class="govuk-body">
+      Third numbered list item
+      </li>
+      </ol>
+      <pre class="language-md"><code class="language-md">1. Numbered list item
+      1. Second numbered list item
+      1. Third numbered list item</code></pre>
+      <p class="govuk-body">
+      The GOV.UK Design System also supports lists with neither bullets nor numbers. Standard markdown doesn’t have any syntax for this, so create a bulletted list and wrap it with a special marker, shown below.
+      </p>
+      <div>
+      <ul class="govuk-list">
+      <li>
+      Unbulleted item one
+      </li>
+      <li>
+      Unbulleted item two
+      </li>
+      <li>
+      Unbulleted item three
+      </li>
+      </ul>
+      </div>
+      <pre class="language-md"><code class="language-md">::: {.unbulleted-list}
+      * Unbulleted item one
+      * Unbulleted item two
+      * Unbulleted item three
+      :::</code></pre>
+      <h3 id="section-breaks" class="govuk-heading-m">Section breaks</h3>
+      <p class="govuk-body">
+      The usual section break is available.
+      </p>
+      <pre class="language-md"><code class="language-md">---</code></pre>
+      <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+      <p class="govuk-body">
+      The GOV.UK Design System supports several sizes of section break; govdown uses the largest. For the other sizes use the <a href="https://design-system.service.gov.uk/styles/typography/#section-break" class="govuk-link">raw HTML</a>.
+      </p>
+      <pre class="language-html"><code class="language-html">&lt;hr class=&quot;govuk-section-break govuk-section-break--xl govuk-section-break--visible&quot;&gt;
+      &lt;hr class=&quot;govuk-section-break govuk-section-break--l govuk-section-break--visible&quot;&gt;
+      &lt;hr class=&quot;govuk-section-break govuk-section-break--m govuk-section-break--visible&quot;&gt;
+      &lt;hr class=&quot;govuk-section-break govuk-section-break--visible&quot;&gt;</code></pre>
+      <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
+      <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
+      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+      <hr class="govuk-section-break govuk-section-break--visible">
+      <p class="govuk-body">
+      </br>
+      </p>
+      <h3 id="breadcrumbs" class="govuk-heading-m">Breadcrumbs</h3>
+      <p class="govuk-body">
+      The GOV.UK Design System uses <a href="https://design-system.service.gov.uk/components/breadcrumbs/" class="govuk-link">breadcrumbs</a> to help users know where they are on a website. They are used at the top of a page.
+      </p>
+      <div class="govuk-breadcrumbs">
+      <ol class="govuk-breadcrumbs__list">
+      <li class="govuk-breadcrumbs__list-item">
+      <a href="index.html" class="govuk-breadcrumbs__link govuk-link">trail</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+      <a href="index.html" class="govuk-breadcrumbs__link govuk-link">of</a>
+      </li>
+      <li class="govuk-breadcrumbs__list-item">
+      breadcrumbs
+      </li>
+      </ol>
+      </div>
+      <pre class="language-md"><code class="language-md">::: {.breadcrumbs}
+      * [trail](index.html)
+      * [of](index.html)
+      * breadcrumbs
+      :::</code></pre>
+      <h3 id="tabsets" class="govuk-heading-m">Tabsets</h3>
+      <p class="govuk-body">
+      Tabs can be a helpful way of letting users quickly switch between related information. See the guidance on the <a href="https://design-system.service.gov.uk/components/tabs/" class="govuk-link">GOV.UK Design System</a>.
+      </p>
+      <p class="govuk-body">
+      The syntax is different from normal R Markdown tabsets.
+      </p>
+      <pre class="language-md"><code class="language-md">::: {.tabset}
+      # Header appears on narrow screens
+      
+      ## Tab header 1
+      
+      Tab content A
+      
+      ## Tab header 2
+      
+      Tab content B
+      
+      Second paragraph of content.
+      :::</code></pre>
+      <div class="govuk-tabs" data-module="govuk-tabs">
+      <h2 id="header-appears-on-narrow-screens" class="govuk-tabs__title govuk-heading-l">Header appears on narrow screens</h2>
+      <ul class="govuk-tabs__list">
+      <li class="govuk-tabs__list-item"><a class="govuk-tabs__tab govuk-tabs__tab--selected" href="#tab-header-1">Tab header 1</a>
+      <li class="govuk-tabs__list-item"><a class="govuk-tabs__tab govuk-tabs__tab--selected" href="#tab-header-2">Tab header 2</a>
+      </ul>
+      <section class="govuk-tabs__panel" id="tab-header-1">
+      <h2 class="govuk-heading-l">Tab header 1</h2>
+      <p class="govuk-body">
+      Tab content A
+      </p>
+      </section>
+      <section class="govuk-tabs__panel" id="tab-header-2">
+      <h2 class="govuk-heading-l">Tab header 2</h2>
+      <p class="govuk-body">
+      Tab content B
+      </p>
+      <p class="govuk-body">
+      Second paragraph of content.
+      </p>
+      </section>
+      </div>
+      <h3 id="accordions" class="govuk-heading-m">Accordions</h3>
+      <p class="govuk-body">
+      The accordion component lets users show and hide sections of related content on a page. See the guidance on the <a href="https://design-system.service.gov.uk/components/accordion/" class="govuk-link">GOV.UK Design System</a>.
+      </p>
+      <p class="govuk-body">
+      The syntax is similar to govdown tabsets.
+      </p>
+      <pre class="language-md"><code class="language-md">::: {.accordion}
+      ## Writing well for the web
+      
+      This is the content for Writing well for the web.
+      
+      ## Writing well for specialists
+      
+      This is the content for Writing well for specialists.
+      
+      ## Know your audience
+      
+      This is the content for Know your audience.
+      
+      ## How people read
+      
+      This is the content for How people read.
+      :::</code></pre>
+      <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-1">
+      <div class="govuk-accordion__section">
+      <div class="govuk-accordion__section-header">
+      <h2 class="govuk-accordion__section-heading">
+      <span class="govuk-accordion__section-button" id="accordion-1-heading-1">
+      Writing well for the web
+      </span>
+      </h2>
+      </div>
+      <div id="accordion-1-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-1-heading-1">
+      <p class="govuk-body">
+      This is the content for Writing well for the web.
+      </p>
+      </div></div>
+      <div class="govuk-accordion__section">
+      <div class="govuk-accordion__section-header">
+      <h2 class="govuk-accordion__section-heading">
+      <span class="govuk-accordion__section-button" id="accordion-1-heading-2">
+      Writing well for specialists
+      </span>
+      </h2>
+      </div>
+      <div id="accordion-1-content-2" class="govuk-accordion__section-content" aria-labelledby="accordion-1-heading-2">
+      <p class="govuk-body">
+      This is the content for Writing well for specialists.
+      </p>
+      </div></div>
+      <div class="govuk-accordion__section">
+      <div class="govuk-accordion__section-header">
+      <h2 class="govuk-accordion__section-heading">
+      <span class="govuk-accordion__section-button" id="accordion-1-heading-3">
+      Know your audience
+      </span>
+      </h2>
+      </div>
+      <div id="accordion-1-content-3" class="govuk-accordion__section-content" aria-labelledby="accordion-1-heading-3">
+      <p class="govuk-body">
+      This is the content for Know your audience.
+      </p>
+      </div></div>
+      <div class="govuk-accordion__section">
+      <div class="govuk-accordion__section-header">
+      <h2 class="govuk-accordion__section-heading">
+      <span class="govuk-accordion__section-button" id="accordion-1-heading-4">
+      How people read
+      </span>
+      </h2>
+      </div>
+      <div id="accordion-1-content-4" class="govuk-accordion__section-content" aria-labelledby="accordion-1-heading-4">
+      <p class="govuk-body">
+      This is the content for How people read.
+      </p>
+      </div></div>
+      </div>
+      <p class="govuk-body">
+      </br>
+      </p>
+      <h3 id="details" class="govuk-heading-m">Details</h3>
+      <p class="govuk-body">
+      Details make a page easier to scan by letting users reveal more detailed information only if they need it. As with Tabs, guidance can be found on the <a href="https://design-system.service.gov.uk/components/details/" class="govuk-link">GOV.UK Design System</a>.
+      </p>
+      <p class="govuk-body">
+      The syntax uses the summary attribute to provide the top level information with the content provided by the text within.
+      </p>
+      <div class="govuk-warning-text"><span class="govuk-warning-text__icon" aria-hidden="true">!</span><strong class="govuk-warning-text__text"><span class="govuk-warning-text__assistive">Warning</span>
+      The details component requires Pandoc version 2.5 or more recent.
+      </strong>
+      </div>
+      <pre class="language-md"><code class="language-md">::: {.details summary=&quot;Details&quot;}
+      
+      Here are some details on the
+      [Government Digital Service](https://www.gov.uk/government/organisations/government-digital-service).
+      
+      Multiple paragraphs can be contained in details.
+      
+      :::</code></pre>
+      <details class="govuk-details" data-module="govuk-details"><summary class="govuk-details__summary"><span class="govuk-details__summary-text">Details</span></summary><div class="govuk-details__text">
+      <p class="govuk-body">
+      Here are some details on the <a href="https://www.gov.uk/government/organisations/government-digital-service" class="govuk-link">Government Digital Service</a>.
+      </p>
+      <p class="govuk-body">
+      Multiple paragraphs can be contained in details.
+      </p>
+      </div>
+      </details>
+      <h3 id="code-blocks" class="govuk-heading-m">Code blocks</h3>
+      <p class="govuk-body">
+      Code blocks work the same as they do in markdown and R Markdown. Code in R Markdown files (.Rmd suffix) will be evaluated, and the result interleaved below the code.
+      </p>
+      <pre class="language-r"><code class="language-r">print(&quot;This code will not be evaluated&quot;)</code></pre>
+      <pre class="language-r"><code class="language-r">print(&quot;This code will be evaluated&quot;)</code></pre>
+      <pre class="language-plaintext"><code class="language-plaintext">## [1] &quot;This code will be evaluated&quot;</code></pre>
+      <p class="govuk-body">
+      Create code chunks that are not to be evaluated as follows.
+      </p>
+      <pre class="language-md"><code class="language-md">    ```r
+          print(&quot;This code will not be evaluated&quot;)
+          ```</code></pre>
+      <p class="govuk-body">
+      Create code chunks that are to be evaluated as follows.
+      </p>
+      <pre class="language-md"><code class="language-md">    
+          ```r
+          print(&quot;This code will be evaluated&quot;)
+          ```
+          
+          ```
+          ## [1] &quot;This code will be evaluated&quot;
+          ```</code></pre>
+      <p class="govuk-body">
+      Python code chunks also work, as do any of the languages supported by knitr.
+      </p>
+      <pre class="language-python"><code class="language-python">&#39;Monty Python&#39;.split()</code></pre>
+      <pre class="language-plaintext"><code class="language-plaintext">## [&#39;Monty&#39;, &#39;Python&#39;]</code></pre>
+      <h3 id="images" class="govuk-heading-m">Images</h3>
+      <p class="govuk-body">
+      Images use the normal markdown syntax.
+      </p>
+      <p class="govuk-body">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAAAAAAYplnuAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfjAxsTAxJaSFZgAAAKUElEQVR42u1caXhU5Rm9k8k2WSCELQiGLUSRRYMsFQHRtAaX8IiJoBVoDFZEMIiSVsQCagFblmJqC1qWSsqDaEKERJIACQkiZWlNWTSyGLYQZAmELfvMdCCBOedCzNy595tBnnv+nue978m83733Pd/73UiSDh06dOjQoUOHDh06dOjQcXuh19iXbiWM7eWI6Lettxbe1kXronXR7sftKzp2dWpqakpaibvFWkvSUmxKVsc6ItrDywZP/3R3a7am+3tekeLhiOg6eH/hbs3WL7wdl1svOs3dmq1pikV7pbpbszXVS7HoFHdrtqYoFu35mbs1Wz/zVCx6lbs1W1cpFm2cviUvb1Nu3hk3qD2Tl7spL3/LdKNS0ZJvYEBAgH/zbDeIzm7ub8sd6KtY8zXp69wgep3TcnXRuujbVHSmG0RnqhTt80nxYVej+BMfdaINbTq7Hm0M6kSDfE8Cva2MzBnUh2mEHqvWrrEjfX6gnfKalgHUmrQBEDYgDamM6dC5BcxPR+7zCO1FD7pIN8v2IDvlzdasJgbCYmqI+xKWa9NtRF2O1F70L8ooxWb8pbn3rhoKYdGVxKEbCcgn6uIg7UX3LqUUOf52yriCqIrHICyqnDjskf02EHW+v/ai7z1FKbJMdspjWcN1fvgScSvgTvT9kqizfbUX3e1HSpEOi9PwMdf5IQgbeIG4ZbAhIDP8ZxzaiFaGu49TitVo4P7GdX4QKNmt8A94rnl9TtSpntqLDjtCKcgLzSfqXD+g7udb4e9AyW6FE920F93hB0qRjK+J97nO9wMluxU+AEp2Kxy/W3vR7fZTiiX4/nqH63wvUPecIG4OXvIjoo6GaS865DtKsQi5qVzne4Dqcoy4WRiWRFRRR+1Ft9xFKZKQm0xUcThQHQ8RNwPD5hJ1IFR70c3/QynmIZdA1JHOQIUeIG4qhs0k6vs7tBcd9G9KMRu5sUT90B6oOwqJS8Sw6UTtba296MCvKMW7yMVbkNrXDqhWeyhsIoZNIaqghfai/TdRChoqjDIj9W0boFoUUNgrGPYGUTuDtRdtWk8pfo/cCOo/d7cCqtkOpCwvYtirdMWtTbUXLWtvXkduWFWDdW76NVLmOAzjWyE/QHvRstHAq8g9QU3zjmZABeQhVfs8hsXRrZDr75AORZDt/Y5F7lfUNFOdeVXVDMewX9cil21ySIciePyLFmc8coPJiuWDqZF8aFVVD8OwWLoVMlRuHNwMhqW0OEci1/88chv9gOJVVfkkhg2lW0H5XMgBLKLFOQKpPmeRy8INIl5VFVEYNqQCOeXTCgdA7Q3X+b7TyK3FOnskI3X5EQyLvIzcCgVTTodB7Q3XuftJ5GiUZliC1IWBGMa7EssEbNZIszFDOdWZrdinVGdaVWUPINWfrNjHIkRTp891DjuK3HKqM62q0j5I8a7EhwI0c6fPOysdipBbSj/ZHKRO34cUW7G/iBCdiBl4Z4Wt2Eckmprmkz2QYiv2JxGiJ2IG3llhK8Z1noZUCToxKbwYuZkiRI/DDLyzwlZsPoW9idQxdGJSp8PIzRAhegy2N1znYLJi71PY60gd7oQUW7G3RIgehe1NSVekmpIVe4/CxiNFTkxmxSaLED0c25tjXZAK3IzZ/0Bhv8UC7WuLVGuyYgkiRD9VDRkOUZ39czE7mRopDq3YdyFItfgfho0TIZo6/YO0SWHKwuyTKIya5l3oxKTgnUBZxogQ/Sh2+t9TnX3WougJFBaLBfpvc6TIiplHixA9GLfHv6U684GnlygsGptmnNTIrFjtcyJEP4idPjluybgS60ymRorCpnlLE6RMOL+ojnFAg2L0OQcpvqE6e/wT6zyKwh7BArHjJoNP4yXNQJ3+dnTcPL+oeZbCaH5BToytWOXjIkR3x6HL11Rn6UOs89NE9cMC8aierFj5oyJE34XtTR7vrMzDOkcT1QuPbpETYyt26WERojtje7OB6kzzi4ohRPXEppkPNZLBPz+gcQnK0R6HLrJzJO8CJRsXU9O8kgb6BrRiNF7SDO32QYo1vEmBB8Vl4+JwnF+wEyMrVipgjGjr9PdCCtk5UHQ1ZTwu7nQIuMVsXtGKiRgj2jp9bG+4zuRqzpJ5lUIPAreQL4lWTMQYUZKaYXsjq/PLQJ3hcxvUNH/Al0QrVnyXCNFNtkKKJVxnnF+c5DpT0zyXL4lWjMZLmoHam0UseiT0nzRGtDXN30AYOzFpElBFHUSI9sOd5iTm0NWweZWCtkMYOzGyYgcFjBFtTXMGpJjH3DBomtm8Sk22QNg0DkMrxh26VqDjGbOZexJcDZtXXlVTOAyt2N4QSQDowP07zKGrYfPK84s3OAyt2K6WIkQbcX4h+zYJD/2wqZF88CiZzHHHwKpiJ6YVaKf5d8yhq2HzylbsZQ5DK8ZOTDMshOyvMdX3XIM/GVoxmRMjK8ZOTDMsANHjmYoAV7ONfzK0YjxGZCsmYoxow59BNDtucjWynwytWM0zHIZWTMQY0Yb3oM4vMIXzC/m4+K92quopptCKpQsYI0rUNNeOZAqPkrF5JStW+QRTeJRsteKPnhxCotVyDdXDmWp/8DpnzZCdM59pD7soOwPbs8RiNpvrwlaKGCNKUrf4F+oRH9eBKb+nr3NjImXzwAh72EjZ4ZnAoaNG/yauLmygiOHWzw/hz7sG4eql2vGK2VwrHmbzePVS7aAZhEBoOg1wlejXfo6iJ6mXqot2CBPVS7VjgotEa3ojRmddRXYd1tdjQz021iOnDrlKkbNxw/rsrMx16SlR6qXaYfS5Ct8bYboRfkphMtku5OPj7WVU+yo3BIcAWrsEmDEk2Im/wD+5cK87UZjshJWRHT12Pb4KVC6aD4m6AXlOHJjlIb0b4IzTNWWoz6sKGU44XUO/xSfUZ3YaJxb3c+r559V7wRGL+vROwHJkQW+nfa6x+x/3m9VrUAjz/pndlf/DCYBH2JTdtep1KEDt7ilhqo/KGu5M2FGtXouDqN6RcKc2trx1fF6Fej0OoCJ/jIZf6ASPyLyoXlMjuJT5rMafugRGp5wTKrksNdqJ93Zj8Itcfkq9tgZwenmkn3qJN4PPAwuPq9d3Exxf2F/MnulVeEbMKdL6fWM5NDdCzObjdRi7zijU8n1jLpzRVdWbxDEYOk4uqFGv9ipqChI7uWi31NB23NZK9YqtVVvHtXXlBm/L0TnlKiWX54wWMu/8KQTFrL2gQvKF9NggV0u+goAhK0udlFz66WMCvj50DL6DnDIKPy55SOX//1EH5UbBcjSpr4jv4RRBmVEwH5jVQ/CbxDF4hL25y7EHd+2eqV1EfAvnFAztJmyralRy9c6JobfW3K1V3KaffnBXbH5RyNkZdWj2TEbDD+5LWc8J+JZdCwQ8vursTSWXpQ4Vc5pDE5gGLz15g+TTyb8U1OBrBe++SUfpwS22wdcKnj1mHbj24LYUzY0QcyRCc3h0eWvPlR0eFzX4WsEQmrCzvCCx4631WG4cbaI02irSoUOHDh06dOjQoUOHDh06Gsb/Ab8v6E9PzofjAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE5LTAzLTI3VDE5OjAzOjE4KzAxOjAw6NWKFQAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxOS0wMy0yN1QxOTowMzoxOCswMTowMJmIMqkAAABXelRYdFJhdyBwcm9maWxlIHR5cGUgaXB0YwAAeJzj8gwIcVYoKMpPy8xJ5VIAAyMLLmMLEyMTS5MUAxMgRIA0w2QDI7NUIMvY1MjEzMQcxAfLgEigSi4A6hcRdPJCNZUAAAAASUVORK5CYII=" alt="caption text" />
+      </p>
+      <h3 id="tables" class="govuk-heading-m">Tables</h3>
+      <p class="govuk-body">
+      All four kinds of <a href="https://pandoc.org/MANUAL.html#tables" class="govuk-link">pandoc tables</a> are work. Below is a common kind. Note that only left-aligned and right-aligned columns are supported in the GOV.UK Design System, and captions always appear above the table.
+      </p>
+      <pre class="language-plaintext"><code class="language-plaintext">Table: This is a table caption.
+      
+      | Right | Left | Default | Center |
+      |------:|:-----|---------|:------:|
+      |   12  |  12  |    12   |    12  |
+      |  123  |  123 |   123   |   123  |
+      |    1  |    1 |     1   |     1  |</code></pre>
+      <table class="govuk-table">
+      <caption class="govuk-table__caption">This is a table caption.</caption>
+      <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+      <th class="govuk-table__header govuk-table__header--numeric" scope="col">
+      Right
+      </th>
+      <th class="govuk-table__header" scope="col">
+      Left
+      </th>
+      <th class="govuk-table__header" scope="col">
+      Default
+      </th>
+      <th class="govuk-table__header" scope="col">
+      Center
+      </th>
+      </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      12
+      </td>
+      <td class="govuk-table__cell">
+      12
+      </td>
+      <td class="govuk-table__cell">
+      12
+      </td>
+      <td class="govuk-table__cell">
+      12
+      </td>
+      </tr>
+      <tr class="govuk-table__row">
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      123
+      </td>
+      <td class="govuk-table__cell">
+      123
+      </td>
+      <td class="govuk-table__cell">
+      123
+      </td>
+      <td class="govuk-table__cell">
+      123
+      </td>
+      </tr>
+      <tr class="govuk-table__row">
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      1
+      </td>
+      <td class="govuk-table__cell">
+      1
+      </td>
+      <td class="govuk-table__cell">
+      1
+      </td>
+      <td class="govuk-table__cell">
+      1
+      </td>
+      </tr>
+      </tbody>
+      </table>
+      <pre class="language-plaintext"><code class="language-plaintext">Another table without a caption.
+      
+      | Right | Left | Default | Center |
+      |------:|:-----|---------|:------:|
+      |   12  |  12  |    12   |    12  |
+      |  123  |  123 |   123   |   123  |
+      |    1  |    1 |     1   |     1  |</code></pre>
+      <p class="govuk-body">
+      Another table without a caption.
+      </p>
+      <table class="govuk-table">
+      <caption class="govuk-table__caption"></caption>
+      <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+      <th class="govuk-table__header govuk-table__header--numeric" scope="col">
+      Right
+      </th>
+      <th class="govuk-table__header" scope="col">
+      Left
+      </th>
+      <th class="govuk-table__header" scope="col">
+      Default
+      </th>
+      <th class="govuk-table__header" scope="col">
+      Center
+      </th>
+      </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      12
+      </td>
+      <td class="govuk-table__cell">
+      12
+      </td>
+      <td class="govuk-table__cell">
+      12
+      </td>
+      <td class="govuk-table__cell">
+      12
+      </td>
+      </tr>
+      <tr class="govuk-table__row">
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      123
+      </td>
+      <td class="govuk-table__cell">
+      123
+      </td>
+      <td class="govuk-table__cell">
+      123
+      </td>
+      <td class="govuk-table__cell">
+      123
+      </td>
+      </tr>
+      <tr class="govuk-table__row">
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      1
+      </td>
+      <td class="govuk-table__cell">
+      1
+      </td>
+      <td class="govuk-table__cell">
+      1
+      </td>
+      <td class="govuk-table__cell">
+      1
+      </td>
+      </tr>
+      </tbody>
+      </table>
+      <p class="govuk-body">
+      Tables can also be created from code chunks. This example in R uses <code>knitr::kable()</code>.
+      </p>
+      <pre class="language-r"><code class="language-r">knitr::kable(head(mtcars[, 1:4]))</code></pre>
+      <table class="govuk-table">
+      <caption class="govuk-table__caption"></caption>
+      <thead class="govuk-table__head">
+      <tr class="govuk-table__row">
+      <th class="govuk-table__header" scope="col">
+      </th>
+      <th class="govuk-table__header govuk-table__header--numeric" scope="col">
+      mpg
+      </th>
+      <th class="govuk-table__header govuk-table__header--numeric" scope="col">
+      cyl
+      </th>
+      <th class="govuk-table__header govuk-table__header--numeric" scope="col">
+      disp
+      </th>
+      <th class="govuk-table__header govuk-table__header--numeric" scope="col">
+      hp
+      </th>
+      </tr>
+      </thead>
+      <tbody class="govuk-table__body">
+      <tr class="govuk-table__row">
+      <td class="govuk-table__cell">
+      Mazda RX4
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      21.0
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      6
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      160
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      110
+      </td>
+      </tr>
+      <tr class="govuk-table__row">
+      <td class="govuk-table__cell">
+      Mazda RX4 Wag
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      21.0
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      6
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      160
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      110
+      </td>
+      </tr>
+      <tr class="govuk-table__row">
+      <td class="govuk-table__cell">
+      Datsun 710
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      22.8
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      4
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      108
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      93
+      </td>
+      </tr>
+      <tr class="govuk-table__row">
+      <td class="govuk-table__cell">
+      Hornet 4 Drive
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      21.4
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      6
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      258
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      110
+      </td>
+      </tr>
+      <tr class="govuk-table__row">
+      <td class="govuk-table__cell">
+      Hornet Sportabout
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      18.7
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      8
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      360
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      175
+      </td>
+      </tr>
+      <tr class="govuk-table__row">
+      <td class="govuk-table__cell">
+      Valiant
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      18.1
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      6
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      225
+      </td>
+      <td class="govuk-table__cell govuk-table__cell--numeric">
+      105
+      </td>
+      </tr>
+      </tbody>
+      </table>
+      <p class="govuk-body">
+      If kable doesn’t produce a table that looks like the one above, then try using the <code>format</code> argument, for example <code>kable(mtcars, format = &quot;markdown&quot;)</code> or <code>kable(mtcars, format = &quot;pandoc&quot;)</code>. You will need to do that if the <code>kableExtra</code> package is loaded, because <code>kableExtra</code> sets a global option. Check the value of <code>getOption(&quot;knitr.table.format&quot;)</code> to see if that option has been set. If <code>kableExtra</code> isn’t loaded, then the option might be set in your <code>.Rprofile</code>, which you can open with <code>usethis::edit_r_profile()</code>.
+      </p>
+      <h3 id="mathematical-equations" class="govuk-heading-m">Mathematical equations</h3>
+      <p class="govuk-body">
+      Mathjax is supported as normal, by wrapping the equation in <code>$</code> symbols (inline equations) or in <code>$$</code> symbols on their own line (block equations).
+      </p>
+      <p class="govuk-body">
+      Here’s some inline mathjax <span class="math inline">\(\sum_0^{2e} \alpha_i \mathrm{dt}\)</span>. Here’s some block mathjax
+      </p>
+      <p class="govuk-body">
+      <span class="math display">\[
+      \begin{align}
+      s_i &amp; \sim \mathrm{Binomial}(n_i, p_i) \\
+      \mathrm{logit}(p_i) &amp; = \alpha_{\small{TANK}[i]} \\
+      \alpha_{\small{TANK}} &amp; \sim \mathrm{Normal}(0, 5)
+      \end{align}
+      \]</span>
+      </p>
+      <h2 id="contribute-to-the-development-of-govdown" class="govuk-heading-l">Contribute to the development of govdown</h2>
+      <p class="govuk-body">
+      Use <code>install-govuk-frontend.sh</code> to download, modify and compile the GOV.UK Design System to get the css files for the templates.
+      </p>
+      <h3 id="prerequisites" class="govuk-heading-m">Prerequisites</h3>
+      <p class="govuk-body">
+      The <code>sassc</code> command-line tool. If you can’t get that to work, try the <code>sass</code> package by RStudio, which wraps it.
+      </p>
     </main>
   </div>
 

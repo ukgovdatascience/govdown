@@ -4139,172 +4139,171 @@ color: #d14;
 
   <div class="govuk-width-container">
     <main class="govuk-main-wrapper " id="main-content" role="main">
-            <h1 class="govuk-heading-xl">GOV.UK-style markdown documents</h1>
-            <h1 id="govdown-0.9.0" class="govuk-heading-xl">govdown 0.9.0</h1>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-Fix a pandoc warning about missing title elements.
-</li>
-<li class="govuk-body">
-Provide <code>unstrap()</code> to remove unwanted Boostrap CSS from any crosstalk components (#57)
-</li>
-</ul>
-<h1 id="govdown-0.8.0" class="govuk-heading-xl">govdown 0.8.0</h1>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-Upgrade to GOV.UK Frontend release v3.4.0. Some user-facing changes, see the <a href="https://github.com/alphagov/govuk-frontend/releases/tag/v3.4.0" class="govuk-link">GOV.UK Frontend release notes</a>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-Improved contrast of secondary text
-</li>
-<li class="govuk-body">
-Only add underline to back link when href exists
-</li>
-<li class="govuk-body">
-Fixed text resize issue with warning text icon
-</li>
-<li class="govuk-body">
-Fixed height and alignment issue within header in Chrome 76+
-</li>
-</ul>
-</li>
-<li class="govuk-body">
-Prevent highlightjs from highlighting the syntax of plain text.
-</li>
-</ul>
-<h1 id="govdown-0.7.0" class="govuk-heading-xl">govdown 0.7.0</h1>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-Upgrade to GOV.UK Frontend release v3.2.0. No user-facing changes.
-</li>
-<li class="govuk-body">
-Add an accessibility statement
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-Fix a tabbing problem with code blocks (#45)
-</li>
-<li class="govuk-body">
-Stop code block text being shrunk (325e71b937f08034ef6ab9b83f0f7c8dc7fd07a9)
-</li>
-<li class="govuk-body">
-Fix logo URL config (#44)
-</li>
-<li class="govuk-body">
-Add at least two links to each page
-</li>
-</ul>
-</li>
-<li class="govuk-body">
-Stop rendering New Transport font by mistake (#38)
-</li>
-<li class="govuk-body">
-Fix accordion expansion (#36)
-</li>
-<li class="govuk-body">
-Fix rendering hang with large images (04473a4530e540dfdf96be0f768c0568714ff3d3)
-</li>
-</ul>
-<h1 id="govdown-0.6.0" class="govuk-heading-xl">govdown 0.6.0</h1>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-Upgrade to GOV.UK Frontend release v3.1.0. Many user-facing changes. See the <a href="https://github.com/alphagov/govuk-frontend/releases/tag/v3.1.0" class="govuk-link">GOV.UK Frontend release notes</a>. None of the changes are breaking for users of govdown.
-</li>
-<li class="govuk-body">
-Support accordions (#35) <span class="citation">@mattkerlogue</span>.
-</li>
-</ul>
-<h1 id="govdown-0.5.0" class="govuk-heading-xl">govdown 0.5.0</h1>
-<h2 id="gov.uk-design-system-upgrade" class="govuk-heading-l">GOV.UK Design System upgrade</h2>
-<p class="govuk-body">
-Upgrade to GOV.UK Frontend release v2.13.0. One user-facing change. The crown logo image in the header now:
-</p>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-has height and width attributes set
-</li>
-<li class="govuk-body">
-aligns better with ‘GOV.UK’ in IE8
-</li>
-</ul>
-<p class="govuk-body">
-(Pull request #1419)
-</p>
-<h2 id="govdown-changes" class="govuk-heading-l">Govdown changes:</h2>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-Support warning text (#30, #29)
-</li>
-<li class="govuk-body">
-Don’t accidentally use New Transport font in tables (#31)
-</li>
-<li class="govuk-body">
-Support shiny server by passing through args (#33) (#33) <span class="citation">@RobinL</span>
-</li>
-</ul>
-<h1 id="govdown-0.4.1" class="govuk-heading-xl">govdown 0.4.1</h1>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-Upgrade to GOV.UK Frontend release v2.12.0. No user-facing changes.
-</li>
-</ul>
-<h1 id="govdown-0.4.0" class="govuk-heading-xl">govdown 0.4.0</h1>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-Overhauled yaml configuration to make websites and standalone pages more consistent.
-</li>
-<li class="govuk-body">
-<code>favicon = &quot;none&quot;</code> by default to avoid inadvertently using the GOV.UK crown logo.
-</li>
-<li class="govuk-body">
-Phase banner wording no longer mentions “services”.
-</li>
-<li class="govuk-body">
-The New Transport font isn’t embedded unless it is used.
-</li>
-<li class="govuk-body">
-The “skip to main content” link appears above the banner (press Tab to find it).
-</li>
-</ul>
-<h1 id="govdown-0.3.0" class="govuk-heading-xl">govdown 0.3.0</h1>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-Implemented bold according to the GOV.UK Design System.
-</li>
-<li class="govuk-body">
-Disabled italics and strike-through, which are not supported by the GOV.UK Design System.
-</li>
-</ul>
-<h1 id="govdown-0.2.0" class="govuk-heading-xl">govdown 0.2.0</h1>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-Added implementation of the <code>Details</code> component from the GOV.UK Design System.
-</li>
-<li class="govuk-body">
-Added implementation of the <code>Table</code> component from the GOV.UK Design System.
-</li>
-<li class="govuk-body">
-Defaults to sans-serif font and no logo, because most documents won’t be hosted on GOV.UK.
-</li>
-<li class="govuk-body">
-Added Google Analytics.
-</li>
-<li class="govuk-body">
-Updated the embedded GOV.UK Design System.
-</li>
-<li class="govuk-body">
-Minor tweaks and bugfixes.
-</li>
-</ul>
-<h1 id="govdown-0.1.0" class="govuk-heading-xl">govdown 0.1.0</h1>
-<p class="govuk-body">
-First release.
-</p>
-<h1 id="govdown-0.0.0.9000" class="govuk-heading-xl">govdown 0.0.0.9000</h1>
-<ul class="govuk-list govuk-list--bullet">
-<li class="govuk-body">
-Added a <code>NEWS.md</code> file to track changes to the package.
-</li>
-</ul>
+      <h1 id="govdown-0.9.0" class="govuk-heading-xl">govdown 0.9.0</h1>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      Fix a pandoc warning about missing title elements.
+      </li>
+      <li class="govuk-body">
+      Provide <code>unstrap()</code> to remove unwanted Boostrap CSS from any crosstalk components (#57)
+      </li>
+      </ul>
+      <h1 id="govdown-0.8.0" class="govuk-heading-xl">govdown 0.8.0</h1>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      Upgrade to GOV.UK Frontend release v3.4.0. Some user-facing changes, see the <a href="https://github.com/alphagov/govuk-frontend/releases/tag/v3.4.0" class="govuk-link">GOV.UK Frontend release notes</a>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      Improved contrast of secondary text
+      </li>
+      <li class="govuk-body">
+      Only add underline to back link when href exists
+      </li>
+      <li class="govuk-body">
+      Fixed text resize issue with warning text icon
+      </li>
+      <li class="govuk-body">
+      Fixed height and alignment issue within header in Chrome 76+
+      </li>
+      </ul>
+      </li>
+      <li class="govuk-body">
+      Prevent highlightjs from highlighting the syntax of plain text.
+      </li>
+      </ul>
+      <h1 id="govdown-0.7.0" class="govuk-heading-xl">govdown 0.7.0</h1>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      Upgrade to GOV.UK Frontend release v3.2.0. No user-facing changes.
+      </li>
+      <li class="govuk-body">
+      Add an accessibility statement
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      Fix a tabbing problem with code blocks (#45)
+      </li>
+      <li class="govuk-body">
+      Stop code block text being shrunk (325e71b937f08034ef6ab9b83f0f7c8dc7fd07a9)
+      </li>
+      <li class="govuk-body">
+      Fix logo URL config (#44)
+      </li>
+      <li class="govuk-body">
+      Add at least two links to each page
+      </li>
+      </ul>
+      </li>
+      <li class="govuk-body">
+      Stop rendering New Transport font by mistake (#38)
+      </li>
+      <li class="govuk-body">
+      Fix accordion expansion (#36)
+      </li>
+      <li class="govuk-body">
+      Fix rendering hang with large images (04473a4530e540dfdf96be0f768c0568714ff3d3)
+      </li>
+      </ul>
+      <h1 id="govdown-0.6.0" class="govuk-heading-xl">govdown 0.6.0</h1>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      Upgrade to GOV.UK Frontend release v3.1.0. Many user-facing changes. See the <a href="https://github.com/alphagov/govuk-frontend/releases/tag/v3.1.0" class="govuk-link">GOV.UK Frontend release notes</a>. None of the changes are breaking for users of govdown.
+      </li>
+      <li class="govuk-body">
+      Support accordions (#35) <span class="citation">@mattkerlogue</span>.
+      </li>
+      </ul>
+      <h1 id="govdown-0.5.0" class="govuk-heading-xl">govdown 0.5.0</h1>
+      <h2 id="gov.uk-design-system-upgrade" class="govuk-heading-l">GOV.UK Design System upgrade</h2>
+      <p class="govuk-body">
+      Upgrade to GOV.UK Frontend release v2.13.0. One user-facing change. The crown logo image in the header now:
+      </p>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      has height and width attributes set
+      </li>
+      <li class="govuk-body">
+      aligns better with ‘GOV.UK’ in IE8
+      </li>
+      </ul>
+      <p class="govuk-body">
+      (Pull request #1419)
+      </p>
+      <h2 id="govdown-changes" class="govuk-heading-l">Govdown changes:</h2>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      Support warning text (#30, #29)
+      </li>
+      <li class="govuk-body">
+      Don’t accidentally use New Transport font in tables (#31)
+      </li>
+      <li class="govuk-body">
+      Support shiny server by passing through args (#33) (#33) <span class="citation">@RobinL</span>
+      </li>
+      </ul>
+      <h1 id="govdown-0.4.1" class="govuk-heading-xl">govdown 0.4.1</h1>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      Upgrade to GOV.UK Frontend release v2.12.0. No user-facing changes.
+      </li>
+      </ul>
+      <h1 id="govdown-0.4.0" class="govuk-heading-xl">govdown 0.4.0</h1>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      Overhauled yaml configuration to make websites and standalone pages more consistent.
+      </li>
+      <li class="govuk-body">
+      <code>favicon = &quot;none&quot;</code> by default to avoid inadvertently using the GOV.UK crown logo.
+      </li>
+      <li class="govuk-body">
+      Phase banner wording no longer mentions “services”.
+      </li>
+      <li class="govuk-body">
+      The New Transport font isn’t embedded unless it is used.
+      </li>
+      <li class="govuk-body">
+      The “skip to main content” link appears above the banner (press Tab to find it).
+      </li>
+      </ul>
+      <h1 id="govdown-0.3.0" class="govuk-heading-xl">govdown 0.3.0</h1>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      Implemented bold according to the GOV.UK Design System.
+      </li>
+      <li class="govuk-body">
+      Disabled italics and strike-through, which are not supported by the GOV.UK Design System.
+      </li>
+      </ul>
+      <h1 id="govdown-0.2.0" class="govuk-heading-xl">govdown 0.2.0</h1>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      Added implementation of the <code>Details</code> component from the GOV.UK Design System.
+      </li>
+      <li class="govuk-body">
+      Added implementation of the <code>Table</code> component from the GOV.UK Design System.
+      </li>
+      <li class="govuk-body">
+      Defaults to sans-serif font and no logo, because most documents won’t be hosted on GOV.UK.
+      </li>
+      <li class="govuk-body">
+      Added Google Analytics.
+      </li>
+      <li class="govuk-body">
+      Updated the embedded GOV.UK Design System.
+      </li>
+      <li class="govuk-body">
+      Minor tweaks and bugfixes.
+      </li>
+      </ul>
+      <h1 id="govdown-0.1.0" class="govuk-heading-xl">govdown 0.1.0</h1>
+      <p class="govuk-body">
+      First release.
+      </p>
+      <h1 id="govdown-0.0.0.9000" class="govuk-heading-xl">govdown 0.0.0.9000</h1>
+      <ul class="govuk-list govuk-list--bullet">
+      <li class="govuk-body">
+      Added a <code>NEWS.md</code> file to track changes to the package.
+      </li>
+      </ul>
     </main>
   </div>
 
