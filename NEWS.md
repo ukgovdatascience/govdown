@@ -1,5 +1,8 @@
 # govdown 0.9.1
 
+* Fix tabsets (#61 @Kiki-Jiji)
+* Fix indentation of code blocks
+
 # govdown 0.9.0
 
 * Fix a pandoc warning about missing title elements.
