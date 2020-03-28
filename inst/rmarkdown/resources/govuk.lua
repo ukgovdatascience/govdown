@@ -61,8 +61,6 @@ return {
       -- Look for 'tabset'
       v,i = el.classes:find("tabset")
       if i ~= nil then
-        el.classes[i] = nil
-        el.classes:extend({"govuk-tabs"})
         el.attributes = {{"data-module", "govuk-tabs"}}
 
         -- begin items
@@ -89,7 +87,6 @@ return {
         local html
         local first_section = true
 
-        -- items[#items] = pandoc.RawBlock('html', '<ul class="govuk-tabs__list">')
         table.insert(items, pandoc.RawBlock('html', '<ul class="govuk-tabs__list">'))
 
         for _, block in ipairs(el.content) do
@@ -97,7 +94,6 @@ return {
             if block.level == 1 then
               -- set title
               block.level = 2
-              block.classes:extend({"govuk-tabs__title"})
               title = block
             elseif block.level == 2 then
               -- add new item
