@@ -4,12 +4,20 @@
 \alias{govdown_document}
 \title{GOV.UK style HTML template}
 \usage{
-govdown_document(keep_md = FALSE, font = c("sans-serif",
-  "new-transport"), favicon = c("none", "custom", "govuk"),
-  logo = FALSE, logo_url = "", logo_text = "Logo text",
-  page_title = "Page title", title = "Title", phase = c("none",
-  "alpha", "beta"), feedback_url = "404.html", google_analytics = NULL,
-  ...)
+govdown_document(
+  keep_md = FALSE,
+  font = c("sans-serif", "new-transport"),
+  favicon = c("none", "custom", "govuk"),
+  logo = FALSE,
+  logo_url = "",
+  logo_text = "Logo text",
+  page_title = "Page title",
+  title = "Title",
+  phase = c("none", "alpha", "beta"),
+  feedback_url = "404.html",
+  google_analytics = NULL,
+  ...
+)
 }
 \arguments{
 \item{keep_md}{logical, whether to keep the intermediate \code{.md} file after
@@ -23,9 +31,9 @@ domain, otherwise it must not be used.}
 not standalone documents. If \code{"custom"} then image files in the directory
 \code{"favicon/"} will be used. The filenames are:
 \itemize{
-\item \code{apple-touch-icon-152x152.png}
-\item \code{apple-touch-icon-167x167.png}
-\item \code{apple-touch-icon-180x180.png}
+\item \verb{apple-touch-icon-152x152.png}
+\item \verb{apple-touch-icon-167x167.png}
+\item \verb{apple-touch-icon-180x180.png}
 \item \code{apple-touch-icon.png}
 \item \code{favicon.ico}
 \item \code{mask-icon.svg}
@@ -41,7 +49,7 @@ the default images.  All the files are required.}
 
 \item{logo_text}{Text to place beside the logo.}
 
-\item{page_title}{Text to go inside the \code{<title>} tags, used in browser
+\item{page_title}{Text to go inside the \verb{<title>} tags, used in browser
 toolbars, when making bookmarks and in search engine results.}
 
 \item{title}{Text to appear in the main part of the bar at the top of every
@@ -93,7 +101,7 @@ output:
 ---
 }
 
-To configure a website, use a \code{_site.yml} file instead.\preformatted{output_dir: docs # to host on GitHub pages
+To configure a website, use a \verb{_site.yml} file instead.\preformatted{output_dir: docs # to host on GitHub pages
 navbar:
   - text: "Home"
     href: index.html
