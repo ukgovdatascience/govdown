@@ -14,15 +14,19 @@
 #'
 #' @examples
 #' # The fs object will inject css into your page.
-#' fs <- crosstalk::filter_select(
-#'     id = "myselector",
-#'     label = "select something",
-#'     sharedData = df,
-#'     group = ~selection_column
-#'   )
+#' if (requireNamespace("crosstalk", quietly = TRUE)) {
+#'   df <- crosstalk::SharedData$new(mtcars)
 #'
-#' # The fs_nobootstrap object won't inject css into your page.
-#' fs_nobootstrap <- unstrap(fs)
+#'   fs <- crosstalk::filter_select(
+#'       id = "myselector",
+#'       label = "select something",
+#'       sharedData = df,
+#'       group = ~cyl
+#'     )
+#'
+#'   # The fs_nobootstrap object won't inject css into your page.
+#'   fs_nobootstrap <- unstrap(fs)
+#' }
 #' @export
 unstrap <- function(x) {
   attr(x, "html_dependencies") <-
