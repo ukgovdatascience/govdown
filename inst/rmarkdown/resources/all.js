@@ -891,7 +891,7 @@ Accordion.prototype.initHeaderAttributes = function ($headerWrapper, index) {
   icon.className = this.iconClass;
   icon.setAttribute('aria-hidden', 'true');
 
-  $heading.appendChild(icon);
+  $button.appendChild(icon);
 };
 
 // When section toggled, set and store state
@@ -1748,7 +1748,7 @@ Checkboxes.prototype.handleClick = function (event) {
 
   if (detect) return
 
-    // Polyfill from https://raw.githubusercontent.com/Financial-Times/polyfill-service/1f3c09b402f65bf6e393f933a15ba63f1b86ef1f/packages/polyfill-library/polyfills/Element/prototype/closest/polyfill.js
+  // Polyfill from https://raw.githubusercontent.com/Financial-Times/polyfill-service/1f3c09b402f65bf6e393f933a15ba63f1b86ef1f/packages/polyfill-library/polyfills/Element/prototype/closest/polyfill.js
   Element.prototype.closest = function closest(selector) {
     var node = this;
 
@@ -2026,49 +2026,41 @@ Radios.prototype.handleClick = function (event) {
 
 (function(undefined) {
 
-    // Detection from https://github.com/Financial-Times/polyfill-service/pull/1062/files#diff-b09a5d2acf3314b46a6c8f8d0c31b85c
+    // Detection from https://raw.githubusercontent.com/Financial-Times/polyfill-library/master/polyfills/Element/prototype/nextElementSibling/detect.js
     var detect = (
-      'Element' in this && "nextElementSibling" in document.documentElement
+      'document' in this && "nextElementSibling" in document.documentElement
     );
 
     if (detect) return
 
-
-    (function (global) {
-
-      // Polyfill from https://github.com/Financial-Times/polyfill-service/pull/1062/files#diff-404b69b4750d18dea4174930a49170fd
-      Object.defineProperty(Element.prototype, "nextElementSibling", {
-        get: function(){
-          var el = this.nextSibling;
-          while (el && el.nodeType !== 1) { el = el.nextSibling; }
-          return (el.nodeType === 1) ? el : null;
-        }
-      });
-
-    }(this));
+    // Polyfill from https://raw.githubusercontent.com/Financial-Times/polyfill-library/master/polyfills/Element/prototype/nextElementSibling/polyfill.js
+    Object.defineProperty(Element.prototype, "nextElementSibling", {
+      get: function(){
+        var el = this.nextSibling;
+        while (el && el.nodeType !== 1) { el = el.nextSibling; }
+        return el;
+      }
+    });
 
 }).call('object' === typeof window && window || 'object' === typeof self && self || 'object' === typeof global && global || {});
 
 (function(undefined) {
 
-    // Detection from https://github.com/Financial-Times/polyfill-service/pull/1062/files#diff-a162235fbc9c0dd40d4032265f44942e
+    // Detection from https://raw.githubusercontent.com/Financial-Times/polyfill-library/master/polyfills/Element/prototype/previousElementSibling/detect.js
     var detect = (
-      'Element' in this && 'previousElementSibling' in document.documentElement
+      'document' in this && "previousElementSibling" in document.documentElement
     );
 
     if (detect) return
 
-    (function (global) {
-      // Polyfill from https://github.com/Financial-Times/polyfill-service/pull/1062/files#diff-b45a1197b842728cb76b624b6ba7d739
-      Object.defineProperty(Element.prototype, 'previousElementSibling', {
-        get: function(){
-          var el = this.previousSibling;
-          while (el && el.nodeType !== 1) { el = el.previousSibling; }
-          return (el.nodeType === 1) ? el : null;
-        }
-      });
-
-    }(this));
+    // Polyfill from https://raw.githubusercontent.com/Financial-Times/polyfill-library/master/polyfills/Element/prototype/previousElementSibling/polyfill.js
+    Object.defineProperty(Element.prototype, 'previousElementSibling', {
+      get: function(){
+        var el = this.previousSibling;
+        while (el && el.nodeType !== 1) { el = el.previousSibling; }
+        return el;
+      }
+    });
 
 }).call('object' === typeof window && window || 'object' === typeof self && self || 'object' === typeof global && global || {});
 

@@ -33,7 +33,8 @@ You can install the released version of govdown from
 install.packages("govdown")
 ```
 
-And the development version from [GitHub](https://github.com/) with:
+And the development version from
+[GitHub](https://github.com/ukgovdatascience/govdown) with:
 
 ```r
 # install.packages("devtools") # if devtools is not already installed
@@ -163,7 +164,7 @@ Subheadings have more `#`s
 ### Headings with captions {caption="This is a caption"}
 
 The GOV.UK Design System supports captions above
-[headers](https://design-system.service.gov.uk/styles/typography/#headings).
+[headings](https://design-system.service.gov.uk/styles/typography/#headings).
 This works for headings of level 1, 2 and 3, but not for the smallest headings
 (level 4).
 
@@ -361,13 +362,13 @@ The syntax is different from normal R Markdown tabsets.
 
 ```md
 ::: {.tabset}
-# Header appears on narrow screens
+# Heading appears on narrow screens
 
-## Tab header 1
+## Tab heading 1
 
 Tab content A
 
-## Tab header 2
+## Tab heading 2
 
 Tab content B
 
@@ -376,13 +377,13 @@ Second paragraph of content.
 ```
 
 ::: {.tabset}
-# Header appears on narrow screens
+# Heading appears on narrow screens
 
-## Tab header 1
+## Tab heading 1
 
 Tab content A
 
-## Tab header 2
+## Tab heading 2
 
 Tab content B
 

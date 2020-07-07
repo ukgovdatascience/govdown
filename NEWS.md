@@ -1,3 +1,8 @@
+# govdown 0.10.0
+
+* Upgrade to GOV.UK Frontend release v3.7.0.  See
+    https://github.com/alphagov/govuk-frontend/releases for changes.
+
 # govdown 0.9.1
 
 * Fix tabsets (#61 @Kiki-Jiji)
