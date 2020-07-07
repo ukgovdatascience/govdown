@@ -6,7 +6,7 @@
   <h2 class="govuk-tabs__title">
     {{ params.title | default ("Contents") }}
   </h2>
-  {% if(params.items) %}
+  {% if(params.items | length) %}
   <ul class="govuk-tabs__list">
     {% for item in params.items %}
       {% if item %}
@@ -24,9 +24,9 @@
   {% for item in params.items %}
     {% if item %}
       {% set id = item.id if item.id else idPrefix + "-" + loop.index %}
-      <section class="govuk-tabs__panel{% if loop.index > 1 %} govuk-tabs__panel--hidden{% endif %}" id="{{ id }}"{% for attribute, value in item.panel.attributes %} {{attribute}}="{{value}}"{% endfor %}>
+      <div class="govuk-tabs__panel{% if loop.index > 1 %} govuk-tabs__panel--hidden{% endif %}" id="{{ id }}"{% for attribute, value in item.panel.attributes %} {{attribute}}="{{value}}"{% endfor %}>
         {{ item.panel.html | safe if item.panel.html else item.panel.text }}
-      </section>
+      </div>
     {% endif %}
   {% endfor %}
 </div>
