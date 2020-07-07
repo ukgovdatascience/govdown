@@ -4177,7 +4177,7 @@ You can install the released version of govdown from <a href="https://CRAN.R-pro
 </p>
 <pre class="language-r"><code class="language-r">install.packages(&quot;govdown&quot;)</code></pre>
 <p class="govuk-body">
-And the development version from <a href="https://github.com/" class="govuk-link">GitHub</a> with:
+And the development version from <a href="https://github.com/ukgovdatascience/govdown" class="govuk-link">GitHub</a> with:
 </p>
 <pre class="language-r"><code class="language-r"># install.packages(&quot;devtools&quot;) # if devtools is not already installed
 devtools::install_github(&quot;ukgovdatascience/govdown&quot;)</code></pre>
@@ -4271,7 +4271,7 @@ Subheadings have more <code>#</code>s
 #### Four levels of headings are available!</code></pre>
 <h3 id="headings-with-captions" class="govuk-heading-m"><span class="govuk-caption-m">This is a caption</span>Headings with captions</h3>
 <p class="govuk-body">
-The GOV.UK Design System supports captions above <a href="https://design-system.service.gov.uk/styles/typography/#headings" class="govuk-link">headers</a>. This works for headings of level 1, 2 and 3, but not for the smallest headings (level 4).
+The GOV.UK Design System supports captions above <a href="https://design-system.service.gov.uk/styles/typography/#headings" class="govuk-link">headings</a>. This works for headings of level 1, 2 and 3, but not for the smallest headings (level 4).
 </p>
 <pre class="language-md"><code class="language-md"># Heading with caption above {caption=&quot;This is a caption&quot;}</code></pre>
 <h3 id="bold-italics-and-strike-through" class="govuk-heading-m">Bold, italics and strike-through</h3>
@@ -4442,32 +4442,32 @@ Tabs can be a helpful way of letting users quickly switch between related inform
 The syntax is different from normal R Markdown tabsets.
 </p>
 <pre class="language-md"><code class="language-md">::: {.tabset}
-# Header appears on narrow screens
+# Heading appears on narrow screens
 
-## Tab header 1
+## Tab heading 1
 
 Tab content A
 
-## Tab header 2
+## Tab heading 2
 
 Tab content B
 
 Second paragraph of content.
 :::</code></pre>
 <div class="tabset" data-module="govuk-tabs">
-<h2 id="header-appears-on-narrow-screens" class="govuk-heading-l">Header appears on narrow screens</h2>
+<h2 id="heading-appears-on-narrow-screens" class="govuk-heading-l">Heading appears on narrow screens</h2>
 <ul class="govuk-tabs__list">
-<li class="govuk-tabs__list-item"><a class="govuk-tabs__tab govuk-tabs__tab--selected" href="#tab-header-1">Tab header 1</a>
-<li class="govuk-tabs__list-item"><a class="govuk-tabs__tab govuk-tabs__tab--selected" href="#tab-header-2">Tab header 2</a>
+<li class="govuk-tabs__list-item"><a class="govuk-tabs__tab govuk-tabs__tab--selected" href="#tab-heading-1">Tab heading 1</a>
+<li class="govuk-tabs__list-item"><a class="govuk-tabs__tab govuk-tabs__tab--selected" href="#tab-heading-2">Tab heading 2</a>
 </ul>
-<section class="govuk-tabs__panel" id="tab-header-1">
-<h2 class="govuk-heading-l">Tab header 1</h2>
+<section class="govuk-tabs__panel" id="tab-heading-1">
+<h2 class="govuk-heading-l">Tab heading 1</h2>
 <p class="govuk-body">
 Tab content A
 </p>
 </section>
-<section class="govuk-tabs__panel" id="tab-header-2">
-<h2 class="govuk-heading-l">Tab header 2</h2>
+<section class="govuk-tabs__panel" id="tab-heading-2">
+<h2 class="govuk-heading-l">Tab heading 2</h2>
 <p class="govuk-body">
 Tab content B
 </p>
