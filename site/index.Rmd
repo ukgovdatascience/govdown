@@ -518,6 +518,8 @@ Images use the normal markdown syntax.
 
 ![caption text](./favicon/apple-touch-icon-180x180.png)
 
+Or you can use the `knitr::include_graphics()` function in an R Markdown R code chunk.
+
 ### Tables
 
 All four kinds of [pandoc tables](https://pandoc.org/MANUAL.html#tables) are
