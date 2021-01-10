@@ -489,12 +489,6 @@ Create code chunks that are not to be evaluated using a plain markdown R code ch
 ```r
 print("This code will not be evaluated")
 ```
-Create code chunks that are to be evaluated as follows.
-
-```md
-    ```{r}
-    print("This code will be evaluated")
-    ```
 ````
 Or specify an R Markdown R code chunk with the option `eval=FALSE` as follows.
 ````
@@ -503,6 +497,12 @@ print("This code will not be evaluated")
 ```
 Python code chunks also work, as do any of the languages supported by knitr.
 
+````
+Create code chunks that are to be evaluated as follows (of course you can also explicitly set chunk option `eval=TRUE`).
+````
+```{r}`r ''`
+print("This code will be evaluated")
+```
 ````
 ```{python}
 'Monty Python'.split()
