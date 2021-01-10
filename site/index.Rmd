@@ -61,7 +61,7 @@ them from interfering with how the page is rendered.
 ## Creating standalone HTML pages
 
 Govdown HTML pages are created in the same way as R Markdown HTML pages.  Write
-a markdown document (a plain text file with the suffix `.Rmd` or `.md` instead
+a markdown document (a plain text file with the suffix `.Rmd` instead
 of `.txt`), and put something called 'YAML metadata' at the top.  It should look
 like this:
 
@@ -93,7 +93,7 @@ domain.
 ## Creating websites
 
 Websites are created in the same way as R Markdown websites.  Write
-a set of markdown documents (plain text files with the suffix `.Rmd` or `.md` instead
+a set of markdown documents (plain text files with the suffix `.Rmd` instead
 of `.txt`), and a configuration file called `_site.yml` with content like the
 following:
 
