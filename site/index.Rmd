@@ -495,8 +495,6 @@ Or specify an R Markdown R code chunk with the option `eval=FALSE` as follows.
 ```{r eval=FALSE}`r ''`
 print("This code will not be evaluated")
 ```
-Python code chunks also work, as do any of the languages supported by knitr.
-
 ````
 Create code chunks that are to be evaluated as follows (of course you can also explicitly set chunk option `eval=TRUE`).
 ````
@@ -504,6 +502,13 @@ Create code chunks that are to be evaluated as follows (of course you can also e
 print("This code will be evaluated")
 ```
 ````
+Python code chunks also work (as long as you have the reticulate package and Python installed), as do any of the languages supported by knitr. For example, 
+````
+```{python}`r ''`
+'Monty Python'.split()
+```
+````
+produces the following.
 ```{python}
 'Monty Python'.split()
 ```
