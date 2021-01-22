@@ -4249,7 +4249,7 @@ If you use the <a href="https://rstudio.github.io/crosstalk/" class="govuk-link"
 </p>
 <h2 id="creating-standalone-html-pages" class="govuk-heading-l">Creating standalone HTML pages</h2>
 <p class="govuk-body">
-Govdown HTML pages are created in the same way as R Markdown HTML pages. Write a markdown document (a plain text file with the suffix <code>.Rmd</code> or <code>.md</code> instead of <code>.txt</code>), and put something called ‘YAML metadata’ at the top. It should look like this:
+Govdown HTML pages are created in the same way as R Markdown HTML pages. Write a markdown document (a plain text file with the suffix <code>.Rmd</code> instead of <code>.txt</code>), and put something called ‘YAML metadata’ at the top. It should look like this:
 </p>
 <pre class="language-yaml"><code class="language-yaml">---
 output:
@@ -4274,7 +4274,7 @@ You must use <code>font: &quot;sans-serif&quot;</code> unless the page is hosted
 </p>
 <h2 id="creating-websites" class="govuk-heading-l">Creating websites</h2>
 <p class="govuk-body">
-Websites are created in the same way as R Markdown websites. Write a set of markdown documents (plain text files with the suffix <code>.Rmd</code> or <code>.md</code> instead of <code>.txt</code>), and a configuration file called <code>_site.yml</code> with content like the following:
+Websites are created in the same way as R Markdown websites. Write a set of markdown documents (plain text files with the suffix <code>.Rmd</code> instead of <code>.txt</code>), and a configuration file called <code>_site.yml</code> with content like the following:
 </p>
 <pre class="language-yaml"><code class="language-yaml">output_dir: docs # to host on GitHub pages
 navbar: # links to include in the bar at the top of every page
@@ -4648,24 +4648,31 @@ Code blocks work the same as they do in markdown and R Markdown. Code in R Markd
 <pre class="language-r"><code class="language-r">print(&quot;This code will be evaluated&quot;)</code></pre>
 <pre class="language-plaintext"><code class="language-plaintext">## [1] &quot;This code will be evaluated&quot;</code></pre>
 <p class="govuk-body">
-Create code chunks that are not to be evaluated as follows.
+Create code chunks that are not to be evaluated using a plain markdown R code chunk as follows.
 </p>
-<pre class="language-md"><code class="language-md">    ```r
-    print(&quot;This code will not be evaluated&quot;)
-    ```</code></pre>
+<pre class="language-plaintext"><code class="language-plaintext">```r
+print(&quot;This code will not be evaluated&quot;)
+```</code></pre>
 <p class="govuk-body">
-Create code chunks that are to be evaluated as follows.
+Or specify an R Markdown R code chunk with the option <code>eval=FALSE</code> as follows.
 </p>
-<pre class="language-md"><code class="language-md">    
-    ```r
-    print(&quot;This code will be evaluated&quot;)
-    ```
-    
-    ```
-    ## [1] &quot;This code will be evaluated&quot;
-    ```</code></pre>
+<pre class="language-plaintext"><code class="language-plaintext">```{r eval=FALSE}
+print(&quot;This code will not be evaluated&quot;)
+```</code></pre>
 <p class="govuk-body">
-Python code chunks also work, as do any of the languages supported by knitr.
+Create code chunks that are to be evaluated as follows (of course you can also explicitly set chunk option <code>eval=TRUE</code>).
+</p>
+<pre class="language-plaintext"><code class="language-plaintext">```{r}
+print(&quot;This code will be evaluated&quot;)
+```</code></pre>
+<p class="govuk-body">
+Python code chunks also work (as long as you have the reticulate package and Python installed), as do any of the languages supported by knitr. For example,
+</p>
+<pre class="language-plaintext"><code class="language-plaintext">```{python}
+&#39;Monty Python&#39;.split()
+```</code></pre>
+<p class="govuk-body">
+produces the following.
 </p>
 <pre class="language-python"><code class="language-python">&#39;Monty Python&#39;.split()</code></pre>
 <pre class="language-plaintext"><code class="language-plaintext">## [&#39;Monty&#39;, &#39;Python&#39;]</code></pre>
@@ -4675,6 +4682,9 @@ Images use the normal markdown syntax.
 </p>
 <p class="govuk-body">
 <img src="data:image/png;base64,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" alt="caption text" />
+</p>
+<p class="govuk-body">
+Or you can use the <code>knitr::include_graphics()</code> function in an R Markdown R code chunk.
 </p>
 <h3 id="tables" class="govuk-heading-m">Tables</h3>
 <p class="govuk-body">
