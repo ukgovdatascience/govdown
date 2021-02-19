@@ -522,7 +522,7 @@ Or you can use the `knitr::include_graphics()` function in an R Markdown R code 
 
 ### Tables
 
-All four kinds of [pandoc tables](https://pandoc.org/MANUAL.html#tables) are
+All four kinds of [pandoc tables](https://pandoc.org/MANUAL.html#tables)
 work.  Below is a common kind.  Note that only left-aligned and
 right-aligned columns are supported in the GOV.UK Design System, and captions
 always appear above the table.
