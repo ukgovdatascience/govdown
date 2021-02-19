@@ -454,6 +454,10 @@ return {
   {
     -- Table
     Table = function(el)
+      if PANDOC_VERSION[1] >= 2 and PANDOC_VERSION[2] >= 10 then
+        el = pandoc.utils.to_simple_table(el)
+      end
+
       local res = List:new{} -- list of blocks
       table.insert(res, pandoc.RawBlock('html', '<table class="govuk-table">'))
 

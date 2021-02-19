@@ -1,5 +1,8 @@
 # govdown (development version)
 
+* Convert complex tables (pandoc version >= 2.10) to the original kind, now
+  known as 'simple'.
+
 # govdown 0.10.0
 
 * Upgrade to GOV.UK Frontend release v3.7.0.  See
