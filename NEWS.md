@@ -1,4 +1,4 @@
-# govdown (development version)
+# govdown 0.10.1
 
 * Convert complex tables (pandoc version >= 2.10) to the original kind, now
   known as 'simple'.
