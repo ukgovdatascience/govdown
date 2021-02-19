@@ -502,7 +502,7 @@ Create code chunks that are to be evaluated as follows (of course you can also e
 print("This code will be evaluated")
 ```
 ````
-Python code chunks also work (as long as you have the reticulate package and Python installed), as do any of the languages supported by knitr. For example, 
+Python code chunks also work (as long as you have the reticulate package and Python installed), as do any of the languages supported by knitr. For example,
 ````
 ```{python}`r ''`
 'Monty Python'.split()
