@@ -34,7 +34,7 @@ install.packages("govdown")
 ```
 
 And the development version from
-[GitHub](https://github.com/ukgovdatascience/govdown) with:
+[GitHub](https://github.com/ukgovdatascience/govdown/) with:
 
 ```r
 # install.packages("devtools") # if devtools is not already installed
@@ -72,7 +72,7 @@ output:
     font: "sans-serif" # (default) or "new-transport"
     favicon: "custom" # or "none" (default) or "govuk" see ?govdown_document
     logo: "images/logo.svg" # or false (default)
-    logo_url: "https://ukgovdatascience.github.io/govdown"
+    logo_url: "https://ukgovdatascience.github.io/govdown/"
     logo_text: "logo_text"
     page_title: "page_title"
     title: "title"
@@ -111,7 +111,7 @@ output:
     font: "sans-serif" # (default) or "new-transport"
     favicon: "custom" # or "none" (default) or "govuk" see ?govdown_document
     logo: "images/logo.svg" # or false (default)
-    logo_url: "https://ukgovdatascience.github.io/govdown"
+    logo_url: "https://ukgovdatascience.github.io/govdown/"
     logo_text: "logo_text"
     page_title: "page_title"
     title: "title"
