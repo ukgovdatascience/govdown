@@ -60,7 +60,7 @@ This website is fully compliant with the Web Content Accessibility Guidelines ve
 This website was last tested on the 2nd of October, 2019. The test was carried out by the Government Digital Service.
 
 We tested every page of the website, available at
-https://ukgovdatascience.github.io/govdown.
+https://ukgovdatascience.github.io/govdown/.
 
 You can read the [full accessibility test
 report](https://github.com/ukgovdatascience/govdown/issues/11).

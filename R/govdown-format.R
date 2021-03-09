@@ -60,7 +60,7 @@
 #'     font: "sans-serif"
 #'     favicon: "custom"
 #'     logo: "images/logo.svg"
-#'     logo_url: "https://ukgovdatascience.github.io/govdown"
+#'     logo_url: "https://ukgovdatascience.github.io/govdown/"
 #'     logo_text: "logo_text"
 #'     page_title: "page_title"
 #'     title: "title"

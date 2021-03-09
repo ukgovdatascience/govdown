@@ -1,7 +1,7 @@
 # govdown
 
 Make websites with R Markdown styled with the GOV.UK Design System.  See the
-[website](https://ukgovdatascience.github.io/govdown).
+[website](https://ukgovdatascience.github.io/govdown/).
 
 ## Installation
 
