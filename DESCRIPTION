@@ -11,7 +11,7 @@ Authors@R:
 Description: A suite of custom R Markdown formats and templates
     for authoring web pages styled with the GOV.UK Design System.
 License: MIT + file LICENSE
-URL: https://ukgovdatascience.github.io/govdown
+URL: https://ukgovdatascience.github.io/govdown/
 BugReports: https://github.com/ukgovdatascience/govdown/issues
 Imports:
     rmarkdown
