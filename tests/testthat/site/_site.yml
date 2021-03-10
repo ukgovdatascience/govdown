@@ -20,4 +20,4 @@ output:
     phase: alpha
     feedback_url: "https://github.com/ukgovdatascience/govdown/issues"
     google_analytics: "UA-45097885-11"
-exclude: ["node_modules", "DESCRIPTION", "inst", "install-govuk-frontend.sh", "LICENSE", "LICENSE.md", "LICENSE.html", "man", "NAMESPACE", "package.json", "R", ".Rbuildignore", "README.md", "README.html", "scss", "tags"]
+exclude: ["node_modules", "DESCRIPTION", "inst", "install-govuk-frontend.sh", "LICENSE", "LICENSE.md", "LICENSE.html", "man", "NAMESPACE", "package.json", "R", ".Rbuildignore", "README.md", "README.html", "scss", "tags", "tests"]

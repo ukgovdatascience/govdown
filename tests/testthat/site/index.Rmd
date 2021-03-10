@@ -11,19 +11,30 @@ but specify `output: govdown::govdown_document` instead of `output:
 html_document` in the YAML metadata of the document, or in the `_site.yml` file
 of the website.
 
+> You can't publish govdown documents on the GOV.UK website itself. Please
+> follow the normal guidance for [how to publish on
+> GOV.UK](https://www.gov.uk/guidance/how-to-publish-on-gov-uk).
+
 ## Examples
 
 These websites and documents use govdown.
 
 * https://ukgovdatascience.github.io/rap-website/
-* https://co-analysis.github.io/csmapping/cs_lad.html
+* https://co-analysis.github.io/csmapping/cs_lad_2019.html ([2018 version](https://co-analysis.github.io/csmapping/cs_lad_2018.html))
 * https://mattkerlogue.github.io/coding-guide/
-* https://matt-dray.github.io/drake-egg-rap/
+* https://matt-dray.github.io/drake-egg-rap/egg-report.html
 
 ## Installation
 
-The package is only hosted on [GitHub](https://github.com/ukgovdatascience), not
-on CRAN.  Install it with the devtools package.
+You can install the released version of govdown from
+[CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("govdown")
+```
+
+And the development version from
+[GitHub](https://github.com/ukgovdatascience/govdown/) with:
 
 ```r
 # install.packages("devtools") # if devtools is not already installed
@@ -36,10 +47,21 @@ check which version you have at the R console by typing
 issue](https://github.com/ukgovdatascience/govdown/issues/2) for advice on how
 to obtain a more recent version of pandoc.
 
+## Shiny
+
+If you are developing a Shiny application, then look at
+https://github.com/moj-analytical-services/shinyGovstyle.
+
+## Crosstalk
+
+If you use the [crosstalk](https://rstudio.github.io/crosstalk/) package for
+interactive commponents, then use the `govdown::unstrap()` function to prevent
+them from interfering with how the page is rendered.
+
 ## Creating standalone HTML pages
 
 Govdown HTML pages are created in the same way as R Markdown HTML pages.  Write
-a markdown document (a plain text file with the suffix `.Rmd` or `.md` instead
+a markdown document (a plain text file with the suffix `.Rmd` instead
 of `.txt`), and put something called 'YAML metadata' at the top.  It should look
 like this:
 
@@ -71,7 +93,7 @@ domain.
 ## Creating websites
 
 Websites are created in the same way as R Markdown websites.  Write
-a set of markdown documents (plain text files with the suffix `.Rmd` or `.md` instead
+a set of markdown documents (plain text files with the suffix `.Rmd` instead
 of `.txt`), and a configuration file called `_site.yml` with content like the
 following:
 
@@ -115,6 +137,10 @@ console, or click the 'Build Website' button in RStudio Build panel.
 Most of the usual markdown syntax is supported.  There is some new syntax for
 special features of the GOV.UK Design System.
 
+Where syntax isn't supported, that might be because research by contributors to
+the GOV.UK Design System found the features to be detrimental. Govdown defers to
+the GOV.UK Design System in these cases.
+
 ### Headings
 
 Create headings by beginning a new line of text with a `#` symbol.
@@ -138,7 +164,7 @@ Subheadings have more `#`s
 ### Headings with captions {caption="This is a caption"}
 
 The GOV.UK Design System supports captions above
-[headers](https://design-system.service.gov.uk/styles/typography/#headings).
+[headings](https://design-system.service.gov.uk/styles/typography/#headings).
 This works for headings of level 1, 2 and 3, but not for the smallest headings
 (level 4).
 
@@ -225,8 +251,12 @@ when you have visited the page.
 
 ### Bullets and numbered lists
 
-Bulletted lists work as normal, but nested bullets don't look very good because
-they aren't really supported by the GOV.UK Design System.
+Bulletted and nested lists work as normal, except that nested lists don't look
+very good because they aren't supported by the GOV.UK Design System.  Govdown
+defers to the designers who made this decision, but if you have evidence of a
+need for nested lists, please submit it to the GOV.UK Design System by opening a
+new GitHub issue on the [GOV.UK frontend
+repository](https://github.com/alphagov/govuk-frontend/issues).
 
 * First bullet
   * Nested bullets are available but ...
@@ -243,9 +273,6 @@ they aren't really supported by the GOV.UK Design System.
 * Second bullet
 * Third bullet
 ```
-
-Numbered lists work as normal, except that nested numbered lists don't work at
-all because they aren't supported by the GOV.UK Design System.
 
 1. Numbered list item
 1. Second numbered list item
@@ -335,13 +362,13 @@ The syntax is different from normal R Markdown tabsets.
 
 ```md
 ::: {.tabset}
-# Header appears on narrow screens
+# Heading appears on narrow screens
 
-## Tab header 1
+## Tab heading 1
 
 Tab content A
 
-## Tab header 2
+## Tab heading 2
 
 Tab content B
 
@@ -350,13 +377,13 @@ Second paragraph of content.
 ```
 
 ::: {.tabset}
-# Header appears on narrow screens
+# Heading appears on narrow screens
 
-## Tab header 1
+## Tab heading 1
 
 Tab content A
 
-## Tab header 2
+## Tab heading 2
 
 Tab content B
 
@@ -420,6 +447,10 @@ information only if they need it. As with Tabs, guidance can be found on the
 The syntax uses the summary attribute to provide the top level information with
 the content provided by the text within.
 
+:::{.warning}
+The details component requires Pandoc version 2.5 or more recent.
+:::
+
 ```md
 ::: {.details summary="Details"}
 
@@ -452,34 +483,55 @@ print("This code will not be evaluated")
 ```{r}
 print("This code will be evaluated")
 ```
-Create code chunks that are not to be evaluated as follows.
+Create code chunks that are not to be evaluated using a plain markdown R code chunk as follows.
 
-```md
-    ```r
-    print("This code will not be evaluated")
-    ```
+````
+```r
+print("This code will not be evaluated")
 ```
-Create code chunks that are to be evaluated as follows.
+````
 
-```md
-    ```{r}
-    print("This code will be evaluated")
-    ```
+Or specify an R Markdown R code chunk with the option `eval=FALSE` as follows.
+
+````
+```{r eval=FALSE}`r ''`
+print("This code will not be evaluated")
 ```
-Python code chunks also work, as do any of the languages supported by knitr.
+````
+
+Create code chunks that are to be evaluated as follows (of course you can also explicitly set chunk option `eval=TRUE`).
+
+````
+```{r}`r ''`
+print("This code will be evaluated")
+```
+````
+
+Python code chunks also work (as long as you have the reticulate package and Python installed), as do any of the languages supported by knitr. For example,
+
+````
+```{python}`r ''`
+'Monty Python'.split()
+```
+````
+
+produces the following.
 
 ```{python}
 'Monty Python'.split()
 ```
+
 ### Images
 
 Images use the normal markdown syntax.
 
 ![caption text](./favicon/apple-touch-icon-180x180.png)
 
+Or you can use the `knitr::include_graphics()` function in an R Markdown R code chunk.
+
 ### Tables
 
-All four kinds of [pandoc tables](https://pandoc.org/MANUAL.html#tables) are
+All four kinds of [pandoc tables](https://pandoc.org/MANUAL.html#tables)
 work.  Below is a common kind.  Note that only left-aligned and
 right-aligned columns are supported in the GOV.UK Design System, and captions
 always appear above the table.
