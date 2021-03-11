@@ -6,10 +6,10 @@
 <!-- badges: end -->
 
 Make websites with R Markdown styled with the GOV.UK Design System.  See the
-[website](https://ukgovdatascience.github.io/govdown/).
+[website](https://ukgovdatascience.github.io/govdown/).  Please also consider an
+alternative, [govuk-hugo-r](https://github.com/co-analysis/govuk-hugo-r/).
 
 ## Installation
-
 ``` r
 remotes::install_github("ukgovdatascience/govdown")
 ```
